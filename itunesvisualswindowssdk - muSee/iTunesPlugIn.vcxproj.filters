@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{2313c35d-4998-4709-982e-e5432361b222}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{0b7f6ada-11b5-49ee-bf1a-f2559bfe0852}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NotImplementedModule">
+      <UniqueIdentifier>{446bcb6c-c8d2-4c15-9c03-09be7bffc0ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NotImplementedModule\Further Optimization">
+      <UniqueIdentifier>{c440ef14-b961-4b97-8648-5006e0f7dd6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Currently Developing">
+      <UniqueIdentifier>{43dd396f-afce-48b5-92e1-033d8d253594}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NotImplementedModule\Unlikely To Develop">
+      <UniqueIdentifier>{517f4550-6fea-45fa-a6e0-1f23d09b4d40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Currently Developing\Wait For Testing">
+      <UniqueIdentifier>{bbdac34d-6a88-4974-8b4e-070c7f614d62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ArtStoryCoreComponent">
+      <UniqueIdentifier>{69e6577b-94b8-4512-a666-7cb79b10e416}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataReaderComponent">
+      <UniqueIdentifier>{07013037-479c-4ddc-82df-e9f151c7fe73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Public Available Functions">
+      <UniqueIdentifier>{5c51de10-ab57-43bd-af3c-01caab9f0f92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Modified Apple Original Source">
+      <UniqueIdentifier>{7322e98c-86a2-4f1c-b8bf-91912b7ee684}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AnimationObjs">
+      <UniqueIdentifier>{c59adfc1-a658-42a2-887e-8724a07afa73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AnimationObjHeaders">
+      <UniqueIdentifier>{33b96f9d-e501-4466-a7fa-bcdd865456b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Global">
+      <UniqueIdentifier>{3d387da5-c65a-40b3-9858-09d8633a7ade}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Currently Developing\in queue">
+      <UniqueIdentifier>{2ef702b8-b970-4f83-8dae-d25b86462742}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ArtStoryCoreComponent">
+      <UniqueIdentifier>{f5d3f95d-48db-4a8a-8d6f-ca0e8136be32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Currently Developing\Needed Most">
+      <UniqueIdentifier>{df8a2400-065b-4171-803a-bb84ba8ad9cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Currently Developing\Special Effect AniObj">
+      <UniqueIdentifier>{474dbf45-8af5-4a89-8627-6351a71ec092}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Redesign AnimationObj">
+      <UniqueIdentifier>{0a73091b-51a7-4947-b94d-a5f1be242050}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MelodyComponent">
+      <UniqueIdentifier>{b7186112-1437-46be-b02e-2d24ce720b96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Control">
+      <UniqueIdentifier>{19eb4d39-dd11-4b48-873a-db9f82267cc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Control">
+      <UniqueIdentifier>{137d8e2d-7cd3-4f87-8920-116c8f8ea1d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AniComputation">
+      <UniqueIdentifier>{cf4efe67-8161-4861-8481-446e523945d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Background">
+      <UniqueIdentifier>{ed6f4413-1fd2-4912-886f-840008a869e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TempLegacy">
+      <UniqueIdentifier>{f37c979d-02e5-4b44-80d1-ecc1b742ee9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CreativeCore">
+      <UniqueIdentifier>{f6859f54-585f-4082-85f6-e9eb24403b7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MelodyObj">
+      <UniqueIdentifier>{6cdbc892-dac9-4cdc-8e0a-af52c0d09efb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataReaderComponent\DataReaderSupport">
+      <UniqueIdentifier>{71fe7140-acde-4b3e-8995-9dbc21bb6e0f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="iTunesPlugIn.cpp">
+      <Filter>Source Files\Modified Apple Original Source</Filter>
+    </ClCompile>
+    <ClCompile Include="iTunesVisualAPI\iTunesAPI.cpp">
+      <Filter>Source Files\Modified Apple Original Source</Filter>
+    </ClCompile>
+    <ClCompile Include="iTunesPlugInWin.cpp">
+      <Filter>Source Files\Modified Apple Original Source</Filter>
+    </ClCompile>
+    <ClCompile Include="ArtStoryCore.cpp">
+      <Filter>Source Files\ArtStoryCoreComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="ArtStoryCoreMelodyExtraction.cpp">
+      <Filter>Source Files\ArtStoryCoreComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="ArtStoryCoreTestVisual.cpp">
+      <Filter>Source Files\ArtStoryCoreComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="DecodingCore.cpp">
+      <Filter>NotImplementedModule\Unlikely To Develop</Filter>
+    </ClCompile>
+    <ClCompile Include="DataReader.cpp">
+      <Filter>Source Files\DataReaderComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="DataReaderAnimationObj.cpp">
+      <Filter>Source Files\DataReaderComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="DataReaderVerticalAnimationObj.cpp">
+      <Filter>Source Files\DataReaderComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="DataReaderBackground.cpp">
+      <Filter>Source Files\DataReaderComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="SpecialEffectCore.cpp">
+      <Filter>Currently Developing</Filter>
+    </ClCompile>
+    <ClCompile Include="WinArtStory.cpp">
+      <Filter>Source Files\ArtStoryCoreComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationObj.cpp">
+      <Filter>Source Files\AnimationObjs</Filter>
+    </ClCompile>
+    <ClCompile Include="FlyingAnimationObj.cpp">
+      <Filter>Source Files\AnimationObjs</Filter>
+    </ClCompile>
+    <ClCompile Include="VerticalAnimationObj.cpp">
+      <Filter>Source Files\AnimationObjs</Filter>
+    </ClCompile>
+    <ClCompile Include="Halo.cpp">
+      <Filter>Currently Developing\Special Effect AniObj</Filter>
+    </ClCompile>
+    <ClCompile Include="BubbleEffect.cpp">
+      <Filter>Currently Developing</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationObjCollisionEventCore.cpp">
+      <Filter>Currently Developing\Wait For Testing</Filter>
+    </ClCompile>
+    <ClCompile Include="EventDrivenCore.cpp">
+      <Filter>Currently Developing\Wait For Testing</Filter>
+    </ClCompile>
+    <ClCompile Include="CollidableBubble.cpp">
+      <Filter>Currently Developing</Filter>
+    </ClCompile>
+    <ClCompile Include="DepreciatedAnimationImplementations.cpp">
+      <Filter>Source Files\AnimationObjs</Filter>
+    </ClCompile>
+    <ClCompile Include="MelodyObjCore.cpp">
+      <Filter>Source Files\MelodyObj</Filter>
+    </ClCompile>
+    <ClCompile Include="MelodyFlyingObjCore.cpp">
+      <Filter>Source Files\MelodyObj</Filter>
+    </ClCompile>
+    <ClCompile Include="ArtStoryCoreDebugOutput.cpp">
+      <Filter>Source Files\ArtStoryCoreComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="RhythmicExtract.cpp">
+      <Filter>Source Files\ArtStoryCoreComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="RhythmicEventCore.cpp">
+      <Filter>Currently Developing\Needed Most</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationComponents.cpp">
+      <Filter>Header Files\Redesign AnimationObj</Filter>
+    </ClCompile>
+    <ClCompile Include="nonEssentialAniComponentMethods.cpp">
+      <Filter>Header Files\Redesign AnimationObj</Filter>
+    </ClCompile>
+    <ClCompile Include="AniDispatcher.cpp">
+      <Filter>Header Files\Redesign AnimationObj</Filter>
+    </ClCompile>
+    <ClCompile Include="AInterface.h">
+      <Filter>Header Files\Redesign AnimationObj</Filter>
+    </ClCompile>
+    <ClCompile Include="SubComponents.cpp">
+      <Filter>Header Files\Redesign AnimationObj</Filter>
+    </ClCompile>
+    <ClCompile Include="BackUpMelody.cpp">
+      <Filter>Header Files\MelodyComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="SpeedControl.cpp">
+      <Filter>Source Files\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="control.cpp">
+      <Filter>Source Files\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="CreationCore.cpp">
+      <Filter>Source Files\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="AniSpawnHelper.cpp">
+      <Filter>Header Files\AniComputation</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalGeometryFunction.cpp">
+      <Filter>Header Files\AniComputation</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalHelperFunctions.cpp">
+      <Filter>Source Files\Public Available Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalStatisticalFunction.cpp">
+      <Filter>Header Files\AniComputation</Filter>
+    </ClCompile>
+    <ClCompile Include="CreationInterface.cpp">
+      <Filter>Header Files\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="ALineSeg.cpp">
+      <Filter>Header Files\Redesign AnimationObj</Filter>
+    </ClCompile>
+    <ClCompile Include="ATreeBranch.cpp">
+      <Filter>Header Files\Redesign AnimationObj</Filter>
+    </ClCompile>
+    <ClCompile Include="tail.cpp">
+      <Filter>Header Files\Redesign AnimationObj</Filter>
+    </ClCompile>
+    <ClCompile Include="FlyingAniComp.cpp">
+      <Filter>Header Files\Redesign AnimationObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Source Files\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="verticalLegacy.cpp">
+      <Filter>Source Files\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorFunction.cpp">
+      <Filter>Header Files\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="DataReaderInitLoader.cpp">
+      <Filter>Source Files\DataReaderComponent\DataReaderSupport</Filter>
+    </ClCompile>
+    <ClCompile Include="logFunction.cpp">
+      <Filter>Source Files\ArtStoryCoreComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="logwriterSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="iTunesPlugIn.h">
+      <Filter>Source Files\Modified Apple Original Source</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationGraphicsGlobal.h">
+      <Filter>Header Files\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="DataReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MelodyScoringModule.h">
+      <Filter>NotImplementedModule\Further Optimization</Filter>
+    </ClInclude>
+    <ClInclude Include="GLtexture.h">
+      <Filter>Header Files\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Data.h">
+      <Filter>Header Files\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="MelodyExtractionParameters.h">
+      <Filter>Header Files\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="MelodyObjParameters.h">
+      <Filter>Header Files\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="iTunesSystemDefinition.h">
+      <Filter>Header Files\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BassAnimation.h">
+      <Filter>NotImplementedModule\Unlikely To Develop</Filter>
+    </ClInclude>
+    <ClInclude Include="DataWriter.h">
+      <Filter>NotImplementedModule\Unlikely To Develop</Filter>
+    </ClInclude>
+    <ClInclude Include="UserDrawingEffect.h">
+      <Filter>NotImplementedModule</Filter>
+    </ClInclude>
+    <ClInclude Include="DecodingCore.h">
+      <Filter>NotImplementedModule\Unlikely To Develop</Filter>
+    </ClInclude>
+    <ClInclude Include="SpecialEffectCore.h">
+      <Filter>Currently Developing</Filter>
+    </ClInclude>
+    <ClInclude Include="BackgroundData.h">
+      <Filter>Header Files\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationObj.h">
+      <Filter>Header Files\AnimationObjHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="FlyingAnimationObj.h">
+      <Filter>Header Files\AnimationObjHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="VerticalAnimationObj.h">
+      <Filter>Header Files\AnimationObjHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h">
+      <Filter>Header Files\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="BubbleEffect.h">
+      <Filter>Currently Developing</Filter>
+    </ClInclude>
+    <ClInclude Include="Halo.h">
+      <Filter>Currently Developing\Special Effect AniObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Splash.h">
+      <Filter>Currently Developing\Special Effect AniObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Droplet.h">
+      <Filter>Currently Developing\Special Effect AniObj</Filter>
+    </ClInclude>
+    <ClInclude Include="SpecialEffectController.h">
+      <Filter>Currently Developing\in queue</Filter>
+    </ClInclude>
+    <ClInclude Include="TransitionEffectCore.h">
+      <Filter>Currently Developing\in queue</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationObjCollisionEventCore.h">
+      <Filter>Currently Developing\Wait For Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="EventDrivenCore.h">
+      <Filter>Currently Developing\Wait For Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="CollidableBubble.h">
+      <Filter>Currently Developing</Filter>
+    </ClInclude>
+    <ClInclude Include="MelodicEventCore.h">
+      <Filter>Currently Developing</Filter>
+    </ClInclude>
+    <ClInclude Include="MelodyExtract.h">
+      <Filter>Currently Developing</Filter>
+    </ClInclude>
+    <ClInclude Include="ArtStoryCore.h">
+      <Filter>Header Files\ArtStoryCoreComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="RhythmicExtract.h">
+      <Filter>Header Files\ArtStoryCoreComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="RhythmicEventCore.h">
+      <Filter>Currently Developing\Needed Most</Filter>
+    </ClInclude>
+    <ClInclude Include="iTunesVisualAPI\iTunesAPI.h">
+      <Filter>Source Files\Modified Apple Original Source</Filter>
+    </ClInclude>
+    <ClInclude Include="iTunesVisualAPI\iTunesVisualAPI.h">
+      <Filter>Source Files\Modified Apple Original Source</Filter>
+    </ClInclude>
+    <ClInclude Include="AniStructs.h">
+      <Filter>Header Files\Redesign AnimationObj</Filter>
+    </ClInclude>
+    <ClInclude Include="AniDispatcher.h">
+      <Filter>Header Files\Redesign AnimationObj</Filter>
+    </ClInclude>
+    <ClInclude Include="SubComponents.h">
+      <Filter>Header Files\Redesign AnimationObj</Filter>
+    </ClInclude>
+    <ClInclude Include="MelodyObj.h">
+      <Filter>Header Files\MelodyComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="MelodyToneAccept.h">
+      <Filter>Header Files\MelodyComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSpeedCore.h">
+      <Filter>Header Files\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="CreationCore.h">
+      <Filter>Header Files\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="control.h">
+      <Filter>Header Files\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationComponents.h">
+      <Filter>Header Files\Redesign AnimationObj</Filter>
+    </ClInclude>
+    <ClInclude Include="AniSpawningHelper.h">
+      <Filter>Header Files\AniComputation</Filter>
+    </ClInclude>
+    <ClInclude Include="AniCreationCore.h">
+      <Filter>Header Files\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="CreationInterface.h">
+      <Filter>Header Files\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="ATreeBranch.h">
+      <Filter>Header Files\Redesign AnimationObj</Filter>
+    </ClInclude>
+    <ClInclude Include="ALineSeg.h">
+      <Filter>Header Files\Redesign AnimationObj</Filter>
+    </ClInclude>
+    <ClInclude Include="tail.h">
+      <Filter>Header Files\Redesign AnimationObj</Filter>
+    </ClInclude>
+    <ClInclude Include="FlyingAniComp.h">
+      <Filter>Header Files\Redesign AnimationObj</Filter>
+    </ClInclude>
+    <ClInclude Include="AllAObj.h">
+      <Filter>Header Files\Redesign AnimationObj</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorFunctions.h">
+      <Filter>Header Files\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Colors.h">
+      <Filter>Header Files\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="CreativeCore.h">
+      <Filter>Source Files\CreativeCore</Filter>
+    </ClInclude>
+    <ClInclude Include="DataReaderStore.h">
+      <Filter>Source Files\DataReaderComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="DataReaderInitLoader.h">
+      <Filter>Source Files\DataReaderComponent\DataReaderSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="logwriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+</Project>

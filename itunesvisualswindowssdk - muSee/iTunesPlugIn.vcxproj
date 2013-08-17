@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B57261D1-AABF-4A42-89C4-1D50A5AAD740}</ProjectGuid>
+    <ProjectName>ArtStory</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\Release/iTunesVisualSample.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.\iTunesVisualAPI\;.\lodepng\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <BrowseInformation>true</BrowseInformation>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ImportLibrary>.\Release/iTunesVisualSample.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>GLu32.lib; opengl32.lib;gdiplus.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TypeLibraryName>.\Release/iTunesVisualSample.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories> .\iTunesVisualAPI\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <BrowseInformation>true</BrowseInformation>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ImportLibrary>.\Release/iTunesVisualSample.lib</ImportLibrary>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>GLu32.lib; opengl32.lib;gdiplus.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\Debug/iTunesVisualSample.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.\iTunesVisualAPI\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MinimalRebuild>true</MinimalRebuild>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ImportLibrary>.\Debug/iTunesVisualSample.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>GLu32.lib; opengl32.lib;gdiplus.lib;%(AdditionalDependencies);allegro-5.0.6-monolith-md-debug.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>c:\allegro\lib</AdditionalLibraryDirectories>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TypeLibraryName>.\Debug/iTunesVisualSample.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.\iTunesVisualAPI\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ImportLibrary>.\Debug/iTunesVisualSample.lib</ImportLibrary>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>GLu32.lib; opengl32.lib;gdiplus.lib;%(AdditionalDependencies);allegro-5.0.6-monolith-md-debug.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>c:\allegro\lib</AdditionalLibraryDirectories>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AInterface.h" />
+    <ClCompile Include="ALineSeg.cpp" />
+    <ClCompile Include="AniDispatcher.cpp" />
+    <ClCompile Include="AnimationComponents.cpp" />
+    <ClCompile Include="AnimationObj.cpp" />
+    <ClCompile Include="AnimationObjCollisionEventCore.cpp" />
+    <ClCompile Include="AniSpawnHelper.cpp" />
+    <ClCompile Include="ArtStoryCore.cpp" />
+    <ClCompile Include="ArtStoryCoreDebugOutput.cpp" />
+    <ClCompile Include="ArtStoryCoreMelodyExtraction.cpp" />
+    <ClCompile Include="ArtStoryCoreTestVisual.cpp" />
+    <ClCompile Include="ATreeBranch.cpp" />
+    <ClCompile Include="Background.cpp" />
+    <ClCompile Include="BackUpMelody.cpp" />
+    <ClCompile Include="BubbleEffect.cpp" />
+    <ClCompile Include="CollidableBubble.cpp" />
+    <ClCompile Include="ColorFunction.cpp" />
+    <ClCompile Include="control.cpp" />
+    <ClCompile Include="CreationCore.cpp" />
+    <ClCompile Include="CreationInterface.cpp" />
+    <ClCompile Include="DataReader.cpp" />
+    <ClCompile Include="DataReaderAnimationObj.cpp" />
+    <ClCompile Include="DataReaderBackground.cpp" />
+    <ClCompile Include="DataReaderInitLoader.cpp" />
+    <ClCompile Include="DataReaderVerticalAnimationObj.cpp" />
+    <ClCompile Include="DecodingCore.cpp" />
+    <ClCompile Include="DepreciatedAnimationImplementations.cpp" />
+    <ClCompile Include="EventDrivenCore.cpp" />
+    <ClCompile Include="FlyingAniComp.cpp" />
+    <ClCompile Include="FlyingAnimationObj.cpp" />
+    <ClCompile Include="GlobalGeometryFunction.cpp" />
+    <ClCompile Include="GlobalStatisticalFunction.cpp" />
+    <ClCompile Include="Halo.cpp" />
+    <ClCompile Include="GlobalHelperFunctions.cpp" />
+    <ClCompile Include="iTunesPlugIn.cpp" />
+    <ClCompile Include="iTunesVisualAPI\iTunesAPI.cpp" />
+    <ClCompile Include="iTunesPlugInWin.cpp" />
+    <ClCompile Include="logFunction.cpp" />
+    <ClCompile Include="logwriterSource.cpp" />
+    <ClCompile Include="MelodyFlyingObjCore.cpp" />
+    <ClCompile Include="MelodyObjCore.cpp" />
+    <ClCompile Include="nonEssentialAniComponentMethods.cpp" />
+    <ClCompile Include="RhythmicEventCore.cpp" />
+    <ClCompile Include="RhythmicExtract.cpp" />
+    <ClCompile Include="SpecialEffectCore.cpp" />
+    <ClCompile Include="SpeedControl.cpp" />
+    <ClCompile Include="SubComponents.cpp" />
+    <ClCompile Include="tail.cpp" />
+    <ClCompile Include="VerticalAnimationObj.cpp" />
+    <ClCompile Include="verticalLegacy.cpp" />
+    <ClCompile Include="WinArtStory.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ALineSeg.h" />
+    <ClInclude Include="AllAObj.h" />
+    <ClInclude Include="AniCreationCore.h" />
+    <ClInclude Include="AniDispatcher.h" />
+    <ClInclude Include="AnimationComponents.h" />
+    <ClInclude Include="AnimationGraphicsGlobal.h" />
+    <ClInclude Include="AnimationObj.h" />
+    <ClInclude Include="AnimationObjCollisionEventCore.h" />
+    <ClInclude Include="AniSpawningHelper.h" />
+    <ClInclude Include="AniStructs.h" />
+    <ClInclude Include="ArtStoryCore.h" />
+    <ClInclude Include="ATreeBranch.h" />
+    <ClInclude Include="Background.h" />
+    <ClInclude Include="BackgroundData.h" />
+    <ClInclude Include="BassAnimation.h" />
+    <ClInclude Include="BubbleEffect.h" />
+    <ClInclude Include="CollidableBubble.h" />
+    <ClInclude Include="Colors.h" />
+    <ClInclude Include="control.h" />
+    <ClInclude Include="CreationCore.h" />
+    <ClInclude Include="CreationInterface.h" />
+    <ClInclude Include="CreativeCore.h" />
+    <ClInclude Include="Data.h" />
+    <ClInclude Include="DataReader.h" />
+    <ClInclude Include="DataReaderInitLoader.h" />
+    <ClInclude Include="DataWriter.h" />
+    <ClInclude Include="DecodingCore.h" />
+    <ClInclude Include="Droplet.h" />
+    <ClInclude Include="EventDrivenCore.h" />
+    <ClInclude Include="FlyingAniComp.h" />
+    <ClInclude Include="Global.h" />
+    <ClInclude Include="GLtexture.h" />
+    <ClInclude Include="Halo.h" />
+    <ClInclude Include="DataReaderStore.h" />
+    <ClInclude Include="iTunesPlugIn.h" />
+    <ClInclude Include="iTunesSystemDefinition.h" />
+    <ClInclude Include="iTunesVisualAPI\iTunesAPI.h" />
+    <ClInclude Include="iTunesVisualAPI\iTunesVisualAPI.h" />
+    <ClInclude Include="logwriter.h" />
+    <ClInclude Include="MelodicEventCore.h" />
+    <ClInclude Include="MelodyExtract.h" />
+    <ClInclude Include="MelodyExtractionParameters.h" />
+    <ClInclude Include="MelodyObj.h" />
+    <ClInclude Include="MelodyObjParameters.h" />
+    <ClInclude Include="MelodyScoringModule.h" />
+    <ClInclude Include="MelodyToneAccept.h" />
+    <ClInclude Include="ObjSpeedCore.h" />
+    <ClInclude Include="FlyingAnimationObj.h" />
+    <ClInclude Include="RhythmicEventCore.h" />
+    <ClInclude Include="RhythmicExtract.h" />
+    <ClInclude Include="SpecialEffectController.h" />
+    <ClInclude Include="SpecialEffectCore.h" />
+    <ClInclude Include="Splash.h" />
+    <ClInclude Include="SubComponents.h" />
+    <ClInclude Include="tail.h" />
+    <ClInclude Include="TransitionEffectCore.h" />
+    <ClInclude Include="UserDrawingEffect.h" />
+    <ClInclude Include="VectorFunctions.h" />
+    <ClInclude Include="VerticalAnimationObj.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="lodepng\lodepng.vcxproj">
+      <Project>{b274d808-fe94-4d50-a1a4-e9d230771b49}</Project>
+    </ProjectReference>
+    <ProjectReference Include="TextureScriptReader\TextureScriptReader.vcxproj">
+      <Project>{8a6ca30a-5bb7-4a24-b35e-3a32a79a285c}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
