@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{2313c35d-4998-4709-982e-e5432361b222}</UniqueIdentifier>
-      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
-    </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{0b7f6ada-11b5-49ee-bf1a-f2559bfe0852}</UniqueIdentifier>
     </Filter>
@@ -22,21 +18,6 @@
     </Filter>
     <Filter Include="Currently Developing\Wait For Testing">
       <UniqueIdentifier>{bbdac34d-6a88-4974-8b4e-070c7f614d62}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\ArtStoryCoreComponent">
-      <UniqueIdentifier>{69e6577b-94b8-4512-a666-7cb79b10e416}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\DataReaderComponent">
-      <UniqueIdentifier>{07013037-479c-4ddc-82df-e9f151c7fe73}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Public Available Functions">
-      <UniqueIdentifier>{5c51de10-ab57-43bd-af3c-01caab9f0f92}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Modified Apple Original Source">
-      <UniqueIdentifier>{7322e98c-86a2-4f1c-b8bf-91912b7ee684}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\AnimationObjs">
-      <UniqueIdentifier>{c59adfc1-a658-42a2-887e-8724a07afa73}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\AnimationObjHeaders">
       <UniqueIdentifier>{33b96f9d-e501-4466-a7fa-bcdd865456b3}</UniqueIdentifier>
@@ -62,29 +43,48 @@
     <Filter Include="Header Files\MelodyComponent">
       <UniqueIdentifier>{b7186112-1437-46be-b02e-2d24ce720b96}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Control">
-      <UniqueIdentifier>{19eb4d39-dd11-4b48-873a-db9f82267cc3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Control">
       <UniqueIdentifier>{137d8e2d-7cd3-4f87-8920-116c8f8ea1d2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\AniComputation">
       <UniqueIdentifier>{cf4efe67-8161-4861-8481-446e523945d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Background">
-      <UniqueIdentifier>{ed6f4413-1fd2-4912-886f-840008a869e0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TempLegacy">
       <UniqueIdentifier>{f37c979d-02e5-4b44-80d1-ecc1b742ee9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{2313c35d-4998-4709-982e-e5432361b222}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Source Files\ArtStoryCoreComponent">
+      <UniqueIdentifier>{69e6577b-94b8-4512-a666-7cb79b10e416}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataReaderComponent">
+      <UniqueIdentifier>{07013037-479c-4ddc-82df-e9f151c7fe73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataReaderComponent\DataReaderSupport">
+      <UniqueIdentifier>{71fe7140-acde-4b3e-8995-9dbc21bb6e0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Public Available Functions">
+      <UniqueIdentifier>{5c51de10-ab57-43bd-af3c-01caab9f0f92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Modified Apple Original Source">
+      <UniqueIdentifier>{7322e98c-86a2-4f1c-b8bf-91912b7ee684}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AnimationObjs">
+      <UniqueIdentifier>{c59adfc1-a658-42a2-887e-8724a07afa73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Control">
+      <UniqueIdentifier>{19eb4d39-dd11-4b48-873a-db9f82267cc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Background">
+      <UniqueIdentifier>{ed6f4413-1fd2-4912-886f-840008a869e0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\CreativeCore">
       <UniqueIdentifier>{f6859f54-585f-4082-85f6-e9eb24403b7f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\MelodyObj">
       <UniqueIdentifier>{6cdbc892-dac9-4cdc-8e0a-af52c0d09efb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\DataReaderComponent\DataReaderSupport">
-      <UniqueIdentifier>{71fe7140-acde-4b3e-8995-9dbc21bb6e0f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
