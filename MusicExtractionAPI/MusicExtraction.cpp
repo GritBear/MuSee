@@ -4,6 +4,72 @@
 //Analysis methods
 //Author: Li(Lee) Xiong. All rights reserved.
 //=================================================================
+
+//------------------------------------------------------
+// Constructors and Interface
+//------------------------------------------------------
+void MelodyExtraction::Init(MelodyExtractionPram Prams){
+	pulseIter = 0;
+	melodyExtractRate = Prams.melodyExtractRate; 
+	PulseFreq = Prams.pulseFreq;
+	pulseIterUpperLimit = (int)PulseFreq/melodyExtractRate + 0.5;
+	if(pulseIterUpperLimit<1) //some error checking
+		pulseIterUpperLimit = 1;
+
+	numSpectrumEntries = Prams.numSpectrumEntries;
+	numWaveformEntries = Prams.numWaveformEntries;
+	numMaxChannels = Prams.numMaxChannels;
+
+	maxExtractedStorageEntries = numberOfSecondsStored * melodyExtractRate;
+
+	FrequencyInterval = MP3SamplingRate/numSpectrumEntries;
+	// Calculate Frequency Bands
+	ConstructFrequencyBands();
+
+	// Initialize the spectrum storage matrix
+	vector< vector<float> > storageVect(MaxFrequencyIndex, vector<float>(pulseIterUpperLimit, 0));
+	melodyStoragesVec = storageVect;
+
+	melodyStoragesVecSize1 = melodyStoragesVec.size();
+	melodyStoragesVecSize2 = melodyStoragesVec[0].size();
+
+	// Initialize Tone variable
+	num_tones = MaxTone + 1; // gives some extra upper room
+	dynamicThreshold = valueThreshold;
+
+};
+
+void MelodyExtraction::Destroy(){
+	FreeAll(stepMelody);
+	FreeAll(melodyStoragesVec);
+};
+
+void MelodyExtraction::Update(RenderVisualData * RenderData){
+	bool FullMatrix = false;
+	bool nextValueReady = false;
+
+	renderData = *RenderData;
+	
+	//---------------------------------------------------------------------
+	//Frequency Domain Analysis
+	//---------------------------------------------------------------------
+	//perform SpectrumMatrix storage
+	FullMatrix = MelodyStore();
+	if(FullMatrix){
+		SpectrumMatrixAnalysis();
+		Clean();
+	}
+};
+
+//Garbage Collection
+void MelodyExtraction::Clean(){
+	while(stepMelody.size()>maxExtractedStorageEntries){
+		FreeAll(stepMelody.front());
+		stepMelody.pop_front();	
+	}
+};
+
+
 //------------------------------------------------------
 // Spectrum Matrix Analysis Drive
 //------------------------------------------------------
@@ -252,40 +318,6 @@ void MelodyExtraction::DynamicThresholdAdjustment(int num_tones){
 			dynamicThreshold += (valueTop - dynamicThreshold) * dynamicIncreaseFactor;
 }
 
-//------------------------------------------------------
-//	Dynamic MelodyLine Processing
-//------------------------------------------------------
-void MelodyExtraction::MelodyLineAssignment(){
-	//first iteration through the melody line objects asking if they want one or a few tones and return a score for each note
-	//depending on the score, assign tones to alive melody objects
-	//then spawn new melody objects if the remaining tones meet certain condition
-	//another tone storage element is needed here
-
-	/*Critical information:
-		stepMelody
-		MelodyObjList
-	*/
-	vector<int> * astepmelody = &stepMelody.back();
-	int num_tone_extracted = (*astepmelody).size();
-	
-	// by definition MelodyObjList.begin() is always the TopMelody
-	//if(num_tone_extracted > 0){
-	//	for(melodyIter = MelodyObjList.begin(); melodyIter != MelodyObjList.end(); ++melodyIter){
-	//		if((*melodyIter)->GetIsTheHighestLine()){
-	//			//Assign the highest melody to it
-	//			logMelody = (*astepmelody)[num_tone_extracted-1];//for logging purpose
-	//			(*melodyIter)->AcceptTone((*astepmelody)[num_tone_extracted-1], 0);
-	//			
-	//		}else if((*melodyIter)->GetAlive()||(*melodyIter)->GetRevivable()){
-	//			// dummy codes here
-	//			//vector<float> topscore = (*melodyIter)->AnalyseMelodyTones(astepmelody);
-
-	//			//FreeAll(topscore);
-	//		}
-	//	}
-	//}
-	//FreeAll(*astepmelody); should free step melody somewhere else
-}
 
 //------------------------------------------------------
 // Dynamic Frequency Band Converting

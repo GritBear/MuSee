@@ -76,10 +76,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\itunesvisualswindowssdk - muSee\MusicExtraction.h" />
+    <ClInclude Include="MusicExtraction.h" />
+    <ClInclude Include="Parameters.h" />
+    <ClInclude Include="RhythmicExtract.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\itunesvisualswindowssdk - muSee\MusicExtraction.cpp" />
+    <ClCompile Include="MusicExtraction.cpp" />
+    <ClCompile Include="RhythmicExtract.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

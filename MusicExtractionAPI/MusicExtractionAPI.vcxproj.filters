@@ -15,12 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\itunesvisualswindowssdk - muSee\MusicExtraction.h">
+    <ClInclude Include="Parameters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MusicExtraction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RhythmicExtract.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\itunesvisualswindowssdk - muSee\MusicExtraction.cpp">
+    <ClCompile Include="MusicExtraction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RhythmicExtract.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

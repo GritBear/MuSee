@@ -1,11 +1,17 @@
 #pragma once
 //-------------------------------------------------------------------------
+//Storage Variables
+//-------------------------------------------------------------------------
+const unsigned int numberOfSecondsStored = 12; //seconds
+
+//-------------------------------------------------------------------------
 //Band Separation
 //-------------------------------------------------------------------------
 //Define Central C
 const float C4 = 261.625565300599;
 const float toneResolution = 1;
 const float minimumTone = -20;
+const int MP3SamplingRate = 44100;
 
 //a very detailed band seperation sample parameters
 //const unsigned int NumFrequencyBand = 5;

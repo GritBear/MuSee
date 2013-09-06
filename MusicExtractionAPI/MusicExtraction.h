@@ -13,8 +13,20 @@ struct RenderVisualData {
 	unsigned __int8	**	spectrumData;
 };
 
+struct MelodyExtractionPram {
+	int melodyExtractRate;   //extract melody N times a second
+	int pulseFreq; //N update per second
+	int numSpectrumEntries;
+	int numWaveformEntries;
+	int numMaxChannels;
+};
+
 class MelodyExtraction {
 private:
+	int melodyExtractRate;   //extract melody N times a second
+	unsigned int maxExtractedStorageEntries;
+	int PulseFreq;
+
 	int melodyStoragesVecSize1;
 	int melodyStoragesVecSize2;
 	vector<vector<float>> melodyStoragesVec;
@@ -24,10 +36,11 @@ private:
 	list<vector<int>> stepMelody; // this is used to create melody and other things
 	vector<int> FrequencyBandSeparatorVec;
 	int MaxTone;
-	vector<int> FrequencyBandSeparatorVec;
 	vector<int> ToneBandSeparatorVec;
 	unsigned int MaxFrequencyIndex;
+	unsigned int numSpectrumEntries;
 	unsigned int numMaxChannels;
+	unsigned int numWaveformEntries;
 	int pulseIter;
 	int pulseIterUpperLimit;
 
@@ -50,7 +63,6 @@ protected:
 	void StepToneRegistrationFromFreq(vector<float> abuffer);
 	void StepFreRegistration();
 	void DynamicThresholdAdjustment(int num_tones);
-	void MelodyLineAssignment();
 
 	//------------------------------------------------
 	// Acoustic Operations
@@ -73,13 +85,15 @@ protected:
 	void HighFreqCompensation();
 
 public:
-	MelodyExtraction(){init();}; //
+	MelodyExtraction(MelodyExtractionPram Prams){Init(Prams);};
 	~MelodyExtraction(){Destroy();};
-	void init();
+	void Init(MelodyExtractionPram Prams);
 	void Destroy();
-	void Update();
+	void Update(RenderVisualData * RenderData);
 	void Clean(); //RemoveTooOldEntries()
 
+	vector<int> GetCurrentTones(){return stepMelody.back();}
+	list<vector<int>> GetPastMelody(){return stepMelody;}
 };
 
 //-----------------------------------------------------
