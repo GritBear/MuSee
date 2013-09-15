@@ -8,17 +8,17 @@
 //------------------------------------------------------
 // Constructors and Interface
 //------------------------------------------------------
-void MelodyExtraction::Init(MelodyExtractionPram * Prams){
+void MelodyExtraction::Init(MelodyExtractionPram Prams){
 	pulseIter = 0;
-	melodyExtractRate = Prams->melodyExtractRate; 
-	PulseFreq = Prams->pulseFreq;
+	melodyExtractRate = Prams.melodyExtractRate; 
+	PulseFreq = Prams.pulseFreq;
 	pulseIterUpperLimit = (int)PulseFreq/melodyExtractRate + 0.5;
 	if(pulseIterUpperLimit<1) //some error checking
 		pulseIterUpperLimit = 1;
 
-	numSpectrumEntries = Prams->numSpectrumEntries;
-	numWaveformEntries = Prams->numWaveformEntries;
-	numMaxChannels = Prams->numMaxChannels;
+	numSpectrumEntries = Prams.numSpectrumEntries;
+	numWaveformEntries = Prams.numWaveformEntries;
+	numMaxChannels = Prams.numMaxChannels;
 
 	maxExtractedStorageEntries = numberOfSecondsStored * melodyExtractRate;
 

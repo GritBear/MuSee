@@ -76,8 +76,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="museeAPI.h" />
-    <ClInclude Include="MuseeInterfaceParam.h" />
     <ClInclude Include="MusicExtraction.h" />
     <ClInclude Include="Parameters.h" />
     <ClInclude Include="RhythmicExtract.h" />
@@ -85,7 +83,6 @@
   <ItemGroup>
     <ClCompile Include="MusicExtraction.cpp" />
     <ClCompile Include="RhythmicExtract.cpp" />
-    <ClCompile Include="museeAPI.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
