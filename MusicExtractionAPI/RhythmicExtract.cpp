@@ -1,15 +1,15 @@
 #include "RhythmicExtract.h"
 
-RhythmicExtract::RhythmicExtract(int NumWaveformEntries, int NumMaxChannels, int PulseRate){
-	numWaveformEntries = NumWaveformEntries;
-	numMaxChannels = NumMaxChannels;
+RhythmicExtract::RhythmicExtract(MelodyExtractionPram * param){
+	numWaveformEntries = param->numWaveformEntries;
+	numMaxChannels = param->numMaxChannels;
 	nextValueReady = false;
 	//readyForEventUpdate = false;
 
 	//initialize size constants
-	maxRawStorageEntries = PulseRate * numberOfSecondsStored;
+	maxRawStorageEntries = param->pulseFreq * numberOfSecondsStored;
 	maxLowPassStorageSize = numberOfSecondsStored * soundEnergySampleRate;
-	firstLowPassOrder = int(((float)PulseRate/(float)soundEnergySampleRate) + 0.5);
+	firstLowPassOrder = int(((float)param->pulseFreq/(float)soundEnergySampleRate) + 0.5);
 	numEntriesOfEachSoundEnergy = numWaveformEntries * numMaxChannels; // used to normalize current sound energy
 	
 	if(numEntriesOfEachSoundEnergy < 1 )
@@ -61,7 +61,7 @@ void RhythmicExtract::RhythmicProcessingDrive(){
 		SoundEnergyBeatSecondExtraction();
 
 		//SoundEnergyIterativePeriodicMatch();
-		RemoveTooOldEntries();
+		Clean();
 	}
 }
 
@@ -296,7 +296,7 @@ void RhythmicExtract::ConvertToMSPeriod(){
 //------------------------------------------------------
 */
 
-void RhythmicExtract::RemoveTooOldEntries(){
+void RhythmicExtract::Clean(){
 	//Remove too old entries to keep the size of energy and time list reasonable
 	while(SoundEnergy.size() > maxRawStorageEntries){
 		SoundEnergy.pop_front();	

@@ -2,10 +2,14 @@
 #include <vector>
 #include <list>
 #include "Parameters.h"
+#include "MuseeInterfaceParam.h"
 
 using namespace std;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of b307155... wtf
 class MelodyExtraction {
 private:
 	int melodyExtractRate;   //extract melody N times a second
@@ -68,15 +72,19 @@ protected:
 	// this will set all values below threshold to bottom, above or equal threshold to top
 	void HardDecisionPolarizeRule(float Threshold, float bottom, float top);
 	void HighFreqCompensation();
-
+	void Clean();	 //RemoveTooOldEntries()
 public:
-	MelodyExtraction(MelodyExtractionPram Prams){Init(Prams);};
+	MelodyExtraction(MelodyExtractionPram * Prams){Init(Prams);};
 	~MelodyExtraction(){Destroy();};
-	void Init(MelodyExtractionPram Prams);
+	void Init(MelodyExtractionPram * Prams);
 	void Destroy();
 	void Update(RenderVisualData * RenderData);
-	void Clean(); //RemoveTooOldEntries()
 
+	//getter and setters
 	vector<int> GetCurrentTones(){return stepMelody.back();}
 	list<vector<int>> GetPastMelody(){return stepMelody;}
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> parent of b307155... wtf

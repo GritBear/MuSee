@@ -24,12 +24,21 @@
     <ClInclude Include="RhythmicExtract.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="museeAPI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MuseeInterfaceParam.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MusicExtraction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RhythmicExtract.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="museeAPI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

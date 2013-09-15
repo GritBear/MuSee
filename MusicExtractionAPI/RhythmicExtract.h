@@ -1,6 +1,7 @@
 #pragma once
 #include <deque>
 #include "Parameters.h"
+<<<<<<< HEAD
 using namespace std;
 
 /*
@@ -10,12 +11,34 @@ const int MaxInterval = 2 * soundEnergySampleRate; //in period checking
 const int IntervalIncrement = 0.1*soundEnergySampleRate;
 const int MaxPeriod = 2; //top N periods are stored
 */
+=======
+#include "MuseeInterfaceParam.h"
+
+using namespace std;
+>>>>>>> parent of b307155... wtf
 
 //===============================================================================
 //modularize the rhythmic extraction component
 //===============================================================================
 class RhythmicExtract {
 private:
+	//=================================================================
+	//Publicly available output variables
+	//=================================================================
+	//time domain statistics
+	float averageLowPassedSound[bufferNumberOfSecondLength];
+	float varianceOfLowPassedSound[bufferNumberOfSecondLength], standardDeviationOfLowPassedSound[bufferNumberOfSecondLength];
+
+	float dynamicThresholdScale[bufferNumberOfSecondLength];
+
+	float currentBeatMagnitudeArray[bufferNumberOfSecondLength];
+	int currentBeatLevel; //measure how many entries in currentBeatMagnitudeArray is non-zero
+	float currentBeatEnergy; //find the energy out of currentBeatMagnitudeArray
+	
+	deque<float> beatStorageDQue;
+	deque<int>beatLevelDQue;
+
+	float averageBeatLevel, averageBeatMagnitude;
 protected:
 	//=================================================================
 	// Rhythmic variables
@@ -73,62 +96,24 @@ protected:
 	void SoundEnergyBeatSecondExtraction();
 	float BeatThreshold(int BufferInd);
 
-	/*
-	//Rhythmic period (time between beats): achieved through dynamic pattern matching
-	//can be achieved by finding the distance between max value iteratively (with consistancy constraint)
-	int periodInMS[MaxPeriod];
-	int periodInIter[MaxPeriod];
-	float periodScore[MaxPeriod]; //corresponding scores of periodInMS[MaxPeriod];
-
-	void SoundEnergyIterativePeriodicMatch();
-	//helper method for period detection---------------------
-	float IterativePeriodicMatchScoring(int iter);
-	void InsertPeriod(int iter, float score);
-	void ConvertToMSPeriod();
-	//-------------------------------------------------------
-	*/
-	void RemoveTooOldEntries();
+	void Clean();
 
 public:
 	//=================================================================
-	//Publicly available output variables
-	//=================================================================
-	//time domain statistics
-	float averageLowPassedSound[bufferNumberOfSecondLength];
-	float varianceOfLowPassedSound[bufferNumberOfSecondLength], standardDeviationOfLowPassedSound[bufferNumberOfSecondLength];
-
-	float dynamicThresholdScale[bufferNumberOfSecondLength];
-
-	float currentBeatMagnitudeArray[bufferNumberOfSecondLength];
-	int currentBeatLevel; //measure how many entries in currentBeatMagnitudeArray is non-zero
-	float currentBeatEnergy; //find the energy out of currentBeatMagnitudeArray
-	
-	deque<float> beatStorageDQue;
-	deque<int>beatLevelDQue;
-
-	float averageBeatLevel, averageBeatMagnitude;
-
-	//=================================================================
 	//Rhythmic Core methods
 	//=================================================================
-	RhythmicExtract(int NumWaveformEntries,	int NumMaxChannels, int PulseRate);
+	RhythmicExtract(MelodyExtractionPram * param);
 	void Init();
 	void Destroy(){EmptyRhythmicStates();}
 	void Update(RenderVisualData * RenderData);
-	
 	void EmptyRhythmicStates();
 
 	//Getter and Setter
-		//return all raw information
+	//return all raw information
 	deque<float> * GetSoundEnergy(){return &SoundEnergy;}
 	deque<float> * GetLowPassSoundEnergy(){return &lowPassedSoundEnergy;}
 
 		//return the beat related
 	deque<int> * GetBeatLevel(){return &beatLevelDQue;}
 	deque<float> * GetBeatStorage(){return &beatStorageDQue;}
-	
-	int GetInitializedLevel(){return initializedLevel;}
-
-		//return status
-	bool GetNextEventUpdateReady(){ if(readyForEventUpdate){readyForEventUpdate = false; return true;} return false;}
 };
