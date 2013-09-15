@@ -5,21 +5,6 @@
 
 using namespace std;
 
-struct RenderVisualData {
-	unsigned __int8		numWaveformChannels;
-	unsigned __int8 **	waveformData;
-	
-	unsigned __int8		numSpectrumChannels;
-	unsigned __int8	**	spectrumData;
-};
-
-struct MelodyExtractionPram {
-	int melodyExtractRate;   //extract melody N times a second
-	int pulseFreq; //N update per second
-	int numSpectrumEntries;
-	int numWaveformEntries;
-	int numMaxChannels;
-};
 
 class MelodyExtraction {
 private:
@@ -95,11 +80,3 @@ public:
 	vector<int> GetCurrentTones(){return stepMelody.back();}
 	list<vector<int>> GetPastMelody(){return stepMelody;}
 };
-
-//-----------------------------------------------------
-//Memory free function for containers with swap() method
-template <typename T>
-void FreeAll( T & t ) {
-    T tmp;
-    t.swap( tmp );
-}

@@ -1,4 +1,35 @@
 #pragma once
+
+struct RenderVisualData {
+	unsigned __int8		numWaveformChannels;
+	unsigned __int8 **	waveformData;
+	
+	unsigned __int8		numSpectrumChannels;
+	unsigned __int8	**	spectrumData;
+};
+
+struct MelodyExtractionPram {
+	int melodyExtractRate;   //extract melody N times a second
+	int pulseFreq; //N update per second
+	int numSpectrumEntries;
+	int numWaveformEntries;
+	int numMaxChannels;
+};
+
+
+//===============================================================================
+//Define constants
+//===============================================================================
+const int soundEnergySampleRate = 15; //n samples per second for low passed sound
+const int MaxDistributionLevel = 11; //from 0% evenly distribute levels to 100%
+
+//Beat Detection-----------------------------------------------------------------
+const float bufferNumberOfSecond[] = {0.6, 1.5, 5}; //seconds (this does not include the longest possible buffer length)
+const int bufferNumberOfSecondLength = sizeof(bufferNumberOfSecond)/sizeof(float);
+const float beatThresholdStandardDeviationScale = 0.6;//to determine the beat threshold
+const int minBeatIter = 1; //the minimal tap a beat that must last to be a fine beat (1 means same as rough beat)
+
+
 //-------------------------------------------------------------------------
 //Storage Variables
 //-------------------------------------------------------------------------
@@ -50,3 +81,11 @@ const float dynamicDecreaseFactor = 0.9;
 const float endScale = 4.0;
 const float startScale = 1.0;
 
+
+//-----------------------------------------------------
+//Memory free function for containers with swap() method
+template <typename T>
+void FreeAll( T & t ) {
+    T tmp;
+    t.swap( tmp );
+}
