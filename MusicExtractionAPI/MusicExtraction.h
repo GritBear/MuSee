@@ -2,9 +2,9 @@
 #include <vector>
 #include <list>
 #include "Parameters.h"
-#include "MuseeInterfaceParam.h"
 
 using namespace std;
+
 
 class MelodyExtraction {
 private:
@@ -68,15 +68,15 @@ protected:
 	// this will set all values below threshold to bottom, above or equal threshold to top
 	void HardDecisionPolarizeRule(float Threshold, float bottom, float top);
 	void HighFreqCompensation();
-	void Clean();	 //RemoveTooOldEntries()
+
 public:
-	MelodyExtraction(MelodyExtractionPram * Prams){Init(Prams);};
+	MelodyExtraction(MelodyExtractionPram Prams){Init(Prams);};
 	~MelodyExtraction(){Destroy();};
-	void Init(MelodyExtractionPram * Prams);
+	void Init(MelodyExtractionPram Prams);
 	void Destroy();
 	void Update(RenderVisualData * RenderData);
+	void Clean(); //RemoveTooOldEntries()
 
-	//getter and setters
 	vector<int> GetCurrentTones(){return stepMelody.back();}
 	list<vector<int>> GetPastMelody(){return stepMelody;}
 };
