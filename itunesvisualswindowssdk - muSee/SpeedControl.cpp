@@ -102,7 +102,7 @@ float MelodyAnimationObjSpeed(){ //return velocity per second
 
 //returns speed per Pulse
 float BackgroundSpeed(int UpdatePerSecond, float BackgroundXSpan, float OpenGLXRange){
-	return MelodyAnimationObjSpeed();
+	return -MelodyAnimationObjSpeed()/2.0;
 }
 
 //return speed per Pulse (this has to be synchronized with the background)

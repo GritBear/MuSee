@@ -8,7 +8,7 @@ const int	defaultDisplayTimeInMS = 12 * 1000;		//this do not has to less than th
 
 //Precompiled Background info
 const float defaultPercentageVel = 0.0002;
-const float defaultXSpan = 0.9;
+const float defaultXSpan = 1;
 const float defaultYSpan = 1;
 const float maxTimeStep = 1.0/15.0; //bigger time step will be discarded
 

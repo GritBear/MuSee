@@ -341,8 +341,9 @@ void ArtStoryCore::LoadTexture(){
 	if(!textureLoaded){
 		textureLoaded = theReader->TextureLoadDrive();
 
-		if(!theBackground->alreadyInitialized)
+		if(!theBackground->alreadyInitialized){
 			theBackground->Init();
+		}
 	}
 }
 

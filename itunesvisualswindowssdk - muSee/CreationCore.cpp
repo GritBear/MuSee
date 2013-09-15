@@ -82,14 +82,14 @@ void CreationCore::NextVerticalAnimation(float percentageIntoTheTheme, int &Inde
 
 void CreationCore::NextBackground(int &Index){
 	Index = 0;
-	if(backgroundIDList.size() == 0){
-		backgroundIDList.push_back(Index);
-	}else{
-		if(Index != backgroundIDList.back()){
-			backgroundIDList.push_back(Index);
-			RemoveTooOldEntries(); //some book keeping
-		}
-	}
+	//if(backgroundIDList.size() == 0){
+	//	backgroundIDList.push_back(Index);
+	//}else{
+	//	if(Index != backgroundIDList.back()){
+	//		backgroundIDList.push_back(Index);
+	//		RemoveTooOldEntries(); //some book keeping
+	//	}
+	//}
 }
 
 //-----------------------------------------------------------------

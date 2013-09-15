@@ -1,7 +1,6 @@
 #pragma once
 #include <deque>
 #include "Parameters.h"
-<<<<<<< HEAD
 using namespace std;
 
 /*
@@ -11,11 +10,9 @@ const int MaxInterval = 2 * soundEnergySampleRate; //in period checking
 const int IntervalIncrement = 0.1*soundEnergySampleRate;
 const int MaxPeriod = 2; //top N periods are stored
 */
-=======
+
 #include "MuseeInterfaceParam.h"
 
-using namespace std;
->>>>>>> parent of b307155... wtf
 
 //===============================================================================
 //modularize the rhythmic extraction component

@@ -6,10 +6,6 @@
 
 using namespace std;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of b307155... wtf
 class MelodyExtraction {
 private:
 	int melodyExtractRate;   //extract melody N times a second
@@ -74,6 +70,7 @@ protected:
 	void HighFreqCompensation();
 	void Clean();	 //RemoveTooOldEntries()
 public:
+
 	MelodyExtraction(MelodyExtractionPram * Prams){Init(Prams);};
 	~MelodyExtraction(){Destroy();};
 	void Init(MelodyExtractionPram * Prams);
@@ -83,8 +80,6 @@ public:
 	//getter and setters
 	vector<int> GetCurrentTones(){return stepMelody.back();}
 	list<vector<int>> GetPastMelody(){return stepMelody;}
-<<<<<<< HEAD
+
 };
-=======
-};
->>>>>>> parent of b307155... wtf
+

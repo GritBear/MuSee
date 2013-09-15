@@ -1,33 +1,17 @@
-<<<<<<< HEAD
-﻿Build started 9/15/2013 1:01:18 AM.
-=======
-﻿Build started 9/13/2013 1:28:41 AM.
->>>>>>> parent of b307155... wtf
-     1>Project "C:\Users\Grit\Dropbox\GitHub\MuSee\MusicExtractionAPI\MusicExtractionAPI.vcxproj" on node 2 (Build target(s)).
+﻿Build started 9/15/2013 1:30:43 AM.
+     1>Project "C:\Users\Grit\Dropbox\GitHub\MuSee\MusicExtractionAPI\MusicExtractionAPI.vcxproj" on node 2 (Rebuild target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D MUSICEXTRACTIONAPI_EXPORTS /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt MusicExtraction.cpp RhythmicExtract.cpp museeAPI.cpp
          MusicExtraction.cpp
-<<<<<<< HEAD
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(27): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(29): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(42): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(67): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(68): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(69): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(71): warning C4244: 'initializing' : conversion from 'double' to 'const float', possible loss of data
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(77): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(78): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-=======
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(37): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(13): warning C4305: 'initializing' : truncation from 'double' to 'const float'
      1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(38): warning C4305: 'initializing' : truncation from 'double' to 'const float'
      1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(39): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(41): warning C4244: 'initializing' : conversion from 'double' to 'const float', possible loss of data
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(47): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(40): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(42): warning C4244: 'initializing' : conversion from 'double' to 'const float', possible loss of data
      1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(48): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(49): warning C4305: 'initializing' : truncation from 'double' to 'const float'
      1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(62): warning C4305: 'initializing' : truncation from 'double' to 'const float'
      1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(64): warning C4305: 'initializing' : truncation from 'double' to 'const float'
->>>>>>> parent of b307155... wtf
      1>MusicExtraction.cpp(15): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
      1>MusicExtraction.cpp(25): warning C4244: '=' : conversion from 'unsigned int' to 'float', possible loss of data
      1>MusicExtraction.cpp(97): warning C4018: '<' : signed/unsigned mismatch
@@ -60,27 +44,15 @@
      1>MusicExtraction.cpp(467): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
      1>MusicExtraction.cpp(468): warning C4018: '<' : signed/unsigned mismatch
          RhythmicExtract.cpp
-<<<<<<< HEAD
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(27): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(29): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(42): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(67): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(68): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(69): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(71): warning C4244: 'initializing' : conversion from 'double' to 'const float', possible loss of data
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(77): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(78): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-=======
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(37): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(13): warning C4305: 'initializing' : truncation from 'double' to 'const float'
      1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(38): warning C4305: 'initializing' : truncation from 'double' to 'const float'
      1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(39): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(41): warning C4244: 'initializing' : conversion from 'double' to 'const float', possible loss of data
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(47): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(40): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(42): warning C4244: 'initializing' : conversion from 'double' to 'const float', possible loss of data
      1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(48): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(49): warning C4305: 'initializing' : truncation from 'double' to 'const float'
      1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(62): warning C4305: 'initializing' : truncation from 'double' to 'const float'
      1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(64): warning C4305: 'initializing' : truncation from 'double' to 'const float'
->>>>>>> parent of b307155... wtf
      1>RhythmicExtract.cpp(13): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
      1>RhythmicExtract.cpp(75): warning C4018: '<' : signed/unsigned mismatch
      1>RhythmicExtract.cpp(76): warning C4018: '<' : signed/unsigned mismatch
@@ -93,13 +65,13 @@
      1>RhythmicExtract.cpp(315): warning C4018: '>' : signed/unsigned mismatch
      1>RhythmicExtract.cpp(336): warning C4305: '=' : truncation from 'unsigned __int64' to 'float'
          museeAPI.cpp
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(37): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(13): warning C4305: 'initializing' : truncation from 'double' to 'const float'
      1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(38): warning C4305: 'initializing' : truncation from 'double' to 'const float'
      1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(39): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(41): warning C4244: 'initializing' : conversion from 'double' to 'const float', possible loss of data
-     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(47): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(40): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(42): warning C4244: 'initializing' : conversion from 'double' to 'const float', possible loss of data
      1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(48): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(49): warning C4305: 'initializing' : truncation from 'double' to 'const float'
      1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(62): warning C4305: 'initializing' : truncation from 'double' to 'const float'
      1>c:\users\grit\dropbox\github\musee\musicextractionapi\Parameters.h(64): warning C4305: 'initializing' : truncation from 'double' to 'const float'
        Link:
@@ -109,12 +81,8 @@
          Generating code
          Finished generating code
          MusicExtractionAPI.vcxproj -> C:\Users\Grit\Dropbox\GitHub\MuSee\itunesvisualswindowssdk - muSee\Release\MusicExtractionAPI.dll
-     1>Done Building Project "C:\Users\Grit\Dropbox\GitHub\MuSee\MusicExtractionAPI\MusicExtractionAPI.vcxproj" (Build target(s)).
+     1>Done Building Project "C:\Users\Grit\Dropbox\GitHub\MuSee\MusicExtractionAPI\MusicExtractionAPI.vcxproj" (Rebuild target(s)).
 
 Build succeeded.
 
-<<<<<<< HEAD
-Time Elapsed 00:00:01.71
-=======
-Time Elapsed 00:00:01.93
->>>>>>> parent of b307155... wtf
+Time Elapsed 00:00:02.07
