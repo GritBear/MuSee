@@ -2,8 +2,6 @@
 
 //this method is called in Render() to display debugging data
 void ArtStoryCore::DebugUpdate(){
-	//InfoOut = num2str(theBackground->backgroundInd);
-
 	/*
 	int size = (*MelodyObjList.front()).inScreenTraceX.size();
 	InfoOut = num2str(size);

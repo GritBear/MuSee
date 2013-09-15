@@ -118,7 +118,6 @@ public:
 	//debug
 	bool testGenerated;
 	int colorInst;
-	int backgroundInd;
 	
 	//=========================================================================================
 	//Core functions

@@ -118,8 +118,7 @@ bool DataReader::GeneralLoader(int PreCompiledind){
 		GetPathToData(thename);
 		break;
 	case 1:
-		//thename = "CCs_background1.png";
-		thename = "grayness.png";
+		thename = "CCs_background1.png";
 		theType = BackgroundTexture;
 		repeatOpt = X_Repeat;
 		GetPathToData(thename);
@@ -208,7 +207,7 @@ void DataReader::FillTexInfoDrive(TextureImage * texInfo){
 	/*else if(strcmp(thename, "FlyingSpark.png")){
 		FillTexInfo(&texInfo->texParameter, 1);
 	}*/
-	else if(texInfo->texName.compare("grayness.png")==0){
+	else if(texInfo->texName.compare("CCs_background1.png")==0){
 		FillTexInfo(&texInfo->texParameter, 1);
 	}else if(texInfo->texName.compare("grass1.png")==0){
 		FillTexInfo(&texInfo->texParameter, 2);
