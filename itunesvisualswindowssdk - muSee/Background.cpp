@@ -52,7 +52,7 @@ void Background::Init(){
 	theReader->BackgroundInfo(ThemeID, percentageVel, XSpan, YSpan, width, height, usingTexture, textureID);
 		
 	//White Background
-	//usingTexture = false; //set to white background
+	usingTexture = false; //set to white background
 
 	XVel = BackgroundSpeed(1, XSpan, OpenGLXSpan); //get the speed per second
 	YVel = 0;
@@ -102,8 +102,15 @@ void Background::Render(bool updating){
 	screen_w = theControl->GetScreenW();
 	screen_h = theControl->GetScreenH();
 
+<<<<<<< HEAD
 
 	if(true){
+=======
+	theChildren->Render();
+	theAllActiveChildren->Render();
+
+	if(usingTexture){
+>>>>>>> parent of 00890b3... temp commit
 		bottom  = 1.0;
 		left = BackgrounOpenGLLeft;
 		top = 0.0;
@@ -177,10 +184,13 @@ void Background::Render(bool updating){
 			(*flyingAniObjIter)->Render();//call to render each object
 		}
 	}	
+<<<<<<< HEAD
 
 	
 	theChildren->Render();
 	theAllActiveChildren->Render();
+=======
+>>>>>>> parent of 00890b3... temp commit
 }
 
 void Background::UpdateThemeParameters(){
