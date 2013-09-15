@@ -259,7 +259,6 @@
     <ClCompile Include="logwriterSource.cpp" />
     <ClCompile Include="MelodyFlyingObjCore.cpp" />
     <ClCompile Include="MelodyObjCore.cpp" />
-    <ClCompile Include="nonEssentialAniComponentMethods.cpp" />
     <ClCompile Include="RhythmicEventCore.cpp" />
     <ClCompile Include="RhythmicExtract.cpp" />
     <ClCompile Include="SpecialEffectCore.cpp" />
@@ -271,6 +270,7 @@
     <ClCompile Include="WinArtStory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AFactory.h" />
     <ClInclude Include="ALineSeg.h" />
     <ClInclude Include="AllAObj.h" />
     <ClInclude Include="AniCreationCore.h" />

@@ -1,7 +1,5 @@
 #include "AnimationComponents.h"
 
-
-
 //AObject Object==========================================
 AObject::AObject(){
 	vertex = 0;

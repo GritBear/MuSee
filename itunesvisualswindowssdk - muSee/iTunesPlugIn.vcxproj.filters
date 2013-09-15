@@ -37,9 +37,6 @@
     <Filter Include="Currently Developing\Special Effect AniObj">
       <UniqueIdentifier>{474dbf45-8af5-4a89-8627-6351a71ec092}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Redesign AnimationObj">
-      <UniqueIdentifier>{0a73091b-51a7-4947-b94d-a5f1be242050}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\MelodyComponent">
       <UniqueIdentifier>{b7186112-1437-46be-b02e-2d24ce720b96}</UniqueIdentifier>
     </Filter>
@@ -85,6 +82,24 @@
     </Filter>
     <Filter Include="Source Files\MelodyObj">
       <UniqueIdentifier>{6cdbc892-dac9-4cdc-8e0a-af52c0d09efb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Redesign AnimationObj">
+      <UniqueIdentifier>{0a73091b-51a7-4947-b94d-a5f1be242050}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Redesign AnimationObj\Factory">
+      <UniqueIdentifier>{0c91aa08-852c-4e29-8b1c-fce226baf0e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Redesign AnimationObj\Interface">
+      <UniqueIdentifier>{83e648e8-be3c-480a-abe9-cb6d7ec5e954}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Redesign AnimationObj\Dispatcher">
+      <UniqueIdentifier>{014f882d-4726-4ba5-bbc9-5602f72d402f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Redesign AnimationObj\LineAndTree">
+      <UniqueIdentifier>{eef9ce28-85a7-4250-8b54-3db04c01745c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Redesign AnimationObj\BaseComponent">
+      <UniqueIdentifier>{7f04ed84-d42b-4ce7-9580-47e3aa88c8ff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -169,21 +184,6 @@
     <ClCompile Include="RhythmicEventCore.cpp">
       <Filter>Currently Developing\Needed Most</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationComponents.cpp">
-      <Filter>Header Files\Redesign AnimationObj</Filter>
-    </ClCompile>
-    <ClCompile Include="nonEssentialAniComponentMethods.cpp">
-      <Filter>Header Files\Redesign AnimationObj</Filter>
-    </ClCompile>
-    <ClCompile Include="AniDispatcher.cpp">
-      <Filter>Header Files\Redesign AnimationObj</Filter>
-    </ClCompile>
-    <ClCompile Include="AInterface.h">
-      <Filter>Header Files\Redesign AnimationObj</Filter>
-    </ClCompile>
-    <ClCompile Include="SubComponents.cpp">
-      <Filter>Header Files\Redesign AnimationObj</Filter>
-    </ClCompile>
     <ClCompile Include="BackUpMelody.cpp">
       <Filter>Header Files\MelodyComponent</Filter>
     </ClCompile>
@@ -211,17 +211,11 @@
     <ClCompile Include="CreationInterface.cpp">
       <Filter>Header Files\Control</Filter>
     </ClCompile>
-    <ClCompile Include="ALineSeg.cpp">
-      <Filter>Header Files\Redesign AnimationObj</Filter>
-    </ClCompile>
-    <ClCompile Include="ATreeBranch.cpp">
-      <Filter>Header Files\Redesign AnimationObj</Filter>
-    </ClCompile>
     <ClCompile Include="tail.cpp">
-      <Filter>Header Files\Redesign AnimationObj</Filter>
+      <Filter>Redesign AnimationObj</Filter>
     </ClCompile>
     <ClCompile Include="FlyingAniComp.cpp">
-      <Filter>Header Files\Redesign AnimationObj</Filter>
+      <Filter>Redesign AnimationObj</Filter>
     </ClCompile>
     <ClCompile Include="Background.cpp">
       <Filter>Source Files\Background</Filter>
@@ -240,6 +234,24 @@
     </ClCompile>
     <ClCompile Include="logwriterSource.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AInterface.h">
+      <Filter>Redesign AnimationObj\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="AniDispatcher.cpp">
+      <Filter>Redesign AnimationObj\Dispatcher</Filter>
+    </ClCompile>
+    <ClCompile Include="ALineSeg.cpp">
+      <Filter>Redesign AnimationObj\LineAndTree</Filter>
+    </ClCompile>
+    <ClCompile Include="ATreeBranch.cpp">
+      <Filter>Redesign AnimationObj\LineAndTree</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationComponents.cpp">
+      <Filter>Redesign AnimationObj\BaseComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="SubComponents.cpp">
+      <Filter>Redesign AnimationObj\BaseComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -351,15 +363,6 @@
     <ClInclude Include="iTunesVisualAPI\iTunesVisualAPI.h">
       <Filter>Source Files\Modified Apple Original Source</Filter>
     </ClInclude>
-    <ClInclude Include="AniStructs.h">
-      <Filter>Header Files\Redesign AnimationObj</Filter>
-    </ClInclude>
-    <ClInclude Include="AniDispatcher.h">
-      <Filter>Header Files\Redesign AnimationObj</Filter>
-    </ClInclude>
-    <ClInclude Include="SubComponents.h">
-      <Filter>Header Files\Redesign AnimationObj</Filter>
-    </ClInclude>
     <ClInclude Include="MelodyObj.h">
       <Filter>Header Files\MelodyComponent</Filter>
     </ClInclude>
@@ -375,9 +378,6 @@
     <ClInclude Include="control.h">
       <Filter>Header Files\Control</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationComponents.h">
-      <Filter>Header Files\Redesign AnimationObj</Filter>
-    </ClInclude>
     <ClInclude Include="AniSpawningHelper.h">
       <Filter>Header Files\AniComputation</Filter>
     </ClInclude>
@@ -387,20 +387,11 @@
     <ClInclude Include="CreationInterface.h">
       <Filter>Header Files\Control</Filter>
     </ClInclude>
-    <ClInclude Include="ATreeBranch.h">
-      <Filter>Header Files\Redesign AnimationObj</Filter>
-    </ClInclude>
-    <ClInclude Include="ALineSeg.h">
-      <Filter>Header Files\Redesign AnimationObj</Filter>
-    </ClInclude>
     <ClInclude Include="tail.h">
-      <Filter>Header Files\Redesign AnimationObj</Filter>
+      <Filter>Redesign AnimationObj</Filter>
     </ClInclude>
     <ClInclude Include="FlyingAniComp.h">
-      <Filter>Header Files\Redesign AnimationObj</Filter>
-    </ClInclude>
-    <ClInclude Include="AllAObj.h">
-      <Filter>Header Files\Redesign AnimationObj</Filter>
+      <Filter>Redesign AnimationObj</Filter>
     </ClInclude>
     <ClInclude Include="VectorFunctions.h">
       <Filter>Header Files\Global</Filter>
@@ -419,6 +410,30 @@
     </ClInclude>
     <ClInclude Include="logwriter.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AllAObj.h">
+      <Filter>Redesign AnimationObj\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="AniDispatcher.h">
+      <Filter>Redesign AnimationObj\Dispatcher</Filter>
+    </ClInclude>
+    <ClInclude Include="AniStructs.h">
+      <Filter>Redesign AnimationObj\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="ALineSeg.h">
+      <Filter>Redesign AnimationObj\LineAndTree</Filter>
+    </ClInclude>
+    <ClInclude Include="ATreeBranch.h">
+      <Filter>Redesign AnimationObj\LineAndTree</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationComponents.h">
+      <Filter>Redesign AnimationObj\BaseComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="SubComponents.h">
+      <Filter>Redesign AnimationObj\BaseComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="AFactory.h">
+      <Filter>Redesign AnimationObj\Factory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

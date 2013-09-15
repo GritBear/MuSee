@@ -272,7 +272,7 @@ void Background::NexAnimationObjGenerate(){
 
 	
 //testing here
-	if(false){
+	if(spawndingConditionGood){
 		//for test demo
 		//legacyVertical(); create legacy grass
 
