@@ -255,6 +255,7 @@
     <ClCompile Include="iTunesPlugIn.cpp" />
     <ClCompile Include="iTunesVisualAPI\iTunesAPI.cpp" />
     <ClCompile Include="iTunesPlugInWin.cpp" />
+    <ClCompile Include="LightForestFac.cpp" />
     <ClCompile Include="logFunction.cpp" />
     <ClCompile Include="logwriterSource.cpp" />
     <ClCompile Include="MelodyFlyingObjCore.cpp" />
@@ -309,6 +310,7 @@
     <ClInclude Include="iTunesSystemDefinition.h" />
     <ClInclude Include="iTunesVisualAPI\iTunesAPI.h" />
     <ClInclude Include="iTunesVisualAPI\iTunesVisualAPI.h" />
+    <ClInclude Include="LightForestFac.h" />
     <ClInclude Include="logwriter.h" />
     <ClInclude Include="MelodicEventCore.h" />
     <ClInclude Include="MelodyExtract.h" />

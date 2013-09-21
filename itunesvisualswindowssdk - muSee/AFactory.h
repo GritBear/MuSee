@@ -1,12 +1,24 @@
 #pragma once
 #include "AInterface.h" //animation interface
+#include "AniStructs.h"
 //define the abstract class for the factory
+
+struct AniFacParam {
+	Vector3 foot;
+	Vector3 head;
+	Color3 color; //this is light color in lightforestfac
+	control * theControl;
+};
 
 class AFactory {
 private:
 protected:
 public:
-	AFactory();
-	~AFactory();
-	AInterface * create(void * param); //equivalent to Object param 
+	AFactory(){init();}
+	~AFactory(){destroy();}
+	virtual void init(){};
+	virtual void destroy(){};
+	virtual AInterface * create(void * param){} //equivalent to Object param 
+
+
 };

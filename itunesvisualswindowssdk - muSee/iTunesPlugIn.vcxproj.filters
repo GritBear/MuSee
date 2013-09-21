@@ -253,6 +253,9 @@
     <ClCompile Include="SubComponents.cpp">
       <Filter>Redesign AnimationObj\BaseComponent</Filter>
     </ClCompile>
+    <ClCompile Include="LightForestFac.cpp">
+      <Filter>Redesign AnimationObj\Factory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="iTunesPlugIn.h">
@@ -433,6 +436,9 @@
       <Filter>Redesign AnimationObj\BaseComponent</Filter>
     </ClInclude>
     <ClInclude Include="AFactory.h">
+      <Filter>Redesign AnimationObj\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="LightForestFac.h">
       <Filter>Redesign AnimationObj\Factory</Filter>
     </ClInclude>
   </ItemGroup>
