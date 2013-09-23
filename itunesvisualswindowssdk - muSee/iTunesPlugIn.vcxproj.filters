@@ -19,9 +19,6 @@
     <Filter Include="Currently Developing\Wait For Testing">
       <UniqueIdentifier>{bbdac34d-6a88-4974-8b4e-070c7f614d62}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\AnimationObjHeaders">
-      <UniqueIdentifier>{33b96f9d-e501-4466-a7fa-bcdd865456b3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Global">
       <UniqueIdentifier>{3d387da5-c65a-40b3-9858-09d8633a7ade}</UniqueIdentifier>
     </Filter>
@@ -42,9 +39,6 @@
     </Filter>
     <Filter Include="Header Files\Control">
       <UniqueIdentifier>{137d8e2d-7cd3-4f87-8920-116c8f8ea1d2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\AniComputation">
-      <UniqueIdentifier>{cf4efe67-8161-4861-8481-446e523945d7}</UniqueIdentifier>
     </Filter>
     <Filter Include="TempLegacy">
       <UniqueIdentifier>{f37c979d-02e5-4b44-80d1-ecc1b742ee9d}</UniqueIdentifier>
@@ -100,6 +94,12 @@
     </Filter>
     <Filter Include="Redesign AnimationObj\BaseComponent">
       <UniqueIdentifier>{7f04ed84-d42b-4ce7-9580-47e3aa88c8ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility">
+      <UniqueIdentifier>{cf4efe67-8161-4861-8481-446e523945d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AnimationObjHeaders">
+      <UniqueIdentifier>{33b96f9d-e501-4466-a7fa-bcdd865456b3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -197,16 +197,16 @@
       <Filter>Source Files\Control</Filter>
     </ClCompile>
     <ClCompile Include="AniSpawnHelper.cpp">
-      <Filter>Header Files\AniComputation</Filter>
+      <Filter>Header Files\Utility</Filter>
     </ClCompile>
     <ClCompile Include="GlobalGeometryFunction.cpp">
-      <Filter>Header Files\AniComputation</Filter>
+      <Filter>Header Files\Utility</Filter>
     </ClCompile>
     <ClCompile Include="GlobalHelperFunctions.cpp">
       <Filter>Source Files\Public Available Functions</Filter>
     </ClCompile>
     <ClCompile Include="GlobalStatisticalFunction.cpp">
-      <Filter>Header Files\AniComputation</Filter>
+      <Filter>Header Files\Utility</Filter>
     </ClCompile>
     <ClCompile Include="CreationInterface.cpp">
       <Filter>Header Files\Control</Filter>
@@ -382,7 +382,7 @@
       <Filter>Header Files\Control</Filter>
     </ClInclude>
     <ClInclude Include="AniSpawningHelper.h">
-      <Filter>Header Files\AniComputation</Filter>
+      <Filter>Header Files\Utility</Filter>
     </ClInclude>
     <ClInclude Include="AniCreationCore.h">
       <Filter>Header Files\Control</Filter>
