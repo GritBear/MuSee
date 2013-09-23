@@ -4,7 +4,7 @@
 #include "VectorFunctions.h"
 
 //This file contains speed constands for ObjSpeedCore
-const int	defaultDisplayTimeInMS = 12 * 1000;		//this do not has to less than the length of stored melodies. Useful to calculate default x moving speed
+const int	defaultDisplayTimeInMS = 8 * 1000;		//this do not has to less than the length of stored melodies. Useful to calculate default x moving speed
 
 //Precompiled Background info
 const float defaultPercentageVel = 0.0002;

@@ -1,11 +1,12 @@
 #pragma once
 #include "AInterface.h" //animation interface
 #include "AniStructs.h"
-//define the abstract class for the factory
+//define the base abstract class for the factory
 
 struct AniFacParam {
 	Vector3 foot;
 	Vector3 head;
+	Vector3 vel;
 	Color3 color; //this is light color in lightforestfac
 	control * theControl;
 };
