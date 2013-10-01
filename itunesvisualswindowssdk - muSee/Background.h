@@ -4,6 +4,8 @@
 #include"CreationCore.h"
 #include"VerticalAnimationObj.h"
 #include"FlyingAnimationObj.h"
+#include"AFactory.h"
+
 //#include"SpecialEffectController.h"
 #include "control.h"
 
@@ -51,6 +53,8 @@ protected:
 	float velRange;
 
 	//----------------------------Vertical Animation Object Related------------------------------------
+	AFactory backgroundAnimationFac;
+	
 	int minTime, maxTime, meanTime;
 	float minHeight, maxHeight, meanHeight, nextHeight;
 	float minAngle, maxAngle, meanAngle;
