@@ -19,7 +19,7 @@ public:
 	~AFactory(){destroy();}
 	virtual void init(){};
 	virtual void destroy(){};
-	virtual AInterface * create(void * param){} //equivalent to Object param 
+	virtual AInterface * create(void * param){return NULL;} //equivalent to Object param 
 
 
 };
