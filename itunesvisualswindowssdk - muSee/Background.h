@@ -161,8 +161,8 @@ public:
 	void RemoveTooOldEntries(bool Removeall = false);
 
 	//legacy vertical animation code
-	void legacyVertical();
-	bool legacyBestMatchParameters(int AnimationIndex); 
+	//void legacyVertical();
+	//bool legacyBestMatchParameters(int AnimationIndex); 
 };
 
 //=====================================================================================
