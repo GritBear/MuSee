@@ -59,9 +59,6 @@
     <Filter Include="Redesign AnimationObj">
       <UniqueIdentifier>{0a73091b-51a7-4947-b94d-a5f1be242050}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Redesign AnimationObj\Factory">
-      <UniqueIdentifier>{0c91aa08-852c-4e29-8b1c-fce226baf0e4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Redesign AnimationObj\Interface">
       <UniqueIdentifier>{83e648e8-be3c-480a-abe9-cb6d7ec5e954}</UniqueIdentifier>
     </Filter>
@@ -100,6 +97,9 @@
     </Filter>
     <Filter Include="CommentedOut\NotImplementedModule\Unlikely To Develop">
       <UniqueIdentifier>{517f4550-6fea-45fa-a6e0-1f23d09b4d40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Currently Developing\Factory">
+      <UniqueIdentifier>{0c91aa08-852c-4e29-8b1c-fce226baf0e4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -242,7 +242,7 @@
       <Filter>Redesign AnimationObj\BaseComponent</Filter>
     </ClCompile>
     <ClCompile Include="LightForestFac.cpp">
-      <Filter>Redesign AnimationObj\Factory</Filter>
+      <Filter>Currently Developing\Factory</Filter>
     </ClCompile>
     <ClCompile Include="BubbleEffect.cpp">
       <Filter>CommentedOut</Filter>
@@ -421,10 +421,10 @@
       <Filter>Redesign AnimationObj\BaseComponent</Filter>
     </ClInclude>
     <ClInclude Include="AFactory.h">
-      <Filter>Redesign AnimationObj\Factory</Filter>
+      <Filter>Currently Developing\Factory</Filter>
     </ClInclude>
     <ClInclude Include="LightForestFac.h">
-      <Filter>Redesign AnimationObj\Factory</Filter>
+      <Filter>Currently Developing\Factory</Filter>
     </ClInclude>
     <ClInclude Include="BubbleEffect.h">
       <Filter>CommentedOut</Filter>
