@@ -326,6 +326,7 @@
     <ClInclude Include="SpecialEffectController.h" />
     <ClInclude Include="SpecialEffectCore.h" />
     <ClInclude Include="Splash.h" />
+    <ClInclude Include="StatisticalFunctions.h" />
     <ClInclude Include="SubComponents.h" />
     <ClInclude Include="tail.h" />
     <ClInclude Include="TransitionEffectCore.h" />

@@ -5,6 +5,8 @@
 #include"VerticalAnimationObj.h"
 #include"FlyingAnimationObj.h"
 #include"AFactory.h"
+#include "StatisticalFunctions.h"
+
 
 //#include"SpecialEffectController.h"
 #include "control.h"

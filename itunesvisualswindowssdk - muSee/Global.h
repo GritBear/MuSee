@@ -76,8 +76,6 @@ const GLfloat	defaultSpecialEffectDepth = 2.0;
 //----------------------------------------------------------------------------
 string ExePath();
 double str2double(string valuestr);
-float GaussianDistribution(float LowerBound, float Mean, float UpperBound, float Variance = NULL);
-float UniformDistribution(float LowerBound, float UpperBound);
 string num2str(float number);
 
 //rotation translation functions

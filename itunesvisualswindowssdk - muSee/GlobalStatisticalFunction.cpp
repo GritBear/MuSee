@@ -1,4 +1,5 @@
-#include "Global.h"
+#include "StatisticalFunctions.h"
+using namespace std;
 
 //this returns a random value based on Gaussian Distribution and 
 float GaussianDistribution(float LowerBound, float Mean, float UpperBound, float StandardDeviation){

@@ -1,6 +1,6 @@
 #pragma once
 #include "AniStructs.h"
-
+#include "StatisticalFunctions.h"
 
 //Multiple method of spawning animations coordinates are enclosed
 //Diagonal Rectangular Spawn

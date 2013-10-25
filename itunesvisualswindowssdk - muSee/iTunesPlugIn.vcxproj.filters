@@ -441,6 +441,9 @@
     <ClInclude Include="SpecialEffectCore.h">
       <Filter>CommentedOut</Filter>
     </ClInclude>
+    <ClInclude Include="StatisticalFunctions.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
