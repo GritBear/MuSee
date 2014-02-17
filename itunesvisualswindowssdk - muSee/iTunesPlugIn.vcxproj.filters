@@ -241,9 +241,6 @@
     <ClCompile Include="SubComponents.cpp">
       <Filter>Redesign AnimationObj\BaseComponent</Filter>
     </ClCompile>
-    <ClCompile Include="LightForestFac.cpp">
-      <Filter>Currently Developing\Factory</Filter>
-    </ClCompile>
     <ClCompile Include="BubbleEffect.cpp">
       <Filter>CommentedOut</Filter>
     </ClCompile>
@@ -255,6 +252,9 @@
     </ClCompile>
     <ClCompile Include="verticalLegacy.cpp">
       <Filter>CommentedOut</Filter>
+    </ClCompile>
+    <ClCompile Include="LightStraw.cpp">
+      <Filter>Currently Developing\Factory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -423,9 +423,6 @@
     <ClInclude Include="AFactory.h">
       <Filter>Currently Developing\Factory</Filter>
     </ClInclude>
-    <ClInclude Include="LightForestFac.h">
-      <Filter>Currently Developing\Factory</Filter>
-    </ClInclude>
     <ClInclude Include="BubbleEffect.h">
       <Filter>CommentedOut</Filter>
     </ClInclude>
@@ -443,6 +440,9 @@
     </ClInclude>
     <ClInclude Include="StatisticalFunctions.h">
       <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="LightStraw.h">
+      <Filter>Currently Developing\Factory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
