@@ -9,7 +9,7 @@
 			    android:src="@drawable/wanda_smile"
 			    android:adjustViewBounds="true"
 			    android:gravity="center_vertical"/>
-			 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android">
+			 <TableLayout>
 		    	<TableRow>
 			    <TextView android:id="@+id/speakername"
 					    android:layout_width="wrap_content" 
@@ -19,7 +19,7 @@
 					    android:textStyle = "bold"/>
 		   	 	</TableRow>
 		    	<TableRow>
-					<view xmlns:android="http://schemas.android.com/apk/res/android" 
+					<view
 						class = "com.replica.replicaisland.ConversationDialogActivity$TypewriterTextView"
 						android:id="@+id/typewritertext"
 					    android:layout_width="300dp" 
@@ -31,7 +31,7 @@
 			</TableLayout>	
 		</TableRow>
 	<TableRow>
-		<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		<FrameLayout
 				android:layout_span = "2" 
 				android:layout_gravity="right">
 			<ImageView 

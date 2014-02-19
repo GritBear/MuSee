@@ -97,8 +97,6 @@ public class Game extends AllocationGuard {
             // The buffer library manages hardware VBOs.
             BaseObject.sSystemRegistry.bufferLibrary = new BufferLibrary();
     
-            
-            
             BaseObject.sSystemRegistry.soundSystem = new SoundSystem();
             
             // The root of the game graph.
