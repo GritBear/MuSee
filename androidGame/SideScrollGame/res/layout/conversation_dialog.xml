@@ -20,7 +20,7 @@
 		   	 	</TableRow>
 		    	<TableRow>
 					<view
-						class = "com.replica.replicaisland.ConversationDialogActivity$TypewriterTextView"
+						class = "com.music.musee.ConversationDialogActivity$TypewriterTextView"
 						android:id="@+id/typewritertext"
 					    android:layout_width="300dp" 
 					    android:layout_height="110dp"

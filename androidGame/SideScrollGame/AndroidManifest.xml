@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.replica.replicaisland" 
+    package="com.music.musee" 
     android:versionName="1.4" 
     android:versionCode="14"
     android:installLocation="preferExternal">
@@ -9,7 +9,7 @@
     			 android:label="@string/app_name"
     			 android:debuggable="false"
     			 android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
-    	<activity android:name=".MainMenuActivity"
+    	<activity android:name="com.music.musee.MainMenuActivity"
                   android:label="@string/app_name" 
                   android:screenOrientation="landscape" 
                   android:configChanges="keyboardHidden|orientation" >
@@ -19,42 +19,42 @@
             </intent-filter>
         </activity>
         
-        <activity android:name="AndouKun" android:label="@string/app_name" 
+        <activity android:name="com.music.musee.AndouKun" android:label="@string/app_name" 
    				  android:screenOrientation="landscape" 
      			  android:configChanges="keyboardHidden|orientation" 
      			  android:launchMode="singleTask"/>
             
-        <activity android:name="LevelSelectActivity"
+        <activity android:name="com.music.musee.LevelSelectActivity"
 	              android:screenOrientation="landscape" 
 	              android:configChanges="keyboardHidden|orientation" />
                   
 	    <activity android:theme="@style/Theme.ConversationDialog"
 	              android:screenOrientation="landscape" 
                   android:configChanges="keyboardHidden|orientation" 
-	    		  android:name="ConversationDialogActivity"/>
+	    		  android:name="com.music.musee.ConversationDialogActivity"/>
 	    
-	    <activity android:name="DiaryActivity"
+	    <activity android:name="com.music.musee.DiaryActivity"
 				  android:screenOrientation="landscape" 
 	   			  android:configChanges="keyboardHidden|orientation"/>
 		     					
 		     					
-		<activity android:name="SetPreferencesActivity"
+		<activity android:name="com.music.musee.SetPreferencesActivity"
 				  android:screenOrientation="landscape" 
      			  android:configChanges="keyboardHidden|orientation" />
 		     					
-    	<activity android:name="AnimationPlayerActivity"
+    	<activity android:name="com.music.musee.AnimationPlayerActivity"
              	  android:screenOrientation="landscape" 
                	  android:configChanges="keyboardHidden|orientation" />
              
-        <activity android:name="ExtrasMenuActivity"
+        <activity android:name="com.music.musee.ExtrasMenuActivity"
 	              android:screenOrientation="landscape" 
 	              android:configChanges="keyboardHidden|orientation" />
 	              
-		<activity android:name="DifficultyMenuActivity"
+		<activity android:name="com.music.musee.DifficultyMenuActivity"
 	              android:screenOrientation="landscape" 
 	              android:configChanges="keyboardHidden|orientation" />
 	              
-		<activity android:name="GameOverActivity"
+		<activity android:name="com.music.musee.GameOverActivity"
 				  android:screenOrientation="landscape" 
 	   			  android:configChanges="keyboardHidden|orientation"/>
 	   			     
