@@ -16,6 +16,8 @@
 
 package com.music.musee;
 
+import com.music.musee.GL.Texture;
+
 /**
  * A single animation frame.  Frames contain a texture, a hold time, and collision volumes to
  * use for "attacking" or "vulnerability."  This allows animated sprites to cheaply interact with

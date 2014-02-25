@@ -18,6 +18,9 @@ package com.music.musee;
 
 import java.util.ArrayList;
 
+import com.music.musee.GL.BufferLibrary;
+import com.music.musee.GL.TextureLibrary;
+
 /**
  * The object registry manages a collection of global singleton objects.  However, it differs from
  * the standard singleton pattern in a few important ways:

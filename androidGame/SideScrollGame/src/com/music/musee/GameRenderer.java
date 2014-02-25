@@ -23,6 +23,9 @@ import android.os.SystemClock;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+import com.music.musee.GL.BufferLibrary;
+import com.music.musee.GL.GLSurfaceView;
+import com.music.musee.GL.TextureLibrary;
 import com.music.musee.RenderSystem.RenderElement;
 
 /**

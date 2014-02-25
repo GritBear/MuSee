@@ -16,6 +16,8 @@
 
 package com.music.musee;
 
+import com.music.musee.GL.Texture;
+
 /**
  * DrawableObject is the base object interface for objects that can be rendered to the screen.
  * Note that objects derived from DrawableObject are passed between threads, and that care must be

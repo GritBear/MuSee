@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package com.music.musee;
+package com.music.musee.GL;
+
+import com.music.musee.AllocationGuard;
 
 /**
  * Simple container class for textures.  Serves as a mapping between Android resource ids and

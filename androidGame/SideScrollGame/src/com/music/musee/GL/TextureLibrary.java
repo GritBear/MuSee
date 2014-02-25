@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.music.musee;
+package com.music.musee.GL;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,6 +22,9 @@ import java.io.InputStream;
 import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.opengles.GL11;
 import javax.microedition.khronos.opengles.GL11Ext;
+
+import com.music.musee.BaseObject;
+import com.music.musee.DebugLog;
 
 import android.content.Context;
 import android.graphics.Bitmap;

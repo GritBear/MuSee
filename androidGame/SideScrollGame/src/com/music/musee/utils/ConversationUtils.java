@@ -15,11 +15,13 @@
  */
 
 
-package com.music.musee;
+package com.music.musee.utils;
 
 import java.util.ArrayList;
 
 import org.xmlpull.v1.XmlPullParser;
+
+import com.music.musee.DebugLog;
 
 import android.content.Context;
 import android.content.res.XmlResourceParser;

@@ -23,6 +23,10 @@ import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.widget.Toast;
 import com.music.musee.R;
+import com.music.musee.GL.BufferLibrary;
+import com.music.musee.GL.GLSurfaceView;
+import com.music.musee.GL.Texture;
+import com.music.musee.GL.TextureLibrary;
 
 /**
  * High-level setup object for the AndouKun game engine.

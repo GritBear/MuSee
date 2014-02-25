@@ -19,6 +19,8 @@ package com.music.musee;
 import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.opengles.GL11Ext;
 
+import com.music.musee.GL.Texture;
+
 /** 
  * Draws a screen-aligned bitmap to the screen.
  */

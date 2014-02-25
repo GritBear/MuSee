@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.music.musee;
+package com.music.musee.GL;
 
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
@@ -26,13 +26,15 @@ import java.nio.IntBuffer;
 import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.opengles.GL11;
 
+import com.music.musee.DebugLog;
+
 /**
  * A 2D rectangular mesh. Can be drawn textured or untextured.
  * This version is modified from the original Grid.java (found in
  * the SpriteText package in the APIDemos Android sample) to support hardware
  * vertex buffers and to insert edges between grid squares for tiling.
  */
-class Grid {
+public class Grid {
 	private static final int FLOAT_SIZE = 4;
 	private static final int FIXED_SIZE = 4;
 	private static final int CHAR_SIZE = 2;

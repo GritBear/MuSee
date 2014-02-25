@@ -35,8 +35,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.music.musee.R;
-import com.music.musee.ConversationUtils.Conversation;
-import com.music.musee.ConversationUtils.ConversationPage;
+import com.music.musee.utils.ConversationUtils;
+import com.music.musee.utils.ConversationUtils.Conversation;
+import com.music.musee.utils.ConversationUtils.ConversationPage;
 
 public class ConversationDialogActivity extends Activity {
 

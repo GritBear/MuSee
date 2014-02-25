@@ -18,6 +18,8 @@
 package com.music.musee;
 
 import com.music.musee.R;
+import com.music.musee.GL.Texture;
+import com.music.musee.GL.TextureLibrary;
 
 public final class DebugSystem extends BaseObject {
 	public static final int COLOR_RED = 0;

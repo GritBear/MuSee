@@ -16,6 +16,8 @@
 
 package com.music.musee;
 
+import com.music.musee.GL.Texture;
+
 /**
  * A very simple manager for orthographic in-game UI elements.
  * TODO: This should probably manage a number of hud objects in keeping with the component-centric

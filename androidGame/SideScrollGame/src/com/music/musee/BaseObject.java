@@ -23,7 +23,7 @@ package com.music.musee;
  * BaseObject.  BaseObject also defines the interface for the object-wide system registry.
  */
 public abstract class BaseObject extends AllocationGuard {
-    static ObjectRegistry sSystemRegistry = new ObjectRegistry();
+    public static ObjectRegistry sSystemRegistry = new ObjectRegistry();
 
     public BaseObject() {
         super();

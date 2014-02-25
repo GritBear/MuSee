@@ -18,6 +18,7 @@
 package com.music.musee;
 
 import com.music.musee.R;
+import com.music.musee.GL.TextureLibrary;
 
 public class LevelBuilder extends BaseObject {
     private final static int THEME_GRASS = 0;

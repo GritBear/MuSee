@@ -16,6 +16,8 @@
 
 package com.music.musee;
 
+import com.music.musee.GL.Texture;
+
 public class MotionBlurComponent extends GameComponent {
 	private static final int STEP_COUNT = 4;
 	private static final float STEP_DELAY = 0.1f;

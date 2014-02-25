@@ -16,6 +16,8 @@
 
 package com.music.musee;
 
+import com.music.musee.GL.Texture;
+
 /**
  * Implements a bitmap that can be scrolled in place, such as the background of a scrolling
  * world.

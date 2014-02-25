@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.music.musee;
+package com.music.musee.GL;
 
 import java.io.Writer;
 import java.util.ArrayList;
@@ -27,6 +27,8 @@ import javax.microedition.khronos.egl.EGLDisplay;
 import javax.microedition.khronos.egl.EGLSurface;
 import javax.microedition.khronos.opengles.GL;
 import javax.microedition.khronos.opengles.GL10;
+
+import com.music.musee.DebugLog;
 
 import android.content.Context;
 import android.content.pm.ConfigurationInfo;

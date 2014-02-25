@@ -18,6 +18,10 @@ package com.music.musee;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import com.music.musee.GL.BufferLibrary;
+import com.music.musee.GL.Grid;
+import com.music.musee.GL.Texture;
+
 public class TiledVertexGrid extends BaseObject {
 	private static final float GL_MAGIC_OFFSET = 0.375f;
     private Grid mTileMap;

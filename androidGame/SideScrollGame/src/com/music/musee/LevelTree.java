@@ -20,6 +20,8 @@ import java.util.ArrayList;
 
 import org.xmlpull.v1.XmlPullParser;
 
+import com.music.musee.utils.ConversationUtils;
+
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 

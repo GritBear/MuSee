@@ -16,6 +16,8 @@
 
 package com.music.musee;
 
+import com.music.musee.GL.Texture;
+
 /**
  * Adjusts the scroll position of a drawable object based on the camera's focus position.
  * May be used to scroll a ScrollableBitmap or TiledWorld to match the camera.  Uses DrawableFactory

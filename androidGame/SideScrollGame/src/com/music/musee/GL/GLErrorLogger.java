@@ -14,7 +14,7 @@
  * limitations under the License.
  */
  
- package com.music.musee;
+ package com.music.musee.GL;
 
 import java.nio.Buffer;
 import java.nio.FloatBuffer;
@@ -26,6 +26,8 @@ import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.opengles.GL10Ext;
 import javax.microedition.khronos.opengles.GL11;
 import javax.microedition.khronos.opengles.GL11Ext;
+
+import com.music.musee.DebugLog;
 
 import android.opengl.GLU;
 

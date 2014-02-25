@@ -42,6 +42,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import com.music.musee.R;
+import com.music.musee.GL.GLSurfaceView;
 import com.music.musee.constant.PreferenceConstants;
 import com.music.musee.constant.UIConstants;
 
@@ -103,7 +104,7 @@ public class AndouKun extends Activity implements SensorEventListener {
         super.onCreate(savedInstanceState);
         
         SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
-        final boolean debugLogs = prefs.getBoolean(PreferenceConstants.PREFERENCE_ENABLE_DEBUG, false);
+        final boolean debugLogs = prefs.getBoolean(PreferenceConstants.PREFERENCE_ENABLE_DEBUG, true);
         
         if (VERSION < 0 || debugLogs) {
         	DebugLog.setDebugLogging(true);
