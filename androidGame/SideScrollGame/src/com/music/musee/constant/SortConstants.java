@@ -14,7 +14,7 @@
  * limitations under the License.
  */
  
-package com.music.musee;
+package com.music.musee.constant;
 
 public class SortConstants {
 	public static final int BACKGROUND_START = -100;

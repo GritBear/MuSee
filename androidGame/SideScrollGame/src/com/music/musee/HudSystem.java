@@ -17,6 +17,7 @@
 package com.music.musee;
 
 import com.music.musee.GL.Texture;
+import com.music.musee.constant.SortConstants;
 
 /**
  * A very simple manager for orthographic in-game UI elements.

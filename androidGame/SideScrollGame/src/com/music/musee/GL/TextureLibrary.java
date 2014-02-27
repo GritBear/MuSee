@@ -173,7 +173,7 @@ public class TextureLibrary extends BaseObject {
                 }
             }
             
-            GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bitmap, 0);
+            GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bitmap, 0); //here the bitmap is installed to the newly created texture
             
             error = gl.glGetError();
             if (error != GL10.GL_NO_ERROR) {
