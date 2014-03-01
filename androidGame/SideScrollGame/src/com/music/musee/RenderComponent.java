@@ -65,7 +65,7 @@ public class RenderComponent extends GameComponent {
                 }
                 // It might be better not to do culling here, as doing it in the render thread
                 // would allow us to have multiple views into the same scene and things like that.
-                // But at the moment significant CPU is being spent on sorting the list of objects
+                // But at the moment significant CPU- is being spent on sorting the list of objects
                 // to draw per frame, so I'm going to go ahead and cull early.
                 if (mDrawable.visibleAtPosition(mScreenLocation)) {
                     system.scheduleForDraw(mDrawable, mPositionWorkspace, mPriority, mCameraRelative);

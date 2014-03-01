@@ -79,7 +79,7 @@ public class RenderSystem extends BaseObject {
         // This code will block if the previous queue is still being executed.
         renderer.setDrawQueue(mRenderQueues[mQueueIndex], cameraX, cameraY); 
     
-        final int lastQueue = (mQueueIndex == 0) ? DRAW_QUEUE_COUNT - 1 : mQueueIndex - 1;
+        final int lastQueue = (mQueueIndex + 1) % DRAW_QUEUE_COUNT;
     
         // Clear the old queue.
         FixedSizeArray<BaseObject> objects = mRenderQueues[lastQueue].getObjects();

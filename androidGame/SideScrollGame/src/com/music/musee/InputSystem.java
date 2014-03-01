@@ -52,7 +52,8 @@ public class InputSystem extends BaseObject {
 	   TimeSystem time = sSystemRegistry.timeSystem;
 	   // Change the origin of the touch location from the top-left to the bottom-left to match
 	   // OpenGL space.
-	   // TODO: UNIFY THIS SHIT
+	   // TODO: UNIFY THIS SHIT hahahahaha
+	   
 	   mTouchScreen.press(index, time.getGameTime(), x, params.gameHeight - y);   
     }
     

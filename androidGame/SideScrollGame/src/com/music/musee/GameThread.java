@@ -17,7 +17,6 @@
 package com.music.musee;
 
 import android.os.SystemClock;
-import android.view.KeyEvent;
 
 
 /** 
@@ -65,7 +64,7 @@ public class GameThread implements Runnable {
     
                     mGameRoot.update(secondsDelta, null);
     
-                    CameraSystem camera = mGameRoot.sSystemRegistry.cameraSystem;
+                    CameraSystem camera = BaseObject.sSystemRegistry.cameraSystem;
                     float x = 0.0f;
                     float y = 0.0f;
                     if (camera != null) {
@@ -81,11 +80,13 @@ public class GameThread implements Runnable {
                     mProfileTime += finalDelta;
                     mProfileFrames++;
                     if (mProfileTime > PROFILE_REPORT_DELAY * 1000) {
-                        final long averageFrameTime = mProfileTime / mProfileFrames;
+                        final float averageFrameTime = ((float)mProfileTime) / mProfileFrames;
                         DebugLog.d("Game Profile", "Average: " + averageFrameTime);
                         mProfileTime = 0;
                         mProfileFrames = 0;
-                        mGameRoot.sSystemRegistry.hudSystem.setFPS(1000 / (int)averageFrameTime);
+                        
+                        if(averageFrameTime > 0) //error checking to prevent crush in high end devices
+                        	BaseObject.sSystemRegistry.hudSystem.setFPS((int)(1000 / averageFrameTime));
                     }
                 }
                 // If the game logic completed in less than 16ms, that means it's running
