@@ -137,11 +137,14 @@ public class PlayerComponent extends GameComponent {
             final InputXY dpad = input.getDirectionalPad();
             final InputButton jumpButton = input.getJumpButton();
             
-            if (dpad.getPressed() || jumpButton.getPressed()) {
+            if (dpad.getPressed() || jumpButton.getPressed() || true) {
                 Vector2 impulse = pool.allocate();
-
+                
+                //TODO implement constant right move (to have more logic here)
+                impulse.set(1, 0.0f);
                 if (dpad.getPressed()) {
                     impulse.set(dpad.getX(), 0.0f);
+                	
                 }
                                 
                 if (jumpButton.getPressed()) {

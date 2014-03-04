@@ -18,6 +18,8 @@ package com.music.musee;
 
 import java.util.Comparator;
 
+import android.util.Log;
+
 /** 
  * A node in the game graph that manages the activation status of its children.  The
  * GameObjectManager moves the objects it manages in and out of the active list (that is,
@@ -118,6 +120,7 @@ public class GameObjectManager extends ObjectManager {
                 final float xDistance = position.x - mCameraFocus.x;
                 if (distance2 < (gameObject.activationRadius * gameObject.activationRadius) 
                         || gameObject.activationRadius == -1) {
+                	
                     gameObject.update(timeDelta, this);
                     mInactiveObjects.swapWithLast(i);
                     mInactiveObjects.removeLast();
