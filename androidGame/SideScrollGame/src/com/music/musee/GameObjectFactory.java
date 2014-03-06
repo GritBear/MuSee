@@ -18,6 +18,8 @@ package com.music.musee;
 
 import java.util.Comparator;
 
+import android.util.Log;
+
 import com.music.musee.R;
 import com.music.musee.AnimationComponent.PlayerAnimations;
 import com.music.musee.CollisionParameters.HitType;
@@ -575,6 +577,12 @@ public class GameObjectFactory extends BaseObject {
     
 	
 
+    /**
+     * Player, robot, bats, coins, ruby and all objects are spawned in this function
+     * @param world		tileWorld index array
+     * @param tileWidth
+     * @param tileHeight
+     */
 	public void spawnFromWorld(TiledWorld world, int tileWidth, int tileHeight) {
         // Walk the world and spawn objects based on tile indexes.
         final float worldHeight = world.getHeight() * tileHeight;
@@ -586,6 +594,7 @@ public class GameObjectFactory extends BaseObject {
                     if (index != -1) {
                         GameObjectType type = GameObjectType.indexToType(index);
                         if (type != GameObjectType.INVALID) {
+//                        	Log.d("lee debug", "spawn one object:" + index);
                             final float worldX = x * tileWidth;
                             final float worldY = worldHeight - ((y + 1) * tileHeight);
                             GameObject object = spawn(type, worldX, worldY, false);

@@ -17,10 +17,12 @@
 package com.music.musee;
 
 import android.content.res.AssetManager;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
 
+import com.music.musee.constant.ParseConstant;
 import com.music.musee.utils.Utils;
 
 /**
@@ -532,7 +534,7 @@ public class CollisionSystem extends BaseObject {
         // TODO: this is a hack.  I really should only allocate an array that is the size of the
         // tileset, but at this point I don't actually know that size, so I allocate a buffer that's
         // probably large enough.  
-        mCollisionTiles = new CollisionTile[256]; 
+        mCollisionTiles = new CollisionTile[ParseConstant.numCollisionTiles]; 
         try {
             signature = (byte)byteStream.read();
             if (signature == 52) {
@@ -550,6 +552,8 @@ public class CollisionSystem extends BaseObject {
                         final int tileIndex = byteStream.read();
                         final int segmentCount = byteStream.read();
                         
+                        Log.w("lee debug", "tileIndex:" + tileIndex);
+                       
                         if (mCollisionTiles[tileIndex] == null && segmentCount > 0) {
                             mCollisionTiles[tileIndex] = new CollisionTile(segmentCount);
                         }
@@ -567,6 +571,9 @@ public class CollisionSystem extends BaseObject {
                             final float normalX = Utils.byteArrayToFloat(mWorkspaceBytes);
                             byteStream.read(mWorkspaceBytes, 0, 4);
                             final float normalY = Utils.byteArrayToFloat(mWorkspaceBytes);
+                            
+                            
+                            Log.d("lee debug", "startX:" + startX + ";startY:" + startY + ";endX" + endX + ";endY:" + endY);
                             
                             // TODO: it might be wise to pool line segments.  I don't think that
                             // this data will be loaded very often though, so this is ok for now.

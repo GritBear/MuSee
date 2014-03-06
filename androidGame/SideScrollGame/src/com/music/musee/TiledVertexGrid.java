@@ -18,6 +18,8 @@ package com.music.musee;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import android.util.Log;
+
 import com.music.musee.GL.BufferLibrary;
 import com.music.musee.GL.Grid;
 import com.music.musee.GL.Texture;
@@ -88,12 +90,16 @@ public class TiledVertexGrid extends BaseObject {
         Grid grid = null;
         if (!entirelyEmpty) {
             grid = new Grid(tilesAcross, tilesDown, false);
+            Log.d("lee debug", "generating grid across:" + tilesAcross + "; down:" + tilesDown);
+            Log.d("lee debug", "tileWidth:" + tileWidth + "; tileHeight:" + tileHeight);
+            Log.d("lee debug", "textureTilesAcross:" + textureTilesAcross + "; textureTilesDown:" + textureTilesDown);
             for (int tileY = 0; tileY < tilesDown; tileY++) {
                 for (int tileX = 0; tileX < tilesAcross; tileX++) {
                     final float offsetX = tileX * tileWidth;
                     final float offsetY = tileY * tileHeight;
                     int tileIndex = mWorld.getTile(startTileX + tileX, 
                             (tilesPerWorldColumn - 1 - (startTileY + tileY)));
+//                    Log.d("lee debug", "tileIndex:" + tileIndex);
                     if (tileIndex < 0) {
                         tileIndex = totalTextureTiles - 1; // Assume that the last tile is empty.
                     }
@@ -111,10 +117,15 @@ public class TiledVertexGrid extends BaseObject {
                     final float u2 = ((textureOffsetX + tileWidth - GL_MAGIC_OFFSET) * texelWidth);
                     final float v2 = ((textureOffsetY + tileHeight - GL_MAGIC_OFFSET) * texelHeight);
                     
+//                    Log.d("lee debug", "u:" + u + ";v" + v);
+                    
+                    //p is the position in the actual map
                     final float[] p0 = { offsetX, offsetY, 0.0f };
                     final float[] p1 = { offsetX + tileWidth, offsetY, 0.0f };
                     final float[] p2 = { offsetX, offsetY + tileHeight, 0.0f };
                     final float[] p3 = { offsetX + tileWidth, offsetY + tileHeight, 0.0f };
+                    
+                    //uv looks like the position in the texture picture
                     final float[] uv0 = { u, v2 };
                     final float[] uv1 = { u2, v2 };
                     final float[] uv2 = { u, v };

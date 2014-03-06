@@ -56,6 +56,8 @@ public class AndouKun extends Activity implements SensorEventListener {
     private static final int ACTIVITY_CONVERSATION = 1;
     private static final int ACTIVITY_DIARY = 2;
     private static final int ACTIVITY_ANIMATION_PLAYER = 3;
+    
+    public static Activity gameRootActivity;
 
     private static final int CHANGE_LEVEL_ID = Menu.FIRST;
     private static final int TEST_ANIMATION_ID = CHANGE_LEVEL_ID + 1;
@@ -102,6 +104,8 @@ public class AndouKun extends Activity implements SensorEventListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        gameRootActivity = this;
         
         SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
         final boolean debugLogs = prefs.getBoolean(PreferenceConstants.PREFERENCE_ENABLE_DEBUG, true);

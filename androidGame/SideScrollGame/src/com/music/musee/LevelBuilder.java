@@ -17,6 +17,8 @@
 
 package com.music.musee;
 
+import android.util.Log;
+
 import com.music.musee.R;
 import com.music.musee.GL.TextureLibrary;
 import com.music.musee.constant.SortConstants;
@@ -151,6 +153,8 @@ public class LevelBuilder extends BaseObject {
             default:
                 assert false;
         }
+        
+        Log.d("lee debug", "theme:" + theme);
         
         RenderComponent backgroundRender = new RenderComponent();
         backgroundRender.setPriority(priority);

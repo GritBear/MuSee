@@ -22,6 +22,7 @@ import java.io.InputStream;
 import com.music.musee.utils.Utils;
 
 import android.content.res.AssetManager;
+import android.util.Log;
 
 /**
  * TiledWorld manages a 2D map of tile indexes that define a "world" of tiles.  These may be 
@@ -85,6 +86,8 @@ public class TiledWorld extends AllocationGuard {
                 byteStream.read(mWorkspaceBytes, 0, 4);
                 final int height = Utils.byteArrayToInt(mWorkspaceBytes);
 
+                Log.d("lee debug","width:" + width + "; height:" + height);
+                
                 final int totalTiles = width * height;
                 final int bytesRemaining = byteStream.available();
                 assert bytesRemaining >= totalTiles;

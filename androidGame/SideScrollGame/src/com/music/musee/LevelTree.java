@@ -24,6 +24,7 @@ import com.music.musee.utils.ConversationUtils;
 
 import android.content.Context;
 import android.content.res.XmlResourceParser;
+import android.util.Log;
 
 public final class LevelTree {
 	public static class LevelGroup {
@@ -33,6 +34,7 @@ public final class LevelTree {
     public static class Level {
     	public int resource;
         public DialogEntry dialogResources;
+        public int musicResource;
         public String name;
         public String timeStamp;
         public boolean completed;
@@ -144,6 +146,21 @@ public final class LevelTree {
                     	currentDialog = new DialogEntry();
                     	currentLevel.dialogResources = currentDialog;
                     }
+                    
+                    
+                    if (parser.getName().equals("song") && currentLevel != null) {
+                    	Log.w("lee debug", "read the song from xml");
+                    	for(int i=0; i < parser.getAttributeCount(); i++) { 
+                            final int value = parser.getAttributeResourceValue(i, -1);
+                            if (value != -1) {
+                                if (parser.getAttributeName(i).equals("resource")) {
+                                	currentLevel.musicResource = value;
+                                }
+                               
+                            }
+                    	} 
+                    }
+                    
                     
                     if (parser.getName().equals("diary") && currentDialog != null) { 
                     	
