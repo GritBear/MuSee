@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <levelTree>
 
+
+    
     <group>
         <level
-            resource="@raw/level_3_5_sewer"
+            resource="@raw/test_map"
             time="@string/level_3_5_time"
             title="@string/level_3_5_sewer" >
-            <dialog>
-                <character1 resource="@xml/level_3_5_dialog_wanda" />
-            </dialog>
             <music>
                 <song resource="@raw/neon_pegasus" />
             </music>
@@ -24,7 +23,7 @@
 	<level resource="@raw/performancetest3" title = "@string/level_performance_test3" time = "@string/level_test_time"/>
 	<level resource="@raw/performancetest4" title = "@string/level_performance_test4" time = "@string/level_test_time"/>
 	<level resource="@raw/npc_motion_test" title = "@string/level_npc_motion_test" time = "@string/level_test_time"/>
-</group>
+</group>
     -->
 
 </levelTree>

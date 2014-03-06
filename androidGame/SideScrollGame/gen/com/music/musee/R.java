@@ -677,8 +677,9 @@ containing a value of this type.
         public static final int sound_possession=0x7f060050;
         public static final int sound_rokudou_hit=0x7f060051;
         public static final int sound_stomp=0x7f060052;
-        public static final int testmap=0x7f060053;
-        public static final int thump=0x7f060054;
+        public static final int test_map=0x7f060053;
+        public static final int testmap=0x7f060054;
+        public static final int thump=0x7f060055;
     }
     public static final class string {
         public static final int Android=0x7f0800bb;

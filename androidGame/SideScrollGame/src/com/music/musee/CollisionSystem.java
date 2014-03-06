@@ -90,6 +90,14 @@ public class CollisionSystem extends BaseObject {
     public void initialize(TiledWorld world, int tileWidth, int tileHeight) {
         mWorld = world;
         
+//        for(int x = 0; x < mWorld.getWidth(); x++){
+//        	for(int y = 0; y < mWorld.getHeight(); y++){
+//        		
+//        		Log.d("lee debug", "Collision x:" + x + ";y:" + y + ";index:"+ mWorld.getTile(x, y));
+//        	}
+//        }
+        
+        
         mTileWidth = tileWidth;
         mTileHeight = tileHeight;
     }
@@ -552,7 +560,7 @@ public class CollisionSystem extends BaseObject {
                         final int tileIndex = byteStream.read();
                         final int segmentCount = byteStream.read();
                         
-                        Log.w("lee debug", "tileIndex:" + tileIndex);
+//                        Log.w("lee debug", "tileIndex:" + tileIndex);
                        
                         if (mCollisionTiles[tileIndex] == null && segmentCount > 0) {
                             mCollisionTiles[tileIndex] = new CollisionTile(segmentCount);
@@ -573,7 +581,7 @@ public class CollisionSystem extends BaseObject {
                             final float normalY = Utils.byteArrayToFloat(mWorkspaceBytes);
                             
                             
-                            Log.d("lee debug", "startX:" + startX + ";startY:" + startY + ";endX" + endX + ";endY:" + endY);
+//                            Log.d("lee debug", "startX:" + startX + ";startY:" + startY + ";endX" + endX + ";endY:" + endY);
                             
                             // TODO: it might be wise to pool line segments.  I don't think that
                             // this data will be loaded very often though, so this is ok for now.

@@ -198,8 +198,9 @@ public class TiledVertexGrid extends BaseObject {
                 final int verticalSlop = ((tileSpaceY - bottomTile) * mTileHeight) > 0 ? 1 : 0;
 
                 
+                //begin to draw the grid
                 OpenGLSystem.bindTexture(GL10.GL_TEXTURE_2D, texture.name);
-                tileMap.beginDrawingStrips(gl, true);
+//                tileMap.beginDrawingStrips(gl, true);
 
                 final int horzTileCount = (int)Math.ceil((float)mWidth / mTileWidth);
                 final int vertTileCount = (int)Math.ceil((float)mHeight / mTileHeight);
@@ -227,8 +228,7 @@ public class TiledVertexGrid extends BaseObject {
                 }
                 
                 gl.glPopMatrix();
-              
-                Grid.endDrawing(gl);
+                tileMap.endDrawing(gl);
                 
             }
         }

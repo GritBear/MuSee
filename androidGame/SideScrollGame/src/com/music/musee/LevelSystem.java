@@ -122,72 +122,72 @@ public class LevelSystem extends BaseObject {
 				for (int x = 0; x < layerCount; x++) {  //for each layer
 
 					final int type = (byte)byteStream.read(); //1 byte for type
-					final int tileIndex = (byte)byteStream.read(); //1 byte for index
+					final int tileIndex = (byte)byteStream.read(); //1 byte for index for theme
 					byteStream.read(mWorkspaceBytes, 0, 4);	//get a float point (32 bits or 4 bytes) scroll speed value
 					final float scrollSpeed = Utils.byteArrayToFloat(mWorkspaceBytes);
 
 					Log.d("lee debug", "layer count index:" + x + "; type:" + type + "; tileIndex:" + tileIndex + "; scrollspeed:" + scrollSpeed);
 					// TODO: use a pool here?  Seems pointless.
 					TiledWorld world = new TiledWorld(byteStream); //after finished reading headers
-					if(x != 4 && x != 1){ //for debug
-						//layer 0 collision is for background/environment collisions
-						//layer 1 background is mostly just a background image (it is optional due to layer 2)
-						//layer 2 background is the blocks textures
-						//layer 3 objects contains all the objects including the player
-						//layer 4 hotspot is mainly for conversations and triggering event (removed in the last version)
-						
-						if (type == 0) { // it's a background layer
-							assert mWidthInTiles != 0;
-							assert mTileWidth != 0;
-							Log.w("lee debug", "parse background");
-							// We require a collision layer to set up the tile sizes before we load.
-							// TODO: this really sucks.  there's no reason each layer can't have its
-							// own tile widths and heights.  Refactor this crap.
-							if (mWidthInTiles > 0 && mTileWidth > 0) {
+					//if(x != 4 && x != 1){ //for debug
+					//layer 0 collision is for background/environment collisions
+					//layer 1 background is mostly just a background image (it is optional due to layer 2)
+					//layer 2 background is the blocks textures
+					//layer 3 objects contains all the objects including the player
+					//layer 4 hotspot is mainly for conversations and triggering event (removed in the last version)
 
-								LevelBuilder builder = sSystemRegistry.levelBuilder;
+					if (type == 0) { // it's a background layer
+						assert mWidthInTiles != 0;
+						assert mTileWidth != 0;
+						Log.w("lee debug", "parse background");
+						// We require a collision layer to set up the tile sizes before we load.
+						// TODO: this really sucks.  there's no reason each layer can't have its
+						// own tile widths and heights.  Refactor this crap.
+						if (mWidthInTiles > 0 && mTileWidth > 0) {
 
-								if (mBackgroundObject == null) {
-									mBackgroundObject = 
-											builder.buildBackground(
-													backgroundIndex, 
-													mWidthInTiles * mTileWidth,
-													mHeightInTiles * mTileHeight);
-									root.add(mBackgroundObject);
-								}
+							LevelBuilder builder = sSystemRegistry.levelBuilder;
 
-								builder.addTileMapLayer(mBackgroundObject, currentPriority, 
-										scrollSpeed, params.gameWidth, params.gameHeight, 
-										mTileWidth, mTileHeight, world, tileIndex);
-
-
-								currentPriority++;
+							if (mBackgroundObject == null) {
+								mBackgroundObject = 
+										builder.buildBackground(
+												backgroundIndex, 
+												mWidthInTiles * mTileWidth,
+												mHeightInTiles * mTileHeight);
+								root.add(mBackgroundObject);
 							}
 
-						} else if (type == 1) { // collision
-							// Collision always defines the world boundaries.
-							mWidthInTiles = world.getWidth();
-							mHeightInTiles = world.getHeight();
-							Log.w("lee debug", "parse collision layer");
+							builder.addTileMapLayer(mBackgroundObject, currentPriority, 
+									scrollSpeed, params.gameWidth, params.gameHeight, 
+									mTileWidth, mTileHeight, world, tileIndex);
 
-							CollisionSystem collision = sSystemRegistry.collisionSystem;
-							if (collision != null) {
-								collision.initialize(world, mTileWidth, mTileHeight);
-							}
-						} else if (type == 2) { // objects
-							mSpawnLocations = world;
-							spawnObjects();
-							Log.w("lee debug", "parse oject layer");
-						} else if (type == 3) { // hot spots
-							//not yet useful for the musical game
-//							HotSpotSystem hotSpots = sSystemRegistry.hotSpotSystem;
-//							Log.w("lee debug", "parse hotSpot layer");
-//							if (hotSpots != null) {
-//								hotSpots.setWorld(world);
-//							}
 
+							currentPriority++;
 						}
+
+					} else if (type == 1) { // collision
+						// Collision always defines the world boundaries.
+						mWidthInTiles = world.getWidth();
+						mHeightInTiles = world.getHeight();
+						Log.w("lee debug", "parse collision layer");
+
+						CollisionSystem collision = sSystemRegistry.collisionSystem;
+						if (collision != null) {
+							collision.initialize(world, mTileWidth, mTileHeight);
+						}
+					} else if (type == 2) { // objects
+						mSpawnLocations = world;
+						spawnObjects();
+						Log.w("lee debug", "parse oject layer");
+					} else if (type == 3) { // hot spots
+						//not yet useful for the musical game
+						//							HotSpotSystem hotSpots = sSystemRegistry.hotSpotSystem;
+						//							Log.w("lee debug", "parse hotSpot layer");
+						//							if (hotSpots != null) {
+						//								hotSpots.setWorld(world);
+						//							}
+
 					}
+
 				}
 
 				// hack!
