@@ -162,9 +162,9 @@ public class TiledVertexGrid extends BaseObject {
             mGenerated = true;
             if (grid != null) {
                 bufferLibrary.add(grid);
-                if (sSystemRegistry.contextParameters.supportsVBOs) {
-                	grid.generateHardwareBuffers(gl);
-                }
+//                if (sSystemRegistry.contextParameters.supportsVBOs) {
+//                	grid.generateHardwareBuffers(gl);
+//                }
             }
                        
         }
@@ -200,7 +200,7 @@ public class TiledVertexGrid extends BaseObject {
                 
                 //begin to draw the grid
                 OpenGLSystem.bindTexture(GL10.GL_TEXTURE_2D, texture.name);
-//                tileMap.beginDrawingStrips(gl, true);
+//                tileMap.beginDrawingStrips(gl, true); this is called at each drawStrip
 
                 final int horzTileCount = (int)Math.ceil((float)mWidth / mTileWidth);
                 final int vertTileCount = (int)Math.ceil((float)mHeight / mTileHeight);
@@ -217,18 +217,12 @@ public class TiledVertexGrid extends BaseObject {
                         originY, 
                         0.0f);
                 
-                
-                final int indexesPerTile = 6;
-                final int indexesPerRow = mTilesPerRow * indexesPerTile;
-                final int startOffset = (startX * indexesPerTile);
-                final int count = (endX - startX) * indexesPerTile;
-                for (int tileY = startY; tileY < endY && tileY < mTilesPerColumn; tileY++) {
-                	final int row = tileY * indexesPerRow;
-                	tileMap.drawStrip(gl, true, row + startOffset, count);
-                }
-                
+//              Log.d("lee debug", "start X:" + startX + ";startY:" + startY + ";endX:" + endX + ";endY:" + endY);
+                                         
+                tileMap.drawBlock(gl, true, startX, startY, endX, endY);
+
                 gl.glPopMatrix();
-                tileMap.endDrawing(gl);
+                Grid.endDrawing(gl);
                 
             }
         }

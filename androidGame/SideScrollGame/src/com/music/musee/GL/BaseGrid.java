@@ -26,6 +26,7 @@ import java.nio.IntBuffer;
 import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.opengles.GL11;
 
+import com.music.musee.BaseObject;
 import com.music.musee.DebugLog;
 
 /**
@@ -55,7 +56,6 @@ public class BaseGrid {
 	protected int mVertsDown;
 	protected int mIndexCount;
 	private boolean mUseHardwareBuffers;
-	private boolean beginDrawningInitialized = false;
 	private int mVertBufferIndex;
 	private int mIndexBufferIndex;
 	private int mTextureCoordBufferIndex;
@@ -217,32 +217,38 @@ public class BaseGrid {
 	}
 
 	protected void beginDrawingStrips(GL10 gl, boolean useTexture) {
-		if(!beginDrawningInitialized){
-			endDrawing(gl);
-			beginDrawing(gl, useTexture);
-			if (!mUseHardwareBuffers) {
-				gl.glVertexPointer(3, mCoordinateType, 0, mVertexBuffer);
-				if (useTexture) {
-					gl.glTexCoordPointer(2, mCoordinateType, 0, mTexCoordBuffer);
-				} 
+		beginDrawing(gl, useTexture);
+		if (!mUseHardwareBuffers) {
+			gl.glVertexPointer(3, mCoordinateType, 0, mVertexBuffer);
+			if (useTexture) {
+				gl.glTexCoordPointer(2, mCoordinateType, 0, mTexCoordBuffer);
+			} 
 
-			} else {
-				GL11 gl11 = (GL11)gl;
-				// draw using hardware buffers
-				gl11.glBindBuffer(GL11.GL_ARRAY_BUFFER, mVertBufferIndex);
-				gl11.glVertexPointer(3, mCoordinateType, 0, 0);
+		} else {
+			GL11 gl11 = (GL11)gl;
+			// draw using hardware buffers
+			gl11.glBindBuffer(GL11.GL_ARRAY_BUFFER, mVertBufferIndex);
+			gl11.glVertexPointer(3, mCoordinateType, 0, 0);
 
-				gl11.glBindBuffer(GL11.GL_ARRAY_BUFFER, mTextureCoordBufferIndex);
-				gl11.glTexCoordPointer(2, mCoordinateType, 0, 0);
+			gl11.glBindBuffer(GL11.GL_ARRAY_BUFFER, mTextureCoordBufferIndex);
+			gl11.glTexCoordPointer(2, mCoordinateType, 0, 0);
 
-				gl11.glBindBuffer(GL11.GL_ELEMENT_ARRAY_BUFFER, mIndexBufferIndex);
-			}
-			beginDrawningInitialized = true;
+			gl11.glBindBuffer(GL11.GL_ELEMENT_ARRAY_BUFFER, mIndexBufferIndex);
 		}
+
 	}
 
 	// Assumes beginDrawingStrips() has been called before this.
-	public void drawStrip(GL10 gl, boolean useTexture, int startIndex, int indexCount) {
+	public void drawStrip(GL10 gl, boolean useTexture, boolean useHardwareBuffer, int startIndex, int indexCount) {
+		if(useHardwareBuffer){
+			if (!mUseHardwareBuffers && BaseObject.sSystemRegistry.contextParameters.supportsVBOs) {
+				generateHardwareBuffers(gl);
+			}
+		}else{
+			mUseHardwareBuffers = false;
+			releaseHardwareBuffers(gl);
+		}
+		
 		beginDrawingStrips(gl, useTexture);
 		int count = indexCount;
 		if (startIndex + indexCount >= mIndexCount) {
@@ -289,9 +295,8 @@ public class BaseGrid {
 		}
 	}
 
-	public void endDrawing(GL10 gl) {
+	public static void endDrawing(GL10 gl) {
 		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
-		beginDrawningInitialized = false;
 	}
 
 	public boolean usingHardwareBuffers() {
@@ -339,7 +344,7 @@ public class BaseGrid {
 	 * not guaranteed to be supported on every device.
 	 * @param gl  A pointer to the OpenGL ES context.
 	 */
-	public void generateHardwareBuffers(GL10 gl) {
+	protected void generateHardwareBuffers(GL10 gl) {
 		if (!mUseHardwareBuffers) {
 			DebugLog.i("Grid", "Using Hardware Buffers");
 			if (gl instanceof GL11) {

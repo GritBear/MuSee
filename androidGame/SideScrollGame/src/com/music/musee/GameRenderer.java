@@ -158,7 +158,8 @@ public class GameRenderer implements GLSurfaceView.Renderer {
     
     public void loadBuffers(GL10 gl, BufferLibrary library) {
         if (gl != null) {
-            library.generateHardwareBuffers(gl);
+        	//buffers are loaded at run time
+//            library.generateHardwareBuffers(gl);
             DebugLog.d("AndouKun", "Buffers Created.");
         }
     }

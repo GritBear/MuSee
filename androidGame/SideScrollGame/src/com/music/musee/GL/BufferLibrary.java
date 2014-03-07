@@ -45,13 +45,13 @@ public class BufferLibrary extends BaseObject {
     }
     
     public void generateHardwareBuffers(GL10 gl) {
-    	if (sSystemRegistry.contextParameters.supportsVBOs) {
-	        final int count = mGridList.getCount();
-	        for (int x = 0; x < count; x++) {
-	            Grid grid = mGridList.get(x);
-	            grid.generateHardwareBuffers(gl);
-	        }
-    	}
+//    	if (sSystemRegistry.contextParameters.supportsVBOs) {
+//	        final int count = mGridList.getCount();
+//	        for (int x = 0; x < count; x++) {
+//	            Grid grid = mGridList.get(x);
+//	            grid.generateHardwareBuffers(gl);
+//	        }
+//    	}
     }
     
     public void releaseHardwareBuffers(GL10 gl) {
