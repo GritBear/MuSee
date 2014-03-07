@@ -163,7 +163,7 @@ public class Grid extends BaseGrid {
 				grid.drawStrip(gl, true, true, row + startOffset, count);
 			}
 		}else{
-			Log.w("lee debug", "startX:" + startX + ";endX:" + endX);
+//			Log.w("lee debug", "startX:" + startX + ";endX:" + endX);
 			BaseGrid grid1 = gridArray.get(startGridIndex);	
 			final int startOffset1 = (startX * indexesPerTile);
 			final int endX1 = grid1.mVertsAcross/2;
