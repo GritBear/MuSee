@@ -149,7 +149,7 @@ public class Grid extends BaseGrid {
 				//needs to normalize the start and end X tile coordinates
 				startX = startX - maxQuadsAcross * startGridIndex;
 				endX = endX - maxQuadsAcross * startGridIndex;
-				gridArray.get(startGridIndex-1).releaseHardwareBuffers(gl);//release previous resource
+				gridArray.get(startGridIndex-1).releaseHardwareBuffers(gl);
 			}
 			
 			//in this case the start and finish are within one grid
@@ -162,12 +162,13 @@ public class Grid extends BaseGrid {
 				final int row = tileY * indexesPerRow;
 				grid.drawStrip(gl, true, true, row + startOffset, count);
 			}
-		}else{
-//			Log.w("lee debug", "startX:" + startX + ";endX:" + endX);
+		}else if(endGridIndex > startGridIndex){
 			BaseGrid grid1 = gridArray.get(startGridIndex);	
-			final int startOffset1 = (startX * indexesPerTile);
+			
+			final int tempStartX = startX - maxQuadsAcross * startGridIndex;
+			final int startOffset1 = (tempStartX * indexesPerTile);
 			final int endX1 = grid1.mVertsAcross/2;
-			final int count1 = (endX1 - startX) * indexesPerTile;
+			final int count1 = (endX1 - tempStartX) * indexesPerTile;
 			final int indexesPerRow1 = grid1.mVertsAcross/2 * indexesPerTile;
 			for (int tileY = startY; tileY < endY && tileY < mTilesPerColumn; tileY++) {
 				final int row = tileY * indexesPerRow1;
@@ -184,37 +185,6 @@ public class Grid extends BaseGrid {
 				grid2.drawStrip(gl, true, true, row + startOffset2, count2);
 			}
 		}
-
-		//
-		//		int count = indexCount;
-		//		int indexCountStartOffset = 0;
-		//		if (startIndex + indexCount >= mIndexCount) {
-		//			count = mIndexCount - startIndex;
-		//		}		
-		//
-		//
-		//
-		//		//draw all covered region
-		//		for(int i = 0; i < horizontalSegment; i ++){
-		//			BaseGrid tempGrid = gridArray.get(i);
-		//			final int curIndexCount = tempGrid.mIndexCount;
-		//			if(indexCountStartOffset <= startIndex && startIndex < curIndexCount + indexCountStartOffset){
-		//				//it should start drawing
-		//				if(startIndex + count < curIndexCount + indexCountStartOffset){
-		//					tempGrid.drawStrip(gl, useTexture, startIndex, count);
-		//					//					Log.w("lee debug", "startIndex:" + startIndex + ";count:"+count+
-		//					//							";indexCountStartOffset:" + indexCountStartOffset + ";curIndexCount:" + curIndexCount);
-		//					break; //draw finished here
-		//				}else{
-		//					Log.w("lee debug", "drawing overflow to next grid");
-		//					tempGrid.drawStrip(gl, useTexture, startIndex, count);
-		//					//update the new start
-		//					startIndex = curIndexCount + indexCountStartOffset;
-		//
-		//				}
-		//			}
-		//			indexCountStartOffset += curIndexCount;
-		//		}
 	}
 
 	@Override

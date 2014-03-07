@@ -111,7 +111,7 @@ public class LevelSystem extends BaseObject {
 				final int layerCount = (byte)byteStream.read(); //1 byte
 				final int backgroundIndex = (byte)byteStream.read(); //1 byte
 
-				Log.d("lee debug", "layer count:" + layerCount + "; background index:" + backgroundIndex);
+//				Log.d("lee debug", "layer count:" + layerCount + "; background index:" + backgroundIndex);
 
 				mRoot = root;
 				mTileWidth = 32;
@@ -126,7 +126,7 @@ public class LevelSystem extends BaseObject {
 					byteStream.read(mWorkspaceBytes, 0, 4);	//get a float point (32 bits or 4 bytes) scroll speed value
 					final float scrollSpeed = Utils.byteArrayToFloat(mWorkspaceBytes);
 
-					Log.d("lee debug", "layer count index:" + x + "; type:" + type + "; tileIndex:" + tileIndex + "; scrollspeed:" + scrollSpeed);
+//					Log.d("lee debug", "layer count index:" + x + "; type:" + type + "; tileIndex:" + tileIndex + "; scrollspeed:" + scrollSpeed);
 					// TODO: use a pool here?  Seems pointless.
 					TiledWorld world = new TiledWorld(byteStream); //after finished reading headers
 					//if(x != 4 && x != 1){ //for debug
@@ -139,7 +139,7 @@ public class LevelSystem extends BaseObject {
 					if (type == 0) { // it's a background layer
 						assert mWidthInTiles != 0;
 						assert mTileWidth != 0;
-						Log.w("lee debug", "parse background");
+//						Log.w("lee debug", "parse background");
 						// We require a collision layer to set up the tile sizes before we load.
 						// TODO: this really sucks.  there's no reason each layer can't have its
 						// own tile widths and heights.  Refactor this crap.
@@ -177,7 +177,7 @@ public class LevelSystem extends BaseObject {
 					} else if (type == 2) { // objects
 						mSpawnLocations = world;
 						spawnObjects();
-						Log.w("lee debug", "parse oject layer");
+//						Log.w("lee debug", "parse oject layer");
 					} else if (type == 3) { // hot spots
 						//not yet useful for the musical game
 						//							HotSpotSystem hotSpots = sSystemRegistry.hotSpotSystem;

@@ -1,7 +1,6 @@
 package musee.mapgen;
 
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
@@ -12,15 +11,89 @@ import java.nio.ByteBuffer;
  *
  */
 public class MapGen {
-
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		testGen();
+		final String fileName = "neon_pegasus.txt";
+		SongInfo songResult = new SongInfo();
+		IOUtils.readFromFile(fileName, songResult);	
+		songTestGen(songResult);
 	}
 
+	public static void songTestGen(SongInfo song){
+		String name = "neon_pegasus_map.bin";
+		double tileToSampleRatio = Consts.tileSpeed / Consts.sampleRatePerSecond; //ideally this is 1
+		int songLength = song.levels.size();
+		int tileLength = (int)(songLength * tileToSampleRatio + 0.5);
+
+		int toneRange = song.maxTone - song.minNonZeroTone;
+		int tileDownRange = (toneRange * Consts.tilesPerTone + 2 > Consts.MIN_TILE_DOWN)?toneRange * Consts.tilesPerTone + 2:Consts.MIN_TILE_DOWN;
+
+		final int height = tileDownRange;
+		final int width = tileLength;
+
+		int[][] backgroundIndexArray = initArray(width, height);
+		int[][] ObjectArray = initArray(width, height);
+
+		//add boundaries
+		for(int x = 0; x < width; x++){
+			if(x<10){
+				backgroundIndexArray[x][0] = 34;
+				backgroundIndexArray[x][height - 1] = 34;
+			}else if(width - x < 10){
+				backgroundIndexArray[x][0] = 26;
+				backgroundIndexArray[x][height - 1] = 26;
+			}else{
+				backgroundIndexArray[x][0] = 17;
+				backgroundIndexArray[x][height - 1] = 17;
+			}
+		}
+
+		//add in player
+		ObjectArray[2][tileDownRange/2] = Consts.PLAYER_INDEX;
+
+		//generate cold coin
+		for(int x = 0; x < width; x++){
+			int songIndex = tileIndexToSong(x, tileToSampleRatio);
+			int toneDeviation = song.tones.get(songIndex) - song.minNonZeroTone;
+			int level = song.levels.get(songIndex);
+			if(toneDeviation > 0 && level > 0){
+				int y = toneDeviation * Consts.tilesPerTone;
+				if(0<y && y< height - 1)
+					ObjectArray[x][y] = Consts.COIN;
+			}
+		}
+
+		//now needs to write into a file
+		int levelSignature = 96;
+		int layercount = 3;
+		int backgroundindex = 2; // this is for island	
+
+		try {
+			OutputStream fstream = new FileOutputStream(name);
+			fstream.write(intToByte1(levelSignature));
+			fstream.write(intToByte1(layercount));
+			fstream.write(intToByte1(backgroundindex));
+
+			writeALayer(fstream, 42, 1, 2, 1.0f, backgroundIndexArray, width, height);
+			writeALayer(fstream, 42,0, 2, 1.0f, backgroundIndexArray, width, height);
+			writeALayer(fstream, 42,2, 2, 1.0f, ObjectArray, width, height);
+
+			fstream.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println("test song generate successful");
+	}
+
+	public static int tileIndexToSong(int tileIndex, double tileToSampleRatio){
+		int indexSong = (int)Math.round((tileIndex/tileToSampleRatio));
+		return indexSong;
+	}
 
 	public static void testGen(){
 		final String name = "test_map.bin";
@@ -48,6 +121,9 @@ public class MapGen {
 
 		ObjectArray[2][2] = 0; //this is the player spawning location
 
+		ObjectArray[2][18] = 1;
+		ObjectArray[20][17] = 1;
+		
 		//now needs to write into a file
 		int levelSignature = 96;
 		int layercount = 3;
@@ -81,7 +157,6 @@ public class MapGen {
 		}
 		return tempArray;
 	}
-
 
 	public static byte intToByte1(int value){
 		ByteBuffer b = ByteBuffer.allocate(4);

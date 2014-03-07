@@ -16,6 +16,7 @@
 
 package com.music.musee;
 
+
 import com.music.musee.CollisionParameters.HitType;
 import com.music.musee.GameObject.ActionType;
 import com.music.musee.utils.Utils;
@@ -26,9 +27,15 @@ public class PlayerComponent extends GameComponent {
     private static final float AIR_HORIZONTAL_IMPULSE_SPEED = 4000.0f;
     private static final float AIR_VERTICAL_IMPULSE_SPEED = 1200.0f;
     private static final float AIR_VERTICAL_IMPULSE_SPEED_FROM_GROUND = 250.0f;
-    private static final float AIR_DRAG_SPEED = 4000.0f;
-    private static final float MAX_GROUND_HORIZONTAL_SPEED = 500.0f;
-    private static final float MAX_AIR_HORIZONTAL_SPEED = 150.0f;
+//    private static final float AIR_DRAG_SPEED = 4000.0f;
+    private static final float AIR_DRAG_SPEED = 0.0f;
+//    private static final float MAX_GROUND_HORIZONTAL_SPEED = 500.0f; //500 px per second (32 px per tile)
+
+    private static final float MAX_GROUND_HORIZONTAL_SPEED = 32 * 6; //6 tiles per second
+    
+    
+//    private static final float MAX_AIR_HORIZONTAL_SPEED = 150.0f;
+    private static final float MAX_AIR_HORIZONTAL_SPEED = MAX_GROUND_HORIZONTAL_SPEED;
     private static final float MAX_UPWARD_SPEED = 250.0f;
     private static final float VERTICAL_IMPULSE_TOLERANCE = 50.0f;
     private static final float FUEL_AMOUNT = 1.0f;
@@ -126,7 +133,8 @@ public class PlayerComponent extends GameComponent {
                 if (mTouchingGround) {
                     mFuel += mDifficultyConstants.getFuelGroundRefillSpeed() * timeDelta;
                 } else {
-                    mFuel += mFuelAirRefillSpeed * timeDelta;
+//                    mFuel += mFuelAirRefillSpeed * timeDelta;
+                	mFuel += 1;
                 }
                 
                 if (mFuel > FUEL_AMOUNT) {

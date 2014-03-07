@@ -38,7 +38,7 @@ import com.music.musee.utils.Utils;
  * a) generated from data at compile time, or b) described by data at runtime.
  */
 public class GameObjectFactory extends BaseObject {
-    private final static int MAX_GAME_OBJECTS = 384;
+    private final static int MAX_GAME_OBJECTS = 1024;
     private final static ComponentPoolComparator sComponentPoolComparator = new ComponentPoolComparator();
     private FixedSizeArray<FixedSizeArray<BaseObject>> mStaticData;
     private FixedSizeArray<GameComponentPool> mComponentPools;
@@ -225,7 +225,7 @@ public class GameObjectFactory extends BaseObject {
                 new ComponentClass(ChangeComponentsComponent.class, 256),
                 new ComponentClass(CrusherAndouComponent.class, 1),
                 new ComponentClass(DoorAnimationComponent.class, 256),  //!
-                new ComponentClass(DynamicCollisionComponent.class, 256),
+                new ComponentClass(DynamicCollisionComponent.class, 1024),
                 new ComponentClass(EnemyAnimationComponent.class, 256),
                 new ComponentClass(FadeDrawableComponent.class, 32),
                 new ComponentClass(FixedAnimationComponent.class, 8),
@@ -233,12 +233,12 @@ public class GameObjectFactory extends BaseObject {
                 new ComponentClass(GenericAnimationComponent.class, 32),
                 new ComponentClass(GhostComponent.class, 256),
                 new ComponentClass(GravityComponent.class, 128),
-                new ComponentClass(HitPlayerComponent.class, 256),
-                new ComponentClass(HitReactionComponent.class, 256),
+                new ComponentClass(HitPlayerComponent.class, 1024),
+                new ComponentClass(HitReactionComponent.class, 1024),
                 new ComponentClass(InventoryComponent.class, 128),
                 new ComponentClass(LauncherComponent.class, 16),
                 new ComponentClass(LaunchProjectileComponent.class, 128),
-                new ComponentClass(LifetimeComponent.class, 384),
+                new ComponentClass(LifetimeComponent.class, 1024),
                 new ComponentClass(MotionBlurComponent.class, 1),
                 new ComponentClass(MovementComponent.class, 128),
                 new ComponentClass(NPCAnimationComponent.class, 8),
@@ -249,14 +249,14 @@ public class GameObjectFactory extends BaseObject {
                 new ComponentClass(PlayerComponent.class, 1),
                 new ComponentClass(PlaySingleSoundComponent.class, 128),
                 new ComponentClass(PopOutComponent.class, 32),
-                new ComponentClass(RenderComponent.class, 384),
+                new ComponentClass(RenderComponent.class, 1024),
                 new ComponentClass(ScrollerComponent.class, 8),
                 new ComponentClass(SelectDialogComponent.class, 8),
                 new ComponentClass(SimpleCollisionComponent.class, 32),
                 new ComponentClass(SimplePhysicsComponent.class, 256),
                 new ComponentClass(SleeperComponent.class, 32),
                 new ComponentClass(SolidSurfaceComponent.class, 16),
-                new ComponentClass(SpriteComponent.class, 384),
+                new ComponentClass(SpriteComponent.class, 1024),
                 new ComponentClass(TheSourceComponent.class, 1),
                 
         };
@@ -4378,6 +4378,7 @@ public class GameObjectFactory extends BaseObject {
         //DynamicCollisionComponent dynamicCollision = (DynamicCollisionComponent)allocateComponent(DynamicCollisionComponent.class);
         //sprite.setCollisionComponent(dynamicCollision);
         
+//        Log.d("lee debug", "spawn one coing and hit react");
         HitReactionComponent hitReact = (HitReactionComponent)allocateComponent(HitReactionComponent.class);
         hitReact.setDieWhenCollected(true);
         hitReact.setInvincible(true);
