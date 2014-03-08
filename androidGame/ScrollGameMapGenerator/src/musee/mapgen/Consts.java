@@ -1,7 +1,9 @@
 package musee.mapgen;
 
 public class Consts {
-	public static final int sampleRatePerSecond = 6;
+	public static double sampleRatePerSecond = 6;
+	public static double tileToSampleRatio = 1;
+
 	public static final double tileSpeed = 6.0; //6 per second	
 	public static final int tilesPerTone = 1;
 	public static final int MIN_TILE_DOWN = 10;

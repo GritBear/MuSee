@@ -1,9 +1,11 @@
-package musee.mapgen;
+package musee.mapgen.utils;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+
+import musee.mapgen.SongInfo;
 
 
 public class IOUtils {
