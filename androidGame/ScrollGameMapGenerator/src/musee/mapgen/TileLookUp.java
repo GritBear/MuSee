@@ -9,11 +9,31 @@ public class TileLookUp {
 	Map<Integer, Double> tileEndPointMap;
 	Map<Integer, Double> tileStartPointMap;
 	
+	final double[] differenceLookUp = {-2, -1, 0, 1, 2, -1};
+	
 	TileLookUp(){
 		tileEndPointMap = new HashMap<Integer,Double>();
 		tileStartPointMap = new HashMap<Integer,Double>();
 		init();
 	}
+	
+	public double findClosestValueIndex(double value){
+		double prevDifference = Math.abs(value - differenceLookUp[0]);
+		int index = 0;
+		for(int i = 1; i < differenceLookUp.length; i++){
+			double curDifference = Math.abs(value - differenceLookUp[i]);
+			if(curDifference > prevDifference){
+				index = i - 1;
+				break;
+			}else{
+				prevDifference = curDifference;
+				index = i;
+			}
+		}
+		
+		return differenceLookUp[index];
+	}
+	
 	
 	public double getStartY(int tileIndex){
 		return tileStartPointMap.get(tileIndex);

@@ -62,7 +62,7 @@ public class MapGen {
 		}
 
 		IdealPathCalc pathCalc = new IdealPathCalc(song);
-		ArrayList<Integer> idealPath = pathCalc.getIdealPathRaw();
+		ArrayList<Integer> idealPath = pathCalc.getIdealPath();
 
 		//generate cold coin
 		for(int x = 0; x < width; x++){

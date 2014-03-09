@@ -33,14 +33,22 @@ public class IdealPathCalc {
 			int diff = song.tones.get(i) - prevTone;
 			if(diff > upDownJumpLimit){
 				diff = upDownJumpLimit;
-			}else if(diff < (-upDownJumpLimit + 1)){
-				diff = (-upDownJumpLimit + 1);
+			}else if(diff < -upDownJumpLimit){
+				diff = -upDownJumpLimit;
 			}
 			idealPathRaw.add(i, prevTone + diff);
 		}		
 	}
-	
+		
 	public ArrayList<Integer> getIdealPathRaw(){
+		return idealPathRaw;
+	}
+	
+	public ArrayList<Double> getIdealPathDouble(){
+		return idealPathDouble;
+	}
+	
+	public ArrayList<Integer> getIdealPath(){
 		return idealPath;
 	}
 		
