@@ -23,57 +23,132 @@ public class LandScape {
 			yTarget = Math.min(yTarget, height -1);
 
 			if(0<=yTarget && yTarget<= height -1){
-				int yIndex = (int) Math.round(yTarget);	
+				int yIndex = (int) Math.ceil(yTarget);	
 				for(int tempY = yIndex; tempY > 0; tempY--){
 					background[x][tempY] = 17;
 				}
 
 				//smoothing processing here
 				if(x == 0){
-					prevType = 17;
+					prevType = Consts.normalSquare;
 					prevYTarget = yIndex;
 				}else{
 					double YTargetDiff = yIndex - prevYTarget;
 					YTargetDiff = TileLookUp.singleton.findClosestValueIndex(YTargetDiff);
 
-					//choose the type here
-					if(YTargetDiff == 0){
-						//do nothing
-					}else if(YTargetDiff == -2){
-						//some error checking for unknonw reason where glitches happen
-						int checkValue = yIndex + 3;
-						while(checkValue < height - 1 && background[x-1][checkValue] == 17){
-							checkValue ++;
-						}
-						int numberShift = checkValue - 3 - yIndex;
-						
-						for(int i = numberShift + yIndex; i >= yIndex - numberShift; i--){
-							if(i >= 0)
-								background[x][i] = 17;
-						}
-						
-						background[x][yIndex + 2 + numberShift] = 44;
-						background[x][yIndex + 1 + numberShift] = 60;
+					if(prevType == Consts.normalSquare){
+						//choose the type here
+						if(YTargetDiff == 0){
+							//do nothing
+						}else if(YTargetDiff == -2){
+							//some error checking for unknonw reason where glitches happen
+							int checkValue = yIndex + 3;
+							while(checkValue < height - 1 && background[x-1][checkValue] == 17){
+								checkValue ++;
+							}
+							int numberShift = checkValue - 3 - yIndex;
 
-					}else if(YTargetDiff == -1){
-						background[x][yIndex + 1] = 37;
-					}else if(YTargetDiff == 1){
-						background[x][yIndex] = 36;
-					}else if(YTargetDiff == 2){
-						//some error checking for unknonw reason where glitches happen
-						int checkValue = yIndex - 2;
-						while(checkValue > 0 && background[x-1][checkValue] == Consts.nonIndex){
-							checkValue --;
+							for(int i = numberShift + yIndex; i >= yIndex - numberShift; i--){
+								if(i >= 0)
+									background[x][i] = 17;
+							}
+
+							background[x][yIndex + 2 + numberShift] = 44;
+							background[x][yIndex + 1 + numberShift] = 60;
+
+						}else if(YTargetDiff == -1){
+							background[x][yIndex + 1] = 37;
+						}else if(YTargetDiff == 1){
+							background[x][yIndex] = 36;		
+						}else if(YTargetDiff == 2){
+							//some error checking for unknonw reason where glitches happen
+							int checkValue = yIndex - 2;
+							while(checkValue > 0 && background[x-1][checkValue] == Consts.nonIndex){
+								checkValue --;
+							}
+							int numberShift = checkValue - (yIndex - 2);
+
+							for(int i = numberShift + yIndex; i <= yIndex - numberShift; i++){
+								if(i >= 0 && i < height)
+									background[x][i] = Consts.nonIndex;
+							}
+
+							background[x][yIndex + numberShift] = 43;
+							background[x][yIndex-1 + numberShift] = 59;
+						}else if(YTargetDiff == -1.5){
+							background[x][yIndex + 1] = 44;
+							background[x][yIndex] = 53;
+							prevType = Consts.normalHalfSquare;
+						}else if(YTargetDiff == -0.5){
+							background[x][yIndex + 1] = 57;
+							prevType = Consts.normalHalfSquare;
+						}else if(YTargetDiff == 0.5){
+							background[x][yIndex] = 55;
+							prevType = Consts.normalHalfSquare;
+						}else if(YTargetDiff == 1.5){
+							background[x][yIndex] = 51;
+							background[x][yIndex-1] = 59;
+							prevType = Consts.normalHalfSquare;
 						}
-						int numberShift = checkValue - (yIndex - 2);
-						
-						for(int i = numberShift + yIndex; i <= yIndex - numberShift; i++){
-							if(i >= 0 && i < height)
-								background[x][i] = Consts.nonIndex;
+					}else{
+						//the tile must end in a 0.5 Y location
+						if(YTargetDiff == 0){
+							background[x][yIndex] = 48;
+//						}else if(YTargetDiff == -2){
+//							//some error checking for unknonw reason where glitches happen
+//							int checkValue = yIndex + 3;
+//							while(checkValue < height - 1 && background[x-1][checkValue] == 17){
+//								checkValue ++;
+//							}
+//							int numberShift = checkValue - 3 - yIndex;
+//
+//							for(int i = numberShift + yIndex; i >= yIndex - numberShift; i--){
+//								if(i >= 0)
+//									background[x][i] = 17;
+//							}
+//
+//							background[x][yIndex + 2 + numberShift] = 54;
+//							background[x][yIndex + 1 + numberShift] = 40;
+//							background[x][yIndex + numberShift] = 53;
+						}else if(YTargetDiff == -1){
+							background[x][yIndex + 1] = 54;
+							background[x][yIndex] = 53;
+						}else if(YTargetDiff == 1){
+							background[x][yIndex - 1] = 52;	
+							background[x][yIndex] = 51;	
+//						}else if(YTargetDiff == 2){
+//							//some error checking for unknonw reason where glitches happen
+//							int checkValue = yIndex - 2;
+//							while(checkValue > 0 && background[x-1][checkValue] == Consts.nonIndex){
+//								checkValue --;
+//							}
+//							int numberShift = checkValue - (yIndex - 2);
+//
+//							for(int i = numberShift + yIndex; i <= yIndex - numberShift; i++){
+//								if(i >= 0 && i < height)
+//									background[x][i] = Consts.nonIndex;
+//							}
+//
+//							background[x][yIndex + numberShift] = 51;
+//							background[x][yIndex-1 + numberShift] = 25;
+//							background[x][yIndex-2 + numberShift] = 52;
+						}else if(YTargetDiff <= -1.5){
+							background[x][yIndex + 1] = 54;
+							background[x][yIndex] = 60;
+//							YTargetDiff = -1.5;
+							prevType = Consts.normalSquare;
+						}else if(YTargetDiff == -0.5){
+							background[x][yIndex + 1] = 54;
+							prevType = Consts.normalSquare;
+						}else if(YTargetDiff == 0.5){
+							background[x][yIndex] = 56;
+							prevType = Consts.normalSquare;
+						}else if(YTargetDiff >= 1.5){
+							background[x][yIndex] = 43;
+							background[x][yIndex-1] = 52;
+//							YTargetDiff = 1.5;
+							prevType = Consts.normalSquare;
 						}
-										
-						background[x][yIndex + numberShift] = 43;
-						background[x][yIndex-1 + numberShift] = 59;
 					}
 					prevYTarget += YTargetDiff;
 				}
@@ -94,49 +169,8 @@ public class LandScape {
 		}
 	}
 
-	public void processBackgroundRaw(int[][] background, int[][]ObjectArray, int width, int height){
-		int prevY = 0;
-		for(int x = 0; x < width; x++){
-			int songIndex = TileUtils.tileIndexToSong(x, Consts.tileToSampleRatio);
-			int toneDeviation = idealPath.getIdealPath().get(songIndex) - song.minNonZeroTone;
-
-			int yInverted = toneDeviation * Consts.tilesPerTone;
-			int y = height - 1 - yInverted + 2; //2 is an offset
-			y = Math.min(y, height -1);
-			if(0<=y && y<= height -1){
-				if(x == 0){
-					prevY = y;
-					for(int tempY = y; tempY < height; tempY++){
-						background[x][tempY] = 17;
-					}
-				}else{
-					for(int tempY = y; tempY < height; tempY++){
-						background[x][tempY] = 17;
-					}
-					int divY = y - prevY;
-					switch(divY){
-					case -1:
-						background[x][y] = 36;
-						break;
-					case -2:
-						background[x][y] = 43;
-						background[x][y+1] = 59;
-						break;
-					case 1:
-						background[x][y] = 37;
-						break;
-					case 2:
-						background[x][y] = 60						;
-						background[x][y-1] = 44;
-						break;
-					default:
-					}
-					prevY = y;
-				}
-			}
-
-		}
-	}
-
+	
+	
+	
 
 }

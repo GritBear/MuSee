@@ -63,7 +63,7 @@ public class IdealPathCalc {
 	
 	private void castToIntPath(){
 		for(int i = 0; i < length;i++){
-			idealPath.add(i, (int)Math.round(idealPathDouble.get(i)));
+			idealPath.add(i, (int)Math.ceil(idealPathDouble.get(i)));
 		}		
 	}
 	

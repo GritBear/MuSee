@@ -9,7 +9,7 @@ public class TileLookUp {
 	Map<Integer, Double> tileEndPointMap;
 	Map<Integer, Double> tileStartPointMap;
 	
-	final double[] differenceLookUp = {-2, -1, 0, 1, 2, -1};
+	final double[] differenceLookUp = {-2, -1.5 ,-1, -0.5, 0, 0.5, 1, 1.5, 2};
 	
 	TileLookUp(){
 		tileEndPointMap = new HashMap<Integer,Double>();
