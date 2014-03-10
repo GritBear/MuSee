@@ -188,13 +188,7 @@ public class Game extends AllocationGuard {
 											new DrawableBitmap(longTermTextureLibrary.allocateTexture(
 													R.drawable.ui_button_stomp_off), 0, 0),
 													new DrawableBitmap(longTermTextureLibrary.allocateTexture(
-															R.drawable.ui_button_stomp_on), 0, 0),
-															new DrawableBitmap(longTermTextureLibrary.allocateTexture(
-																	R.drawable.ui_movement_slider_base), 0, 0),
-																	new DrawableBitmap(longTermTextureLibrary.allocateTexture(
-																			R.drawable.ui_movement_slider_button_off), 0, 0),
-																			new DrawableBitmap(longTermTextureLibrary.allocateTexture(
-																					R.drawable.ui_movement_slider_button_on), 0, 0));
+															R.drawable.ui_button_stomp_on), 0, 0));
 			Texture[] digitTextures = {
 					longTermTextureLibrary.allocateTexture(R.drawable.ui_0),
 					longTermTextureLibrary.allocateTexture(R.drawable.ui_1),

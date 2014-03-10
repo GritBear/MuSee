@@ -716,13 +716,14 @@ public class GameObjectFactory extends BaseObject {
             final int staticObjectCount = 13;
             staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
             
-            GameComponent gravity = allocateComponent(GravityComponent.class);
+            GravityComponent gravity = (GravityComponent)allocateComponent(GravityComponent.class);
+            gravity.setGravityMultiplier(2);
             GameComponent movement = allocateComponent(MovementComponent.class);
             PhysicsComponent physics = (PhysicsComponent)allocateComponent(PhysicsComponent.class);
 
-            physics.setMass(9.1f);   // ~90kg w/ earth gravity
-            physics.setDynamicFrictionCoeffecient(0.2f);
-            physics.setStaticFrictionCoeffecient(0.01f);
+            physics.setMass(1f);   // ~10kg w/ earth gravity
+//            physics.setDynamicFrictionCoeffecient(0.2f);
+//            physics.setStaticFrictionCoeffecient(0.01f);
             
             // Animation Data
             FixedSizeArray<CollisionVolume> basicVulnerabilityVolume = 
@@ -1186,7 +1187,8 @@ public class GameObjectFactory extends BaseObject {
             final int staticObjectCount = 5;
             staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
             
-            GameComponent gravity = allocateComponent(GravityComponent.class);
+            GravityComponent gravity = (GravityComponent)allocateComponent(GravityComponent.class);
+            gravity.setGravityMultiplier(1);
             GameComponent movement = allocateComponent(MovementComponent.class);
             SimplePhysicsComponent physics = (SimplePhysicsComponent)allocateComponent(SimplePhysicsComponent.class);
             physics.setBounciness(0.4f);

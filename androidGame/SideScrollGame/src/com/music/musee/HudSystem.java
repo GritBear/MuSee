@@ -63,9 +63,9 @@ public class HudSystem extends BaseObject {
     private DrawableBitmap mStompButtonEnabledDrawable;
     private DrawableBitmap mStompButtonDepressedDrawable;
     
-    private DrawableBitmap mMovementSliderBaseDrawable;
-    private DrawableBitmap mMovementSliderButtonDrawable;
-    private DrawableBitmap mMovementSliderButtonDepressedDrawable;
+//    private DrawableBitmap mMovementSliderBaseDrawable;
+//    private DrawableBitmap mMovementSliderButtonDrawable;
+//    private DrawableBitmap mMovementSliderButtonDepressedDrawable;
 
     
     private Vector2 mFlyButtonLocation;
@@ -156,9 +156,9 @@ public class HudSystem extends BaseObject {
         mFadePendingEventType = GameFlowEvent.EVENT_INVALID;
         mFadePendingEventIndex = 0;
         
-        mMovementSliderBaseDrawable = null;
-        mMovementSliderButtonDrawable = null;
-        mMovementSliderButtonDepressedDrawable = null;
+//        mMovementSliderBaseDrawable = null;
+//        mMovementSliderButtonDrawable = null;
+//        mMovementSliderButtonDepressedDrawable = null;
         mMovementSliderBaseLocation.set(MOVEMENT_SLIDER_BASE_X, MOVEMENT_SLIDER_BASE_Y);
         mMovementSliderButtonLocation.set(MOVEMENT_SLIDER_BUTTON_X, MOVEMENT_SLIDER_BUTTON_Y);
         mMovementSliderMode = false;
@@ -179,17 +179,29 @@ public class HudSystem extends BaseObject {
     }
     
     public void setButtonDrawables(DrawableBitmap disabled, DrawableBitmap enabled, DrawableBitmap depressed,
-    		DrawableBitmap stompEnabled, DrawableBitmap stompDepressed,
-    		DrawableBitmap sliderBase, DrawableBitmap sliderButton, DrawableBitmap sliderDepressed) {
+    		DrawableBitmap stompEnabled, DrawableBitmap stompDepressed) {
         mFlyButtonDisabledDrawable = disabled;
         mFlyButtonEnabledDrawable = enabled;
         mFlyButtonDepressedDrawable = depressed;
         mStompButtonEnabledDrawable = stompEnabled;
         mStompButtonDepressedDrawable = stompDepressed;
-        mMovementSliderBaseDrawable = sliderBase;
-        mMovementSliderButtonDrawable = sliderButton;
-        mMovementSliderButtonDepressedDrawable = sliderDepressed;
+//        mMovementSliderBaseDrawable = sliderBase;
+//        mMovementSliderButtonDrawable = sliderButton;
+//        mMovementSliderButtonDepressedDrawable = sliderDepressed;
     }
+    
+//    public void setButtonDrawablesDep(DrawableBitmap disabled, DrawableBitmap enabled, DrawableBitmap depressed,
+//    		DrawableBitmap stompEnabled, DrawableBitmap stompDepressed,
+//    		DrawableBitmap sliderBase, DrawableBitmap sliderButton, DrawableBitmap sliderDepressed) {
+//        mFlyButtonDisabledDrawable = disabled;
+//        mFlyButtonEnabledDrawable = enabled;
+//        mFlyButtonDepressedDrawable = depressed;
+//        mStompButtonEnabledDrawable = stompEnabled;
+//        mStompButtonDepressedDrawable = stompDepressed;
+////        mMovementSliderBaseDrawable = sliderBase;
+////        mMovementSliderButtonDrawable = sliderButton;
+////        mMovementSliderButtonDepressedDrawable = sliderDepressed;
+//    }
     
     public void setDigitDrawables(DrawableBitmap[] digits, DrawableBitmap xMark) {
         mXDrawable = xMark;
@@ -206,7 +218,7 @@ public class HudSystem extends BaseObject {
     public void setButtonState(boolean pressed, boolean attackPressed, boolean sliderPressed) {
         mFlyButtonPressed = pressed;
         mStompButtonPressed = attackPressed;
-        mMovementSliderButtonPressed = sliderPressed;
+        //mMovementSliderButtonPressed = sliderPressed;
     }
     
     public void startFade(boolean in, float duration) {
@@ -350,37 +362,37 @@ public class HudSystem extends BaseObject {
 	            render.scheduleForDraw(bitmap, mStompButtonLocation, SortConstants.HUD, false);   
 	        }
 	        
-	        if (mMovementSliderMode && 
-	        		mMovementSliderBaseDrawable != null && mMovementSliderButtonDrawable != null) {
-	               
-	            if (mMovementSliderBaseDrawable.getWidth() == 0) {
-	                // first time init
-	                Texture tex = mMovementSliderBaseDrawable.getTexture();
-	                mMovementSliderBaseDrawable.resize(tex.width, tex.height);
-	            }
-	            
-	            if (mMovementSliderButtonDrawable.getWidth() == 0) {
-	                // first time init
-	                Texture tex = mMovementSliderButtonDrawable.getTexture();
-	                mMovementSliderButtonDrawable.resize(tex.width, tex.height);
-	            }
-	            
-	            if (mMovementSliderButtonDepressedDrawable.getWidth() == 0) {
-	                // first time init
-	                Texture tex = mMovementSliderButtonDepressedDrawable.getTexture();
-	                mMovementSliderButtonDepressedDrawable.resize(tex.width, tex.height);
-	            }
-	            
-	            DrawableBitmap bitmap = mMovementSliderButtonDrawable;
-
-	            if (mMovementSliderButtonPressed) {
-	            	bitmap = mMovementSliderButtonDepressedDrawable;
-	            }
-	            
-	            render.scheduleForDraw(mMovementSliderBaseDrawable, mMovementSliderBaseLocation, SortConstants.HUD, false);   
-	            render.scheduleForDraw(bitmap, mMovementSliderButtonLocation, SortConstants.HUD + 1, false);   
-
-	        }
+//	        if (mMovementSliderMode && 
+//	        		mMovementSliderBaseDrawable != null && mMovementSliderButtonDrawable != null) {
+//	               
+//	            if (mMovementSliderBaseDrawable.getWidth() == 0) {
+//	                // first time init
+//	                Texture tex = mMovementSliderBaseDrawable.getTexture();
+//	                mMovementSliderBaseDrawable.resize(tex.width, tex.height);
+//	            }
+//	            
+//	            if (mMovementSliderButtonDrawable.getWidth() == 0) {
+//	                // first time init
+//	                Texture tex = mMovementSliderButtonDrawable.getTexture();
+//	                mMovementSliderButtonDrawable.resize(tex.width, tex.height);
+//	            }
+//	            
+//	            if (mMovementSliderButtonDepressedDrawable.getWidth() == 0) {
+//	                // first time init
+//	                Texture tex = mMovementSliderButtonDepressedDrawable.getTexture();
+//	                mMovementSliderButtonDepressedDrawable.resize(tex.width, tex.height);
+//	            }
+//	            
+//	            DrawableBitmap bitmap = mMovementSliderButtonDrawable;
+//
+//	            if (mMovementSliderButtonPressed) {
+//	            	bitmap = mMovementSliderButtonDepressedDrawable;
+//	            }
+//	            
+//	            render.scheduleForDraw(mMovementSliderBaseDrawable, mMovementSliderBaseLocation, SortConstants.HUD, false);   
+//	            render.scheduleForDraw(bitmap, mMovementSliderButtonLocation, SortConstants.HUD + 1, false);   
+//
+//	        }
 	        
 	        
 	        if (mCoinDrawable != null) {
