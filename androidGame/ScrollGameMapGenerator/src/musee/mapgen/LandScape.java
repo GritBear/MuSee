@@ -13,49 +13,75 @@ public class LandScape {
 
 	public void processBackground(int[][] background, int[][]ObjectArray, int width, int height){
 		double prevYTarget = 0;
-		
+		int prevType = 0;
+
 		for(int x = 0; x < width; x++){
 			int songIndex = TileUtils.tileIndexToSong(x, Consts.tileToSampleRatio);
-			double toneDeviation = idealPath.getIdealPathRaw().get(songIndex) - song.minNonZeroTone;
+			double toneDeviation = idealPath.getIdealPathDouble().get(songIndex) - song.minNonZeroTone;
 			double yTarget = toneDeviation * Consts.tilesPerTone;
 
 			yTarget = Math.min(yTarget, height -1);
-			
+
 			if(0<=yTarget && yTarget<= height -1){
 				int yIndex = (int) Math.round(yTarget);	
 				for(int tempY = yIndex; tempY > 0; tempY--){
 					background[x][tempY] = 17;
 				}
-				
+
 				//smoothing processing here
 				if(x == 0){
+					prevType = 17;
 					prevYTarget = yIndex;
 				}else{
 					double YTargetDiff = yIndex - prevYTarget;
-					int tileIndex = -1;
 					YTargetDiff = TileLookUp.singleton.findClosestValueIndex(YTargetDiff);
-					
+
 					//choose the type here
 					if(YTargetDiff == 0){
 						//do nothing
 					}else if(YTargetDiff == -2){
-						background[x][yIndex + 2] = 44;
-						background[x][yIndex + 1] = 60;
+						//some error checking for unknonw reason where glitches happen
+						int checkValue = yIndex + 3;
+						while(checkValue < height - 1 && background[x-1][checkValue] == 17){
+							checkValue ++;
+						}
+						int numberShift = checkValue - 3 - yIndex;
+						
+						for(int i = numberShift + yIndex; i >= yIndex - numberShift; i--){
+							if(i >= 0)
+								background[x][i] = 17;
+						}
+						
+						background[x][yIndex + 2 + numberShift] = 44;
+						background[x][yIndex + 1 + numberShift] = 60;
+
 					}else if(YTargetDiff == -1){
 						background[x][yIndex + 1] = 37;
 					}else if(YTargetDiff == 1){
 						background[x][yIndex] = 36;
 					}else if(YTargetDiff == 2){
-						background[x][yIndex] = 43;
-						background[x][yIndex-1] = 59;
+						//some error checking for unknonw reason where glitches happen
+						int checkValue = yIndex - 2;
+						while(checkValue > 0 && background[x-1][checkValue] == Consts.nonIndex){
+							checkValue --;
+						}
+						int numberShift = checkValue - (yIndex - 2);
+						
+						for(int i = numberShift + yIndex; i <= yIndex - numberShift; i++){
+							if(i >= 0 && i < height)
+								background[x][i] = Consts.nonIndex;
+						}
+										
+						background[x][yIndex + numberShift] = 43;
+						background[x][yIndex-1 + numberShift] = 59;
 					}
-					prevYTarget = yIndex;
+					prevYTarget += YTargetDiff;
 				}
 			}
 		}
 		invertVerticalIndexs(background,  width, height);
 	}
-	
+
 	private void invertVerticalIndexs(int[][] array, int width, int height){
 		int[] bufferArray = new int[height];
 		for(int col = 0; col < width; col++){

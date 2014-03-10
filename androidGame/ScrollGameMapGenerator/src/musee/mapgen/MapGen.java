@@ -32,13 +32,13 @@ public class MapGen {
 		int songLength = song.levels.size();
 		Consts.sampleRatePerSecond = (double)songLength/(double)songDurationSeconds;
 		Consts.tileToSampleRatio = Consts.tileSpeed / Consts.sampleRatePerSecond; //ideally this is 1
-		
-		int tileLength = (int)(songLength * Consts.tileToSampleRatio + 0.5);
+
+		int tileLength = (int)(songLength * Consts.tileToSampleRatio + 0.5 );
 		System.out.println("sample per second:" + Consts.sampleRatePerSecond + ";songLength seconds:" +songDurationSeconds + ";songLength:" + songLength
 				+";tileToSampleRatio:" + Consts.tileToSampleRatio + ";tile length:" + tileLength);
-		
+
 		int toneRange = song.maxTone - song.minNonZeroTone;
-		int tileDownRange = (toneRange * Consts.tilesPerTone + 2 > Consts.MIN_TILE_DOWN)?toneRange * Consts.tilesPerTone + 2:Consts.MIN_TILE_DOWN;
+		int tileDownRange = (toneRange * Consts.tilesPerTone + 5 > Consts.MIN_TILE_DOWN)?toneRange * Consts.tilesPerTone + 5:Consts.MIN_TILE_DOWN;
 
 		final int height = tileDownRange;
 		final int width = tileLength;
@@ -56,8 +56,8 @@ public class MapGen {
 				backgroundIndexArray[x][0] = 26;
 				backgroundIndexArray[x][height - 1] = 26;
 			}else{
-				backgroundIndexArray[x][0] = 17;
-				backgroundIndexArray[x][height - 1] = 17;
+				backgroundIndexArray[x][0] = 34;
+				backgroundIndexArray[x][height - 1] = 34;
 			}
 		}
 
@@ -70,18 +70,19 @@ public class MapGen {
 			int toneDeviation = idealPath.get(songIndex) - song.minNonZeroTone;
 			int level = song.levels.get(songIndex);
 			if(toneDeviation > 0 && level > 0 && x > 15){
-				int yInverted = toneDeviation * Consts.tilesPerTone;
+				int yInverted = toneDeviation * Consts.tilesPerTone + 2;
 				if(0<yInverted && yInverted< height - 1){
 					int y = (height - 1) - yInverted;
-//					System.out.println("x:" + x +";y:" + y + ";height:" + height);
+					//					System.out.println("x:" + x +";y:" + y + ";height:" + height);
 					ObjectArray2[x][y] = Consts.COIN;
+
 				}
 			}
 		}
-		
+
 		LandScape landScape = new LandScape(song, pathCalc);
 		landScape.processBackground(backgroundIndexArray, ObjectArray2, width, height);
-		
+
 		//add in player
 		ObjectArray[2][height/2] = Consts.PLAYER_INDEX;
 
@@ -167,7 +168,7 @@ public class MapGen {
 		int[][] tempArray = new int[width][height];
 		for(int x = 0; x < width; x++){
 			for(int y=0; y< height; y++){
-				tempArray[x][y] = -99;
+				tempArray[x][y] = Consts.nonIndex;
 			}
 		}
 		return tempArray;
