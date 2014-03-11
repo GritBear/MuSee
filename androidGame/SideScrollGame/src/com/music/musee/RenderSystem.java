@@ -17,7 +17,6 @@
 package com.music.musee;
 
 import com.music.musee.GL.Texture;
-import com.music.musee.game.GameRenderer;
 import com.music.musee.utils.Utils;
 
 

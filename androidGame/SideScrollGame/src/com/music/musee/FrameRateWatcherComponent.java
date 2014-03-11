@@ -17,8 +17,6 @@
 
 package com.music.musee;
 
-import com.music.musee.game.GameComponent;
-
 public class FrameRateWatcherComponent extends GameComponent {
 	private RenderComponent mRenderComponent;
 	private DrawableObject mDrawable;

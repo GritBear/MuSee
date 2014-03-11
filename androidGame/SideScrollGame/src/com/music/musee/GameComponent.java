@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-package com.music.musee.game;
-
-import com.music.musee.PhasedObject;
+package com.music.musee;
 
 /**
  * A game component implements a single feature of a game object.  Components are run once per frame

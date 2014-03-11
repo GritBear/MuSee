@@ -14,88 +14,21 @@
  * limitations under the License.
  */
 
-package com.music.musee.game;
+package com.music.musee;
 
 import java.util.Comparator;
 
 import android.util.Log;
 
-import com.music.musee.AABoxCollisionVolume;
-import com.music.musee.AnimationComponent;
-import com.music.musee.AnimationFrame;
-import com.music.musee.AnimationPlayerActivity;
-import com.music.musee.AttackAtDistanceComponent;
-import com.music.musee.BackgroundCollisionComponent;
-import com.music.musee.BaseObject;
-import com.music.musee.ButtonAnimationComponent;
-import com.music.musee.CameraBiasComponent;
-import com.music.musee.CameraSystem;
-import com.music.musee.ChangeComponentsComponent;
-import com.music.musee.ChannelSystem;
-import com.music.musee.CollisionParameters;
-import com.music.musee.CollisionVolume;
-import com.music.musee.ContextParameters;
-import com.music.musee.CrusherAndouComponent;
-import com.music.musee.DebugLog;
-import com.music.musee.DoorAnimationComponent;
-import com.music.musee.DrawableBitmap;
-import com.music.musee.DynamicCollisionComponent;
-import com.music.musee.EnemyAnimationComponent;
-import com.music.musee.EventRecorder;
-import com.music.musee.FadeDrawableComponent;
-import com.music.musee.FixedAnimationComponent;
-import com.music.musee.FixedSizeArray;
-import com.music.musee.FrameRateWatcherComponent;
-import com.music.musee.GenericAnimationComponent;
-import com.music.musee.GhostComponent;
-import com.music.musee.GravityComponent;
-import com.music.musee.HitPlayerComponent;
-import com.music.musee.HitReactionComponent;
-import com.music.musee.InventoryComponent;
-import com.music.musee.LaunchProjectileComponent;
-import com.music.musee.LauncherComponent;
-import com.music.musee.LevelSystem;
-import com.music.musee.LevelTree;
-import com.music.musee.LifetimeComponent;
-import com.music.musee.MotionBlurComponent;
-import com.music.musee.MovementComponent;
-import com.music.musee.NPCAnimationComponent;
-import com.music.musee.NPCComponent;
-import com.music.musee.OrbitalMagnetComponent;
-import com.music.musee.PatrolComponent;
-import com.music.musee.PhysicsComponent;
-import com.music.musee.PlaySingleSoundComponent;
-import com.music.musee.PlayerComponent;
-import com.music.musee.PopOutComponent;
 import com.music.musee.R;
-import com.music.musee.RenderComponent;
-import com.music.musee.ScrollerComponent;
-import com.music.musee.SelectDialogComponent;
-import com.music.musee.SimpleCollisionComponent;
-import com.music.musee.SimplePhysicsComponent;
-import com.music.musee.SleeperComponent;
-import com.music.musee.SolidSurfaceComponent;
-import com.music.musee.SoundSystem;
-import com.music.musee.SphereCollisionVolume;
-import com.music.musee.SpriteAnimation;
-import com.music.musee.SpriteComponent;
-import com.music.musee.TObjectPool;
-import com.music.musee.TheSourceComponent;
-import com.music.musee.TiledWorld;
-import com.music.musee.Vector2;
 import com.music.musee.AnimationComponent.PlayerAnimations;
-import com.music.musee.ChannelSystem.Channel;
 import com.music.musee.CollisionParameters.HitType;
 import com.music.musee.EnemyAnimationComponent.EnemyAnimations;
 import com.music.musee.GL.TextureLibrary;
+import com.music.musee.GameObject.ActionType;
+import com.music.musee.GameObject.Team;
 import com.music.musee.GenericAnimationComponent.Animation;
-import com.music.musee.InventoryComponent.UpdateRecord;
-import com.music.musee.LevelTree.Level;
-import com.music.musee.R.drawable;
-import com.music.musee.R.raw;
 import com.music.musee.constant.SortConstants;
-import com.music.musee.game.GameObject.ActionType;
-import com.music.musee.game.GameObject.Team;
 import com.music.musee.utils.Utils;
 
 /** A class for generating game objects at runtime.
@@ -137,15 +70,15 @@ public class GameObjectFactory extends BaseObject {
         DIARY (3),
         
         // Characters
-//        WANDA (10),
-//        KYLE (11),
-//        KYLE_DEAD (12),
-//        ANDOU_DEAD (13),
-//        KABOCHA (26),
-//        ROKUDOU_TERMINAL (27),
-//        KABOCHA_TERMINAL (28),
-//        EVIL_KABOCHA (29),
-//        ROKUDOU (30),
+        WANDA (10),
+        KYLE (11),
+        KYLE_DEAD (12),
+        ANDOU_DEAD (13),
+        KABOCHA (26),
+        ROKUDOU_TERMINAL (27),
+        KABOCHA_TERMINAL (28),
+        EVIL_KABOCHA (29),
+        ROKUDOU (30),
         
         // AI
         BROBOT (16),
@@ -364,7 +297,7 @@ public class GameObjectFactory extends BaseObject {
         return component;
     }
     
-    public void releaseComponent(GameComponent component) {
+    protected void releaseComponent(GameComponent component) {
         GameComponentPool pool = getComponentPool(component.getClass());
         assert pool != null;
         if (pool != null) {
@@ -469,33 +402,33 @@ public class GameObjectFactory extends BaseObject {
             case DIARY:
                 newObject = spawnDiary(x, y);
                 break;
-//            case WANDA:
-//                newObject = spawnEnemyWanda(x, y, true);
-//                break;
-//            case KYLE:
-//                newObject = spawnEnemyKyle(x, y, true);
-//                break;
-//            case KYLE_DEAD:
-//                newObject = spawnEnemyKyleDead(x, y);
-//                break;
-//            case ANDOU_DEAD:
-//                newObject = spawnEnemyAndouDead(x, y);
-//                break;
-//            case KABOCHA:
-//                newObject = spawnEnemyKabocha(x, y, true);
-//                break;
-//            case ROKUDOU_TERMINAL:
-//                newObject = spawnRokudouTerminal(x, y);
-//                break;
-//            case KABOCHA_TERMINAL:
-//                newObject = spawnKabochaTerminal(x, y);
-//                break;
-//            case EVIL_KABOCHA:
-//                newObject = spawnEnemyEvilKabocha(x, y, true);
-//                break;
-//            case ROKUDOU:
-//                newObject = spawnEnemyRokudou(x, y, true);
-//                break;
+            case WANDA:
+                newObject = spawnEnemyWanda(x, y, true);
+                break;
+            case KYLE:
+                newObject = spawnEnemyKyle(x, y, true);
+                break;
+            case KYLE_DEAD:
+                newObject = spawnEnemyKyleDead(x, y);
+                break;
+            case ANDOU_DEAD:
+                newObject = spawnEnemyAndouDead(x, y);
+                break;
+            case KABOCHA:
+                newObject = spawnEnemyKabocha(x, y, true);
+                break;
+            case ROKUDOU_TERMINAL:
+                newObject = spawnRokudouTerminal(x, y);
+                break;
+            case KABOCHA_TERMINAL:
+                newObject = spawnKabochaTerminal(x, y);
+                break;
+            case EVIL_KABOCHA:
+                newObject = spawnEnemyEvilKabocha(x, y, true);
+                break;
+            case ROKUDOU:
+                newObject = spawnEnemyRokudou(x, y, true);
+                break;
             case BROBOT:
                 newObject = spawnEnemyBrobot(x, y, horzFlip);
                 break;
@@ -2693,1221 +2626,1221 @@ public class GameObjectFactory extends BaseObject {
                 
         return object;
     }
-//    
-//    public GameObject spawnEnemyWanda(float positionX, float positionY, boolean flipHorizontal) {
-//        TextureLibrary textureLibrary = sSystemRegistry.shortTermTextureLibrary;
-//        
-//
-//        // Make sure related textures are loaded.
-//        textureLibrary.allocateTexture(R.drawable.energy_ball01);
-//        textureLibrary.allocateTexture(R.drawable.energy_ball02);
-//        textureLibrary.allocateTexture(R.drawable.energy_ball03);
-//        textureLibrary.allocateTexture(R.drawable.energy_ball04);
-//        
-//        GameObject object = mGameObjectPool.allocate();
-//        object.getPosition().set(positionX, positionY);
-//        object.activationRadius = mAlwaysActive;
-//        object.width = 64;
-//        object.height = 128;
-//        
-//        FixedSizeArray<BaseObject> staticData = getStaticData(GameObjectType.WANDA);
-//        if (staticData == null) {
-//            final int staticObjectCount = 9;
-//            staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
-//            
-//            GameComponent gravity = allocateComponent(GravityComponent.class);
-//            GameComponent movement = allocateComponent(MovementComponent.class);
-//            
-//            SimplePhysicsComponent physics = (SimplePhysicsComponent)allocateComponent(SimplePhysicsComponent.class);
-//            physics.setBounciness(0.0f);
-//
-//            
-//            
-//            FixedSizeArray<CollisionVolume> basicVulnerabilityVolume = 
-//                new FixedSizeArray<CollisionVolume>(1);
-//            basicVulnerabilityVolume.add(new AABoxCollisionVolume(20, 5, 26, 80, HitType.COLLECT));
-//                    
-//            SpriteAnimation idle = new SpriteAnimation(NPCAnimationComponent.IDLE, 1);
-//            idle.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_stand), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
-//            
-//            
-//            
-//            AnimationFrame walkFrame1 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_walk01), 
-//                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
-//            AnimationFrame walkFrame2 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_walk02), 
-//                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
-//            AnimationFrame walkFrame3 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_walk03), 
-//                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
-//            AnimationFrame walkFrame4 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_walk04), 
-//                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
-//            AnimationFrame walkFrame5 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_walk05), 
-//                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
-//            SpriteAnimation walk = new SpriteAnimation(NPCAnimationComponent.WALK, 8);
-//            walk.addFrame(walkFrame1);
-//            walk.addFrame(walkFrame2);
-//            walk.addFrame(walkFrame3);
-//            walk.addFrame(walkFrame4);
-//            walk.addFrame(walkFrame5);
-//            walk.addFrame(walkFrame4);
-//            walk.addFrame(walkFrame3);
-//            walk.addFrame(walkFrame2);
-//            walk.setLoop(true);
-//            
-//            
-//            AnimationFrame runFrame4 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_run04), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
-//            
-//            SpriteAnimation run = new SpriteAnimation(NPCAnimationComponent.RUN, 9);
-//            run.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_run01), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
-//            run.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_run02), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
-//            run.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_run03), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
-//            run.addFrame(runFrame4);
-//            run.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_run05), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
-//            run.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_run06), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
-//            run.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_run07), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
-//            run.addFrame(runFrame4);
-//            run.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_run08), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
-//            run.setLoop(true);
-//            
-//            SpriteAnimation jumpStart = new SpriteAnimation(NPCAnimationComponent.JUMP_START, 4);
-//            AnimationFrame jump1 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_jump01), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
-//            AnimationFrame jump2 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_jump01), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
-//            jumpStart.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_run04), 
-//                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume));
-//            jumpStart.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_crouch), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
-//            jumpStart.addFrame(jump1);
-//            jumpStart.addFrame(jump2);
-//            
-//            SpriteAnimation jumpAir = new SpriteAnimation(NPCAnimationComponent.JUMP_AIR, 2);
-//            jumpAir.addFrame(jump1);
-//            jumpAir.addFrame(jump2);
-//            jumpAir.setLoop(true);
-//            
-//            SpriteAnimation attack = new SpriteAnimation(NPCAnimationComponent.SHOOT, 11);
-//            attack.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_shoot01), 
-//                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume));
-//            attack.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_shoot02), 
-//                    Utils.framesToTime(24, 8), null, basicVulnerabilityVolume));
-//            attack.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_shoot03), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
-//            attack.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_shoot04), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
-//            attack.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_shoot05), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
-//            attack.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_shoot06), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
-//            attack.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_shoot07), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
-//            attack.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_shoot08), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
-//            attack.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_shoot09), 
-//                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume));
-//            attack.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_shoot02), 
-//                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume));
-//            attack.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_shoot01), 
-//                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume));
-//            
-//            staticData.add(gravity);
-//            staticData.add(movement);
-//            staticData.add(physics);
-//            staticData.add(idle);
-//            staticData.add(walk);
-//            staticData.add(run);
-//            staticData.add(jumpStart);
-//            staticData.add(jumpAir);
-//            staticData.add(attack);
-//            
-//            setStaticData(GameObjectType.WANDA, staticData);
-//        }
-//        
-//        RenderComponent render = (RenderComponent)allocateComponent(RenderComponent.class);
-//        render.setPriority(SortConstants.NPC);
-//        
-//        BackgroundCollisionComponent bgcollision = (BackgroundCollisionComponent)allocateComponent(BackgroundCollisionComponent.class);
-//        bgcollision.setSize(32, 82);
-//        bgcollision.setOffset(20, 5);
-//        
-//        SpriteComponent sprite = (SpriteComponent)allocateComponent(SpriteComponent.class);
-//        sprite.setSize((int)object.width, (int)object.height);
-//        sprite.setRenderComponent(render);
-//        
-//        NPCAnimationComponent animation = (NPCAnimationComponent)allocateComponent(NPCAnimationComponent.class);
-//        animation.setSprite(sprite);
-//        
-//        NPCComponent patrol = (NPCComponent)allocateComponent(NPCComponent.class);
-//      
-//        DynamicCollisionComponent collision = (DynamicCollisionComponent)allocateComponent(DynamicCollisionComponent.class);
-//        sprite.setCollisionComponent(collision);
-//        
-//        HitReactionComponent hitReact = (HitReactionComponent)allocateComponent(HitReactionComponent.class);
-//        collision.setHitReactionComponent(hitReact);
-//        
-//        patrol.setHitReactionComponent(hitReact);
-//        
-//        SoundSystem sound = sSystemRegistry.soundSystem;
-//        
-//        LaunchProjectileComponent gun 
-//            = (LaunchProjectileComponent)allocateComponent(LaunchProjectileComponent.class);
-//        gun.setShotsPerSet(1);
-//        gun.setSetsPerActivation(1); 
-//        gun.setDelayBeforeFirstSet(Utils.framesToTime(24, 11));
-//        gun.setObjectTypeToSpawn(GameObjectType.WANDA_SHOT);
-//        gun.setOffsetX(45);
-//        gun.setOffsetY(42);
-//        gun.setRequiredAction(GameObject.ActionType.ATTACK);
-//        gun.setVelocityX(300.0f);
-//        gun.setShootSound(sound.load(R.raw.sound_poing));
-//        
-//        object.team = Team.ENEMY;
-//        object.life = 1;
-//        
-//        if (flipHorizontal) {
-//            object.facingDirection.x = -1.0f;
-//        }
-//             
-//        object.add(gun);
-//        object.add(render);
-//        object.add(sprite);
-//        object.add(bgcollision);
-//        object.add(animation);
-//        object.add(patrol);
-//        object.add(collision);
-//        object.add(hitReact);
-//        
-//        addStaticData(GameObjectType.WANDA, object, sprite);
-//        
-//        
-//        sprite.playAnimation(0);
-//
-//        return object;
-//    }
-//    
-//    
-//    public GameObject spawnEnemyKyle(float positionX, float positionY, boolean flipHorizontal) {
-//        TextureLibrary textureLibrary = sSystemRegistry.shortTermTextureLibrary;
-//        
-//
-//        
-//        GameObject object = mGameObjectPool.allocate();
-//        object.getPosition().set(positionX, positionY);
-//        object.activationRadius = mAlwaysActive;
-//        object.width = 64;
-//        object.height = 128;
-//        
-//        FixedSizeArray<BaseObject> staticData = getStaticData(GameObjectType.KYLE);
-//        if (staticData == null) {
-//            final int staticObjectCount = 9;
-//            staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
-//            
-//            GameComponent gravity = allocateComponent(GravityComponent.class);
-//            GameComponent movement = allocateComponent(MovementComponent.class);
-//            
-//            SimplePhysicsComponent physics = (SimplePhysicsComponent)allocateComponent(SimplePhysicsComponent.class);
-//            physics.setBounciness(0.0f);
-//            
-//            FixedSizeArray<CollisionVolume> basicVulnerabilityVolume = 
-//                new FixedSizeArray<CollisionVolume>(1);
-//            basicVulnerabilityVolume.add(new AABoxCollisionVolume(20, 5, 26, 80, HitType.COLLECT));
-//                    
-//            SpriteAnimation idle = new SpriteAnimation(NPCAnimationComponent.IDLE, 1);
-//            idle.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_stand), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
-//
-//            AnimationFrame walkFrame1 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_walk01), 
-//                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
-//            AnimationFrame walkFrame2 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_walk02), 
-//                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
-//            AnimationFrame walkFrame3 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_walk03), 
-//                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
-//            AnimationFrame walkFrame4 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_walk04), 
-//                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
-//            AnimationFrame walkFrame5 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_walk05), 
-//                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
-//            AnimationFrame walkFrame6 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_walk06), 
-//                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
-//            AnimationFrame walkFrame7 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_walk07), 
-//                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
-//            SpriteAnimation walk = new SpriteAnimation(NPCAnimationComponent.WALK, 12);
-//            walk.addFrame(walkFrame1);
-//            walk.addFrame(walkFrame2);
-//            walk.addFrame(walkFrame3);
-//            walk.addFrame(walkFrame4);
-//            walk.addFrame(walkFrame3);
-//            walk.addFrame(walkFrame2);
-//            walk.addFrame(walkFrame1);
-//            walk.addFrame(walkFrame5);
-//            walk.addFrame(walkFrame6);
-//            walk.addFrame(walkFrame7);
-//            walk.addFrame(walkFrame6);
-//            walk.addFrame(walkFrame5);
-//            
-//            walk.setLoop(true);
-//            
-//            AnimationFrame crouch1 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_crouch01), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
-//            AnimationFrame crouch2 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_crouch02), 
-//                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
-//            
-//            SpriteAnimation runStart = new SpriteAnimation(NPCAnimationComponent.RUN_START, 2);
-//            runStart.addFrame(crouch1);
-//            runStart.addFrame(crouch2);
-//            
-//            FixedSizeArray<CollisionVolume> attackVolume = 
-//                new FixedSizeArray<CollisionVolume>(2);
-//            attackVolume.add(new AABoxCollisionVolume(32, 32, 50, 32, HitType.HIT));
-//            attackVolume.add(new AABoxCollisionVolume(32, 32, 50, 32, HitType.COLLECT));
-//            
-//            SpriteAnimation run = new SpriteAnimation(NPCAnimationComponent.RUN, 2);
-//            run.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_dash01), 
-//                    Utils.framesToTime(24, 1), attackVolume, basicVulnerabilityVolume));
-//            run.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_dash02), 
-//                    Utils.framesToTime(24, 1), attackVolume, basicVulnerabilityVolume));
-//            run.setLoop(true);
-//            
-//            SpriteAnimation jumpStart = new SpriteAnimation(NPCAnimationComponent.JUMP_START, 2);
-//            jumpStart.addFrame(crouch1);
-//            jumpStart.addFrame(crouch2);
-//            
-//            SpriteAnimation jumpAir = new SpriteAnimation(NPCAnimationComponent.JUMP_AIR, 2);
-//            AnimationFrame jump1 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_jump01), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
-//            AnimationFrame jump2 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_jump01), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
-//            jumpAir.addFrame(jump1);
-//            jumpAir.addFrame(jump2);
-//            jumpAir.setLoop(true);
-//            
-//            
-//            
-//            staticData.add(gravity);
-//            staticData.add(movement);
-//            staticData.add(physics);
-//            staticData.add(idle);
-//            staticData.add(walk);
-//            staticData.add(runStart);
-//            staticData.add(run);
-//            staticData.add(jumpStart);
-//            staticData.add(jumpAir);
-//            
-//            setStaticData(GameObjectType.KYLE, staticData);
-//        }
-//        
-//        RenderComponent render = (RenderComponent)allocateComponent(RenderComponent.class);
-//        render.setPriority(SortConstants.NPC);
-//
-//        BackgroundCollisionComponent bgcollision = (BackgroundCollisionComponent)allocateComponent(BackgroundCollisionComponent.class);
-//        bgcollision.setSize(32, 90);
-//        bgcollision.setOffset(20, 5); 
-//        
-//        SpriteComponent sprite = (SpriteComponent)allocateComponent(SpriteComponent.class);
-//        sprite.setSize((int)object.width, (int)object.height);
-//        sprite.setRenderComponent(render);
-//        
-//        NPCAnimationComponent animation = (NPCAnimationComponent)allocateComponent(NPCAnimationComponent.class);
-//        animation.setSprite(sprite);
-//        animation.setStopAtWalls(false); // Kyle can run through walls
-//        
-//        NPCComponent patrol = (NPCComponent)allocateComponent(NPCComponent.class);
-//        patrol.setSpeeds(350.0f, 50.0f, 400.0f, -10.0f, 400.0f);
-//        patrol.setGameEvent(GameFlowEvent.EVENT_SHOW_ANIMATION, AnimationPlayerActivity.KYLE_DEATH, false);
-//
-//        DynamicCollisionComponent collision = (DynamicCollisionComponent)allocateComponent(DynamicCollisionComponent.class);
-//        sprite.setCollisionComponent(collision);
-//        
-//        HitReactionComponent hitReact = (HitReactionComponent)allocateComponent(HitReactionComponent.class);
-//        collision.setHitReactionComponent(hitReact);
-//        
-//        patrol.setHitReactionComponent(hitReact); 
-//        
-//        MotionBlurComponent motionBlur = (MotionBlurComponent)allocateComponent(MotionBlurComponent.class);
-//        motionBlur.setTarget(render);
-//        
-//        LauncherComponent launcher = (LauncherComponent)allocateComponent(LauncherComponent.class);
-//        launcher.setup((float)(Math.PI * 0.45f), 1000.0f, 0.0f, 0.0f, false);
-//        launcher.setLaunchEffect(GameObjectType.FLASH, 70.0f, 50.0f);
-//        hitReact.setLauncherComponent(launcher, HitType.HIT);
-//        
-//        object.team = Team.NONE;
-//        object.life = 1;
-//
-//        if (flipHorizontal) {
-//            object.facingDirection.x = -1.0f;
-//        }
-//                
-//        object.add(render);
-//        object.add(sprite);
-//        object.add(bgcollision);
-//        object.add(animation);
-//        object.add(patrol);
-//        object.add(collision);
-//        object.add(hitReact);
-//        object.add(motionBlur);
-//        object.add(launcher);
-//        
-//        addStaticData(GameObjectType.KYLE, object, sprite);
-//        
-//        
-//        sprite.playAnimation(0);
-//
-//        return object;
-//    }
-//    
-//    public GameObject spawnEnemyKyleDead(float positionX, float positionY) {
-//        TextureLibrary textureLibrary = sSystemRegistry.shortTermTextureLibrary;
-//        
-//
-//        GameObject object = mGameObjectPool.allocate();
-//        object.getPosition().set(positionX, positionY);
-//        object.activationRadius = mTightActivationRadius;
-//        object.width = 128;
-//        object.height = 32;
-//        
-//        FixedSizeArray<BaseObject> staticData = getStaticData(GameObjectType.KYLE_DEAD);
-//        if (staticData == null) {
-//            final int staticObjectCount = 1;
-//            staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
-//                  
-//            FixedSizeArray<CollisionVolume> basicVulnerabilityVolume = 
-//                new FixedSizeArray<CollisionVolume>(1);
-//            basicVulnerabilityVolume.add(new AABoxCollisionVolume(32, 5, 64, 32, HitType.COLLECT));
-//            
-//            SpriteAnimation idle = new SpriteAnimation(0, 1);
-//            AnimationFrame frame1 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.enemy_kyle_dead), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
-//            
-//            idle.addFrame(frame1);
-//           
-//            idle.setLoop(true);
-//            
-//            staticData.add(idle);
-//            
-//            setStaticData(GameObjectType.KYLE_DEAD, staticData);
-//        }
-//        
-//        RenderComponent render = (RenderComponent)allocateComponent(RenderComponent.class);
-//        render.setPriority(SortConstants.GENERAL_OBJECT);
-//
-//        SpriteComponent sprite = (SpriteComponent)allocateComponent(SpriteComponent.class);
-//        sprite.setSize((int)object.width, (int)object.height);
-//        sprite.setRenderComponent(render);
-//
-//        DynamicCollisionComponent dynamicCollision = (DynamicCollisionComponent)allocateComponent(DynamicCollisionComponent.class);
-//        sprite.setCollisionComponent(dynamicCollision);
-//        
-//        HitReactionComponent hitReact = (HitReactionComponent)allocateComponent(HitReactionComponent.class);
-//        dynamicCollision.setHitReactionComponent(hitReact);
-//        hitReact.setSpawnGameEventOnHit(HitType.COLLECT, GameFlowEvent.EVENT_SHOW_DIALOG_CHARACTER2, 0);
-//        
-//        SelectDialogComponent dialogSelect = (SelectDialogComponent)allocateComponent(SelectDialogComponent.class);
-//        dialogSelect.setHitReact(hitReact);
-//        
-//        // Since this object doesn't have gravity or background collision, adjust down to simulate the position
-//        // at which a bounding volume would rest.
-//        
-//        object.getPosition().y -= 5.0f;
-//        
-//        object.add(dialogSelect);
-//        object.add(render);
-//        object.add(sprite);
-//        object.add(dynamicCollision);
-//        object.add(hitReact);
-//        
-//        addStaticData(GameObjectType.KYLE_DEAD, object, sprite);
-//        sprite.playAnimation(0);
-//
-//        return object;
-//    }
-//    
-//    public GameObject spawnEnemyAndouDead(float positionX, float positionY) {
-//        TextureLibrary textureLibrary = sSystemRegistry.shortTermTextureLibrary;
-//        
-//
-//        GameObject object = mGameObjectPool.allocate();
-//        object.getPosition().set(positionX, positionY);
-//        object.activationRadius = mTightActivationRadius;
-//        object.width = 64;
-//        object.height = 64;
-//        
-//        FixedSizeArray<BaseObject> staticData = getStaticData(GameObjectType.ANDOU_DEAD);
-//        if (staticData == null) {
-//            final int staticObjectCount = 1;
-//            staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
-//                  
-//            SpriteAnimation idle = new SpriteAnimation(0, 1);
-//            AnimationFrame frame1 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_explode12), 
-//                    Utils.framesToTime(24, 1), null, null);
-//            
-//            idle.addFrame(frame1);
-//           
-//            idle.setLoop(true);
-//            
-//            staticData.add(idle);
-//            
-//            setStaticData(GameObjectType.ANDOU_DEAD, staticData);
-//        }
-//        
-//        RenderComponent render = (RenderComponent)allocateComponent(RenderComponent.class);
-//        render.setPriority(SortConstants.GENERAL_OBJECT);
-//
-//        SpriteComponent sprite = (SpriteComponent)allocateComponent(SpriteComponent.class);
-//        sprite.setSize((int)object.width, (int)object.height);
-//        sprite.setRenderComponent(render);
-//
-//        LaunchProjectileComponent smokeGun 
-//	        = (LaunchProjectileComponent)allocateComponent(LaunchProjectileComponent.class);
-//	    smokeGun.setDelayBetweenShots(0.25f);
-//	    smokeGun.setObjectTypeToSpawn(GameObjectType.SMOKE_BIG);
-//	    smokeGun.setOffsetX(32);
-//	    smokeGun.setOffsetY(15);
-//	    smokeGun.setVelocityX(-150.0f);
-//	    smokeGun.setVelocityY(100.0f);
-//	    smokeGun.setThetaError(0.1f);
-//	    
-//	    LaunchProjectileComponent smokeGun2 
-//	        = (LaunchProjectileComponent)allocateComponent(LaunchProjectileComponent.class);
-//	    smokeGun2.setDelayBetweenShots(0.35f);
-//	    smokeGun2.setObjectTypeToSpawn(GameObjectType.SMOKE_SMALL);
-//	    smokeGun2.setOffsetX(16);
-//	    smokeGun2.setOffsetY(15);
-//	    smokeGun2.setVelocityX(-150.0f);
-//	    smokeGun2.setVelocityY(150.0f);
-//	    smokeGun2.setThetaError(0.1f); 
-//             
-//        object.add(render);
-//        object.add(sprite);
-//        object.add(smokeGun);
-//        object.add(smokeGun2);
-//        
-//        object.facingDirection.x = -1.0f;
-//        
-//        addStaticData(GameObjectType.ANDOU_DEAD, object, sprite);
-//        sprite.playAnimation(0);
-//
-//        return object;
-//    }
-//    
-//    public GameObject spawnEnemyKabocha(float positionX, float positionY, boolean flipHorizontal) {
-//        TextureLibrary textureLibrary = sSystemRegistry.shortTermTextureLibrary;
-//        
-//
-//        GameObject object = mGameObjectPool.allocate();
-//        object.getPosition().set(positionX, positionY);
-//        object.activationRadius = mAlwaysActive;
-//        object.width = 64;
-//        object.height = 128;
-//        
-//        FixedSizeArray<BaseObject> staticData = getStaticData(GameObjectType.KABOCHA);
-//        if (staticData == null) {
-//            final int staticObjectCount = 5;
-//            staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
-//            
-//            GameComponent gravity = allocateComponent(GravityComponent.class);
-//            GameComponent movement = allocateComponent(MovementComponent.class);
-//            
-//            SimplePhysicsComponent physics = (SimplePhysicsComponent)allocateComponent(SimplePhysicsComponent.class);
-//            physics.setBounciness(0.0f);
-//            
-//            FixedSizeArray<CollisionVolume> basicVulnerabilityVolume = 
-//                new FixedSizeArray<CollisionVolume>(1);
-//            basicVulnerabilityVolume.add(new AABoxCollisionVolume(20, 5, 26, 80, HitType.COLLECT));
-//                    
-//            SpriteAnimation idle = new SpriteAnimation(NPCAnimationComponent.IDLE, 1);
-//            idle.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_stand), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
-//
-//            AnimationFrame walkFrame1 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_walk01), 
-//                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
-//            AnimationFrame walkFrame2 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_walk02), 
-//                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
-//            AnimationFrame walkFrame3 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_walk03), 
-//                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
-//            AnimationFrame walkFrame4 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_walk04), 
-//                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
-//            AnimationFrame walkFrame5 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_walk05), 
-//                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
-//            AnimationFrame walkFrame6 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_walk06), 
-//                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
-//            
-//            SpriteAnimation walk = new SpriteAnimation(NPCAnimationComponent.WALK, 6);
-//            walk.addFrame(walkFrame1);
-//            walk.addFrame(walkFrame2);
-//            walk.addFrame(walkFrame3);
-//            walk.addFrame(walkFrame4);
-//            walk.addFrame(walkFrame5);
-//            walk.addFrame(walkFrame6);
-//  
-//            
-//            walk.setLoop(true);
-//            
-//            staticData.add(gravity);
-//            staticData.add(movement);
-//            staticData.add(physics);
-//            staticData.add(idle);
-//            staticData.add(walk);
-//            
-//            setStaticData(GameObjectType.KABOCHA, staticData);
-//        }
-//        
-//        RenderComponent render = (RenderComponent)allocateComponent(RenderComponent.class);
-//        render.setPriority(SortConstants.NPC);
-//
-//        BackgroundCollisionComponent bgcollision = (BackgroundCollisionComponent)allocateComponent(BackgroundCollisionComponent.class);
-//        bgcollision.setSize(38, 82);
-//        bgcollision.setOffset(16, 5);
-//        
-//        SpriteComponent sprite = (SpriteComponent)allocateComponent(SpriteComponent.class);
-//        sprite.setSize((int)object.width, (int)object.height);
-//        sprite.setRenderComponent(render);
-//        
-//        NPCAnimationComponent animation = (NPCAnimationComponent)allocateComponent(NPCAnimationComponent.class);
-//        animation.setSprite(sprite);
-//        
-//        NPCComponent patrol = (NPCComponent)allocateComponent(NPCComponent.class);
-//        
-//        DynamicCollisionComponent collision = (DynamicCollisionComponent)allocateComponent(DynamicCollisionComponent.class);
-//        sprite.setCollisionComponent(collision);
-//        
-//        HitReactionComponent hitReact = (HitReactionComponent)allocateComponent(HitReactionComponent.class);
-//        collision.setHitReactionComponent(hitReact);
-//        
-//        patrol.setHitReactionComponent(hitReact);
-//        
-//        object.team = Team.ENEMY;
-//        object.life = 1;
-//
-//        if (flipHorizontal) {
-//            object.facingDirection.x = -1.0f;
-//        }
-//                
-//        object.add(render);
-//        object.add(sprite);
-//        object.add(bgcollision);
-//        object.add(animation);
-//        object.add(patrol);
-//        object.add(collision);
-//        object.add(hitReact);
-//        
-//        addStaticData(GameObjectType.KABOCHA, object, sprite);
-//        
-//        
-//        sprite.playAnimation(0);
-//
-//        return object;
-//    }
-//    
-//    public GameObject spawnRokudouTerminal(float positionX, float positionY) {
-//        TextureLibrary textureLibrary = sSystemRegistry.shortTermTextureLibrary;
-//        
-//
-//        GameObject object = mGameObjectPool.allocate();
-//        object.getPosition().set(positionX, positionY);
-//        object.activationRadius = mTightActivationRadius;
-//        object.width = 64;
-//        object.height = 64;
-//        
-//        FixedSizeArray<BaseObject> staticData = getStaticData(GameObjectType.ROKUDOU_TERMINAL);
-//        if (staticData == null) {
-//            final int staticObjectCount = 1;
-//            staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
-//            
-//            FixedSizeArray<CollisionVolume> basicVulnerabilityVolume = new FixedSizeArray<CollisionVolume>(1);
-//            basicVulnerabilityVolume.add(new AABoxCollisionVolume(0, 0, 64, 64));
-//            basicVulnerabilityVolume.get(0).setHitType(HitType.COLLECT);
-//            
-//           
-//            AnimationFrame frame1 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal01), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
-//            AnimationFrame frame2 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal02), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
-//            AnimationFrame frame3 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal03), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
-//            AnimationFrame frame4 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal01), 
-//                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
-//            AnimationFrame frame5 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal02), 
-//                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
-//            AnimationFrame frame6 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal01), 
-//                    1.0f, null, basicVulnerabilityVolume);
-//            
-//            SpriteAnimation idle = new SpriteAnimation(0, 12);
-//            idle.addFrame(frame1);
-//            idle.addFrame(frame5);
-//            idle.addFrame(frame4);
-//            idle.addFrame(frame3);
-//            idle.addFrame(frame2);
-//            idle.addFrame(frame6);
-//            idle.addFrame(frame6);
-//            idle.addFrame(frame3);
-//            idle.addFrame(frame2);
-//            idle.addFrame(frame1);
-//            idle.addFrame(frame2);
-//            idle.addFrame(frame6);
-//
-//            idle.setLoop(true);
-//            
-//           
-//            staticData.add(idle);
-//            
-//            setStaticData(GameObjectType.ROKUDOU_TERMINAL, staticData);
-//        }
-//        
-//        RenderComponent render = (RenderComponent)allocateComponent(RenderComponent.class);
-//        render.setPriority(SortConstants.GENERAL_OBJECT);
-//
-//        SpriteComponent sprite = (SpriteComponent)allocateComponent(SpriteComponent.class);
-//        sprite.setSize((int)object.width, (int)object.height);
-//        sprite.setRenderComponent(render);
-//
-//        DynamicCollisionComponent dynamicCollision = (DynamicCollisionComponent)allocateComponent(DynamicCollisionComponent.class);
-//        sprite.setCollisionComponent(dynamicCollision);
-//        
-//        HitReactionComponent hitReact = (HitReactionComponent)allocateComponent(HitReactionComponent.class);
-//        hitReact.setSpawnGameEventOnHit(HitType.COLLECT, GameFlowEvent.EVENT_SHOW_DIALOG_CHARACTER2, 0);
-//
-//        SelectDialogComponent dialogSelect = (SelectDialogComponent)allocateComponent(SelectDialogComponent.class);
-//        dialogSelect.setHitReact(hitReact);
-//        
-//        dynamicCollision.setHitReactionComponent(hitReact);
-//        
-//        object.add(dialogSelect);
-//        object.add(render);
-//        object.add(sprite);
-//        object.add(dynamicCollision);
-//        object.add(hitReact);
-//        
-//        addStaticData(GameObjectType.ROKUDOU_TERMINAL, object, sprite);
-//        sprite.playAnimation(0);
-//
-//        return object;
-//    }
-//    
-//    
-//    public GameObject spawnKabochaTerminal(float positionX, float positionY) {
-//        TextureLibrary textureLibrary = sSystemRegistry.shortTermTextureLibrary;
-//        
-//
-//        GameObject object = mGameObjectPool.allocate();
-//        object.getPosition().set(positionX, positionY);
-//        object.activationRadius = mTightActivationRadius;
-//        object.width = 64;
-//        object.height = 64;
-//        
-//        FixedSizeArray<BaseObject> staticData = getStaticData(GameObjectType.KABOCHA_TERMINAL);
-//        if (staticData == null) {
-//            final int staticObjectCount = 1;
-//            staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
-//            
-//            FixedSizeArray<CollisionVolume> basicVulnerabilityVolume = new FixedSizeArray<CollisionVolume>(1);
-//            basicVulnerabilityVolume.add(new AABoxCollisionVolume(0, 0, 64, 64));
-//            basicVulnerabilityVolume.get(0).setHitType(HitType.COLLECT);
-//            
-//           
-//            AnimationFrame frame1 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal_kabocha01), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
-//            AnimationFrame frame2 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal_kabocha02), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
-//            AnimationFrame frame3 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal_kabocha03), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
-//            AnimationFrame frame4 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal_kabocha01), 
-//                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
-//            AnimationFrame frame5 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal_kabocha02), 
-//                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
-//            AnimationFrame frame6 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal_kabocha01), 
-//                    1.0f, null, basicVulnerabilityVolume);
-//            
-//            SpriteAnimation idle = new SpriteAnimation(0, 12);
-//            idle.addFrame(frame1);
-//            idle.addFrame(frame5);
-//            idle.addFrame(frame4);
-//            idle.addFrame(frame3);
-//            idle.addFrame(frame2);
-//            idle.addFrame(frame6);
-//            idle.addFrame(frame6);
-//            idle.addFrame(frame3);
-//            idle.addFrame(frame2);
-//            idle.addFrame(frame1);
-//            idle.addFrame(frame2);
-//            idle.addFrame(frame6);
-//
-//            idle.setLoop(true);
-//            
-//           
-//            staticData.add(idle);
-//            
-//            setStaticData(GameObjectType.KABOCHA_TERMINAL, staticData);
-//        }
-//        
-//        RenderComponent render = (RenderComponent)allocateComponent(RenderComponent.class);
-//        render.setPriority(SortConstants.GENERAL_OBJECT);
-//
-//        SpriteComponent sprite = (SpriteComponent)allocateComponent(SpriteComponent.class);
-//        sprite.setSize((int)object.width, (int)object.height);
-//        sprite.setRenderComponent(render);
-//
-//        DynamicCollisionComponent dynamicCollision = (DynamicCollisionComponent)allocateComponent(DynamicCollisionComponent.class);
-//        sprite.setCollisionComponent(dynamicCollision);
-//        
-//        HitReactionComponent hitReact = (HitReactionComponent)allocateComponent(HitReactionComponent.class);
-//        hitReact.setSpawnGameEventOnHit(HitType.COLLECT, GameFlowEvent.EVENT_SHOW_DIALOG_CHARACTER2, 0);
-//
-//        SelectDialogComponent dialogSelect = (SelectDialogComponent)allocateComponent(SelectDialogComponent.class);
-//        dialogSelect.setHitReact(hitReact);
-//       
-//        dynamicCollision.setHitReactionComponent(hitReact);
-//        
-//        object.add(dialogSelect);
-//        object.add(render);
-//        object.add(sprite);
-//        object.add(dynamicCollision);
-//        object.add(hitReact);
-//        
-//        addStaticData(GameObjectType.KABOCHA_TERMINAL, object, sprite);
-//        sprite.playAnimation(0);
-//
-//        return object;
-//    }
-//    
-//    public GameObject spawnEnemyEvilKabocha(float positionX, float positionY, boolean flipHorizontal) {
-//        TextureLibrary textureLibrary = sSystemRegistry.shortTermTextureLibrary;
-//        
-//
-//        GameObject object = mGameObjectPool.allocate();
-//        object.getPosition().set(positionX, positionY);
-//        object.activationRadius = mNormalActivationRadius;
-//        object.width = 128;
-//        object.height = 128;
-//        
-//        FixedSizeArray<BaseObject> staticData = getStaticData(GameObjectType.EVIL_KABOCHA);
-//        if (staticData == null) {
-//            final int staticObjectCount = 8;
-//            staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
-//            
-//            GameComponent gravity = allocateComponent(GravityComponent.class);
-//            GameComponent movement = allocateComponent(MovementComponent.class);
-//            
-//            SimplePhysicsComponent physics = (SimplePhysicsComponent)allocateComponent(SimplePhysicsComponent.class);
-//            physics.setBounciness(0.0f);
-//            
-//            FixedSizeArray<CollisionVolume> basicVulnerabilityVolume = 
-//                new FixedSizeArray<CollisionVolume>(1);
-//            basicVulnerabilityVolume.add(new AABoxCollisionVolume(52, 5, 26, 80, HitType.HIT));
-//                    
-//            SpriteAnimation idle = new SpriteAnimation(NPCAnimationComponent.IDLE, 1);
-//            idle.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_stand), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
-//
-//            AnimationFrame walkFrame1 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_walk01), 
-//                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
-//            AnimationFrame walkFrame2 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_walk02), 
-//                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
-//            AnimationFrame walkFrame3 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_walk03), 
-//                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
-//            AnimationFrame walkFrame4 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_walk04), 
-//                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
-//            AnimationFrame walkFrame5 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_walk05), 
-//                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
-//            AnimationFrame walkFrame6 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_walk06), 
-//                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
-//            
-//            SpriteAnimation walk = new SpriteAnimation(NPCAnimationComponent.WALK, 6);
-//            walk.addFrame(walkFrame1);
-//            walk.addFrame(walkFrame2);
-//            walk.addFrame(walkFrame3);
-//            walk.addFrame(walkFrame4);
-//            walk.addFrame(walkFrame5);
-//            walk.addFrame(walkFrame6);
-//  
-//            walk.setLoop(true);
-//            
-//            
-//            SpriteAnimation surprised = new SpriteAnimation(NPCAnimationComponent.SURPRISED, 1);
-//            surprised.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_surprised), 
-//                    4.0f, null, null));
-//            
-//            
-//            SpriteAnimation hit = new SpriteAnimation(NPCAnimationComponent.TAKE_HIT, 2);
-//            hit.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_hit01), 
-//                    Utils.framesToTime(24, 1), null, null));
-//            hit.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_hit02), 
-//                    Utils.framesToTime(24, 10), null, null));
-//            
-//            SpriteAnimation die = new SpriteAnimation(NPCAnimationComponent.DEATH, 5);
-//            die.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_die01), 
-//                    Utils.framesToTime(24, 6), null, null));
-//            die.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_stand), 
-//                    Utils.framesToTime(24, 2), null, null));
-//            die.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_die02), 
-//                    Utils.framesToTime(24, 2), null, null));
-//            die.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_die03), 
-//                    Utils.framesToTime(24, 2), null, null));
-//            die.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_die04), 
-//                    Utils.framesToTime(24, 6), null, null));
-//            
-//            staticData.add(gravity);
-//            staticData.add(movement);
-//            staticData.add(physics);
-//            staticData.add(idle);
-//            staticData.add(walk);
-//            staticData.add(surprised);
-//            staticData.add(hit);
-//            staticData.add(die);
-//            
-//            setStaticData(GameObjectType.EVIL_KABOCHA, staticData);
-//        }
-//        
-//        RenderComponent render = (RenderComponent)allocateComponent(RenderComponent.class);
-//        render.setPriority(SortConstants.NPC);
-//
-//        BackgroundCollisionComponent bgcollision = (BackgroundCollisionComponent)allocateComponent(BackgroundCollisionComponent.class);
-//        bgcollision.setSize(38, 82);
-//        bgcollision.setOffset(45, 5);
-//        
-//        SpriteComponent sprite = (SpriteComponent)allocateComponent(SpriteComponent.class);
-//        sprite.setSize((int)object.width, (int)object.height);
-//        sprite.setRenderComponent(render);
-//        
-//        NPCAnimationComponent animation = (NPCAnimationComponent)allocateComponent(NPCAnimationComponent.class);
-//        animation.setSprite(sprite);
-//        
-//        ChannelSystem.Channel surpriseChannel = null;
-//        ChannelSystem channelSystem = BaseObject.sSystemRegistry.channelSystem;
-//        surpriseChannel = channelSystem.registerChannel(sSurprisedNPCChannel);
-//        animation.setChannel(surpriseChannel);
-//        animation.setChannelTrigger(NPCAnimationComponent.SURPRISED);
-//        
-//        NPCComponent patrol = (NPCComponent)allocateComponent(NPCComponent.class);
-//        patrol.setSpeeds(50.0f, 50.0f, 0.0f, -10.0f, 200.0f);
-//        patrol.setReactToHits(true);
-//        patrol.setGameEvent(GameFlowEvent.EVENT_SHOW_ANIMATION, AnimationPlayerActivity.ROKUDOU_ENDING, true);
-//
-//        DynamicCollisionComponent collision = (DynamicCollisionComponent)allocateComponent(DynamicCollisionComponent.class);
-//        sprite.setCollisionComponent(collision);
-//        
-//        HitReactionComponent hitReact = (HitReactionComponent)allocateComponent(HitReactionComponent.class);
-//        collision.setHitReactionComponent(hitReact);
-//        
-//        SoundSystem sound = sSystemRegistry.soundSystem;
-//        if (sound != null) {
-//        	hitReact.setTakeHitSound(HitType.HIT, sound.load(R.raw.sound_kabocha_hit));
-//        }
-//        
-//        patrol.setHitReactionComponent(hitReact);
-//        
-//        object.team = Team.ENEMY;
-//        object.life = 3;
-//        
-//        if (flipHorizontal) {
-//            object.facingDirection.x = -1.0f;
-//        }
-//                
-//        object.add(render);
-//        object.add(sprite);
-//        object.add(bgcollision);
-//        object.add(animation);
-//        object.add(patrol);
-//        object.add(collision);
-//        object.add(hitReact);
-//        
-//        addStaticData(GameObjectType.EVIL_KABOCHA, object, sprite);
-//        
-//        
-//        sprite.playAnimation(0);
-//
-//        return object;
-//    }
-//    
-//    public GameObject spawnEnemyRokudou(float positionX, float positionY, boolean flipHorizontal) {
-//    	TextureLibrary textureLibrary = sSystemRegistry.shortTermTextureLibrary;
-//
-//    	// Make sure related textures are loaded.
-//        textureLibrary.allocateTexture(R.drawable.energy_ball01);
-//        textureLibrary.allocateTexture(R.drawable.energy_ball02);
-//        textureLibrary.allocateTexture(R.drawable.energy_ball03);
-//        textureLibrary.allocateTexture(R.drawable.energy_ball04);
-//        
-//        textureLibrary.allocateTexture(R.drawable.effect_bullet01);
-//        textureLibrary.allocateTexture(R.drawable.effect_bullet02);
-//        
-//        
-//        GameObject object = mGameObjectPool.allocate();
-//        object.getPosition().set(positionX, positionY);
-//        object.activationRadius = mNormalActivationRadius;
-//        object.width = 128;
-//        object.height = 128;
-//        
-//        FixedSizeArray<BaseObject> staticData = getStaticData(GameObjectType.ROKUDOU);
-//        if (staticData == null) {
-//            final int staticObjectCount = 8;
-//            staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
-//            
-//            GameComponent movement = allocateComponent(MovementComponent.class);
-//            
-//            SimplePhysicsComponent physics = (SimplePhysicsComponent)allocateComponent(SimplePhysicsComponent.class);
-//            physics.setBounciness(0.0f);
-//            
-//            FixedSizeArray<CollisionVolume> basicVulnerabilityVolume = 
-//                new FixedSizeArray<CollisionVolume>(1);
-//            basicVulnerabilityVolume.add(new AABoxCollisionVolume(45, 23, 42, 75, HitType.HIT));
-//                    
-//            SpriteAnimation idle = new SpriteAnimation(NPCAnimationComponent.IDLE, 1);
-//            idle.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_stand), 
-//                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
-//            
-//            SpriteAnimation fly = new SpriteAnimation(NPCAnimationComponent.WALK, 2);
-//            fly.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_fly01), 
-//                    1.0f, null, basicVulnerabilityVolume));
-//            fly.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_fly02), 
-//                    1.0f, null, basicVulnerabilityVolume));
-//            fly.setLoop(true);
-//            
-//            SpriteAnimation shoot = new SpriteAnimation(NPCAnimationComponent.SHOOT, 2);
-//            shoot.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_shoot01), 
-//                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume));
-//            shoot.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_shoot02), 
-//                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume));
-//            shoot.setLoop(true);
-//            
-//            
-//            SpriteAnimation surprised = new SpriteAnimation(NPCAnimationComponent.SURPRISED, 1);
-//            surprised.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_surprise), 
-//                    4.0f, null, null));
-//            
-//            
-//            SpriteAnimation hit = new SpriteAnimation(NPCAnimationComponent.TAKE_HIT, 7);
-//            AnimationFrame hitFrame1 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_hit01), 
-//                    Utils.framesToTime(24, 2), null, null);
-//            AnimationFrame hitFrame2 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_hit02), 
-//                    Utils.framesToTime(24, 1), null, null);
-//            AnimationFrame hitFrame3 = new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_hit03), 
-//                    Utils.framesToTime(24, 1), null, null);
-//            
-//            hit.addFrame(hitFrame1);
-//            hit.addFrame(hitFrame2);
-//            hit.addFrame(hitFrame3);
-//            hit.addFrame(hitFrame2);
-//            hit.addFrame(hitFrame3);
-//            hit.addFrame(hitFrame2);
-//            hit.addFrame(hitFrame3);
-//            
-//            SpriteAnimation die = new SpriteAnimation(NPCAnimationComponent.DEATH, 5);
-//            die.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_stand), 
-//                    Utils.framesToTime(24, 6), null, null));
-//            die.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_die01), 
-//                    Utils.framesToTime(24, 2), null, null));
-//            die.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_die02), 
-//                    Utils.framesToTime(24, 4), null, null));
-//            die.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_die03), 
-//                    Utils.framesToTime(24, 6), null, null));
-//            die.addFrame(new AnimationFrame(
-//                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_die04), 
-//                    Utils.framesToTime(24, 6), null, null));
-//            
-//            staticData.add(movement);
-//            staticData.add(physics);
-//            staticData.add(idle);
-//            staticData.add(fly);
-//            staticData.add(surprised);
-//            staticData.add(hit);
-//            staticData.add(die);
-//            staticData.add(shoot);
-//            
-//            setStaticData(GameObjectType.ROKUDOU, staticData);
-//        }
-//        
-//        RenderComponent render = (RenderComponent)allocateComponent(RenderComponent.class);
-//        render.setPriority(SortConstants.NPC);
-//
-//        BackgroundCollisionComponent bgcollision = (BackgroundCollisionComponent)allocateComponent(BackgroundCollisionComponent.class);
-//        bgcollision.setSize(45, 75);
-//        bgcollision.setOffset(45, 23);
-//        
-//        SpriteComponent sprite = (SpriteComponent)allocateComponent(SpriteComponent.class);
-//        sprite.setSize((int)object.width, (int)object.height);
-//        sprite.setRenderComponent(render);
-//        
-//       
-//        
-//        NPCAnimationComponent animation = (NPCAnimationComponent)allocateComponent(NPCAnimationComponent.class);
-//        animation.setSprite(sprite);
-//        animation.setFlying(true);
-//        
-//        ChannelSystem.Channel surpriseChannel = null;
-//        ChannelSystem channelSystem = BaseObject.sSystemRegistry.channelSystem;
-//        surpriseChannel = channelSystem.registerChannel(sSurprisedNPCChannel);
-//        animation.setChannel(surpriseChannel);
-//        animation.setChannelTrigger(NPCAnimationComponent.SURPRISED);
-//        
-//        NPCComponent patrol = (NPCComponent)allocateComponent(NPCComponent.class);
-//        patrol.setSpeeds(500.0f, 100.0f, 100.0f, -100.0f, 400.0f);
-//        patrol.setFlying(true);
-//        patrol.setReactToHits(true);
-//        patrol.setGameEvent(GameFlowEvent.EVENT_SHOW_ANIMATION, AnimationPlayerActivity.KABOCHA_ENDING, true);
-//        patrol.setPauseOnAttack(false);
-//        
-//        DynamicCollisionComponent collision = (DynamicCollisionComponent)allocateComponent(DynamicCollisionComponent.class);
-//        sprite.setCollisionComponent(collision);
-//        
-//        HitReactionComponent hitReact = (HitReactionComponent)allocateComponent(HitReactionComponent.class);
-//        collision.setHitReactionComponent(hitReact);
-//        
-//        SoundSystem sound = sSystemRegistry.soundSystem;
-//        if (sound != null) {
-//        	hitReact.setTakeHitSound(HitType.HIT, sound.load(R.raw.sound_rokudou_hit));
-//        }
-//        
-//        patrol.setHitReactionComponent(hitReact);
-//        
-//        ChangeComponentsComponent deathSwap = (ChangeComponentsComponent)allocateComponent(ChangeComponentsComponent.class);
-//        deathSwap.addSwapInComponent(allocateComponent(GravityComponent.class));
-//        deathSwap.setSwapAction(ActionType.DEATH);
-//                
-//        LaunchProjectileComponent gun 
-//	        = (LaunchProjectileComponent)allocateComponent(LaunchProjectileComponent.class);
-//	    gun.setShotsPerSet(1);
-//	    gun.setSetsPerActivation(-1); 
-//	    gun.setDelayBetweenSets(1.5f);
-//	    gun.setObjectTypeToSpawn(GameObjectType.ENERGY_BALL);
-//	    gun.setOffsetX(75);
-//	    gun.setOffsetY(42);
-//	    gun.setRequiredAction(GameObject.ActionType.ATTACK);
-//	    gun.setVelocityX(300.0f);
-//	    gun.setVelocityY(-300.0f);
-//        gun.setShootSound(sound.load(R.raw.sound_poing));
-//
-//	    
-//	    LaunchProjectileComponent gun2
-//        = (LaunchProjectileComponent)allocateComponent(LaunchProjectileComponent.class);
-//	    gun2.setShotsPerSet(5);
-//	    gun2.setDelayBetweenShots(0.1f);
-//	    gun2.setSetsPerActivation(-1); 
-//	    gun2.setDelayBetweenSets(2.5f);
-//	    gun2.setObjectTypeToSpawn(GameObjectType.TURRET_BULLET);
-//	    gun2.setOffsetX(75);
-//	    gun2.setOffsetY(42);
-//	    gun2.setRequiredAction(GameObject.ActionType.ATTACK);
-//	    gun2.setVelocityX(300.0f);
-//	    gun2.setVelocityY(-300.0f);
-//        gun.setShootSound(sound.load(R.raw.sound_gun));
-//
-//        
-//        object.team = Team.ENEMY;  
-//        object.life = 3;
-//        
-//        if (flipHorizontal) {
-//            object.facingDirection.x = -1.0f;
-//        }
-//        
-//        // HACK! Since there's no gravity and this is a big character, align him to the floor
-//        // manually.
-//        object.getPosition().y -= 23;
-//                
-//        object.add(render);
-//        object.add(sprite);
-//        object.add(bgcollision);
-//        object.add(animation);
-//        object.add(patrol);
-//        object.add(collision);
-//        object.add(hitReact);
-//        object.add(deathSwap);
-//        object.add(gun);
-//        object.add(gun2);
-//
-//        addStaticData(GameObjectType.ROKUDOU, object, sprite);
-//        
-//        
-//        sprite.playAnimation(0);
-//
-//        return object;
-//    }
-//    
+    
+    public GameObject spawnEnemyWanda(float positionX, float positionY, boolean flipHorizontal) {
+        TextureLibrary textureLibrary = sSystemRegistry.shortTermTextureLibrary;
+        
+
+        // Make sure related textures are loaded.
+        textureLibrary.allocateTexture(R.drawable.energy_ball01);
+        textureLibrary.allocateTexture(R.drawable.energy_ball02);
+        textureLibrary.allocateTexture(R.drawable.energy_ball03);
+        textureLibrary.allocateTexture(R.drawable.energy_ball04);
+        
+        GameObject object = mGameObjectPool.allocate();
+        object.getPosition().set(positionX, positionY);
+        object.activationRadius = mAlwaysActive;
+        object.width = 64;
+        object.height = 128;
+        
+        FixedSizeArray<BaseObject> staticData = getStaticData(GameObjectType.WANDA);
+        if (staticData == null) {
+            final int staticObjectCount = 9;
+            staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
+            
+            GameComponent gravity = allocateComponent(GravityComponent.class);
+            GameComponent movement = allocateComponent(MovementComponent.class);
+            
+            SimplePhysicsComponent physics = (SimplePhysicsComponent)allocateComponent(SimplePhysicsComponent.class);
+            physics.setBounciness(0.0f);
+
+            
+            
+            FixedSizeArray<CollisionVolume> basicVulnerabilityVolume = 
+                new FixedSizeArray<CollisionVolume>(1);
+            basicVulnerabilityVolume.add(new AABoxCollisionVolume(20, 5, 26, 80, HitType.COLLECT));
+                    
+            SpriteAnimation idle = new SpriteAnimation(NPCAnimationComponent.IDLE, 1);
+            idle.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_stand), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
+            
+            
+            
+            AnimationFrame walkFrame1 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_walk01), 
+                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
+            AnimationFrame walkFrame2 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_walk02), 
+                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
+            AnimationFrame walkFrame3 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_walk03), 
+                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
+            AnimationFrame walkFrame4 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_walk04), 
+                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
+            AnimationFrame walkFrame5 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_walk05), 
+                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
+            SpriteAnimation walk = new SpriteAnimation(NPCAnimationComponent.WALK, 8);
+            walk.addFrame(walkFrame1);
+            walk.addFrame(walkFrame2);
+            walk.addFrame(walkFrame3);
+            walk.addFrame(walkFrame4);
+            walk.addFrame(walkFrame5);
+            walk.addFrame(walkFrame4);
+            walk.addFrame(walkFrame3);
+            walk.addFrame(walkFrame2);
+            walk.setLoop(true);
+            
+            
+            AnimationFrame runFrame4 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_run04), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
+            
+            SpriteAnimation run = new SpriteAnimation(NPCAnimationComponent.RUN, 9);
+            run.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_run01), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
+            run.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_run02), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
+            run.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_run03), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
+            run.addFrame(runFrame4);
+            run.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_run05), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
+            run.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_run06), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
+            run.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_run07), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
+            run.addFrame(runFrame4);
+            run.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_run08), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
+            run.setLoop(true);
+            
+            SpriteAnimation jumpStart = new SpriteAnimation(NPCAnimationComponent.JUMP_START, 4);
+            AnimationFrame jump1 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_jump01), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
+            AnimationFrame jump2 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_jump01), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
+            jumpStart.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_run04), 
+                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume));
+            jumpStart.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_crouch), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
+            jumpStart.addFrame(jump1);
+            jumpStart.addFrame(jump2);
+            
+            SpriteAnimation jumpAir = new SpriteAnimation(NPCAnimationComponent.JUMP_AIR, 2);
+            jumpAir.addFrame(jump1);
+            jumpAir.addFrame(jump2);
+            jumpAir.setLoop(true);
+            
+            SpriteAnimation attack = new SpriteAnimation(NPCAnimationComponent.SHOOT, 11);
+            attack.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_shoot01), 
+                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume));
+            attack.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_shoot02), 
+                    Utils.framesToTime(24, 8), null, basicVulnerabilityVolume));
+            attack.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_shoot03), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
+            attack.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_shoot04), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
+            attack.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_shoot05), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
+            attack.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_shoot06), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
+            attack.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_shoot07), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
+            attack.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_shoot08), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
+            attack.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_shoot09), 
+                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume));
+            attack.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_shoot02), 
+                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume));
+            attack.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_wanda_shoot01), 
+                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume));
+            
+            staticData.add(gravity);
+            staticData.add(movement);
+            staticData.add(physics);
+            staticData.add(idle);
+            staticData.add(walk);
+            staticData.add(run);
+            staticData.add(jumpStart);
+            staticData.add(jumpAir);
+            staticData.add(attack);
+            
+            setStaticData(GameObjectType.WANDA, staticData);
+        }
+        
+        RenderComponent render = (RenderComponent)allocateComponent(RenderComponent.class);
+        render.setPriority(SortConstants.NPC);
+        
+        BackgroundCollisionComponent bgcollision = (BackgroundCollisionComponent)allocateComponent(BackgroundCollisionComponent.class);
+        bgcollision.setSize(32, 82);
+        bgcollision.setOffset(20, 5);
+        
+        SpriteComponent sprite = (SpriteComponent)allocateComponent(SpriteComponent.class);
+        sprite.setSize((int)object.width, (int)object.height);
+        sprite.setRenderComponent(render);
+        
+        NPCAnimationComponent animation = (NPCAnimationComponent)allocateComponent(NPCAnimationComponent.class);
+        animation.setSprite(sprite);
+        
+        NPCComponent patrol = (NPCComponent)allocateComponent(NPCComponent.class);
+      
+        DynamicCollisionComponent collision = (DynamicCollisionComponent)allocateComponent(DynamicCollisionComponent.class);
+        sprite.setCollisionComponent(collision);
+        
+        HitReactionComponent hitReact = (HitReactionComponent)allocateComponent(HitReactionComponent.class);
+        collision.setHitReactionComponent(hitReact);
+        
+        patrol.setHitReactionComponent(hitReact);
+        
+        SoundSystem sound = sSystemRegistry.soundSystem;
+        
+        LaunchProjectileComponent gun 
+            = (LaunchProjectileComponent)allocateComponent(LaunchProjectileComponent.class);
+        gun.setShotsPerSet(1);
+        gun.setSetsPerActivation(1); 
+        gun.setDelayBeforeFirstSet(Utils.framesToTime(24, 11));
+        gun.setObjectTypeToSpawn(GameObjectType.WANDA_SHOT);
+        gun.setOffsetX(45);
+        gun.setOffsetY(42);
+        gun.setRequiredAction(GameObject.ActionType.ATTACK);
+        gun.setVelocityX(300.0f);
+        gun.setShootSound(sound.load(R.raw.sound_poing));
+        
+        object.team = Team.ENEMY;
+        object.life = 1;
+        
+        if (flipHorizontal) {
+            object.facingDirection.x = -1.0f;
+        }
+             
+        object.add(gun);
+        object.add(render);
+        object.add(sprite);
+        object.add(bgcollision);
+        object.add(animation);
+        object.add(patrol);
+        object.add(collision);
+        object.add(hitReact);
+        
+        addStaticData(GameObjectType.WANDA, object, sprite);
+        
+        
+        sprite.playAnimation(0);
+
+        return object;
+    }
+    
+    
+    public GameObject spawnEnemyKyle(float positionX, float positionY, boolean flipHorizontal) {
+        TextureLibrary textureLibrary = sSystemRegistry.shortTermTextureLibrary;
+        
+
+        
+        GameObject object = mGameObjectPool.allocate();
+        object.getPosition().set(positionX, positionY);
+        object.activationRadius = mAlwaysActive;
+        object.width = 64;
+        object.height = 128;
+        
+        FixedSizeArray<BaseObject> staticData = getStaticData(GameObjectType.KYLE);
+        if (staticData == null) {
+            final int staticObjectCount = 9;
+            staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
+            
+            GameComponent gravity = allocateComponent(GravityComponent.class);
+            GameComponent movement = allocateComponent(MovementComponent.class);
+            
+            SimplePhysicsComponent physics = (SimplePhysicsComponent)allocateComponent(SimplePhysicsComponent.class);
+            physics.setBounciness(0.0f);
+            
+            FixedSizeArray<CollisionVolume> basicVulnerabilityVolume = 
+                new FixedSizeArray<CollisionVolume>(1);
+            basicVulnerabilityVolume.add(new AABoxCollisionVolume(20, 5, 26, 80, HitType.COLLECT));
+                    
+            SpriteAnimation idle = new SpriteAnimation(NPCAnimationComponent.IDLE, 1);
+            idle.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_stand), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
+
+            AnimationFrame walkFrame1 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_walk01), 
+                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
+            AnimationFrame walkFrame2 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_walk02), 
+                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
+            AnimationFrame walkFrame3 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_walk03), 
+                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
+            AnimationFrame walkFrame4 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_walk04), 
+                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
+            AnimationFrame walkFrame5 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_walk05), 
+                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
+            AnimationFrame walkFrame6 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_walk06), 
+                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
+            AnimationFrame walkFrame7 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_walk07), 
+                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
+            SpriteAnimation walk = new SpriteAnimation(NPCAnimationComponent.WALK, 12);
+            walk.addFrame(walkFrame1);
+            walk.addFrame(walkFrame2);
+            walk.addFrame(walkFrame3);
+            walk.addFrame(walkFrame4);
+            walk.addFrame(walkFrame3);
+            walk.addFrame(walkFrame2);
+            walk.addFrame(walkFrame1);
+            walk.addFrame(walkFrame5);
+            walk.addFrame(walkFrame6);
+            walk.addFrame(walkFrame7);
+            walk.addFrame(walkFrame6);
+            walk.addFrame(walkFrame5);
+            
+            walk.setLoop(true);
+            
+            AnimationFrame crouch1 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_crouch01), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
+            AnimationFrame crouch2 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_crouch02), 
+                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
+            
+            SpriteAnimation runStart = new SpriteAnimation(NPCAnimationComponent.RUN_START, 2);
+            runStart.addFrame(crouch1);
+            runStart.addFrame(crouch2);
+            
+            FixedSizeArray<CollisionVolume> attackVolume = 
+                new FixedSizeArray<CollisionVolume>(2);
+            attackVolume.add(new AABoxCollisionVolume(32, 32, 50, 32, HitType.HIT));
+            attackVolume.add(new AABoxCollisionVolume(32, 32, 50, 32, HitType.COLLECT));
+            
+            SpriteAnimation run = new SpriteAnimation(NPCAnimationComponent.RUN, 2);
+            run.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_dash01), 
+                    Utils.framesToTime(24, 1), attackVolume, basicVulnerabilityVolume));
+            run.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_dash02), 
+                    Utils.framesToTime(24, 1), attackVolume, basicVulnerabilityVolume));
+            run.setLoop(true);
+            
+            SpriteAnimation jumpStart = new SpriteAnimation(NPCAnimationComponent.JUMP_START, 2);
+            jumpStart.addFrame(crouch1);
+            jumpStart.addFrame(crouch2);
+            
+            SpriteAnimation jumpAir = new SpriteAnimation(NPCAnimationComponent.JUMP_AIR, 2);
+            AnimationFrame jump1 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_jump01), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
+            AnimationFrame jump2 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kyle_jump01), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
+            jumpAir.addFrame(jump1);
+            jumpAir.addFrame(jump2);
+            jumpAir.setLoop(true);
+            
+            
+            
+            staticData.add(gravity);
+            staticData.add(movement);
+            staticData.add(physics);
+            staticData.add(idle);
+            staticData.add(walk);
+            staticData.add(runStart);
+            staticData.add(run);
+            staticData.add(jumpStart);
+            staticData.add(jumpAir);
+            
+            setStaticData(GameObjectType.KYLE, staticData);
+        }
+        
+        RenderComponent render = (RenderComponent)allocateComponent(RenderComponent.class);
+        render.setPriority(SortConstants.NPC);
+
+        BackgroundCollisionComponent bgcollision = (BackgroundCollisionComponent)allocateComponent(BackgroundCollisionComponent.class);
+        bgcollision.setSize(32, 90);
+        bgcollision.setOffset(20, 5); 
+        
+        SpriteComponent sprite = (SpriteComponent)allocateComponent(SpriteComponent.class);
+        sprite.setSize((int)object.width, (int)object.height);
+        sprite.setRenderComponent(render);
+        
+        NPCAnimationComponent animation = (NPCAnimationComponent)allocateComponent(NPCAnimationComponent.class);
+        animation.setSprite(sprite);
+        animation.setStopAtWalls(false); // Kyle can run through walls
+        
+        NPCComponent patrol = (NPCComponent)allocateComponent(NPCComponent.class);
+        patrol.setSpeeds(350.0f, 50.0f, 400.0f, -10.0f, 400.0f);
+        patrol.setGameEvent(GameFlowEvent.EVENT_SHOW_ANIMATION, AnimationPlayerActivity.KYLE_DEATH, false);
+
+        DynamicCollisionComponent collision = (DynamicCollisionComponent)allocateComponent(DynamicCollisionComponent.class);
+        sprite.setCollisionComponent(collision);
+        
+        HitReactionComponent hitReact = (HitReactionComponent)allocateComponent(HitReactionComponent.class);
+        collision.setHitReactionComponent(hitReact);
+        
+        patrol.setHitReactionComponent(hitReact); 
+        
+        MotionBlurComponent motionBlur = (MotionBlurComponent)allocateComponent(MotionBlurComponent.class);
+        motionBlur.setTarget(render);
+        
+        LauncherComponent launcher = (LauncherComponent)allocateComponent(LauncherComponent.class);
+        launcher.setup((float)(Math.PI * 0.45f), 1000.0f, 0.0f, 0.0f, false);
+        launcher.setLaunchEffect(GameObjectType.FLASH, 70.0f, 50.0f);
+        hitReact.setLauncherComponent(launcher, HitType.HIT);
+        
+        object.team = Team.NONE;
+        object.life = 1;
+
+        if (flipHorizontal) {
+            object.facingDirection.x = -1.0f;
+        }
+                
+        object.add(render);
+        object.add(sprite);
+        object.add(bgcollision);
+        object.add(animation);
+        object.add(patrol);
+        object.add(collision);
+        object.add(hitReact);
+        object.add(motionBlur);
+        object.add(launcher);
+        
+        addStaticData(GameObjectType.KYLE, object, sprite);
+        
+        
+        sprite.playAnimation(0);
+
+        return object;
+    }
+    
+    public GameObject spawnEnemyKyleDead(float positionX, float positionY) {
+        TextureLibrary textureLibrary = sSystemRegistry.shortTermTextureLibrary;
+        
+
+        GameObject object = mGameObjectPool.allocate();
+        object.getPosition().set(positionX, positionY);
+        object.activationRadius = mTightActivationRadius;
+        object.width = 128;
+        object.height = 32;
+        
+        FixedSizeArray<BaseObject> staticData = getStaticData(GameObjectType.KYLE_DEAD);
+        if (staticData == null) {
+            final int staticObjectCount = 1;
+            staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
+                  
+            FixedSizeArray<CollisionVolume> basicVulnerabilityVolume = 
+                new FixedSizeArray<CollisionVolume>(1);
+            basicVulnerabilityVolume.add(new AABoxCollisionVolume(32, 5, 64, 32, HitType.COLLECT));
+            
+            SpriteAnimation idle = new SpriteAnimation(0, 1);
+            AnimationFrame frame1 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.enemy_kyle_dead), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
+            
+            idle.addFrame(frame1);
+           
+            idle.setLoop(true);
+            
+            staticData.add(idle);
+            
+            setStaticData(GameObjectType.KYLE_DEAD, staticData);
+        }
+        
+        RenderComponent render = (RenderComponent)allocateComponent(RenderComponent.class);
+        render.setPriority(SortConstants.GENERAL_OBJECT);
+
+        SpriteComponent sprite = (SpriteComponent)allocateComponent(SpriteComponent.class);
+        sprite.setSize((int)object.width, (int)object.height);
+        sprite.setRenderComponent(render);
+
+        DynamicCollisionComponent dynamicCollision = (DynamicCollisionComponent)allocateComponent(DynamicCollisionComponent.class);
+        sprite.setCollisionComponent(dynamicCollision);
+        
+        HitReactionComponent hitReact = (HitReactionComponent)allocateComponent(HitReactionComponent.class);
+        dynamicCollision.setHitReactionComponent(hitReact);
+        hitReact.setSpawnGameEventOnHit(HitType.COLLECT, GameFlowEvent.EVENT_SHOW_DIALOG_CHARACTER2, 0);
+        
+        SelectDialogComponent dialogSelect = (SelectDialogComponent)allocateComponent(SelectDialogComponent.class);
+        dialogSelect.setHitReact(hitReact);
+        
+        // Since this object doesn't have gravity or background collision, adjust down to simulate the position
+        // at which a bounding volume would rest.
+        
+        object.getPosition().y -= 5.0f;
+        
+        object.add(dialogSelect);
+        object.add(render);
+        object.add(sprite);
+        object.add(dynamicCollision);
+        object.add(hitReact);
+        
+        addStaticData(GameObjectType.KYLE_DEAD, object, sprite);
+        sprite.playAnimation(0);
+
+        return object;
+    }
+    
+    public GameObject spawnEnemyAndouDead(float positionX, float positionY) {
+        TextureLibrary textureLibrary = sSystemRegistry.shortTermTextureLibrary;
+        
+
+        GameObject object = mGameObjectPool.allocate();
+        object.getPosition().set(positionX, positionY);
+        object.activationRadius = mTightActivationRadius;
+        object.width = 64;
+        object.height = 64;
+        
+        FixedSizeArray<BaseObject> staticData = getStaticData(GameObjectType.ANDOU_DEAD);
+        if (staticData == null) {
+            final int staticObjectCount = 1;
+            staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
+                  
+            SpriteAnimation idle = new SpriteAnimation(0, 1);
+            AnimationFrame frame1 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.andou_explode12), 
+                    Utils.framesToTime(24, 1), null, null);
+            
+            idle.addFrame(frame1);
+           
+            idle.setLoop(true);
+            
+            staticData.add(idle);
+            
+            setStaticData(GameObjectType.ANDOU_DEAD, staticData);
+        }
+        
+        RenderComponent render = (RenderComponent)allocateComponent(RenderComponent.class);
+        render.setPriority(SortConstants.GENERAL_OBJECT);
+
+        SpriteComponent sprite = (SpriteComponent)allocateComponent(SpriteComponent.class);
+        sprite.setSize((int)object.width, (int)object.height);
+        sprite.setRenderComponent(render);
+
+        LaunchProjectileComponent smokeGun 
+	        = (LaunchProjectileComponent)allocateComponent(LaunchProjectileComponent.class);
+	    smokeGun.setDelayBetweenShots(0.25f);
+	    smokeGun.setObjectTypeToSpawn(GameObjectType.SMOKE_BIG);
+	    smokeGun.setOffsetX(32);
+	    smokeGun.setOffsetY(15);
+	    smokeGun.setVelocityX(-150.0f);
+	    smokeGun.setVelocityY(100.0f);
+	    smokeGun.setThetaError(0.1f);
+	    
+	    LaunchProjectileComponent smokeGun2 
+	        = (LaunchProjectileComponent)allocateComponent(LaunchProjectileComponent.class);
+	    smokeGun2.setDelayBetweenShots(0.35f);
+	    smokeGun2.setObjectTypeToSpawn(GameObjectType.SMOKE_SMALL);
+	    smokeGun2.setOffsetX(16);
+	    smokeGun2.setOffsetY(15);
+	    smokeGun2.setVelocityX(-150.0f);
+	    smokeGun2.setVelocityY(150.0f);
+	    smokeGun2.setThetaError(0.1f); 
+             
+        object.add(render);
+        object.add(sprite);
+        object.add(smokeGun);
+        object.add(smokeGun2);
+        
+        object.facingDirection.x = -1.0f;
+        
+        addStaticData(GameObjectType.ANDOU_DEAD, object, sprite);
+        sprite.playAnimation(0);
+
+        return object;
+    }
+    
+    public GameObject spawnEnemyKabocha(float positionX, float positionY, boolean flipHorizontal) {
+        TextureLibrary textureLibrary = sSystemRegistry.shortTermTextureLibrary;
+        
+
+        GameObject object = mGameObjectPool.allocate();
+        object.getPosition().set(positionX, positionY);
+        object.activationRadius = mAlwaysActive;
+        object.width = 64;
+        object.height = 128;
+        
+        FixedSizeArray<BaseObject> staticData = getStaticData(GameObjectType.KABOCHA);
+        if (staticData == null) {
+            final int staticObjectCount = 5;
+            staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
+            
+            GameComponent gravity = allocateComponent(GravityComponent.class);
+            GameComponent movement = allocateComponent(MovementComponent.class);
+            
+            SimplePhysicsComponent physics = (SimplePhysicsComponent)allocateComponent(SimplePhysicsComponent.class);
+            physics.setBounciness(0.0f);
+            
+            FixedSizeArray<CollisionVolume> basicVulnerabilityVolume = 
+                new FixedSizeArray<CollisionVolume>(1);
+            basicVulnerabilityVolume.add(new AABoxCollisionVolume(20, 5, 26, 80, HitType.COLLECT));
+                    
+            SpriteAnimation idle = new SpriteAnimation(NPCAnimationComponent.IDLE, 1);
+            idle.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_stand), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
+
+            AnimationFrame walkFrame1 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_walk01), 
+                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
+            AnimationFrame walkFrame2 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_walk02), 
+                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
+            AnimationFrame walkFrame3 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_walk03), 
+                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
+            AnimationFrame walkFrame4 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_walk04), 
+                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
+            AnimationFrame walkFrame5 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_walk05), 
+                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
+            AnimationFrame walkFrame6 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_walk06), 
+                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
+            
+            SpriteAnimation walk = new SpriteAnimation(NPCAnimationComponent.WALK, 6);
+            walk.addFrame(walkFrame1);
+            walk.addFrame(walkFrame2);
+            walk.addFrame(walkFrame3);
+            walk.addFrame(walkFrame4);
+            walk.addFrame(walkFrame5);
+            walk.addFrame(walkFrame6);
+  
+            
+            walk.setLoop(true);
+            
+            staticData.add(gravity);
+            staticData.add(movement);
+            staticData.add(physics);
+            staticData.add(idle);
+            staticData.add(walk);
+            
+            setStaticData(GameObjectType.KABOCHA, staticData);
+        }
+        
+        RenderComponent render = (RenderComponent)allocateComponent(RenderComponent.class);
+        render.setPriority(SortConstants.NPC);
+
+        BackgroundCollisionComponent bgcollision = (BackgroundCollisionComponent)allocateComponent(BackgroundCollisionComponent.class);
+        bgcollision.setSize(38, 82);
+        bgcollision.setOffset(16, 5);
+        
+        SpriteComponent sprite = (SpriteComponent)allocateComponent(SpriteComponent.class);
+        sprite.setSize((int)object.width, (int)object.height);
+        sprite.setRenderComponent(render);
+        
+        NPCAnimationComponent animation = (NPCAnimationComponent)allocateComponent(NPCAnimationComponent.class);
+        animation.setSprite(sprite);
+        
+        NPCComponent patrol = (NPCComponent)allocateComponent(NPCComponent.class);
+        
+        DynamicCollisionComponent collision = (DynamicCollisionComponent)allocateComponent(DynamicCollisionComponent.class);
+        sprite.setCollisionComponent(collision);
+        
+        HitReactionComponent hitReact = (HitReactionComponent)allocateComponent(HitReactionComponent.class);
+        collision.setHitReactionComponent(hitReact);
+        
+        patrol.setHitReactionComponent(hitReact);
+        
+        object.team = Team.ENEMY;
+        object.life = 1;
+
+        if (flipHorizontal) {
+            object.facingDirection.x = -1.0f;
+        }
+                
+        object.add(render);
+        object.add(sprite);
+        object.add(bgcollision);
+        object.add(animation);
+        object.add(patrol);
+        object.add(collision);
+        object.add(hitReact);
+        
+        addStaticData(GameObjectType.KABOCHA, object, sprite);
+        
+        
+        sprite.playAnimation(0);
+
+        return object;
+    }
+    
+    public GameObject spawnRokudouTerminal(float positionX, float positionY) {
+        TextureLibrary textureLibrary = sSystemRegistry.shortTermTextureLibrary;
+        
+
+        GameObject object = mGameObjectPool.allocate();
+        object.getPosition().set(positionX, positionY);
+        object.activationRadius = mTightActivationRadius;
+        object.width = 64;
+        object.height = 64;
+        
+        FixedSizeArray<BaseObject> staticData = getStaticData(GameObjectType.ROKUDOU_TERMINAL);
+        if (staticData == null) {
+            final int staticObjectCount = 1;
+            staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
+            
+            FixedSizeArray<CollisionVolume> basicVulnerabilityVolume = new FixedSizeArray<CollisionVolume>(1);
+            basicVulnerabilityVolume.add(new AABoxCollisionVolume(0, 0, 64, 64));
+            basicVulnerabilityVolume.get(0).setHitType(HitType.COLLECT);
+            
+           
+            AnimationFrame frame1 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal01), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
+            AnimationFrame frame2 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal02), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
+            AnimationFrame frame3 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal03), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
+            AnimationFrame frame4 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal01), 
+                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
+            AnimationFrame frame5 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal02), 
+                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
+            AnimationFrame frame6 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal01), 
+                    1.0f, null, basicVulnerabilityVolume);
+            
+            SpriteAnimation idle = new SpriteAnimation(0, 12);
+            idle.addFrame(frame1);
+            idle.addFrame(frame5);
+            idle.addFrame(frame4);
+            idle.addFrame(frame3);
+            idle.addFrame(frame2);
+            idle.addFrame(frame6);
+            idle.addFrame(frame6);
+            idle.addFrame(frame3);
+            idle.addFrame(frame2);
+            idle.addFrame(frame1);
+            idle.addFrame(frame2);
+            idle.addFrame(frame6);
+
+            idle.setLoop(true);
+            
+           
+            staticData.add(idle);
+            
+            setStaticData(GameObjectType.ROKUDOU_TERMINAL, staticData);
+        }
+        
+        RenderComponent render = (RenderComponent)allocateComponent(RenderComponent.class);
+        render.setPriority(SortConstants.GENERAL_OBJECT);
+
+        SpriteComponent sprite = (SpriteComponent)allocateComponent(SpriteComponent.class);
+        sprite.setSize((int)object.width, (int)object.height);
+        sprite.setRenderComponent(render);
+
+        DynamicCollisionComponent dynamicCollision = (DynamicCollisionComponent)allocateComponent(DynamicCollisionComponent.class);
+        sprite.setCollisionComponent(dynamicCollision);
+        
+        HitReactionComponent hitReact = (HitReactionComponent)allocateComponent(HitReactionComponent.class);
+        hitReact.setSpawnGameEventOnHit(HitType.COLLECT, GameFlowEvent.EVENT_SHOW_DIALOG_CHARACTER2, 0);
+
+        SelectDialogComponent dialogSelect = (SelectDialogComponent)allocateComponent(SelectDialogComponent.class);
+        dialogSelect.setHitReact(hitReact);
+        
+        dynamicCollision.setHitReactionComponent(hitReact);
+        
+        object.add(dialogSelect);
+        object.add(render);
+        object.add(sprite);
+        object.add(dynamicCollision);
+        object.add(hitReact);
+        
+        addStaticData(GameObjectType.ROKUDOU_TERMINAL, object, sprite);
+        sprite.playAnimation(0);
+
+        return object;
+    }
+    
+    
+    public GameObject spawnKabochaTerminal(float positionX, float positionY) {
+        TextureLibrary textureLibrary = sSystemRegistry.shortTermTextureLibrary;
+        
+
+        GameObject object = mGameObjectPool.allocate();
+        object.getPosition().set(positionX, positionY);
+        object.activationRadius = mTightActivationRadius;
+        object.width = 64;
+        object.height = 64;
+        
+        FixedSizeArray<BaseObject> staticData = getStaticData(GameObjectType.KABOCHA_TERMINAL);
+        if (staticData == null) {
+            final int staticObjectCount = 1;
+            staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
+            
+            FixedSizeArray<CollisionVolume> basicVulnerabilityVolume = new FixedSizeArray<CollisionVolume>(1);
+            basicVulnerabilityVolume.add(new AABoxCollisionVolume(0, 0, 64, 64));
+            basicVulnerabilityVolume.get(0).setHitType(HitType.COLLECT);
+            
+           
+            AnimationFrame frame1 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal_kabocha01), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
+            AnimationFrame frame2 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal_kabocha02), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
+            AnimationFrame frame3 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal_kabocha03), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume);
+            AnimationFrame frame4 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal_kabocha01), 
+                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
+            AnimationFrame frame5 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal_kabocha02), 
+                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume);
+            AnimationFrame frame6 = new AnimationFrame(textureLibrary.allocateTexture(R.drawable.object_terminal_kabocha01), 
+                    1.0f, null, basicVulnerabilityVolume);
+            
+            SpriteAnimation idle = new SpriteAnimation(0, 12);
+            idle.addFrame(frame1);
+            idle.addFrame(frame5);
+            idle.addFrame(frame4);
+            idle.addFrame(frame3);
+            idle.addFrame(frame2);
+            idle.addFrame(frame6);
+            idle.addFrame(frame6);
+            idle.addFrame(frame3);
+            idle.addFrame(frame2);
+            idle.addFrame(frame1);
+            idle.addFrame(frame2);
+            idle.addFrame(frame6);
+
+            idle.setLoop(true);
+            
+           
+            staticData.add(idle);
+            
+            setStaticData(GameObjectType.KABOCHA_TERMINAL, staticData);
+        }
+        
+        RenderComponent render = (RenderComponent)allocateComponent(RenderComponent.class);
+        render.setPriority(SortConstants.GENERAL_OBJECT);
+
+        SpriteComponent sprite = (SpriteComponent)allocateComponent(SpriteComponent.class);
+        sprite.setSize((int)object.width, (int)object.height);
+        sprite.setRenderComponent(render);
+
+        DynamicCollisionComponent dynamicCollision = (DynamicCollisionComponent)allocateComponent(DynamicCollisionComponent.class);
+        sprite.setCollisionComponent(dynamicCollision);
+        
+        HitReactionComponent hitReact = (HitReactionComponent)allocateComponent(HitReactionComponent.class);
+        hitReact.setSpawnGameEventOnHit(HitType.COLLECT, GameFlowEvent.EVENT_SHOW_DIALOG_CHARACTER2, 0);
+
+        SelectDialogComponent dialogSelect = (SelectDialogComponent)allocateComponent(SelectDialogComponent.class);
+        dialogSelect.setHitReact(hitReact);
+       
+        dynamicCollision.setHitReactionComponent(hitReact);
+        
+        object.add(dialogSelect);
+        object.add(render);
+        object.add(sprite);
+        object.add(dynamicCollision);
+        object.add(hitReact);
+        
+        addStaticData(GameObjectType.KABOCHA_TERMINAL, object, sprite);
+        sprite.playAnimation(0);
+
+        return object;
+    }
+    
+    public GameObject spawnEnemyEvilKabocha(float positionX, float positionY, boolean flipHorizontal) {
+        TextureLibrary textureLibrary = sSystemRegistry.shortTermTextureLibrary;
+        
+
+        GameObject object = mGameObjectPool.allocate();
+        object.getPosition().set(positionX, positionY);
+        object.activationRadius = mNormalActivationRadius;
+        object.width = 128;
+        object.height = 128;
+        
+        FixedSizeArray<BaseObject> staticData = getStaticData(GameObjectType.EVIL_KABOCHA);
+        if (staticData == null) {
+            final int staticObjectCount = 8;
+            staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
+            
+            GameComponent gravity = allocateComponent(GravityComponent.class);
+            GameComponent movement = allocateComponent(MovementComponent.class);
+            
+            SimplePhysicsComponent physics = (SimplePhysicsComponent)allocateComponent(SimplePhysicsComponent.class);
+            physics.setBounciness(0.0f);
+            
+            FixedSizeArray<CollisionVolume> basicVulnerabilityVolume = 
+                new FixedSizeArray<CollisionVolume>(1);
+            basicVulnerabilityVolume.add(new AABoxCollisionVolume(52, 5, 26, 80, HitType.HIT));
+                    
+            SpriteAnimation idle = new SpriteAnimation(NPCAnimationComponent.IDLE, 1);
+            idle.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_stand), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
+
+            AnimationFrame walkFrame1 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_walk01), 
+                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
+            AnimationFrame walkFrame2 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_walk02), 
+                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
+            AnimationFrame walkFrame3 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_walk03), 
+                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
+            AnimationFrame walkFrame4 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_walk04), 
+                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
+            AnimationFrame walkFrame5 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_walk05), 
+                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
+            AnimationFrame walkFrame6 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_walk06), 
+                    Utils.framesToTime(24, 3), null, basicVulnerabilityVolume);
+            
+            SpriteAnimation walk = new SpriteAnimation(NPCAnimationComponent.WALK, 6);
+            walk.addFrame(walkFrame1);
+            walk.addFrame(walkFrame2);
+            walk.addFrame(walkFrame3);
+            walk.addFrame(walkFrame4);
+            walk.addFrame(walkFrame5);
+            walk.addFrame(walkFrame6);
+  
+            walk.setLoop(true);
+            
+            
+            SpriteAnimation surprised = new SpriteAnimation(NPCAnimationComponent.SURPRISED, 1);
+            surprised.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_surprised), 
+                    4.0f, null, null));
+            
+            
+            SpriteAnimation hit = new SpriteAnimation(NPCAnimationComponent.TAKE_HIT, 2);
+            hit.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_hit01), 
+                    Utils.framesToTime(24, 1), null, null));
+            hit.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_hit02), 
+                    Utils.framesToTime(24, 10), null, null));
+            
+            SpriteAnimation die = new SpriteAnimation(NPCAnimationComponent.DEATH, 5);
+            die.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_die01), 
+                    Utils.framesToTime(24, 6), null, null));
+            die.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_stand), 
+                    Utils.framesToTime(24, 2), null, null));
+            die.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_die02), 
+                    Utils.framesToTime(24, 2), null, null));
+            die.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_die03), 
+                    Utils.framesToTime(24, 2), null, null));
+            die.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_kabocha_evil_die04), 
+                    Utils.framesToTime(24, 6), null, null));
+            
+            staticData.add(gravity);
+            staticData.add(movement);
+            staticData.add(physics);
+            staticData.add(idle);
+            staticData.add(walk);
+            staticData.add(surprised);
+            staticData.add(hit);
+            staticData.add(die);
+            
+            setStaticData(GameObjectType.EVIL_KABOCHA, staticData);
+        }
+        
+        RenderComponent render = (RenderComponent)allocateComponent(RenderComponent.class);
+        render.setPriority(SortConstants.NPC);
+
+        BackgroundCollisionComponent bgcollision = (BackgroundCollisionComponent)allocateComponent(BackgroundCollisionComponent.class);
+        bgcollision.setSize(38, 82);
+        bgcollision.setOffset(45, 5);
+        
+        SpriteComponent sprite = (SpriteComponent)allocateComponent(SpriteComponent.class);
+        sprite.setSize((int)object.width, (int)object.height);
+        sprite.setRenderComponent(render);
+        
+        NPCAnimationComponent animation = (NPCAnimationComponent)allocateComponent(NPCAnimationComponent.class);
+        animation.setSprite(sprite);
+        
+        ChannelSystem.Channel surpriseChannel = null;
+        ChannelSystem channelSystem = BaseObject.sSystemRegistry.channelSystem;
+        surpriseChannel = channelSystem.registerChannel(sSurprisedNPCChannel);
+        animation.setChannel(surpriseChannel);
+        animation.setChannelTrigger(NPCAnimationComponent.SURPRISED);
+        
+        NPCComponent patrol = (NPCComponent)allocateComponent(NPCComponent.class);
+        patrol.setSpeeds(50.0f, 50.0f, 0.0f, -10.0f, 200.0f);
+        patrol.setReactToHits(true);
+        patrol.setGameEvent(GameFlowEvent.EVENT_SHOW_ANIMATION, AnimationPlayerActivity.ROKUDOU_ENDING, true);
+
+        DynamicCollisionComponent collision = (DynamicCollisionComponent)allocateComponent(DynamicCollisionComponent.class);
+        sprite.setCollisionComponent(collision);
+        
+        HitReactionComponent hitReact = (HitReactionComponent)allocateComponent(HitReactionComponent.class);
+        collision.setHitReactionComponent(hitReact);
+        
+        SoundSystem sound = sSystemRegistry.soundSystem;
+        if (sound != null) {
+        	hitReact.setTakeHitSound(HitType.HIT, sound.load(R.raw.sound_kabocha_hit));
+        }
+        
+        patrol.setHitReactionComponent(hitReact);
+        
+        object.team = Team.ENEMY;
+        object.life = 3;
+        
+        if (flipHorizontal) {
+            object.facingDirection.x = -1.0f;
+        }
+                
+        object.add(render);
+        object.add(sprite);
+        object.add(bgcollision);
+        object.add(animation);
+        object.add(patrol);
+        object.add(collision);
+        object.add(hitReact);
+        
+        addStaticData(GameObjectType.EVIL_KABOCHA, object, sprite);
+        
+        
+        sprite.playAnimation(0);
+
+        return object;
+    }
+    
+    public GameObject spawnEnemyRokudou(float positionX, float positionY, boolean flipHorizontal) {
+    	TextureLibrary textureLibrary = sSystemRegistry.shortTermTextureLibrary;
+
+    	// Make sure related textures are loaded.
+        textureLibrary.allocateTexture(R.drawable.energy_ball01);
+        textureLibrary.allocateTexture(R.drawable.energy_ball02);
+        textureLibrary.allocateTexture(R.drawable.energy_ball03);
+        textureLibrary.allocateTexture(R.drawable.energy_ball04);
+        
+        textureLibrary.allocateTexture(R.drawable.effect_bullet01);
+        textureLibrary.allocateTexture(R.drawable.effect_bullet02);
+        
+        
+        GameObject object = mGameObjectPool.allocate();
+        object.getPosition().set(positionX, positionY);
+        object.activationRadius = mNormalActivationRadius;
+        object.width = 128;
+        object.height = 128;
+        
+        FixedSizeArray<BaseObject> staticData = getStaticData(GameObjectType.ROKUDOU);
+        if (staticData == null) {
+            final int staticObjectCount = 8;
+            staticData = new FixedSizeArray<BaseObject>(staticObjectCount);
+            
+            GameComponent movement = allocateComponent(MovementComponent.class);
+            
+            SimplePhysicsComponent physics = (SimplePhysicsComponent)allocateComponent(SimplePhysicsComponent.class);
+            physics.setBounciness(0.0f);
+            
+            FixedSizeArray<CollisionVolume> basicVulnerabilityVolume = 
+                new FixedSizeArray<CollisionVolume>(1);
+            basicVulnerabilityVolume.add(new AABoxCollisionVolume(45, 23, 42, 75, HitType.HIT));
+                    
+            SpriteAnimation idle = new SpriteAnimation(NPCAnimationComponent.IDLE, 1);
+            idle.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_stand), 
+                    Utils.framesToTime(24, 1), null, basicVulnerabilityVolume));
+            
+            SpriteAnimation fly = new SpriteAnimation(NPCAnimationComponent.WALK, 2);
+            fly.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_fly01), 
+                    1.0f, null, basicVulnerabilityVolume));
+            fly.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_fly02), 
+                    1.0f, null, basicVulnerabilityVolume));
+            fly.setLoop(true);
+            
+            SpriteAnimation shoot = new SpriteAnimation(NPCAnimationComponent.SHOOT, 2);
+            shoot.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_shoot01), 
+                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume));
+            shoot.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_shoot02), 
+                    Utils.framesToTime(24, 2), null, basicVulnerabilityVolume));
+            shoot.setLoop(true);
+            
+            
+            SpriteAnimation surprised = new SpriteAnimation(NPCAnimationComponent.SURPRISED, 1);
+            surprised.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_surprise), 
+                    4.0f, null, null));
+            
+            
+            SpriteAnimation hit = new SpriteAnimation(NPCAnimationComponent.TAKE_HIT, 7);
+            AnimationFrame hitFrame1 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_hit01), 
+                    Utils.framesToTime(24, 2), null, null);
+            AnimationFrame hitFrame2 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_hit02), 
+                    Utils.framesToTime(24, 1), null, null);
+            AnimationFrame hitFrame3 = new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_hit03), 
+                    Utils.framesToTime(24, 1), null, null);
+            
+            hit.addFrame(hitFrame1);
+            hit.addFrame(hitFrame2);
+            hit.addFrame(hitFrame3);
+            hit.addFrame(hitFrame2);
+            hit.addFrame(hitFrame3);
+            hit.addFrame(hitFrame2);
+            hit.addFrame(hitFrame3);
+            
+            SpriteAnimation die = new SpriteAnimation(NPCAnimationComponent.DEATH, 5);
+            die.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_stand), 
+                    Utils.framesToTime(24, 6), null, null));
+            die.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_die01), 
+                    Utils.framesToTime(24, 2), null, null));
+            die.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_die02), 
+                    Utils.framesToTime(24, 4), null, null));
+            die.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_die03), 
+                    Utils.framesToTime(24, 6), null, null));
+            die.addFrame(new AnimationFrame(
+                    textureLibrary.allocateTexture(R.drawable.enemy_rokudou_fight_die04), 
+                    Utils.framesToTime(24, 6), null, null));
+            
+            staticData.add(movement);
+            staticData.add(physics);
+            staticData.add(idle);
+            staticData.add(fly);
+            staticData.add(surprised);
+            staticData.add(hit);
+            staticData.add(die);
+            staticData.add(shoot);
+            
+            setStaticData(GameObjectType.ROKUDOU, staticData);
+        }
+        
+        RenderComponent render = (RenderComponent)allocateComponent(RenderComponent.class);
+        render.setPriority(SortConstants.NPC);
+
+        BackgroundCollisionComponent bgcollision = (BackgroundCollisionComponent)allocateComponent(BackgroundCollisionComponent.class);
+        bgcollision.setSize(45, 75);
+        bgcollision.setOffset(45, 23);
+        
+        SpriteComponent sprite = (SpriteComponent)allocateComponent(SpriteComponent.class);
+        sprite.setSize((int)object.width, (int)object.height);
+        sprite.setRenderComponent(render);
+        
+       
+        
+        NPCAnimationComponent animation = (NPCAnimationComponent)allocateComponent(NPCAnimationComponent.class);
+        animation.setSprite(sprite);
+        animation.setFlying(true);
+        
+        ChannelSystem.Channel surpriseChannel = null;
+        ChannelSystem channelSystem = BaseObject.sSystemRegistry.channelSystem;
+        surpriseChannel = channelSystem.registerChannel(sSurprisedNPCChannel);
+        animation.setChannel(surpriseChannel);
+        animation.setChannelTrigger(NPCAnimationComponent.SURPRISED);
+        
+        NPCComponent patrol = (NPCComponent)allocateComponent(NPCComponent.class);
+        patrol.setSpeeds(500.0f, 100.0f, 100.0f, -100.0f, 400.0f);
+        patrol.setFlying(true);
+        patrol.setReactToHits(true);
+        patrol.setGameEvent(GameFlowEvent.EVENT_SHOW_ANIMATION, AnimationPlayerActivity.KABOCHA_ENDING, true);
+        patrol.setPauseOnAttack(false);
+        
+        DynamicCollisionComponent collision = (DynamicCollisionComponent)allocateComponent(DynamicCollisionComponent.class);
+        sprite.setCollisionComponent(collision);
+        
+        HitReactionComponent hitReact = (HitReactionComponent)allocateComponent(HitReactionComponent.class);
+        collision.setHitReactionComponent(hitReact);
+        
+        SoundSystem sound = sSystemRegistry.soundSystem;
+        if (sound != null) {
+        	hitReact.setTakeHitSound(HitType.HIT, sound.load(R.raw.sound_rokudou_hit));
+        }
+        
+        patrol.setHitReactionComponent(hitReact);
+        
+        ChangeComponentsComponent deathSwap = (ChangeComponentsComponent)allocateComponent(ChangeComponentsComponent.class);
+        deathSwap.addSwapInComponent(allocateComponent(GravityComponent.class));
+        deathSwap.setSwapAction(ActionType.DEATH);
+                
+        LaunchProjectileComponent gun 
+	        = (LaunchProjectileComponent)allocateComponent(LaunchProjectileComponent.class);
+	    gun.setShotsPerSet(1);
+	    gun.setSetsPerActivation(-1); 
+	    gun.setDelayBetweenSets(1.5f);
+	    gun.setObjectTypeToSpawn(GameObjectType.ENERGY_BALL);
+	    gun.setOffsetX(75);
+	    gun.setOffsetY(42);
+	    gun.setRequiredAction(GameObject.ActionType.ATTACK);
+	    gun.setVelocityX(300.0f);
+	    gun.setVelocityY(-300.0f);
+        gun.setShootSound(sound.load(R.raw.sound_poing));
+
+	    
+	    LaunchProjectileComponent gun2
+        = (LaunchProjectileComponent)allocateComponent(LaunchProjectileComponent.class);
+	    gun2.setShotsPerSet(5);
+	    gun2.setDelayBetweenShots(0.1f);
+	    gun2.setSetsPerActivation(-1); 
+	    gun2.setDelayBetweenSets(2.5f);
+	    gun2.setObjectTypeToSpawn(GameObjectType.TURRET_BULLET);
+	    gun2.setOffsetX(75);
+	    gun2.setOffsetY(42);
+	    gun2.setRequiredAction(GameObject.ActionType.ATTACK);
+	    gun2.setVelocityX(300.0f);
+	    gun2.setVelocityY(-300.0f);
+        gun.setShootSound(sound.load(R.raw.sound_gun));
+
+        
+        object.team = Team.ENEMY;  
+        object.life = 3;
+        
+        if (flipHorizontal) {
+            object.facingDirection.x = -1.0f;
+        }
+        
+        // HACK! Since there's no gravity and this is a big character, align him to the floor
+        // manually.
+        object.getPosition().y -= 23;
+                
+        object.add(render);
+        object.add(sprite);
+        object.add(bgcollision);
+        object.add(animation);
+        object.add(patrol);
+        object.add(collision);
+        object.add(hitReact);
+        object.add(deathSwap);
+        object.add(gun);
+        object.add(gun2);
+
+        addStaticData(GameObjectType.ROKUDOU, object, sprite);
+        
+        
+        sprite.playAnimation(0);
+
+        return object;
+    }
+    
     
     public GameObject spawnPlayerGhost(float positionX, float positionY, GameObject player, float lifeTime) {  
         TextureLibrary textureLibrary = sSystemRegistry.longTermTextureLibrary;
@@ -4453,7 +4386,7 @@ public class GameObjectFactory extends BaseObject {
         hitReact.setInvincible(true);
         
         HitPlayerComponent hitPlayer = (HitPlayerComponent)allocateComponent(HitPlayerComponent.class);
-        hitPlayer.setup(32, hitReact, HitType.COLLECT, false, true);
+        hitPlayer.setup(32, hitReact, HitType.COLLECT, false);
         
         SoundSystem sound = sSystemRegistry.soundSystem;
         if (sound != null) {

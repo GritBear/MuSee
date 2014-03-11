@@ -14,11 +14,8 @@
  * limitations under the License.
  */
 
-package com.music.musee.game;
+package com.music.musee;
 
-import com.music.musee.PhasedObjectManager;
-import com.music.musee.TimeSystem;
-import com.music.musee.Vector2;
 import com.music.musee.CollisionParameters.HitType;
 import com.music.musee.utils.Utils;
 

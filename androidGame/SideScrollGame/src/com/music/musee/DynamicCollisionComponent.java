@@ -17,10 +17,6 @@
 
 package com.music.musee;
 
-import com.music.musee.game.GameComponent;
-import com.music.musee.game.GameObject;
-import com.music.musee.game.GameObjectCollisionSystem;
-
 /**
  * A component to include dynamic collision volumes (such as those produced every frame from
  * animating sprites) in the dynamic collision world.  Given a set of "attack" volumes and 

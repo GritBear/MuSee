@@ -14,15 +14,9 @@
  * limitations under the License.
  */
 
-package com.music.musee.game;
+package com.music.musee;
 
 import java.util.Comparator;
-
-import com.music.musee.BaseObject;
-import com.music.musee.CameraSystem;
-import com.music.musee.FixedSizeArray;
-import com.music.musee.ObjectManager;
-import com.music.musee.Vector2;
 
 import android.util.Log;
 

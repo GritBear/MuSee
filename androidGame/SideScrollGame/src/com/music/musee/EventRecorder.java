@@ -38,19 +38,19 @@ public class EventRecorder extends BaseObject {
 		mLastDeathPosition.set(position);
 	}
 	
-	public synchronized Vector2 getLastDeathPosition() {
+	synchronized Vector2 getLastDeathPosition() {
 		return mLastDeathPosition;
 	}
 	
-	public synchronized void setLastEnding(int ending) {
+	synchronized void setLastEnding(int ending) {
 		mLastEnding = ending;
 	}
 	
-	public synchronized int getLastEnding() {
+	synchronized int getLastEnding() {
 		return mLastEnding;
 	}
 	
-	public synchronized void incrementEventCounter(int event) {
+	synchronized void incrementEventCounter(int event) {
 		if (event == COUNTER_ROBOTS_DESTROYED) {
 			mRobotsDestroyed++;
 		} else if (event == COUNTER_PEARLS_COLLECTED) {
@@ -60,15 +60,15 @@ public class EventRecorder extends BaseObject {
 		}
 	}
 	
-	public synchronized int getRobotsDestroyed() {
+	synchronized int getRobotsDestroyed() {
 		return mRobotsDestroyed;
 	}
 	
-	public synchronized int getPearlsCollected() {
+	synchronized int getPearlsCollected() {
 		return mPearlsCollected;
 	}
 
-	public synchronized int getPearlsTotal() {
+	synchronized int getPearlsTotal() {
 		return mPearlsTotal;
 	}
 }

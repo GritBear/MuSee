@@ -17,9 +17,7 @@
 package com.music.musee;
 
 import com.music.musee.ChannelSystem.Channel;
-import com.music.musee.game.GameComponent;
-import com.music.musee.game.GameObject;
-import com.music.musee.game.GameObject.ActionType;
+import com.music.musee.GameObject.ActionType;
 
 public class NPCAnimationComponent extends GameComponent {
 

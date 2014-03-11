@@ -18,8 +18,6 @@ package com.music.musee;
 
 import com.music.musee.GL.Texture;
 import com.music.musee.constant.SortConstants;
-import com.music.musee.game.GameFlowEvent;
-import com.music.musee.game.GameObjectManager;
 
 /**
  * A very simple manager for orthographic in-game UI elements.

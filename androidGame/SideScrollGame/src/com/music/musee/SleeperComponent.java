@@ -16,9 +16,7 @@
 
 package com.music.musee;
 
-import com.music.musee.game.GameComponent;
-import com.music.musee.game.GameObject;
-import com.music.musee.game.GameObject.ActionType;
+import com.music.musee.GameObject.ActionType;
 
 /**
  * A component that implements the "pop-out" AI behavior.  Pop-out characters alternate between 

@@ -16,9 +16,6 @@
 
 package com.music.musee;
 
-import com.music.musee.game.GameComponent;
-import com.music.musee.game.GameObject;
-
 public class CrusherAndouComponent extends GameComponent {
     private ChangeComponentsComponent mSwap;
     
