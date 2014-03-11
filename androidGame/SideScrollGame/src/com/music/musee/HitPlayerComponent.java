@@ -24,6 +24,7 @@ public class HitPlayerComponent extends GameComponent {
 	HitReactionComponent mHitReact;
 	int mHitType;
 	boolean mHitDirection;
+	boolean mVibrate;
 	
 	public HitPlayerComponent() {
         super();
@@ -35,6 +36,7 @@ public class HitPlayerComponent extends GameComponent {
     
     @Override
     public void reset() {
+    	mVibrate = false;
     	mDistance2 = 0.0f;
     	mPlayerPosition.zero();
     	mMyPosition.zero();
@@ -54,6 +56,13 @@ public class HitPlayerComponent extends GameComponent {
         		mMyPosition.set(parentObject.getCenteredPositionX(), parentObject.getCenteredPositionY());
         		if (mMyPosition.distance2(mPlayerPosition) <= mDistance2) {
         			HitReactionComponent playerHitReact = player.findByClass(HitReactionComponent.class);
+        			if(mVibrate){
+        				VibrationSystem vibrator = sSystemRegistry.vibrationSystem;
+
+        				if (vibrator != null) {
+        					vibrator.vibrate(0.05f);
+        				}
+        			}
         			if (playerHitReact != null) {
         				if (!mHitDirection) {
         					// hit myself
@@ -70,10 +79,19 @@ public class HitPlayerComponent extends GameComponent {
         }
     }
     
+    public void setup(float distance, HitReactionComponent hitReact, int hitType, boolean hitPlayer, boolean vibrate) {
+    	mDistance2 = distance * distance;
+    	mHitReact = hitReact;
+    	mHitType = hitType;
+    	mHitDirection = hitPlayer;
+    	mVibrate = vibrate;
+    }
+    
     public void setup(float distance, HitReactionComponent hitReact, int hitType, boolean hitPlayer) {
     	mDistance2 = distance * distance;
     	mHitReact = hitReact;
     	mHitType = hitType;
     	mHitDirection = hitPlayer;
+    	mVibrate = false;
     }
 }

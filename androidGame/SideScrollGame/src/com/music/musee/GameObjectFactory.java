@@ -28,13 +28,14 @@ import com.music.musee.EnemyAnimationComponent.EnemyAnimations;
 import com.music.musee.R.drawable;
 import com.music.musee.R.raw;
 import com.music.musee.constant.SortConstants;
-import com.music.musee.game.GameComponent;
-import com.music.musee.game.GameComponentPool;
-import com.music.musee.game.GameFlowEvent;
-import com.music.musee.game.GameObject;
-import com.music.musee.game.GameObjectManager;
-import com.music.musee.game.GameObject.ActionType;
-import com.music.musee.game.GameObject.Team;
+import com.music.musee.GameComponent;
+import com.music.musee.GameComponentPool;
+import com.music.musee.GameFlowEvent;
+import com.music.musee.GameObject;
+import com.music.musee.GameObjectManager;
+import com.music.musee.GameObject.ActionType;
+import com.music.musee.GameObject.Team;
+import com.music.musee.GenericAnimationComponent.Animation;
 import com.music.musee.utils.Utils;
 
 /** A class for generating game objects at runtime.
