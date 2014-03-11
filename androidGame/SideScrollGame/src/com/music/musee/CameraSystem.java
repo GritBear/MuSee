@@ -16,6 +16,7 @@
 
 package com.music.musee;
 
+import com.music.musee.game.GameObject;
 import com.music.musee.utils.Utils;
 
 /**
@@ -65,7 +66,7 @@ public class CameraSystem extends BaseObject {
         mTargetPosition.zero();
     }
     
-    void setTarget(GameObject target) {
+    public void setTarget(GameObject target) {
         if (target != null && mTarget != target) {
             mPreInterpolateCameraPosition.set(mCurrentCameraPosition);
             mPreInterpolateCameraPosition.subtract(target.getPosition());

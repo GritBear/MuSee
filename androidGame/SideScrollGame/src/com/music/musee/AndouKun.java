@@ -45,6 +45,9 @@ import com.music.musee.R;
 import com.music.musee.GL.GLSurfaceView;
 import com.music.musee.constant.PreferenceConstants;
 import com.music.musee.constant.UIConstants;
+import com.music.musee.game.Game;
+import com.music.musee.game.GameFlowEvent;
+import com.music.musee.game.GameOverActivity;
 
 /**
  * Core activity for the game.  Sets up a surface view for OpenGL, bootstraps

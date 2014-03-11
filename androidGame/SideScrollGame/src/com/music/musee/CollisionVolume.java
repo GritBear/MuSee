@@ -99,10 +99,10 @@ public abstract class CollisionVolume extends AllocationGuard {
         return value;
     }
     
-    protected abstract float getMinX();
-    protected abstract float getMaxX();
-    protected abstract float getMinY();
-    protected abstract float getMaxY();
+    public abstract float getMinX();
+    public abstract float getMaxX();
+    public abstract float getMinY();
+    public abstract float getMaxY();
     
 
     public static class FlipInfo {

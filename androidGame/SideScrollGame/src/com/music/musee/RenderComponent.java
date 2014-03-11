@@ -16,6 +16,9 @@
 
 package com.music.musee;
 
+import com.music.musee.game.GameComponent;
+import com.music.musee.game.GameObject;
+
 /** 
  * Implements rendering of a drawable object for a game object.  If a drawable is set on this
  * component it will be passed to the renderer and drawn on the screen every frame.  Drawable

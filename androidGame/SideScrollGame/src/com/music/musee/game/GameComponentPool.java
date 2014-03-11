@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package com.music.musee;
+package com.music.musee.game;
+
+import com.music.musee.TObjectPool;
 
 public class GameComponentPool extends TObjectPool<GameComponent> {
     public Class<?> objectClass;

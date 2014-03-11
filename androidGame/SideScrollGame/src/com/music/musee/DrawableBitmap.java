@@ -34,7 +34,7 @@ public class DrawableBitmap extends DrawableObject {
     private int mViewHeight;
     private float mOpacity;
     
-    DrawableBitmap(Texture texture, int width, int height) {
+    public DrawableBitmap(Texture texture, int width, int height) {
         super();
         mTexture = texture;
         mWidth = width;

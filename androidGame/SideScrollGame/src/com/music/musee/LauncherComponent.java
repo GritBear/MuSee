@@ -16,8 +16,12 @@
 
 package com.music.musee;
 
-import com.music.musee.GameObject.ActionType;
 import com.music.musee.SoundSystem.Sound;
+import com.music.musee.game.GameComponent;
+import com.music.musee.game.GameObject;
+import com.music.musee.game.GameObjectFactory;
+import com.music.musee.game.GameObjectManager;
+import com.music.musee.game.GameObject.ActionType;
 
 public class LauncherComponent extends GameComponent {
     private final static float DEFAULT_LAUNCH_DELAY = 2.0f;

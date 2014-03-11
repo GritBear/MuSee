@@ -14,10 +14,19 @@
  * limitations under the License.
  */
 
-package com.music.musee;
+package com.music.musee.game;
 
 import java.util.Comparator;
 
+import com.music.musee.AABoxCollisionVolume;
+import com.music.musee.AllocationGuard;
+import com.music.musee.BaseObject;
+import com.music.musee.CollisionVolume;
+import com.music.musee.DebugSystem;
+import com.music.musee.FixedSizeArray;
+import com.music.musee.HitReactionComponent;
+import com.music.musee.TObjectPool;
+import com.music.musee.Vector2;
 import com.music.musee.CollisionParameters.HitType;
 
 /**

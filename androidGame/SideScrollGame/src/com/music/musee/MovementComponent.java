@@ -16,6 +16,9 @@
 
 package com.music.musee;
 
+import com.music.musee.game.GameComponent;
+import com.music.musee.game.GameObject;
+
 
 /**
  * A game component that implements velocity-based movement.

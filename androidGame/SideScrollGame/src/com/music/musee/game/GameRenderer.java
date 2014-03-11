@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.music.musee;
+package com.music.musee.game;
 
 import android.content.Context;
 import android.os.Build;
@@ -23,6 +23,14 @@ import android.os.SystemClock;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+import com.music.musee.BaseObject;
+import com.music.musee.ContextParameters;
+import com.music.musee.DebugLog;
+import com.music.musee.DrawableBitmap;
+import com.music.musee.FixedSizeArray;
+import com.music.musee.ObjectManager;
+import com.music.musee.OpenGLSystem;
+import com.music.musee.RenderSystem;
 import com.music.musee.GL.BufferLibrary;
 import com.music.musee.GL.GLSurfaceView;
 import com.music.musee.GL.TextureLibrary;

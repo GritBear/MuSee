@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.music.musee;
+package com.music.musee.game;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -28,7 +28,14 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.music.musee.AnimationPlayerActivity;
+import com.music.musee.DebugLog;
 import com.music.musee.R;
+import com.music.musee.R.anim;
+import com.music.musee.R.id;
+import com.music.musee.R.layout;
+import com.music.musee.R.string;
 import com.music.musee.constant.PreferenceConstants;
 import com.music.musee.constant.UIConstants;
 
