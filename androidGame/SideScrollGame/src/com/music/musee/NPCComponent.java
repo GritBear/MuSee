@@ -17,11 +17,7 @@
 package com.music.musee;
 
 import com.music.musee.CollisionParameters.HitType;
-import com.music.musee.game.GameComponent;
-import com.music.musee.game.GameFlowEvent;
-import com.music.musee.game.GameObject;
-import com.music.musee.game.GameObjectManager;
-import com.music.musee.game.GameObject.ActionType;
+import com.music.musee.GameObject.ActionType;
 import com.music.musee.utils.Utils;
 
 public class NPCComponent extends GameComponent {

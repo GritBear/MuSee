@@ -16,9 +16,6 @@
 
 package com.music.musee;
 
-import com.music.musee.game.GameComponent;
-import com.music.musee.game.GameObject;
-
 /**
  * A game component that implements gravity.  Adding this component to a game object will cause
  * it to be pulled down towards the ground.

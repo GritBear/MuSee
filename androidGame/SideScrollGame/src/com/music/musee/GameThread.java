@@ -14,13 +14,7 @@
  * limitations under the License.
  */
 
-package com.music.musee.game;
-
-import com.music.musee.BaseObject;
-import com.music.musee.CameraSystem;
-import com.music.musee.DebugLog;
-import com.music.musee.ObjectManager;
-import com.music.musee.SoundSystem;
+package com.music.musee;
 
 import android.media.MediaPlayer;
 import android.os.SystemClock;

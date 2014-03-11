@@ -54,7 +54,7 @@
 	              android:screenOrientation="landscape" 
 	              android:configChanges="keyboardHidden|orientation" />
 	              
-		<activity android:name="com.music.musee.game.GameOverActivity"
+		<activity android:name="com.music.musee.GameOverActivity"
 				  android:screenOrientation="landscape" 
 	   			  android:configChanges="keyboardHidden|orientation"/>
 	   			     

@@ -19,8 +19,6 @@ package com.music.musee;
 
 import java.util.Comparator;
 
-import com.music.musee.game.GameComponent;
-import com.music.musee.game.GameObject;
 import com.music.musee.utils.Utils;
 
 /**

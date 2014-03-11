@@ -16,8 +16,6 @@
 
 package com.music.musee;
 
-import com.music.musee.game.GameComponent;
-
 public class PlaySingleSoundComponent extends GameComponent {
 	private SoundSystem.Sound mSound;
 	private int mSoundHandle;

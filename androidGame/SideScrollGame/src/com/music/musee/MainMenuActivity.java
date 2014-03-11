@@ -18,6 +18,7 @@ package com.music.musee;
 
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -25,6 +26,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;

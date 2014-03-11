@@ -73,7 +73,7 @@ public abstract class ObjectPool extends BaseObject {
         return mAvailable;
     }
 
-    public int getSize() {
+    protected int getSize() {
         return mSize;
     }
 

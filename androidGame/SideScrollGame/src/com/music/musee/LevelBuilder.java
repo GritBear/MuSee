@@ -22,8 +22,6 @@ import android.util.Log;
 import com.music.musee.R;
 import com.music.musee.GL.TextureLibrary;
 import com.music.musee.constant.SortConstants;
-import com.music.musee.game.GameComponent;
-import com.music.musee.game.GameObject;
 
 public class LevelBuilder extends BaseObject {
 	private final static int THEME_GRASS = 0;

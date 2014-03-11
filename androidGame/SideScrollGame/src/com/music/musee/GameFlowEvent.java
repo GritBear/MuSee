@@ -14,10 +14,7 @@
  * limitations under the License.
  */
  
- package com.music.musee.game;
-
-import com.music.musee.AndouKun;
-import com.music.musee.DebugLog;
+ package com.music.musee;
 
 import android.content.Context;
 

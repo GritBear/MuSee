@@ -17,8 +17,6 @@
 package com.music.musee;
 
 import com.music.musee.SoundSystem.Sound;
-import com.music.musee.game.GameComponent;
-import com.music.musee.game.GameObject;
 
 public class ButtonAnimationComponent extends GameComponent {
     public static final class Animation {
