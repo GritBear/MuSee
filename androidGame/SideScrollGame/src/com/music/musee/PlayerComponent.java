@@ -18,7 +18,12 @@ package com.music.musee;
 
 
 import com.music.musee.CollisionParameters.HitType;
-import com.music.musee.GameObject.ActionType;
+import com.music.musee.game.GameComponent;
+import com.music.musee.game.GameFlowEvent;
+import com.music.musee.game.GameObject;
+import com.music.musee.game.GameObjectFactory;
+import com.music.musee.game.GameObjectManager;
+import com.music.musee.game.GameObject.ActionType;
 import com.music.musee.utils.Utils;
 
 public class PlayerComponent extends GameComponent {
@@ -163,15 +168,15 @@ public class PlayerComponent extends GameComponent {
 						doubleJumped = false;
 						mJumpTime = time;
 					} else if (time > mJumpTime + JUMP_TO_JETS_DELAY) {
-						if (mFuel > 0.0f) {
+						if(!doubleJumped){
+							impulse.y = AIR_VERTICAL_IMPULSE_SPEED_FROM_GROUND;  //double jump
+							doubleJumped = true;
+							mJumpTime = time;
+						} else if (mFuel > 0.0f) {
 							mFuel -= timeDelta;
 							impulse.y = AIR_VERTICAL_IMPULSE_SPEED * timeDelta;
 							mRocketsOn = true;
 						}
-//						if(!doubleJumped){
-//							impulse.y = AIR_VERTICAL_IMPULSE_SPEED_FROM_GROUND;  //double jump
-//							doubleJumped = true;
-//						}
 					}
 				}
 
@@ -270,6 +275,7 @@ public class PlayerComponent extends GameComponent {
 					}
 				}
 			}
+			
 			if (inventory.rubyCount >= MAX_GEMS_PER_LEVEL) {
 				gotoWin(gameTime);
 			}

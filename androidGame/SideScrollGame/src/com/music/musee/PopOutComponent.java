@@ -16,6 +16,10 @@
 
 package com.music.musee;
 
+import com.music.musee.game.GameComponent;
+import com.music.musee.game.GameObject;
+import com.music.musee.game.GameObjectManager;
+
 /**
  * A component that implements the "pop-out" AI behavior.  Pop-out characters alternate between 
  * hiding and appearing based on their distance from the player.  They do not move or normally

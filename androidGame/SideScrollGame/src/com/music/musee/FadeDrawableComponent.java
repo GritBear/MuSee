@@ -17,6 +17,8 @@
 package com.music.musee;
 
 import com.music.musee.GL.Texture;
+import com.music.musee.game.GameComponent;
+import com.music.musee.game.GameObject;
 
 public class FadeDrawableComponent extends GameComponent {
 	public static final int LOOP_TYPE_NONE = 0;

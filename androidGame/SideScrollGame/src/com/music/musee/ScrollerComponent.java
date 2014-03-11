@@ -17,6 +17,7 @@
 package com.music.musee;
 
 import com.music.musee.GL.Texture;
+import com.music.musee.game.GameComponent;
 
 /**
  * Adjusts the scroll position of a drawable object based on the camera's focus position.

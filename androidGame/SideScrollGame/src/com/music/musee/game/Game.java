@@ -14,16 +14,50 @@
  * limitations under the License.
  */
 
-package com.music.musee;
+package com.music.musee.game;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Build;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.widget.Toast;
+
+import com.music.musee.AllocationGuard;
+import com.music.musee.AndouKun;
+import com.music.musee.BaseObject;
+import com.music.musee.CameraSystem;
+import com.music.musee.ChannelSystem;
+import com.music.musee.CollisionSystem;
+import com.music.musee.ContextParameters;
+import com.music.musee.CustomToastSystem;
+import com.music.musee.DebugLog;
+import com.music.musee.DrawableBitmap;
+import com.music.musee.DrawableFactory;
+import com.music.musee.EventRecorder;
+import com.music.musee.HitPointPool;
+import com.music.musee.HotSpotSystem;
+import com.music.musee.HudSystem;
+import com.music.musee.InputGameInterface;
+import com.music.musee.InputSystem;
+import com.music.musee.LevelBuilder;
+import com.music.musee.LevelSystem;
+import com.music.musee.LevelTree;
+import com.music.musee.MainLoop;
+import com.music.musee.MultiTouchFilter;
+import com.music.musee.ObjectManager;
+import com.music.musee.OpenGLSystem;
 import com.music.musee.R;
+import com.music.musee.RenderSystem;
+import com.music.musee.SingleTouchFilter;
+import com.music.musee.SoundSystem;
+import com.music.musee.TimeSystem;
+import com.music.musee.TouchFilter;
+import com.music.musee.Vector2;
+import com.music.musee.VectorPool;
+import com.music.musee.VibrationSystem;
 import com.music.musee.GL.BufferLibrary;
 import com.music.musee.GL.GLSurfaceView;
 import com.music.musee.GL.Texture;
@@ -375,6 +409,18 @@ public class Game extends AllocationGuard {
 		songResource = mCurrentLevel.musicResource;
 		if(songResource != -1){
 			mp = MediaPlayer.create(AndouKun.gameRootActivity, songResource);
+			mp.setOnCompletionListener(new OnCompletionListener(){
+				@Override
+				public void onCompletion(MediaPlayer mp) {
+					HudSystem hud = BaseObject.sSystemRegistry.hudSystem;
+					if (hud != null && !hud.isFading()) {
+						hud.startFade(false, 1.5f);
+						hud.sendGameEventOnFadeComplete(GameFlowEvent.EVENT_GO_TO_NEXT_LEVEL, 0);
+					}
+				}
+
+			});
+
 			mp.start();
 		}
 
