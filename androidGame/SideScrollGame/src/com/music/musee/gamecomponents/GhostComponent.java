@@ -14,8 +14,23 @@
  * limitations under the License.
  */
 
-package com.music.musee;
+package com.music.musee.gamecomponents;
 
+import com.music.musee.BaseObject;
+import com.music.musee.CameraSystem;
+import com.music.musee.ChangeComponentsComponent;
+import com.music.musee.GameComponent;
+import com.music.musee.GameObject;
+import com.music.musee.GameObjectManager;
+import com.music.musee.InputButton;
+import com.music.musee.InputGameInterface;
+import com.music.musee.InputXY;
+import com.music.musee.PlayerComponent;
+import com.music.musee.SoundSystem;
+import com.music.musee.SpriteComponent;
+import com.music.musee.TimeSystem;
+import com.music.musee.GameComponent.ComponentPhases;
+import com.music.musee.GameObject.ActionType;
 import com.music.musee.SoundSystem.Sound;
 
 public class GhostComponent extends GameComponent {

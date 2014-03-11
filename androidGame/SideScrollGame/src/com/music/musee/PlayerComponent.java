@@ -17,15 +17,19 @@
 package com.music.musee;
 
 
-import com.music.musee.CollisionParameters.HitType;
 import com.music.musee.GameObject.ActionType;
+import com.music.musee.constant.AdultsDifficultyConstants;
+import com.music.musee.constant.CollisionParameters;
+import com.music.musee.constant.KidsDifficultyConstants;
+import com.music.musee.constant.CollisionParameters.HitType;
+import com.music.musee.hitcollision.HitReactionComponent;
 import com.music.musee.utils.Utils;
 
 public class PlayerComponent extends GameComponent {
 
 	private static final float GROUND_IMPULSE_SPEED = 5000.0f;
 	private static final float AIR_HORIZONTAL_IMPULSE_SPEED = 4000.0f;
-	private static final float AIR_VERTICAL_IMPULSE_SPEED = 750.0f;
+	private static final float AIR_VERTICAL_IMPULSE_SPEED = 1100.0f;
 	private static final float AIR_VERTICAL_IMPULSE_SPEED_FROM_GROUND = 30000.0f;
 	//    private static final float AIR_DRAG_SPEED = 4000.0f;
 	private static final float AIR_DRAG_SPEED = 0.0f;
@@ -150,10 +154,10 @@ public class PlayerComponent extends GameComponent {
 				Vector2 impulse = pool.allocate();
 				//                
 				//TODO implement constant right move (to have more logic here)
-//				impulse.set(1, 0.0f);
-//				if (dpad.getPressed()) {
-//					impulse.set(dpad.getX(), 0.0f);
-//				}
+				//				impulse.set(1, 0.0f);
+				//				if (dpad.getPressed()) {
+				//					impulse.set(dpad.getX(), 0.0f);
+				//				}
 
 				if (jumpButton.getPressed()) {
 					if (jumpButton.getTriggered(time) && mTouchingGround) {
@@ -163,15 +167,15 @@ public class PlayerComponent extends GameComponent {
 						doubleJumped = false;
 						mJumpTime = time;
 					} else if (time > mJumpTime + JUMP_TO_JETS_DELAY) {
-						if (mFuel > 0.0f) {
+						if(!doubleJumped){
+							impulse.y = AIR_VERTICAL_IMPULSE_SPEED_FROM_GROUND;  //double jump
+							doubleJumped = true;
+							mJumpTime = time;
+						}else if (mFuel > 0.0f) {
 							mFuel -= timeDelta;
 							impulse.y = AIR_VERTICAL_IMPULSE_SPEED * timeDelta;
 							mRocketsOn = true;
 						}
-//						if(!doubleJumped){
-//							impulse.y = AIR_VERTICAL_IMPULSE_SPEED_FROM_GROUND;  //double jump
-//							doubleJumped = true;
-//						}
 					}
 				}
 
@@ -189,18 +193,18 @@ public class PlayerComponent extends GameComponent {
 						// Don't let our jets move us past specific speed thresholds.
 						float currentSpeed = parentObject.getVelocity().x;
 						final float newSpeed = Math.abs(currentSpeed + impulse.x);
-//						if (newSpeed > maxHorizontalSpeed) {
-//							if (Math.abs(currentSpeed) < maxHorizontalSpeed) {
-//								currentSpeed = maxHorizontalSpeed * Utils.sign(impulse.x);
-//								parentObject.getVelocity().x = (currentSpeed);
-//							}
-//							impulse.x = (0.0f); 
-//						}
-						
+						//						if (newSpeed > maxHorizontalSpeed) {
+						//							if (Math.abs(currentSpeed) < maxHorizontalSpeed) {
+						//								currentSpeed = maxHorizontalSpeed * Utils.sign(impulse.x);
+						//								parentObject.getVelocity().x = (currentSpeed);
+						//							}
+						//							impulse.x = (0.0f); 
+						//						}
+
 						//set constant speed
 						currentSpeed = maxHorizontalSpeed;
 						parentObject.getVelocity().x = (currentSpeed);
-						
+
 						if (parentObject.getVelocity().y + impulse.y > MAX_UPWARD_SPEED
 								&& Utils.sign(impulse.y) > 0) {
 							impulse.y = (0.0f);
@@ -209,19 +213,19 @@ public class PlayerComponent extends GameComponent {
 							}
 						}
 
-//						if (inTheAir) {
-//							// Apply drag while in the air.
-//							if (Math.abs(currentSpeed) > maxHorizontalSpeed) {
-//								float postDragSpeed = currentSpeed - 
-//										(AIR_DRAG_SPEED * timeDelta * Utils.sign(currentSpeed));
-//								if (Utils.sign(currentSpeed) != Utils.sign(postDragSpeed)) {
-//									postDragSpeed = 0.0f;
-//								} else if (Math.abs(postDragSpeed) < maxHorizontalSpeed) {
-//									postDragSpeed = maxHorizontalSpeed * Utils.sign(postDragSpeed);
-//								}
-//								parentObject.getVelocity().x = (postDragSpeed);
-//							}
-//						}
+						//						if (inTheAir) {
+						//							// Apply drag while in the air.
+						//							if (Math.abs(currentSpeed) > maxHorizontalSpeed) {
+						//								float postDragSpeed = currentSpeed - 
+						//										(AIR_DRAG_SPEED * timeDelta * Utils.sign(currentSpeed));
+						//								if (Utils.sign(currentSpeed) != Utils.sign(postDragSpeed)) {
+						//									postDragSpeed = 0.0f;
+						//								} else if (Math.abs(postDragSpeed) < maxHorizontalSpeed) {
+						//									postDragSpeed = maxHorizontalSpeed * Utils.sign(postDragSpeed);
+						//								}
+						//								parentObject.getVelocity().x = (postDragSpeed);
+						//							}
+						//						}
 
 						parentObject.getImpulse().add(impulse);
 						pool.release(impulse);
@@ -539,9 +543,9 @@ public class PlayerComponent extends GameComponent {
 		if (time > mGhostDeactivatedTime) {
 			if (!mGhostActive) { // The ghost might have activated again during this delay.
 				CameraSystem camera = sSystemRegistry.cameraSystem;
-			if (camera != null) {
-				camera.setTarget(parentObject);
-			}
+				if (camera != null) {
+					camera.setTarget(parentObject);
+				}
 			}
 			gotoMove(parentObject);
 		}

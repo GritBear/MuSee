@@ -15,6 +15,7 @@
  */
  package com.music.musee;
 
+
 public class CameraBiasComponent extends GameComponent {
 	 public CameraBiasComponent() {
         super();

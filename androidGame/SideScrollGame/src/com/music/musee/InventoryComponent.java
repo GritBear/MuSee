@@ -16,6 +16,7 @@
 
 package com.music.musee;
 
+
 public class InventoryComponent extends GameComponent {
     private UpdateRecord mInventory;
     private boolean mInventoryChanged;

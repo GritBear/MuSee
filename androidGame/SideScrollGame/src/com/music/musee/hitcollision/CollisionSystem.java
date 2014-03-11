@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.music.musee;
+package com.music.musee.hitcollision;
 
 import android.content.res.AssetManager;
 import android.util.Log;
@@ -22,6 +22,14 @@ import android.util.Log;
 import java.io.IOException;
 import java.io.InputStream;
 
+import com.music.musee.AllocationGuard;
+import com.music.musee.BaseObject;
+import com.music.musee.FixedSizeArray;
+import com.music.musee.GameObject;
+import com.music.musee.TObjectPool;
+import com.music.musee.TiledWorld;
+import com.music.musee.Vector2;
+import com.music.musee.VectorPool;
 import com.music.musee.constant.ParseConstant;
 import com.music.musee.utils.Utils;
 

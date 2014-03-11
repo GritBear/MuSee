@@ -15,7 +15,17 @@
  */
 
 
-package com.music.musee;
+package com.music.musee.hitcollision;
+
+import com.music.musee.BaseObject;
+import com.music.musee.GameComponent;
+import com.music.musee.GameObject;
+import com.music.musee.GameObjectManager;
+import com.music.musee.Vector2;
+import com.music.musee.VibrationSystem;
+import com.music.musee.GameComponent.ComponentPhases;
+import com.music.musee.constant.CollisionParameters;
+import com.music.musee.constant.CollisionParameters.HitType;
 
 public class HitPlayerComponent extends GameComponent {
 	float mDistance2;

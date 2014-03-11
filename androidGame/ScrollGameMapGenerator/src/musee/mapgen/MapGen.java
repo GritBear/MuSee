@@ -56,8 +56,8 @@ public class MapGen {
 				backgroundIndexArray[x][0] = 26;
 				backgroundIndexArray[x][height - 1] = 26;
 			}else{
-				backgroundIndexArray[x][0] = 34;
-				backgroundIndexArray[x][height - 1] = 34;
+				backgroundIndexArray[x][0] = 126;
+				backgroundIndexArray[x][height - 1] = 111;
 			}
 		}
 

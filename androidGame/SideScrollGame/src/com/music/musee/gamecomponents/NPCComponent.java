@@ -14,10 +14,23 @@
  * limitations under the License.
  */
 
-package com.music.musee;
+package com.music.musee.gamecomponents;
 
-import com.music.musee.CollisionParameters.HitType;
+import com.music.musee.BaseObject;
+import com.music.musee.CameraSystem;
+import com.music.musee.GameComponent;
+import com.music.musee.GameFlowEvent;
+import com.music.musee.GameObject;
+import com.music.musee.GameObjectManager;
+import com.music.musee.HotSpotSystem;
+import com.music.musee.HudSystem;
+import com.music.musee.LevelSystem;
+import com.music.musee.Vector2;
+import com.music.musee.GameComponent.ComponentPhases;
 import com.music.musee.GameObject.ActionType;
+import com.music.musee.HotSpotSystem.HotSpotType;
+import com.music.musee.constant.CollisionParameters.HitType;
+import com.music.musee.hitcollision.HitReactionComponent;
 import com.music.musee.utils.Utils;
 
 public class NPCComponent extends GameComponent {

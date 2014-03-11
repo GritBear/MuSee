@@ -17,6 +17,7 @@
 package com.music.musee;
 
 
+
 public class OrbitalMagnetComponent extends GameComponent {
 	private final static float DEFAULT_STRENGTH = 15.0f;
 

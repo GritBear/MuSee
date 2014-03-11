@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package com.music.musee;
+package com.music.musee.constant;
+
+import com.music.musee.DifficultyConstants;
 
 public class AdultsDifficultyConstants extends DifficultyConstants {
 

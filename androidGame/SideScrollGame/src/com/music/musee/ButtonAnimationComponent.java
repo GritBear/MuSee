@@ -17,6 +17,7 @@
 package com.music.musee;
 
 import com.music.musee.SoundSystem.Sound;
+import com.music.musee.constant.CollisionParameters;
 
 public class ButtonAnimationComponent extends GameComponent {
     public static final class Animation {

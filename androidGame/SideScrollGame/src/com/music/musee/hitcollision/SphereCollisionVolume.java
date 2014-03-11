@@ -15,7 +15,9 @@
  */
 
 
-package com.music.musee;
+package com.music.musee.hitcollision;
+
+import com.music.musee.Vector2;
 
 /** A sphere collision volume. */
 public class SphereCollisionVolume extends CollisionVolume {

@@ -14,11 +14,18 @@
  * limitations under the License.
  */
 
-package com.music.musee;
+package com.music.musee.hitcollision;
 
 import java.util.Comparator;
 
-import com.music.musee.CollisionParameters.HitType;
+import com.music.musee.AllocationGuard;
+import com.music.musee.BaseObject;
+import com.music.musee.DebugSystem;
+import com.music.musee.FixedSizeArray;
+import com.music.musee.GameObject;
+import com.music.musee.TObjectPool;
+import com.music.musee.Vector2;
+import com.music.musee.constant.CollisionParameters.HitType;
 
 /**
  * A system for calculating collisions between moving game objects.  This system accepts collision
