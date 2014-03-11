@@ -37,6 +37,7 @@ import com.music.musee.DebugLog;
 import com.music.musee.DrawableBitmap;
 import com.music.musee.DrawableFactory;
 import com.music.musee.EventRecorder;
+import com.music.musee.GameObjectFactory;
 import com.music.musee.HitPointPool;
 import com.music.musee.HotSpotSystem;
 import com.music.musee.HudSystem;

@@ -21,6 +21,7 @@ import java.util.Comparator;
 import com.music.musee.BaseObject;
 import com.music.musee.CameraSystem;
 import com.music.musee.FixedSizeArray;
+import com.music.musee.GameObjectFactory;
 import com.music.musee.ObjectManager;
 import com.music.musee.Vector2;
 
