@@ -18,6 +18,7 @@ package com.music.musee;
 
 import com.music.musee.game.GameComponent;
 import com.music.musee.game.GameObject;
+import com.music.musee.game.GameObjectFactory;
 
 /** 
  * A game component that can swap other components in and out of its parent game object.  The

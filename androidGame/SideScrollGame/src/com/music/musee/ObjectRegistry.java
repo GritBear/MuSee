@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import com.music.musee.GL.BufferLibrary;
 import com.music.musee.GL.TextureLibrary;
 import com.music.musee.game.GameObjectCollisionSystem;
+import com.music.musee.game.GameObjectFactory;
 import com.music.musee.game.GameObjectManager;
 
 /**
