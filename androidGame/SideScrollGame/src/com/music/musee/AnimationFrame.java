@@ -17,6 +17,7 @@
 package com.music.musee;
 
 import com.music.musee.GL.Texture;
+import com.music.musee.hitcollision.CollisionVolume;
 
 /**
  * A single animation frame.  Frames contain a texture, a hold time, and collision volumes to

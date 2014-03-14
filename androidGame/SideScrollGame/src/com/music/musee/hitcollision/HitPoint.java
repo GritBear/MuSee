@@ -13,23 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
- package com.music.musee;
 
-public class HitPointPool extends TObjectPool<HitPoint> {
+package com.music.musee.hitcollision;
 
-    @Override
-    protected void fill() {
-        final int size = getSize();
-        for (int x = 0; x < size; x++) {
-            getAvailable().add(new HitPoint());
-        }
+import com.music.musee.AllocationGuard;
+import com.music.musee.Vector2;
+
+public class HitPoint extends AllocationGuard {
+    public Vector2 hitPoint;
+    public Vector2 hitNormal;
+    
+    public HitPoint() {
+        super();
     }
     
-    @Override
-    public void release(Object entry) {
-        ((HitPoint)entry).reset();
-        super.release(entry);
+    public final void reset() {
+        hitPoint = null;
+        hitNormal = null;
     }
-
 }

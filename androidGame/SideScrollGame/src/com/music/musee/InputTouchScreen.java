@@ -1,5 +1,7 @@
 package com.music.musee;
 
+import android.util.Log;
+
 public class InputTouchScreen extends BaseObject {
 	
 	private int MAX_TOUCH_POINTS = 5;

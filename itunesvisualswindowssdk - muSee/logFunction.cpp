@@ -20,8 +20,9 @@ void ArtStoryCore::writeLog(){
 				currentLevels++;
 			}
 		}
-		tempString = "beatlevel:" + num2str(currentLevels) + ";beatmagnitude:" + num2str(tempFloat)+";ToneIndex:" + num2str(logMelody);
-		
+		//tempString = "beatlevel:" + num2str(currentLevels) + ";beatmagnitude:" + num2str(tempFloat)+";ToneIndex:" + num2str(logMelody);
+		tempString =  num2str(currentLevels) + ";" + num2str(tempFloat) + ";" + num2str(logMelody);
+
 		logWriteStream << tempString;
 		logWriteStream << "\n";//separater
 	}

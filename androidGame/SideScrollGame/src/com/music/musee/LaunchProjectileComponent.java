@@ -17,6 +17,7 @@
 package com.music.musee;
 
 import com.music.musee.GameObject.ActionType;
+import com.music.musee.gamecomponents.LifetimeComponent;
 import com.music.musee.utils.Utils;
 
 /**

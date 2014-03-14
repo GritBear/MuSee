@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.music.musee;
+package com.music.musee.constant;
 
 /** 
  * CollisionParamaters defines global parameters related to dynamic (object vs object) collisions.

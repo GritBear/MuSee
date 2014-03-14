@@ -19,6 +19,8 @@ package com.music.musee;
 
 import java.util.Comparator;
 
+import com.music.musee.hitcollision.CollisionSystem;
+import com.music.musee.hitcollision.HitPoint;
 import com.music.musee.utils.Utils;
 
 /**
@@ -224,7 +226,6 @@ public class BackgroundCollisionComponent extends GameComponent {
                     float yStart = top;
                     float yEnd = bottom;
                     
-                  
                     mRayStart.set(centerOffsetX, yStart);
                     mRayStart.add(mCurrentPosition);
                     

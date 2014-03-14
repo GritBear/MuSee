@@ -16,6 +16,7 @@
 
 package com.music.musee;
 
+import com.music.musee.hitcollision.CollisionSystem;
 import com.music.musee.utils.Utils;
 
 // Simple collision detection component for objects not requiring complex collision (projectiles, etc)

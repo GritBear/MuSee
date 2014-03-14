@@ -2,10 +2,10 @@
 <levelTree>
 
 
-    
+
     <group>
         <level
-            resource="@raw/test_map"
+            resource="@raw/neon_pegasus_map"
             time="@string/level_3_5_time"
             title="@string/level_3_5_sewer" >
             <music>

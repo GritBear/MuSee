@@ -18,6 +18,7 @@ package com.music.musee;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Build;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -28,6 +29,9 @@ import com.music.musee.GL.BufferLibrary;
 import com.music.musee.GL.GLSurfaceView;
 import com.music.musee.GL.Texture;
 import com.music.musee.GL.TextureLibrary;
+import com.music.musee.hitcollision.CollisionSystem;
+import com.music.musee.hitcollision.GameObjectCollisionSystem;
+import com.music.musee.hitcollision.HitPointPool;
 
 /**
  * High-level setup object for the AndouKun game engine.
@@ -188,13 +192,7 @@ public class Game extends AllocationGuard {
 											new DrawableBitmap(longTermTextureLibrary.allocateTexture(
 													R.drawable.ui_button_stomp_off), 0, 0),
 													new DrawableBitmap(longTermTextureLibrary.allocateTexture(
-															R.drawable.ui_button_stomp_on), 0, 0),
-															new DrawableBitmap(longTermTextureLibrary.allocateTexture(
-																	R.drawable.ui_movement_slider_base), 0, 0),
-																	new DrawableBitmap(longTermTextureLibrary.allocateTexture(
-																			R.drawable.ui_movement_slider_button_off), 0, 0),
-																			new DrawableBitmap(longTermTextureLibrary.allocateTexture(
-																					R.drawable.ui_movement_slider_button_on), 0, 0));
+															R.drawable.ui_button_stomp_on), 0, 0));
 			Texture[] digitTextures = {
 					longTermTextureLibrary.allocateTexture(R.drawable.ui_0),
 					longTermTextureLibrary.allocateTexture(R.drawable.ui_1),
@@ -372,18 +370,35 @@ public class Game extends AllocationGuard {
 
 	/** Starts the game running. */
 	public void start() {
-		if(mp != null && mp.isPlaying()){
-			mp.stop();
-			mp.reset();
-			mp.release();
-			mp = null;
-		}
-		songResource = mCurrentLevel.musicResource;
-		if(songResource != -1){
-			mp = MediaPlayer.create(AndouKun.gameRootActivity, songResource);
-			mp.start();
-		}
+		try{
+			if(mp != null){
+				if(!mp.isPlaying()){
+					mp.stop();
+					mp.reset();
+					mp.release();
+					mp = null;
+				}
+			}
 
+			songResource = mCurrentLevel.musicResource;
+			if(songResource != -1){
+				mp = MediaPlayer.create(AndouKun.gameRootActivity, songResource);
+				mp.setOnCompletionListener(new OnCompletionListener(){
+
+					@Override
+					public void onCompletion(MediaPlayer mp1) {
+						HudSystem hud = BaseObject.sSystemRegistry.hudSystem;
+						if (hud != null && !hud.isFading()) {
+							hud.startFade(false, 1.5f);
+							hud.sendGameEventOnFadeComplete(GameFlowEvent.EVENT_GO_TO_NEXT_LEVEL, 0);
+						}
+					}});
+
+				mp.start();
+			}
+		}catch(Exception e){
+			//well, should be better handled
+		}
 		if (!mRunning) {
 			assert mGame == null;
 			// Now's a good time to run the GC.

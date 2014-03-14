@@ -16,6 +16,7 @@
 
 package com.music.musee;
 
+
 public class FixedAnimationComponent extends GameComponent {
     private int mAnimationIndex;
     

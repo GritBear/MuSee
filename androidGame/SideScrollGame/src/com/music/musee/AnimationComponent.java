@@ -17,9 +17,9 @@
 package com.music.musee;
 
 
-import com.music.musee.CollisionParameters.HitType;
 import com.music.musee.GameObject.ActionType;
 import com.music.musee.SoundSystem.Sound;
+import com.music.musee.constant.CollisionParameters.HitType;
 import com.music.musee.utils.Utils;
 
 /**
@@ -205,10 +205,10 @@ public class AnimationComponent extends GameComponent {
             
             if (currentAction == ActionType.MOVE) {
                 InputGameInterface input = sSystemRegistry.inputGameInterface;
-                final InputXY dpad = input.getDirectionalPad();
-                if (dpad.getX() < 0.0f) {
+//                final InputXY dpad = input.getDirectionalPad();
+                if (parentObject.getVelocity().x < 0.0f) {
                     parentObject.facingDirection.x = -1.0f; 
-                } else if (dpad.getX() > 0.0f) {
+                } else if (parentObject.getVelocity().x > 0.0f) {
                     parentObject.facingDirection.x = 1.0f;
                 }
                 

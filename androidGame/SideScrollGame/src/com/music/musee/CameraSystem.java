@@ -65,7 +65,7 @@ public class CameraSystem extends BaseObject {
         mTargetPosition.zero();
     }
     
-    void setTarget(GameObject target) {
+    public void setTarget(GameObject target) {
         if (target != null && mTarget != target) {
             mPreInterpolateCameraPosition.set(mCurrentCameraPosition);
             mPreInterpolateCameraPosition.subtract(target.getPosition());
@@ -88,7 +88,7 @@ public class CameraSystem extends BaseObject {
 		return mTarget;
 	}
     
-    void shake(float duration, float magnitude) {
+    public void shake(float duration, float magnitude) {
         mShakeTime = duration;
         mShakeMagnitude = magnitude;
     }

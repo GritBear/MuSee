@@ -14,12 +14,29 @@
  * limitations under the License.
  */
 
-package com.music.musee;
+package com.music.musee.hitcollision;
 
-import com.music.musee.CollisionParameters.HitType;
+import com.music.musee.BaseObject;
+import com.music.musee.ChangeComponentsComponent;
+import com.music.musee.GameComponent;
+import com.music.musee.GameObject;
+import com.music.musee.GameObjectFactory;
+import com.music.musee.GameObjectManager;
+import com.music.musee.InventoryComponent;
+import com.music.musee.LauncherComponent;
+import com.music.musee.LevelSystem;
+import com.music.musee.SoundSystem;
+import com.music.musee.TimeSystem;
+import com.music.musee.Vector2;
+import com.music.musee.VectorPool;
+import com.music.musee.GameComponent.ComponentPhases;
 import com.music.musee.GameObject.ActionType;
 import com.music.musee.GameObject.Team;
 import com.music.musee.GameObjectFactory.GameObjectType;
+import com.music.musee.InventoryComponent.UpdateRecord;
+import com.music.musee.SoundSystem.Sound;
+import com.music.musee.constant.CollisionParameters;
+import com.music.musee.constant.CollisionParameters.HitType;
 import com.music.musee.utils.Utils;
 
 /** 

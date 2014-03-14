@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package com.music.musee;
+package com.music.musee.hitcollision;
 
-import com.music.musee.CollisionParameters.HitType;
+import com.music.musee.AllocationGuard;
+import com.music.musee.Vector2;
+import com.music.musee.constant.CollisionParameters.HitType;
 
 /** 
  * CollisionVolume describes a volume (rectangle, sphere, etc) used for dynamic collision detection.

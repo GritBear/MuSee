@@ -20,6 +20,9 @@ import java.util.ArrayList;
 
 import com.music.musee.GL.BufferLibrary;
 import com.music.musee.GL.TextureLibrary;
+import com.music.musee.hitcollision.CollisionSystem;
+import com.music.musee.hitcollision.GameObjectCollisionSystem;
+import com.music.musee.hitcollision.HitPointPool;
 
 /**
  * The object registry manages a collection of global singleton objects.  However, it differs from

@@ -14,7 +14,14 @@
  * limitations under the License.
  */
 
-package com.music.musee;
+package com.music.musee.gamecomponents;
+
+import com.music.musee.BaseObject;
+import com.music.musee.ChangeComponentsComponent;
+import com.music.musee.GameComponent;
+import com.music.musee.GameObject;
+import com.music.musee.InputSystem;
+import com.music.musee.GameObject.ActionType;
 
 public class CrusherAndouComponent extends GameComponent {
     private ChangeComponentsComponent mSwap;

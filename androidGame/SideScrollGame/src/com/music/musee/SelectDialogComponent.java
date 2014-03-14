@@ -16,7 +16,8 @@
 
 package com.music.musee;
 
-import com.music.musee.CollisionParameters.HitType;
+import com.music.musee.constant.CollisionParameters.HitType;
+import com.music.musee.hitcollision.HitReactionComponent;
 
 
 public class SelectDialogComponent extends GameComponent {

@@ -253,7 +253,7 @@ public class InputGameInterface extends BaseObject {
 		final HudSystem hud = sSystemRegistry.hudSystem;
         if (hud != null) {
             hud.setButtonState(mJumpButton.getPressed(), mAttackButton.getPressed(), mDirectionalPad.getPressed());
-            hud.setMovementSliderOffset(sliderOffset);
+//            hud.setMovementSliderOffset(sliderOffset);
         }
 	}
 	

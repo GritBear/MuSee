@@ -14,8 +14,13 @@
  * limitations under the License.
  */
 
-package com.music.musee;
+package com.music.musee.gamecomponents;
 
+import com.music.musee.BaseObject;
+import com.music.musee.CameraSystem;
+import com.music.musee.GameComponent;
+import com.music.musee.GameObject;
+import com.music.musee.GameComponent.ComponentPhases;
 import com.music.musee.GameObject.ActionType;
 
 /**
