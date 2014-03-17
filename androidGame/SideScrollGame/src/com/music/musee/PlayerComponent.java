@@ -37,7 +37,6 @@ public class PlayerComponent extends GameComponent {
 
 	private static final float MAX_GROUND_HORIZONTAL_SPEED = 32 * 6; //6 tiles per second
 
-
 	//    private static final float MAX_AIR_HORIZONTAL_SPEED = 150.0f;
 	private static final float MAX_AIR_HORIZONTAL_SPEED = MAX_GROUND_HORIZONTAL_SPEED;
 	private static final float MAX_UPWARD_SPEED = 400.0f;
@@ -147,7 +146,7 @@ public class PlayerComponent extends GameComponent {
 				}
 			}
 
-			final InputXY dpad = input.getDirectionalPad(); // this is for debug only
+//			final InputXY dpad = input.getDirectionalPad(); // this is for debug only
 			final InputButton jumpButton = input.getJumpButton();
 			parentObject.getVelocity().x = (MAX_GROUND_HORIZONTAL_SPEED);
 			if (jumpButton.getPressed()) {
