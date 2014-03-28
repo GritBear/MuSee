@@ -16,6 +16,8 @@
 
 package com.music.musee;
 
+import com.music.musee.datastructure.FixedSizeArray;
+
 
 /** 
  * A game component that can swap other components in and out of its parent game object.  The

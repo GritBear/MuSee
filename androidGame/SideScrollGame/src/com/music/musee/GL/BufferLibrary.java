@@ -19,7 +19,7 @@
 import javax.microedition.khronos.opengles.GL10;
 
 import com.music.musee.BaseObject;
-import com.music.musee.FixedSizeArray;
+import com.music.musee.datastructure.FixedSizeArray;
 
 public class BufferLibrary extends BaseObject {
     private static final int GRID_LIST_SIZE = 256;

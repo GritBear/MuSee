@@ -22,6 +22,7 @@ import com.music.musee.constant.AdultsDifficultyConstants;
 import com.music.musee.constant.CollisionParameters;
 import com.music.musee.constant.KidsDifficultyConstants;
 import com.music.musee.constant.CollisionParameters.HitType;
+import com.music.musee.gamecomponents.InventoryComponent;
 import com.music.musee.hitcollision.HitReactionComponent;
 import com.music.musee.utils.Utils;
 

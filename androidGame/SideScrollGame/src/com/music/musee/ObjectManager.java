@@ -16,6 +16,8 @@
 
 package com.music.musee;
 
+import com.music.musee.datastructure.FixedSizeArray;
+
 /** 
  * ObjectManagers are "group nodes" in the game graph.  They contain child objects, and updating
  * an object manager invokes update on its children.  ObjectManagers themselves are derived from
@@ -57,9 +59,9 @@ public class ObjectManager extends BaseObject {
     public void commitUpdates() {
         final int additionCount = mPendingAdditions.getCount();
         if (additionCount > 0) {
-            final Object[] additionsArray = mPendingAdditions.getArray();
+//            final Object[] additionsArray = mPendingAdditions.getArray();
             for (int i = 0; i < additionCount; i++) {
-                BaseObject object = (BaseObject)additionsArray[i];
+                BaseObject object = (BaseObject)mPendingAdditions.get(i);
                 mObjects.add(object);
             } 
             mPendingAdditions.clear();
@@ -67,10 +69,10 @@ public class ObjectManager extends BaseObject {
         
         final int removalCount = mPendingRemovals.getCount();
         if (removalCount > 0) {
-            final Object[] removalsArray = mPendingRemovals.getArray();
+//            final Object[] removalsArray = mPendingRemovals.getArray();
     
             for (int i = 0; i < removalCount; i++) {
-                BaseObject object = (BaseObject)removalsArray[i];
+                BaseObject object = (BaseObject)mPendingRemovals.get(i);
                 mObjects.remove(object, true);
             } 
             mPendingRemovals.clear();
@@ -82,9 +84,9 @@ public class ObjectManager extends BaseObject {
         commitUpdates();
         final int count = mObjects.getCount();
         if (count > 0) {
-            final Object[] objectArray = mObjects.getArray();
+//            final Object[] objectArray = mObjects.getArray();
             for (int i = 0; i < count; i++) {
-                BaseObject object = (BaseObject)objectArray[i];
+                BaseObject object = (BaseObject)mObjects.get(i);
                 object.update(timeDelta, this);
             }
         }
@@ -117,9 +119,9 @@ public class ObjectManager extends BaseObject {
     
     public void removeAll() {
         final int count = mObjects.getCount();
-        final Object[] objectArray = mObjects.getArray();
+//        final Object[] objectArray = mObjects.getArray();
         for (int i = 0; i < count; i++) {
-            mPendingRemovals.add((BaseObject)objectArray[i]);
+            mPendingRemovals.add((BaseObject)mObjects.get(i));
         }
         mPendingAdditions.clear();
     }

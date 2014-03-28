@@ -18,6 +18,8 @@ package com.music.musee;
 
 import java.util.Comparator;
 
+import com.music.musee.datastructure.FixedSizeArray;
+
 public class ChannelSystem extends BaseObject {
     private static final int CHANNEL_COUNT = 8;
     private static final ChannelComparator sChannelComparator = new ChannelComparator();

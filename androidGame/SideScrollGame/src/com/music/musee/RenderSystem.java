@@ -17,6 +17,7 @@
 package com.music.musee;
 
 import com.music.musee.GL.Texture;
+import com.music.musee.datastructure.FixedSizeArray;
 import com.music.musee.utils.Utils;
 
 
@@ -63,10 +64,10 @@ public class RenderSystem extends BaseObject {
 
     private void clearQueue(FixedSizeArray<BaseObject> objects) {
         final int count = objects.getCount();
-        final Object[] objectArray = objects.getArray();
+//        final Object[] objectArray = objects.getArray();
         final RenderElementPool elementPool = mElementPool;
         for (int i = count - 1; i >= 0; i--) {
-            RenderElement element = (RenderElement)objectArray[i];
+            RenderElement element = (RenderElement)objects.get(i);
             elementPool.release(element);
             objects.removeLast();
         }

@@ -15,6 +15,9 @@
  */
 package com.music.musee;
 
+import com.music.musee.datastructure.EnhancedFixedSizeArray;
+import com.music.musee.datastructure.FixedSizeArray;
+
 /**
  * A general-purpose pool of objects.  Objects in the pool are allocated up front and then 
  * passed out to requesting objects until the pool is exhausted (at which point an error is thrown).
@@ -23,7 +26,7 @@ package com.music.musee;
  * may wish to override release() to clear state on objects as they are returned to the pool.
  */
 public abstract class ObjectPool extends BaseObject {
-    private FixedSizeArray<Object> mAvailable;
+    private EnhancedFixedSizeArray<Object> mAvailable;
     private int mSize;
 
     private static final int DEFAULT_SIZE = 32;
@@ -62,14 +65,14 @@ public abstract class ObjectPool extends BaseObject {
     
     private void setSize(int size) {
         mSize = size;
-        mAvailable = new FixedSizeArray<Object>(mSize);
+        mAvailable = new EnhancedFixedSizeArray<Object>(mSize);
 
         fill();
     }
 
     protected abstract void fill();
 
-    protected FixedSizeArray<Object> getAvailable() {
+    protected EnhancedFixedSizeArray<Object> getAvailable() {
         return mAvailable;
     }
 

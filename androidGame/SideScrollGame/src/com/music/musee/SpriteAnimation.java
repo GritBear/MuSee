@@ -18,6 +18,8 @@ package com.music.musee;
 
 import java.util.Arrays;
 
+import com.music.musee.datastructure.FixedSizeArray;
+
 /**
  * Describes a single animation for a sprite.
  */

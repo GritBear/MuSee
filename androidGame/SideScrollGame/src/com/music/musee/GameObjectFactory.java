@@ -18,25 +18,25 @@ package com.music.musee;
 
 import java.util.Comparator;
 
-import android.util.Log;
-
 import com.music.musee.R;
 import com.music.musee.AnimationComponent.PlayerAnimations;
 import com.music.musee.GL.TextureLibrary;
-import com.music.musee.R.drawable;
-import com.music.musee.R.raw;
 import com.music.musee.constant.CollisionParameters;
 import com.music.musee.constant.SortConstants;
 import com.music.musee.constant.CollisionParameters.HitType;
+import com.music.musee.datastructure.FixedSizeArray;
 import com.music.musee.gamecomponents.AttackAtDistanceComponent;
 import com.music.musee.gamecomponents.CrusherAndouComponent;
 import com.music.musee.gamecomponents.EnemyAnimationComponent;
 import com.music.musee.gamecomponents.GhostComponent;
+import com.music.musee.gamecomponents.InventoryComponent;
 import com.music.musee.gamecomponents.LifetimeComponent;
 import com.music.musee.gamecomponents.NPCAnimationComponent;
 import com.music.musee.gamecomponents.NPCComponent;
 import com.music.musee.gamecomponents.PopOutComponent;
 import com.music.musee.gamecomponents.SleeperComponent;
+import com.music.musee.gamecomponents.SolidSurfaceComponent;
+import com.music.musee.gamecomponents.TheSourceComponent;
 import com.music.musee.gamecomponents.EnemyAnimationComponent.EnemyAnimations;
 import com.music.musee.hitcollision.AABoxCollisionVolume;
 import com.music.musee.hitcollision.CollisionVolume;
@@ -223,11 +223,14 @@ public class GameObjectFactory extends BaseObject {
         mNormalActivationRadius = screenSizeRadius * 1.25f;
         mWideActivationRadius = screenSizeRadius * 2.0f;
         mAlwaysActive = -1.0f;
-       
+               
         // TODO: I wish there was a way to do this automatically, but the ClassLoader doesn't seem
         // to provide access to the currently loaded class list.  There's some discussion of walking
         // the actual class file objects and using forName() to instantiate them, but that sounds
         // really heavy-weight.  For now I'll rely on (sucky) manual enumeration.
+        
+        final int MOST_COMMON_OBJECT_POOL_SIZE = 800;
+        
         class ComponentClass {
             public Class<?> type;
             public int poolSize;
@@ -245,7 +248,7 @@ public class GameObjectFactory extends BaseObject {
                 new ComponentClass(ChangeComponentsComponent.class, 256),
                 new ComponentClass(CrusherAndouComponent.class, 1),
                 new ComponentClass(DoorAnimationComponent.class, 256),  //!
-                new ComponentClass(DynamicCollisionComponent.class, 1024),
+                new ComponentClass(DynamicCollisionComponent.class, MOST_COMMON_OBJECT_POOL_SIZE),
                 new ComponentClass(EnemyAnimationComponent.class, 256),
                 new ComponentClass(FadeDrawableComponent.class, 32),
                 new ComponentClass(FixedAnimationComponent.class, 8),
@@ -253,12 +256,12 @@ public class GameObjectFactory extends BaseObject {
                 new ComponentClass(GenericAnimationComponent.class, 32),
                 new ComponentClass(GhostComponent.class, 256),
                 new ComponentClass(GravityComponent.class, 128),
-                new ComponentClass(HitPlayerComponent.class, 1024),
-                new ComponentClass(HitReactionComponent.class, 1024),
+                new ComponentClass(HitPlayerComponent.class, MOST_COMMON_OBJECT_POOL_SIZE),
+                new ComponentClass(HitReactionComponent.class, MOST_COMMON_OBJECT_POOL_SIZE),
                 new ComponentClass(InventoryComponent.class, 128),
                 new ComponentClass(LauncherComponent.class, 16),
                 new ComponentClass(LaunchProjectileComponent.class, 128),
-                new ComponentClass(LifetimeComponent.class, 1024),
+                new ComponentClass(LifetimeComponent.class, MOST_COMMON_OBJECT_POOL_SIZE),
                 new ComponentClass(MotionBlurComponent.class, 1),
                 new ComponentClass(MovementComponent.class, 128),
                 new ComponentClass(NPCAnimationComponent.class, 8),
@@ -269,14 +272,14 @@ public class GameObjectFactory extends BaseObject {
                 new ComponentClass(PlayerComponent.class, 1),
                 new ComponentClass(PlaySingleSoundComponent.class, 128),
                 new ComponentClass(PopOutComponent.class, 32),
-                new ComponentClass(RenderComponent.class, 1024),
+                new ComponentClass(RenderComponent.class, MOST_COMMON_OBJECT_POOL_SIZE),
                 new ComponentClass(ScrollerComponent.class, 8),
                 new ComponentClass(SelectDialogComponent.class, 8),
                 new ComponentClass(SimpleCollisionComponent.class, 32),
                 new ComponentClass(SimplePhysicsComponent.class, 256),
                 new ComponentClass(SleeperComponent.class, 32),
                 new ComponentClass(SolidSurfaceComponent.class, 16),
-                new ComponentClass(SpriteComponent.class, 1024),
+                new ComponentClass(SpriteComponent.class, MOST_COMMON_OBJECT_POOL_SIZE),
                 new ComponentClass(TheSourceComponent.class, 1),
                 
         };

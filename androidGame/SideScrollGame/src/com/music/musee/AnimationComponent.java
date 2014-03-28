@@ -20,6 +20,7 @@ package com.music.musee;
 import com.music.musee.GameObject.ActionType;
 import com.music.musee.SoundSystem.Sound;
 import com.music.musee.constant.CollisionParameters.HitType;
+import com.music.musee.gamecomponents.InventoryComponent;
 import com.music.musee.utils.Utils;
 
 /**

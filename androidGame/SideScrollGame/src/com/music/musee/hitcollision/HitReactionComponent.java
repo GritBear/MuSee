@@ -22,7 +22,6 @@ import com.music.musee.GameComponent;
 import com.music.musee.GameObject;
 import com.music.musee.GameObjectFactory;
 import com.music.musee.GameObjectManager;
-import com.music.musee.InventoryComponent;
 import com.music.musee.LauncherComponent;
 import com.music.musee.LevelSystem;
 import com.music.musee.SoundSystem;
@@ -33,10 +32,11 @@ import com.music.musee.GameComponent.ComponentPhases;
 import com.music.musee.GameObject.ActionType;
 import com.music.musee.GameObject.Team;
 import com.music.musee.GameObjectFactory.GameObjectType;
-import com.music.musee.InventoryComponent.UpdateRecord;
 import com.music.musee.SoundSystem.Sound;
 import com.music.musee.constant.CollisionParameters;
 import com.music.musee.constant.CollisionParameters.HitType;
+import com.music.musee.gamecomponents.InventoryComponent;
+import com.music.musee.gamecomponents.InventoryComponent.UpdateRecord;
 import com.music.musee.utils.Utils;
 
 /** 

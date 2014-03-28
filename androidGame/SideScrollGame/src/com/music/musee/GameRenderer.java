@@ -27,6 +27,7 @@ import com.music.musee.GL.BufferLibrary;
 import com.music.musee.GL.GLSurfaceView;
 import com.music.musee.GL.TextureLibrary;
 import com.music.musee.RenderSystem.RenderElement;
+import com.music.musee.datastructure.FixedSizeArray;
 
 /**
  * GameRenderer the top-level rendering interface for the game engine.  It is called by

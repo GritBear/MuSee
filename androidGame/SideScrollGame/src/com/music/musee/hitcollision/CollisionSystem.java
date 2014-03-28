@@ -24,13 +24,13 @@ import java.io.InputStream;
 
 import com.music.musee.AllocationGuard;
 import com.music.musee.BaseObject;
-import com.music.musee.FixedSizeArray;
 import com.music.musee.GameObject;
 import com.music.musee.TObjectPool;
 import com.music.musee.TiledWorld;
 import com.music.musee.Vector2;
 import com.music.musee.VectorPool;
 import com.music.musee.constant.ParseConstant;
+import com.music.musee.datastructure.FixedSizeArray;
 import com.music.musee.utils.Utils;
 
 /**

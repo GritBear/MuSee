@@ -18,6 +18,8 @@ package com.music.musee;
 
 import java.util.Comparator;
 
+import com.music.musee.datastructure.FixedSizeArray;
+
 import android.util.Log;
 
 /** 

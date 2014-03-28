@@ -20,7 +20,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 import android.util.Log;
 
-import com.music.musee.FixedSizeArray;
+import com.music.musee.datastructure.FixedSizeArray;
 
 /**
  * A 2D rectangular mesh. Can be drawn textured or untextured.

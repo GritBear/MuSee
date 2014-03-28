@@ -17,6 +17,7 @@
  package com.music.musee;
 
 import com.music.musee.SoundSystem.Sound;
+import com.music.musee.gamecomponents.SolidSurfaceComponent;
 
 public class DoorAnimationComponent extends GameComponent {
     

@@ -14,7 +14,12 @@
  * limitations under the License.
  */
 
-package com.music.musee;
+package com.music.musee.gamecomponents;
+
+import com.music.musee.BaseObject;
+import com.music.musee.GameComponent;
+import com.music.musee.HudSystem;
+import com.music.musee.GameComponent.ComponentPhases;
 
 
 public class InventoryComponent extends GameComponent {

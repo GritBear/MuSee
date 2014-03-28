@@ -17,6 +17,7 @@
 package com.music.musee;
 
 import com.music.musee.GL.Texture;
+import com.music.musee.datastructure.FixedSizeArray;
 import com.music.musee.hitcollision.CollisionVolume;
 
 /**
