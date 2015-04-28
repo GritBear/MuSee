@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArtStory", "iTunesPlugIn.vcxproj", "{B57261D1-AABF-4A42-89C4-1D50A5AAD740}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lodepng", "lodepng\lodepng.vcxproj", "{B274D808-FE94-4D50-A1A4-E9D230771B49}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextureScriptReader", "TextureScriptReader\TextureScriptReader.vcxproj", "{8A6CA30A-5BB7-4A24-B35E-3A32A79A285C}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataReaderMonitor", "DataReaderMonitor\DataReaderMonitor.vcxproj", "{9BD3405D-CB23-4FF5-AE3D-310A6C4A0BA5}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MusicExtractionAPI", "..\MusicExtractionAPI\MusicExtractionAPI.vcxproj", "{9E41FDEC-B281-49BE-9B19-6D2F573909E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,25 +30,15 @@ Global
 		{B274D808-FE94-4D50-A1A4-E9D230771B49}.Debug|x64.ActiveCfg = Debug|Win32
 		{B274D808-FE94-4D50-A1A4-E9D230771B49}.Release|Win32.ActiveCfg = Release|Win32
 		{B274D808-FE94-4D50-A1A4-E9D230771B49}.Release|Win32.Build.0 = Release|Win32
-		{B274D808-FE94-4D50-A1A4-E9D230771B49}.Release|x64.ActiveCfg = Release|Win32
+		{B274D808-FE94-4D50-A1A4-E9D230771B49}.Release|x64.ActiveCfg = Release|x64
+		{B274D808-FE94-4D50-A1A4-E9D230771B49}.Release|x64.Build.0 = Release|x64
 		{8A6CA30A-5BB7-4A24-B35E-3A32A79A285C}.Debug|Win32.ActiveCfg = Debug|Win32
 		{8A6CA30A-5BB7-4A24-B35E-3A32A79A285C}.Debug|Win32.Build.0 = Debug|Win32
 		{8A6CA30A-5BB7-4A24-B35E-3A32A79A285C}.Debug|x64.ActiveCfg = Debug|Win32
 		{8A6CA30A-5BB7-4A24-B35E-3A32A79A285C}.Release|Win32.ActiveCfg = Release|Win32
 		{8A6CA30A-5BB7-4A24-B35E-3A32A79A285C}.Release|Win32.Build.0 = Release|Win32
-		{8A6CA30A-5BB7-4A24-B35E-3A32A79A285C}.Release|x64.ActiveCfg = Release|Win32
-		{9BD3405D-CB23-4FF5-AE3D-310A6C4A0BA5}.Debug|Win32.ActiveCfg = Debug|Win32
-		{9BD3405D-CB23-4FF5-AE3D-310A6C4A0BA5}.Debug|Win32.Build.0 = Debug|Win32
-		{9BD3405D-CB23-4FF5-AE3D-310A6C4A0BA5}.Debug|x64.ActiveCfg = Debug|Win32
-		{9BD3405D-CB23-4FF5-AE3D-310A6C4A0BA5}.Release|Win32.ActiveCfg = Release|Win32
-		{9BD3405D-CB23-4FF5-AE3D-310A6C4A0BA5}.Release|Win32.Build.0 = Release|Win32
-		{9BD3405D-CB23-4FF5-AE3D-310A6C4A0BA5}.Release|x64.ActiveCfg = Release|Win32
-		{9E41FDEC-B281-49BE-9B19-6D2F573909E7}.Debug|Win32.ActiveCfg = Debug|Win32
-		{9E41FDEC-B281-49BE-9B19-6D2F573909E7}.Debug|Win32.Build.0 = Debug|Win32
-		{9E41FDEC-B281-49BE-9B19-6D2F573909E7}.Debug|x64.ActiveCfg = Debug|Win32
-		{9E41FDEC-B281-49BE-9B19-6D2F573909E7}.Release|Win32.ActiveCfg = Release|Win32
-		{9E41FDEC-B281-49BE-9B19-6D2F573909E7}.Release|Win32.Build.0 = Release|Win32
-		{9E41FDEC-B281-49BE-9B19-6D2F573909E7}.Release|x64.ActiveCfg = Release|Win32
+		{8A6CA30A-5BB7-4A24-B35E-3A32A79A285C}.Release|x64.ActiveCfg = Release|x64
+		{8A6CA30A-5BB7-4A24-B35E-3A32A79A285C}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
