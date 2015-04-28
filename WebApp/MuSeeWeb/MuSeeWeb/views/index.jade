@@ -3,6 +3,7 @@
 block content
     h1= title
     p Welcome to #{title}
+    p#debug Debug
 
     button(onclick='this.innerText = togglePlayback()') use demo audio
     //button(onclick='toggleLiveInput()') use live input
@@ -22,5 +23,7 @@ block content
         span#flat cents &flat;
         span#sharp cents &sharp;
 
-        link(rel='stylesheet', href='/stylesheets/index.css')
-        script(type='text/javascript' src='/javascripts/pitchdetect.js')
+
+
+    link(rel='stylesheet', href='/stylesheets/index.css')
+    script(type='text/javascript' src='/javascripts/pitchdetect.js')
