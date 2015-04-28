@@ -303,10 +303,62 @@ function storeMatrix(fbuf) {
 }
 
 //this can be machine learned or simple matrix operation
-function melodyExtract() { 
+function melodyExtract() {
+    SpectrumMatrixAnalysis();
+    MelodyLineAssignment();
+    //RemoveTooOldEntries();
+}
+
+var max, min;
+var NormalizationPower = 3;
+var endCompensationScale = 4;
+var startCompensationScale = 1;
+function SpectrumMatrixAnalysis() {
+    PowerMatrix(NormalizationPower); //power up and normalize
+    ScalerAddMatrix(-min); //integrate HighFreqCompensation inside
+    //HighFreqCompensation();
+    //BandedNormalizeMatrix(FrequencyBandSeparatorVec); //integrate HardDecisionPolarizeRule
+    //HardDecisionPolarizeRule(dynamicThreshold,valueBottom,valueTop); // hard decision rule
+    
+    StepFreRegistration(); //Including the Tone Translation
+}
+
+function MelodyLineAssignment() { 
 
 }
 
+function RemoveTooOldEntries() { 
+
+}
+
+function PowerMatrix(power) {
+    min = fbuf2D[0][0];
+    max = fbuf2D[0][0];
+
+    for (i = 0; i < fbufDuration2D; i++) {
+        for (j = 0; j < fbuflen; j++) {
+            var temp = Math.pow(fbuf2D[i][j], power);
+            max = (max < temp)? temp : max;
+            min = (min > temp)? temp : min;
+            fbuf2D[i][j] = temp;
+        }
+    }
+}
+
+function ScalerAddMatrix( min ) {
+    var slope = (endCompensationScale - startCompensationScale) / fbuflen;
+    
+    for (i = 0; i < fbuflen; i++) {
+        var scaleFreq =(i + 1.0) * slope + startCompensationScale;
+        for (j = 0; j < fbufDuration2D; j++) {
+            fbuf2D[j][i] = (fbuf2D[j][i] - min) * scaleFreq;
+        }
+    }
+}
+
+function StepFreRegistration() { 
+
+}
 
 var noteStrings = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
