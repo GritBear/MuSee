@@ -23,7 +23,7 @@ SOFTWARE.
 */
 
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
-
+var fftSize = 1024;
 var audioContext = null;
 var isPlaying = false;
 var sourceNode = null;
@@ -108,16 +108,7 @@ function getUserMedia(dictionary, callback) {
     }
 }
 
-function gotStream(stream) {
-    // Create an AudioNode from the stream.
-    mediaStreamSource = audioContext.createMediaStreamSource(stream);
 
-    // Connect it to the destination.
-    analyser = audioContext.createAnalyser();
-    analyser.fftSize = 2048;
-    mediaStreamSource.connect( analyser );
-    updatePitch();
-}
 
 function toggleOscillator() {
     if (isPlaying) {
@@ -126,49 +117,57 @@ function toggleOscillator() {
         sourceNode = null;
         analyser = null;
         isPlaying = false;
-		if (!window.cancelAnimationFrame)
-			window.cancelAnimationFrame = window.webkitCancelAnimationFrame;
-        window.cancelAnimationFrame( rafID );
+        stopPainting();
         return "play oscillator";
     }
     sourceNode = audioContext.createOscillator();
 
     analyser = audioContext.createAnalyser();
-    analyser.fftSize = 2048;
+    analyser.fftSize = fftSize;
     sourceNode.connect( analyser );
     analyser.connect( audioContext.destination );
     sourceNode.start(0);
     isPlaying = true;
     isLiveInput = false;
-    updatePitch();
+    startPainting();
 
     return "stop";
 }
 
-function toggleLiveInput() {
-    if (isPlaying) {
-        //stop playing and return
-        sourceNode.stop( 0 );
-        sourceNode = null;
-        analyser = null;
-        isPlaying = false;
-		if (!window.cancelAnimationFrame)
-			window.cancelAnimationFrame = window.webkitCancelAnimationFrame;
-        window.cancelAnimationFrame( rafID );
-    }
-    getUserMedia(
-    	{
-            "audio": {
-                "mandatory": {
-                    "googEchoCancellation": "false",
-                    "googAutoGainControl": "false",
-                    "googNoiseSuppression": "false",
-                    "googHighpassFilter": "false"
-                },
-                "optional": []
-            },
-        }, gotStream);
-}
+//function gotStream(stream) {
+//    // Create an AudioNode from the stream.
+//    mediaStreamSource = audioContext.createMediaStreamSource(stream);
+    
+//    // Connect it to the destination.
+//    analyser = audioContext.createAnalyser();
+//    analyser.fftSize = fftSize;
+//    mediaStreamSource.connect(analyser);
+//    updatePitch();
+//}
+//function toggleLiveInput() {
+//    if (isPlaying) {
+//        //stop playing and return
+//        sourceNode.stop( 0 );
+//        sourceNode = null;
+//        analyser = null;
+//        isPlaying = false;
+//		if (!window.cancelAnimationFrame)
+//			window.cancelAnimationFrame = window.webkitCancelAnimationFrame;
+//        window.cancelAnimationFrame( rafID );
+//    }
+//    getUserMedia(
+//    	{
+//            "audio": {
+//                "mandatory": {
+//                    "googEchoCancellation": "false",
+//                    "googAutoGainControl": "false",
+//                    "googNoiseSuppression": "false",
+//                    "googHighpassFilter": "false"
+//                },
+//                "optional": []
+//            },
+//        }, gotStream);
+//}
 
 function togglePlayback() {
     if (isPlaying) {
@@ -177,9 +176,7 @@ function togglePlayback() {
         sourceNode = null;
         analyser = null;
         isPlaying = false;
-		if (!window.cancelAnimationFrame)
-			window.cancelAnimationFrame = window.webkitCancelAnimationFrame;
-        window.cancelAnimationFrame( rafID );
+        stopPainting();
         return "start";
     }
 
@@ -188,21 +185,128 @@ function togglePlayback() {
     sourceNode.loop = true;
 
     analyser = audioContext.createAnalyser();
-    analyser.fftSize = 2048;
+    analyser.fftSize = fftSize;
     sourceNode.connect( analyser );
     analyser.connect( audioContext.destination );
     sourceNode.start( 0 );
     isPlaying = true;
     isLiveInput = false;
-    updatePitch();
+    startPainting();
 
     return "stop";
+}
+
+var paintTimer;
+var frameRate = 20;
+function startPainting() {
+    paintTimer = window.setInterval(function () { 
+        rafID = window.requestAnimationFrame(updatePitch);
+    }, 1000 / frameRate);
+}
+
+function stopPainting() {
+    window.clearInterval(paintTimer);
+    if (!window.cancelAnimationFrame)
+        window.cancelAnimationFrame = window.webkitCancelAnimationFrame;
+    window.cancelAnimationFrame(rafID);
 }
 
 var rafID = null;
 var tracks = null;
 var buflen = 1024;
-var buf = new Float32Array( buflen );
+var buf = new Float32Array(buflen);
+
+//frequency domain buffer
+var fbuflen = fftSize / 2;
+var fbuf = new Float32Array(fbuflen);
+var fbufDuration2D = 10;
+var fbuf2D = new Array(fbufDuration2D);
+var fbuf2DCnt = 0;
+for (i = 0; i < fbufDuration2D; i++) {
+    fbuf2D[i] = new Float32Array(fbuflen);
+}
+
+function updatePitch(time) {
+    var cycles = new Array;
+    analyser.getFloatTimeDomainData(buf);
+    var ac = autoCorrelate(buf, audioContext.sampleRate);
+    // TODO: Paint confidence meter on canvasElem here.
+    
+    //conduct processing in frequency domain
+    analyser.getFloatFrequencyData(fbuf);
+    var matrixFull = storeMatrix(fbuf);
+    if (matrixFull) {
+        melodyExtract();
+    }
+    
+    
+    //if (DEBUGCANVAS) {  // This draws the current waveform, useful for debugging
+    //    waveCanvas.clearRect(0, 0, 512, 256);
+    //    waveCanvas.strokeStyle = "red";
+    //    waveCanvas.beginPath();
+    //    waveCanvas.moveTo(0, 0);
+    //    waveCanvas.lineTo(0, 256);
+    //    waveCanvas.moveTo(128, 0);
+    //    waveCanvas.lineTo(128, 256);
+    //    waveCanvas.moveTo(256, 0);
+    //    waveCanvas.lineTo(256, 256);
+    //    waveCanvas.moveTo(384, 0);
+    //    waveCanvas.lineTo(384, 256);
+    //    waveCanvas.moveTo(512, 0);
+    //    waveCanvas.lineTo(512, 256);
+    //    waveCanvas.stroke();
+    //    waveCanvas.strokeStyle = "black";
+    //    waveCanvas.beginPath();
+    //    waveCanvas.moveTo(0, buf[0]);
+    //    for (var i = 1; i < 512; i++) {
+    //        waveCanvas.lineTo(i, 128 + (buf[i] * 128));
+    //    }
+    //    waveCanvas.stroke();
+    //}
+    
+    if (ac == -1) {
+        detectorElem.className = "vague";
+        pitchElem.innerText = "--";
+        noteElem.innerText = "-";
+        detuneElem.className = "";
+        detuneAmount.innerText = "--";
+    } else {
+        detectorElem.className = "confident";
+        pitch = ac;
+        pitchElem.innerText = Math.round(pitch);
+        var note = noteFromPitch(pitch);
+        noteElem.innerHTML = noteStrings[note % 12];
+        var detune = centsOffFromPitch(pitch, note);
+        if (detune == 0) {
+            detuneElem.className = "";
+            detuneAmount.innerHTML = "--";
+        } else {
+            if (detune < 0)
+                detuneElem.className = "flat";
+            else
+                detuneElem.className = "sharp";
+            detuneAmount.innerHTML = Math.abs(detune);
+        }
+    }   
+}
+
+
+function storeMatrix(fbuf) {
+    //copy the 1D frequency buffer into the 2D matrix, at the CNT
+    for (i = 0; i < fbuflen; i++) {
+        fbuf2D[fbuf2DCnt][i] = fbuf[i];
+    }
+    
+    fbuf2DCnt = (fbuf2DCnt + 1) % fbufDuration2D;
+    
+    return fbuf2DCnt == 0;
+}
+
+//this can be machine learned or simple matrix operation
+function melodyExtract() { 
+
+}
+
 
 var noteStrings = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
@@ -312,62 +416,4 @@ function autoCorrelate( buf, sampleRate ) {
 //	var best_frequency = sampleRate/best_offset;
 }
 
-function updatePitch( time ) {
-	var cycles = new Array;
-	analyser.getFloatTimeDomainData( buf );
-	var ac = autoCorrelate( buf, audioContext.sampleRate );
-	// TODO: Paint confidence meter on canvasElem here.
 
-	if (DEBUGCANVAS) {  // This draws the current waveform, useful for debugging
-		waveCanvas.clearRect(0,0,512,256);
-		waveCanvas.strokeStyle = "red";
-		waveCanvas.beginPath();
-		waveCanvas.moveTo(0,0);
-		waveCanvas.lineTo(0,256);
-		waveCanvas.moveTo(128,0);
-		waveCanvas.lineTo(128,256);
-		waveCanvas.moveTo(256,0);
-		waveCanvas.lineTo(256,256);
-		waveCanvas.moveTo(384,0);
-		waveCanvas.lineTo(384,256);
-		waveCanvas.moveTo(512,0);
-		waveCanvas.lineTo(512,256);
-		waveCanvas.stroke();
-		waveCanvas.strokeStyle = "black";
-		waveCanvas.beginPath();
-		waveCanvas.moveTo(0,buf[0]);
-		for (var i=1;i<512;i++) {
-			waveCanvas.lineTo(i,128+(buf[i]*128));
-		}
-		waveCanvas.stroke();
-	}
-
- 	if (ac == -1) {
- 		detectorElem.className = "vague";
-	 	pitchElem.innerText = "--";
-		noteElem.innerText = "-";
-		detuneElem.className = "";
-		detuneAmount.innerText = "--";
- 	} else {
-	 	detectorElem.className = "confident";
-	 	pitch = ac;
-	 	pitchElem.innerText = Math.round( pitch ) ;
-	 	var note =  noteFromPitch( pitch );
-		noteElem.innerHTML = noteStrings[note%12];
-		var detune = centsOffFromPitch( pitch, note );
-		if (detune == 0 ) {
-			detuneElem.className = "";
-			detuneAmount.innerHTML = "--";
-		} else {
-			if (detune < 0)
-				detuneElem.className = "flat";
-			else
-				detuneElem.className = "sharp";
-			detuneAmount.innerHTML = Math.abs( detune );
-		}
-	}
-
-	if (!window.requestAnimationFrame)
-		window.requestAnimationFrame = window.webkitRequestAnimationFrame;
-	rafID = window.requestAnimationFrame( updatePitch );
-}

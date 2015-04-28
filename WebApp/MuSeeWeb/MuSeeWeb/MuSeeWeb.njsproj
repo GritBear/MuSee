@@ -39,6 +39,7 @@
     <Content Include="package.json" />
     <Content Include="public\sounds\cj.mp3" />
     <Content Include="public\stylesheets\style.styl" />
+    <Content Include="public\stylesheets\index.css" />
     <Content Include="README.md" />
     <Content Include="views\index.jade" />
     <Content Include="views\layout.jade" />

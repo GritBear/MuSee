@@ -4,10 +4,8 @@ block content
     h1= title
     p Welcome to #{title}
 
-    script(type='text/javascript' src='/javascripts/pitchdetect.js')
-
     button(onclick='this.innerText = togglePlayback()') use demo audio
-    button(onclick='toggleLiveInput()') use live input
+    //button(onclick='toggleLiveInput()') use live input
     button(onclick='toggleOscillator()') use oscillator
 
     // <button onclick="updatePitch(0);">sample</button>
@@ -23,3 +21,6 @@ block content
         span#detune_amt --
         span#flat cents &flat;
         span#sharp cents &sharp;
+
+        link(rel='stylesheet', href='/stylesheets/index.css')
+        script(type='text/javascript' src='/javascripts/pitchdetect.js')
