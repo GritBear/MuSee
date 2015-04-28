@@ -1,5 +1,25 @@
 ﻿extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    h1= title
+    p Welcome to #{title}
+
+    script(type='text/javascript' src='/javascripts/pitchdetect.js')
+
+    button(onclick='this.innerText = togglePlayback()') use demo audio
+    button(onclick='toggleLiveInput()') use live input
+    button(onclick='toggleOscillator()') use oscillator
+
+    // <button onclick="updatePitch(0);">sample</button>
+    #detector.vague
+        .pitch
+        span#pitch --
+        | Hz
+        .note
+        span#note --
+        |    
+        canvas#output(width='300', height='42')
+        #detune
+        span#detune_amt --
+        span#flat cents &flat;
+        span#sharp cents &sharp;
