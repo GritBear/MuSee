@@ -29,7 +29,6 @@ var isPlaying = false;
 var sourceNode = null;
 var analyser = null;
 var theBuffer = null;
-var DEBUGCANVAS = null;
 var mediaStreamSource = null;
 var detectorElem, 
 	canvasElem,
@@ -57,12 +56,7 @@ window.onload = function() {
 
 	detectorElem = document.getElementById( "detector" );
 	canvasElem = document.getElementById( "output" );
-	DEBUGCANVAS = document.getElementById( "waveform" );
-	if (DEBUGCANVAS) {
-		waveCanvas = DEBUGCANVAS.getContext("2d");
-		waveCanvas.strokeStyle = "black";
-		waveCanvas.lineWidth = 1;
-	}
+
 	pitchElem = document.getElementById( "pitch" );
 	noteElem = document.getElementById( "note" );
 	detuneElem = document.getElementById( "detune" );
@@ -90,10 +84,6 @@ window.onload = function() {
 	  	reader.readAsArrayBuffer(e.dataTransfer.files[0]);
 	  	return false;
 	};
-
-    for (i = 0; i < fbufDuration2D; i++) {
-        fbuf2D[i] = new Float32Array(fbuflen);
-    }
 }
 
 function error() {
@@ -111,8 +101,6 @@ function getUserMedia(dictionary, callback) {
         alert('getUserMedia threw exception :' + e);
     }
 }
-
-
 
 function toggleOscillator() {
     if (isPlaying) {
@@ -137,41 +125,6 @@ function toggleOscillator() {
 
     return "stop";
 }
-
-//function gotStream(stream) {
-//    // Create an AudioNode from the stream.
-//    mediaStreamSource = audioContext.createMediaStreamSource(stream);
-    
-//    // Connect it to the destination.
-//    analyser = audioContext.createAnalyser();
-//    analyser.fftSize = fftSize;
-//    mediaStreamSource.connect(analyser);
-//    updatePitch();
-//}
-//function toggleLiveInput() {
-//    if (isPlaying) {
-//        //stop playing and return
-//        sourceNode.stop( 0 );
-//        sourceNode = null;
-//        analyser = null;
-//        isPlaying = false;
-//		if (!window.cancelAnimationFrame)
-//			window.cancelAnimationFrame = window.webkitCancelAnimationFrame;
-//        window.cancelAnimationFrame( rafID );
-//    }
-//    getUserMedia(
-//    	{
-//            "audio": {
-//                "mandatory": {
-//                    "googEchoCancellation": "false",
-//                    "googAutoGainControl": "false",
-//                    "googNoiseSuppression": "false",
-//                    "googHighpassFilter": "false"
-//                },
-//                "optional": []
-//            },
-//        }, gotStream);
-//}
 
 function togglePlayback() {
     if (isPlaying) {
@@ -201,11 +154,10 @@ function togglePlayback() {
 }
 
 var paintTimer;
-var frameRate = 40;
 function startPainting() {
     paintTimer = window.setInterval(function () { 
         rafID = window.requestAnimationFrame(updatePitch);
-    }, 1000 / frameRate);
+    }, 1000 / updateRate);
 }
 
 function stopPainting() {
@@ -220,30 +172,14 @@ var tracks = null;
 var buflen = 1024;
 var buf = new Float32Array(buflen);
 
-//frequency domain buffer
-var fbuflen = fftSize / 2 / 10; //limit storage to up to 2k Hz
-var fbuf = new Float32Array(fbuflen);
-var fbufDuration2D = 5;
-var fbuf2D = new Array(fbufDuration2D);
-var fbuf2DCnt = 0;
-
 var highestAc = 0;
 var acCnt = 0;
-var acBufferSize = 20; //every 1/4 second
 
 function updatePitch(time) {
     var cycles = new Array;
     analyser.getFloatTimeDomainData(buf);
     var ac = autoCorrelate(buf, audioContext.sampleRate);
-    // TODO: Paint confidence meter on canvasElem here.
-    
-    //conduct processing in frequency domain
-    //analyser.getFloatFrequencyData(fbuf);
-    //var matrixFull = storeMatrix(fbuf);
-    //if (matrixFull) {
-    //    melodyExtract();
-    //}
-    
+
     if (acCnt == 0) {
         highestAc = ac;
     } else {
@@ -253,6 +189,12 @@ function updatePitch(time) {
     acCnt = (acCnt + 1) % acBufferSize;
 
     ac = highestAc;
+    
+    //store values into global variables
+    CURRENT_NOTE = ac;
+    NOTE_HISTORY[note_buffer_cnt] = CURRENT_NOTE;
+    note_buffer_cnt = (note_buffer_cnt + 1) % Note_bufferSize;
+
     if (ac == -1) {
         detectorElem.className = "vague";
         pitchElem.innerText = "--";
@@ -266,152 +208,8 @@ function updatePitch(time) {
         var note = noteFromPitch(pitch);
         //noteElem.innerHTML = noteStrings[note % 12];
         noteElem.innerHTML = note;
-        //var detune = centsOffFromPitch(pitch, note);
-        //if (detune == 0) {
-        //    detuneElem.className = "";
-        //    detuneAmount.innerHTML = "--";
-        //} else {
-        //    if (detune < 0)
-        //        detuneElem.className = "flat";
-        //    else
-        //        detuneElem.className = "sharp";
-        //    detuneAmount.innerHTML = Math.abs(detune);
-        //}
+
     }   
-}
-
-function storeMatrix(fbuf) {
-    //copy the 1D frequency buffer into the 2D matrix, at the CNT
-    for (i = 0; i < fbuflen; i++) {
-        fbuf2D[fbuf2DCnt][i] = fbuf[i];
-    }
-        
-    fbuf2DCnt = (fbuf2DCnt + 1) % fbufDuration2D;
-    
-    return fbuf2DCnt == 0;
-}
-
-//this can be machine learned or simple matrix operation
-function melodyExtract() {
-    SpectrumMatrixAnalysis();
-}
-
-var max, min;
-var NormalizationPower = 3;
-var endCompensationScale = 4;
-var startCompensationScale = 1;
-var FrequencySeparationPoint = [100, 300, 1200, 20000];
-var FrequencyInterval = 40000 / fftSize;
-var MaxNormalizedValue = 10;
-var dynamicThreashold = 8;
-
-var dynamicIncreaseFactor = 0.8; //both factor has to be less than 1
-var dynamicDecreaseFactor = 0.9;
-var dynamicPointsMinimum = FrequencySeparationPoint.length - 1;
-var dynamicPointsMaximum = FrequencySeparationPoint.length + 1;
-
-var bassMelodyDevideTone = 2;
-var curBaseNote = 0;
-var curNonBaseNote = 0;
-
-function SpectrumMatrixAnalysis() {
-    PowerMatrix(NormalizationPower); //power up and normalize
-    ScalerAddMatrix(); //integrate HighFreqCompensation inside
-    
-    StepFreRegistration(); //Including the Tone Translation
-}
-
-function PowerMatrix(power) {
-    min = fbuf2D[0][0];
-    max = fbuf2D[0][0];
-
-    for (i = 0; i < fbufDuration2D; i++) {
-        for (j = 0; j < fbuflen; j++) {
-            var temp = Math.pow(fbuf2D[i][j], power);
-            max = (max < temp)? temp : max;
-            min = (min > temp)? temp : min;
-            fbuf2D[i][j] = temp;
-        }
-    }
-}
-
-function ScalerAddMatrix() {
-    var slope = (endCompensationScale - startCompensationScale) / fbuflen;
-    
-    for (i = 0; i < fbuflen; i++) {
-        var scaleFreq =(i + 1.0) * slope + startCompensationScale;
-        for (j = 0; j < fbufDuration2D; j++) {
-            fbuf2D[j][i] = (fbuf2D[j][i] - min) / (max - min) * scaleFreq;
-        }
-    }
-
-}
-
-function StepFreRegistration() {
-    //Sum the melodyStorage into Buffer
-    for (i = 1; i < fbufDuration2D; i++) {
-        for (j = 0; j < fbuflen; j++) {
-            fbuf2D[0][j] += fbuf2D[i][j];
-        }
-    }
-    
-    // perform Banded Normalization
-    var cntBand = 0;
-    var BandMax = 0;
-    var BandStart = 0;
-    for (i = 0; i <= fbuflen; i++) {
-        if (i * FrequencyInterval > FrequencySeparationPoint[cntBand]) {
-            if (BandMax != 0) {
-                var factor = MaxNormalizedValue / BandMax;
-                for (j = BandStart; j < i; j++) {
-                    fbuf2D[0][j] = fbuf2D[0][i] * factor;
-                    if (fbuf2D[0][j] > dynamicThreashold) {
-                        fbuf2D[0][j] = MaxNormalizedValue;
-                    } else {
-                        fbuf2D[0][j] = 0;
-                    }
-                }
-            }
-            cntBand++;
-            BandStart = i;
-            BandMax = 0;
-        }
-        BandMax = (BandMax < fbuf2D[0][i]) ? fbuf2D[0][i] : BandMax;
-    }//Bands
-    
-    StepToneRegistrationFromFreq();
-}
-
-function StepToneRegistrationFromFreq(){
-    var num_tones = 0;
-    
-    // the extracted tone indexes are from low to high
-    for (i = 0; i < fbuflen; i++) {
-        if (fbuf2D[0][i] == MaxNormalizedValue) {
-            var tonePoint = noteFromPitch(i * FrequencyInterval);
-            debug.innerText = i * FrequencyInterval;
-            //push the tone into either bass or melody
-            if (tonePoint < bassMelodyDevideTone) {
-                curBaseNote = tonePoint;
-                num_tones++;
-            }
-            else {
-                curNonBaseNote = tonePoint;
-                num_tones++;
-            }
-        }
-    }
-
-    //perform dynamic threshold adjustment
-    DynamicThresholdAdjustment(num_tones);
-}
-
-function DynamicThresholdAdjustment(num_tones) {
-    if (num_tones < dynamicPointsMinimum) {
-        dynamicThreshold = dynamicThreshold * dynamicDecreaseFactor;
-    }else if (num_tones > dynamicPointsMaximum){
-        dynamicThreshold += (MaxNormalizedValue - dynamicThreshold) * dynamicIncreaseFactor;
-    }
 }
 
 var noteStrings = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
@@ -428,42 +226,6 @@ function frequencyFromNoteNumber( note ) {
 function centsOffFromPitch( frequency, note ) {
 	return Math.floor( 1200 * Math.log( frequency / frequencyFromNoteNumber( note ))/Math.log(2) );
 }
-
-// this is a float version of the algorithm below - but it's not currently used.
-/*
-function autoCorrelateFloat( buf, sampleRate ) {
-	var MIN_SAMPLES = 4;	// corresponds to an 11kHz signal
-	var MAX_SAMPLES = 1000; // corresponds to a 44Hz signal
-	var SIZE = 1000;
-	var best_offset = -1;
-	var best_correlation = 0;
-	var rms = 0;
-
-	if (buf.length < (SIZE + MAX_SAMPLES - MIN_SAMPLES))
-		return -1;  // Not enough data
-
-	for (var i=0;i<SIZE;i++)
-		rms += buf[i]*buf[i];
-	rms = Math.sqrt(rms/SIZE);
-
-	for (var offset = MIN_SAMPLES; offset <= MAX_SAMPLES; offset++) {
-		var correlation = 0;
-
-		for (var i=0; i<SIZE; i++) {
-			correlation += Math.abs(buf[i]-buf[i+offset]);
-		}
-		correlation = 1 - (correlation/SIZE);
-		if (correlation > best_correlation) {
-			best_correlation = correlation;
-			best_offset = offset;
-		}
-	}
-	if ((rms>0.1)&&(best_correlation > 0.1)) {
-		console.log("f = " + sampleRate/best_offset + "Hz (rms: " + rms + " confidence: " + best_correlation + ")");
-	}
-//	var best_frequency = sampleRate/best_offset;
-}
-*/
 
 var MIN_SAMPLES = 0;  // will be initialized when AudioContext is created.
 

@@ -3,13 +3,21 @@
 block content
     h1= title
     p Welcome to #{title}
-    p#debug Debug
+
+
 
     button(onclick='this.innerText = togglePlayback()') use demo audio
     //button(onclick='toggleLiveInput()') use live input
     button(onclick='toggleOscillator()') use oscillator
 
     // <button onclick="updatePitch(0);">sample</button>
+    h2 Graphics
+    canvas#buffer1(width='1200', height='600', style="border:4px solid #d3d3d3;")
+    canvas#buffer2(width='1200', height='600', style="border:4px solid #d3d3d3;")
+    p end of graphics
+
+    p#debug Debug
+
     #detector.vague
         .pitch
         span#pitch --
@@ -23,7 +31,8 @@ block content
         span#flat cents &flat;
         span#sharp cents &sharp;
 
-
-
     link(rel='stylesheet', href='/stylesheets/index.css')
+    script(type='text/javascript' src='/javascripts/audio_global.js')
+    script(type='text/javascript' src='/javascripts/visual_global.js')
     script(type='text/javascript' src='/javascripts/pitchdetect.js')
+    script(type='text/javascript' src='/javascripts/visual.js')
