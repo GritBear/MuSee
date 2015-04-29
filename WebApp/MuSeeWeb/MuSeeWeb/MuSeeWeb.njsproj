@@ -32,8 +32,10 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="public\javascripts\audio_global.js" />
+    <Compile Include="public\javascripts\legacy.js" />
     <Compile Include="public\javascripts\pitchdetect.js" />
     <Compile Include="public\javascripts\visual.js" />
+    <Compile Include="public\javascripts\visual_global.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />

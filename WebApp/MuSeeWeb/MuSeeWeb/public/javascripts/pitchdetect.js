@@ -25,7 +25,6 @@ SOFTWARE.
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 var fftSize = 1024;
 var audioContext = null;
-var isPlaying = false;
 var sourceNode = null;
 var analyser = null;
 var theBuffer = null;
@@ -60,7 +59,8 @@ window.onload = function() {
 	pitchElem = document.getElementById( "pitch" );
 	noteElem = document.getElementById( "note" );
 	detuneElem = document.getElementById( "detune" );
-	detuneAmount = document.getElementById( "detune_amt" );
+    detuneAmount = document.getElementById("detune_amt");
+    debug = document.getElementById( "debug" );
 
 	detectorElem.ondragenter = function () { 
 		this.classList.add("droptarget"); 
@@ -155,8 +155,12 @@ function togglePlayback() {
 
 var paintTimer;
 function startPainting() {
-    paintTimer = window.setInterval(function () { 
+    paintTimer = window.setInterval(function () {
+        if (!isPlaying) {
+            return;
+        }
         rafID = window.requestAnimationFrame(updatePitch);
+        console.log("pitch timer clicked");
     }, 1000 / updateRate);
 }
 
@@ -191,10 +195,10 @@ function updatePitch(time) {
     ac = highestAc;
     
     //store values into global variables
-    CURRENT_NOTE = ac;
+    CURRENT_NOTE = noteFromPitch(Math.round(ac));
     NOTE_HISTORY[note_buffer_cnt] = CURRENT_NOTE;
     note_buffer_cnt = (note_buffer_cnt + 1) % Note_bufferSize;
-
+    debug.innerText = CURRENT_NOTE;
     if (ac == -1) {
         detectorElem.className = "vague";
         pitchElem.innerText = "--";
@@ -209,7 +213,11 @@ function updatePitch(time) {
         //noteElem.innerHTML = noteStrings[note % 12];
         noteElem.innerHTML = note;
 
-    }   
+    }
+    
+    //TODO
+    artStoryEngine.frameUpdate();
+
 }
 
 var noteStrings = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
