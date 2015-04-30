@@ -4,6 +4,7 @@ var renderTimer;
 var MIN_NOTE = 50;
 var MAX_NOTE = 100;
 var NOTE_SPAN;
+var ENTRANCE_DURATION = 1;
 
 var artStoryEngine;
 $(function () {
@@ -75,7 +76,7 @@ function makeAnimationFac() {
     this.maxAngleChange = Math.PI / 4;
 
     this.prevMade = 0;
-    this.prevXEnd = WIDTH / 2.2;
+    this.prevXEnd = WIDTH / 2;
     this.prevYEnd = HEIGHT / 2;
     this.prevAngle = Math.PI / 4;
     this.delayCnt = 2;
@@ -87,7 +88,7 @@ function makeAnimationFac() {
         
         var curPitch = melodayStore.getMovingAvg();
         
-        var curXEnd = WIDTH / 2.2;
+        var curXEnd = WIDTH / 2;
         var curYEnd = HEIGHT - ((curPitch - MIN_NOTE) / NOTE_SPAN) * HEIGHT;
         
         if (isNaN(curYEnd)) { 
@@ -139,14 +140,15 @@ function makeAnimationFac() {
         console.log(width);
         console.log(angle);
 
-        var newSquare = new AnimatedObject({
+        var newSquare = new AnimatedObject( {
             name : "leaf", 
             width : width, 
             height : height, 
             textureImg : TEXTURES["leaf1"],
             x : x,
             y : y,
-            angle : angle
+            angle : angle,
+            entranceDuration : ENTRANCE_DURATION
         });
 
         this.prevMade = Date.now();
@@ -195,6 +197,8 @@ function AnimatedObject(params) {
     this.width = params.width;
     this.height = params.height;
     this.textureImg = params.textureImg;
+    this.entranceDuration = params.entranceDuration;
+    this.creationTime = Date.now();
     
     this.x = params.x;
     this.y = params.y;
@@ -213,9 +217,11 @@ function AnimatedObject(params) {
         //console.log(this.width);
         //console.log(this.height);
         ctx.save();
+
         ctx.translate(this.x, this.y);
         ctx.rotate(this.angle);
-        //ctx.fillRect(-this.width / 2, -this.height / 2, this.width, this.height);
+        ctx.globalAlpha = Math.min((Date.now() - this.creationTime) / 1000 / this.entranceDuration, 1); // set fade in effect
+        //ctx.fillRect(-this.width / 2, -this.height / 2, this.width, this.height); //use to debug
         ctx.drawImage(this.textureImg, -this.width / 2, -this.height / 2, this.width, this.height);
         ctx.restore();
         //ctx.rotate(-this.angle);
