@@ -70,22 +70,33 @@ function artStoryEngine() {
 }
 
 function makeAnimationFac() {
+    this.minTimeDiff = 1.0 * 1000; // 0.6 seconds
+    this.minDiaDistanceSquare = 100 * 100;
+    this.maxAngleChange = Math.PI / 4;
+
     this.prevMade = 0;
-    this.minDiaDistanceSquare = 50 * 50;
-    //this.maxDiaDistanceSquare = 80 * 80;
-    this.prevXEnd = 0;
-    this.prevYEnd = 0;
-    this.delayCnt = 1;
+    this.prevXEnd = WIDTH / 2.2;
+    this.prevYEnd = HEIGHT / 2;
     this.prevAngle = Math.PI / 4;
+    this.delayCnt = 2;
 
     this.make = function () {
+        if (Date.now() - this.prevMade < this.minTimeDiff || !CURRENT_NOTE) { 
+            return null;
+        }
+        
         var curPitch = melodayStore.getMovingAvg();
         
         var curXEnd = WIDTH / 2.2;
         var curYEnd = HEIGHT - ((curPitch - MIN_NOTE) / NOTE_SPAN) * HEIGHT;
         
+        if (isNaN(curYEnd)) { 
+            curYEnd = this.prevYEnd;
+        }
+
         if (this.delayCnt-- > 0) {
             //enforce initial delay
+            this.prevMade = Date.now();
             this.prevXEnd = curXEnd;
             this.prevYEnd = curYEnd;
             return null;
@@ -94,24 +105,39 @@ function makeAnimationFac() {
         //making a new element
         var xDis = curXEnd - this.prevXEnd;
         var yDis = curYEnd - this.prevYEnd;
+        
+        if (xDis == 0) { 
+            xDis = 2; //2 pixel
+        }
+
+        var angle = Math.PI / 4 + Math.atan(yDis / xDis);
+        
+        //smoothing the angle
+        if (Math.abs(angle - this.prevAngle) > this.maxAngleChange) {
+            angle = (angle - this.prevAngle > 0) ? this.prevAngle + this.maxAngleChange : this.prevAngle - this.maxAngleChange;
+            yDis = Math.tan(angle - Math.PI / 4) * xDis;
+            curYEnd = this.prevYEnd + yDis;
+        }
 
         var diagSquare = xDis * xDis + yDis * yDis;
-        
-
+        if (diagSquare < this.minDiaDistanceSquare) { 
+            return null;
+        }
 
         var width = Math.sqrt(diagSquare / 2);
         var height = width; //for leaf1, which is a square
 
-        var angle =  Math.PI / 4 + Math.atan(yDis / xDis);
         var x = xDis / 2 + this.prevXEnd;
         var y = yDis / 2 + this.prevYEnd;
         
-        //console.log("make image");
-        //console.log(this.prevXEnd);
-        //console.log(this.prevYEnd);
-
-        //console.log(width);
-        //console.log(angle);
+        console.log("make image");
+        console.log(this.prevXEnd);
+        console.log(this.prevYEnd);
+        console.log(xDis);
+        console.log(yDis);
+        console.log(diagSquare);
+        console.log(width);
+        console.log(angle);
 
         var newSquare = new AnimatedObject({
             name : "leaf", 
@@ -122,10 +148,11 @@ function makeAnimationFac() {
             y : y,
             angle : angle
         });
-        
-        this.prevAngle = angle;
+
+        this.prevMade = Date.now();
         this.prevXEnd = curXEnd;
         this.prevYEnd = curYEnd;
+        this.prevAngle = angle;
         return newSquare;
     }
 
@@ -185,13 +212,14 @@ function AnimatedObject(params) {
         //console.log(this.y);
         //console.log(this.width);
         //console.log(this.height);
-
+        ctx.save();
         ctx.translate(this.x, this.y);
         ctx.rotate(this.angle);
         //ctx.fillRect(-this.width / 2, -this.height / 2, this.width, this.height);
         ctx.drawImage(this.textureImg, -this.width / 2, -this.height / 2, this.width, this.height);
-        ctx.rotate(-this.angle);
-        ctx.translate(-this.x, -this.y);
+        ctx.restore();
+        //ctx.rotate(-this.angle);
+        //ctx.translate(-this.x, -this.y);
     }
 
 }
