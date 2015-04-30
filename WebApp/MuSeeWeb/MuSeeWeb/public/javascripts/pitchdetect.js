@@ -60,47 +60,15 @@ window.onload = function() {
 	noteElem = document.getElementById( "note" );
 	detuneElem = document.getElementById( "detune" );
     detuneAmount = document.getElementById("detune_amt");
-    debug = document.getElementById( "debug" );
+    debug = document.getElementById("debug");
 
-	detectorElem.ondragenter = function () { 
-		this.classList.add("droptarget"); 
-		return false; };
-	detectorElem.ondragleave = function () { this.classList.remove("droptarget"); return false; };
-	detectorElem.ondrop = function (e) {
-  		this.classList.remove("droptarget");
-  		e.preventDefault();
-		theBuffer = null;
-
-	  	var reader = new FileReader();
-	  	reader.onload = function (event) {
-	  		audioContext.decodeAudioData( event.target.result, function(buffer) {
-	    		theBuffer = buffer;
-	  		}, function(){alert("error loading!");} ); 
-
-	  	};
-	  	reader.onerror = function (event) {
-	  		alert("Error: " + reader.error );
-		};
-	  	reader.readAsArrayBuffer(e.dataTransfer.files[0]);
-	  	return false;
-	};
+    melodayStore = new melodayStoreEngine();
 }
 
 function error() {
     alert('Stream generation failed.');
 }
 
-function getUserMedia(dictionary, callback) {
-    try {
-        navigator.getUserMedia = 
-        	navigator.getUserMedia ||
-        	navigator.webkitGetUserMedia ||
-        	navigator.mozGetUserMedia;
-        navigator.getUserMedia(dictionary, callback, error);
-    } catch (e) {
-        alert('getUserMedia threw exception :' + e);
-    }
-}
 
 function toggleOscillator() {
     if (isPlaying) {
@@ -159,7 +127,8 @@ function startPainting() {
         if (!isPlaying) {
             return;
         }
-        rafID = window.requestAnimationFrame(updatePitch);
+        updatePitch();
+        artStoryEngine.frameUpdate();
         console.log("pitch timer clicked");
     }, 1000 / updateRate);
 }
@@ -183,7 +152,8 @@ function updatePitch(time) {
     var cycles = new Array;
     analyser.getFloatTimeDomainData(buf);
     var ac = autoCorrelate(buf, audioContext.sampleRate);
-
+    
+    //preferrably choose the highest note
     if (acCnt == 0) {
         highestAc = ac;
     } else {
@@ -196,9 +166,10 @@ function updatePitch(time) {
     
     //store values into global variables
     CURRENT_NOTE = noteFromPitch(Math.round(ac));
-    NOTE_HISTORY[note_buffer_cnt] = CURRENT_NOTE;
-    note_buffer_cnt = (note_buffer_cnt + 1) % Note_bufferSize;
+    melodayStore.addNote(CURRENT_NOTE);
+
     debug.innerText = CURRENT_NOTE;
+
     if (ac == -1) {
         detectorElem.className = "vague";
         pitchElem.innerText = "--";
@@ -212,12 +183,7 @@ function updatePitch(time) {
         var note = noteFromPitch(pitch);
         //noteElem.innerHTML = noteStrings[note % 12];
         noteElem.innerHTML = note;
-
     }
-    
-    //TODO
-    artStoryEngine.frameUpdate();
-
 }
 
 var noteStrings = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];

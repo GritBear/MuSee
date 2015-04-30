@@ -14,9 +14,9 @@ $(function () {
     //ctx.drawImage(img, 100, 100);
     
     //TODO: fix this equation
-    AVG_X_MOVE_SPEED = -WIDTH / 25 / updateRate;
+    //speed per second
+    AVG_X_MOVE_SPEED = -WIDTH / 25; 
     NOTE_SPAN = MAX_NOTE - MIN_NOTE;
-    console.log(AVG_X_MOVE_SPEED);
     artStoryEngine = new artStoryEngine();
     startPainting();
 })
@@ -32,26 +32,32 @@ var renderTimer;
 //    }, 1000 / FRAME_RATE);
 //}
 
-function stopPainting() {
-    window.clearInterval(renderTimer);
-}
+//function stopPainting() {
+//    window.clearInterval(renderTimer);
+//}
 
 function artStoryEngine() { 
     this.dispatcher = new dispatcher({maxSize : 50});
     this.aniFactory = new makeAnimationFac();
+    this.time = Date.now();
 
     this.frameUpdate = function () {
         var newAni = this.aniFactory.make();
+        var timeNow = Date.now();
+        var timeDiff = (timeNow - this.time) / 1000;
+        this.time = timeNow;
         if (newAni) {
             this.dispatcher.add(newAni);
         }
         
         //move elements
+        var xSpeed = timeDiff * AVG_X_MOVE_SPEED;
+
         this.dispatcher.apply(function (obj) { 
-            obj.move(AVG_X_MOVE_SPEED, 0);
+            obj.move(xSpeed, 0);
         });
         
-        this.aniFactory.move(AVG_X_MOVE_SPEED, 0);
+        this.aniFactory.move(xSpeed, 0);
         
         var ctx = CUR_BACK_BUFFER.getContext("2d");
         //paint elements
@@ -65,20 +71,21 @@ function artStoryEngine() {
 
 function makeAnimationFac() {
     this.prevMade = 0;
-    this.minTimeDiff = 0.6 * 1000; // 0.6 seconds
-    this.prevXEnd = -1;
-    this.prevYEnd = -1;
+    this.minDiaDistanceSquare = 50 * 50;
+    //this.maxDiaDistanceSquare = 80 * 80;
+    this.prevXEnd = 0;
+    this.prevYEnd = 0;
+    this.delayCnt = 1;
+    this.prevAngle = Math.PI / 4;
 
     this.make = function () {
-        if (Date.now() - this.prevMade < this.minTimeDiff || !CURRENT_NOTE) { 
-            return null;
-        }
-
-        var curXEnd = WIDTH / 2.2;
-        var curYEnd = HEIGHT - ((CURRENT_NOTE - MIN_NOTE) / NOTE_SPAN) * HEIGHT;
+        var curPitch = melodayStore.getMovingAvg();
         
-        if (this.prevXEnd == -1 && this.prevYEnd == -1) {
-            this.prevMade = Date.now();
+        var curXEnd = WIDTH / 2.2;
+        var curYEnd = HEIGHT - ((curPitch - MIN_NOTE) / NOTE_SPAN) * HEIGHT;
+        
+        if (this.delayCnt-- > 0) {
+            //enforce initial delay
             this.prevXEnd = curXEnd;
             this.prevYEnd = curYEnd;
             return null;
@@ -88,49 +95,35 @@ function makeAnimationFac() {
         var xDis = curXEnd - this.prevXEnd;
         var yDis = curYEnd - this.prevYEnd;
 
-        var diagSquare = Math.pow(xDis, 2) + Math.pow(xDis, 2);
-        var width = Math.sqrt(diagSquare / 2);
-        var height = width; //for leaf1
+        var diagSquare = xDis * xDis + yDis * yDis;
         
-        var angle = Math.PI / 4 - Math.atan(yDis / xDis);
+
+
+        var width = Math.sqrt(diagSquare / 2);
+        var height = width; //for leaf1, which is a square
+
+        var angle =  Math.PI / 4 + Math.atan(yDis / xDis);
         var x = xDis / 2 + this.prevXEnd;
         var y = yDis / 2 + this.prevYEnd;
         
         //console.log("make image");
-        //console.log(HEIGHT);
-        //console.log(CURRENT_NOTE - MIN_NOTE);
+        //console.log(this.prevXEnd);
         //console.log(this.prevYEnd);
-        //console.log(curXEnd);
 
-        //console.log(xDis);
-        //console.log(yDis);
-
-        //console.log(x);
-        //console.log(y);
         //console.log(width);
-        //console.log(height);
+        //console.log(angle);
 
-        //var newSquare = new AnimatedObject({
-        //    name : "leaf", 
-        //    width : width, 
-        //    height : height, 
-        //    textureImg : TEXTURES["leaf1"],
-        //    x : x,
-        //    y : y,
-        //    angle : angle
-        //});
-        
         var newSquare = new AnimatedObject({
             name : "leaf", 
-            width : 60, 
-            height : 60, 
+            width : width, 
+            height : height, 
             textureImg : TEXTURES["leaf1"],
-            x : WIDTH / 2,
-            y : HEIGHT / 2,
-            angle : 0
+            x : x,
+            y : y,
+            angle : angle
         });
-
-        this.prevMade = Date.now();
+        
+        this.prevAngle = angle;
         this.prevXEnd = curXEnd;
         this.prevYEnd = curYEnd;
         return newSquare;
@@ -195,8 +188,9 @@ function AnimatedObject(params) {
 
         ctx.translate(this.x, this.y);
         ctx.rotate(this.angle);
+        //ctx.fillRect(-this.width / 2, -this.height / 2, this.width, this.height);
         ctx.drawImage(this.textureImg, -this.width / 2, -this.height / 2, this.width, this.height);
-        ctx.rotate(this.angle);
+        ctx.rotate(-this.angle);
         ctx.translate(-this.x, -this.y);
     }
 
