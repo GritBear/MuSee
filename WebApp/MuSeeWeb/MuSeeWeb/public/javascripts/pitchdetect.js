@@ -56,8 +56,10 @@ function startNextSongLoading(soundid, numSound) {
             theBuffer = buffer;
             console.log("load:" + curSoundName);
             soundBufferArray.push(buffer);
-            if (soundid < numSound-1) { 
+            if (soundid < numSound - 1) {
                 startNextSongLoading(soundid + 1, numSound);
+            } else { 
+                $("#state").text("ready"); 
             }
         });
     }
