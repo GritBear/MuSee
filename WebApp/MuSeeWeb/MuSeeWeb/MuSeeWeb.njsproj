@@ -35,6 +35,7 @@
     <Compile Include="public\javascripts\jsrender\audio_global.js" />
     <Compile Include="public\javascripts\jsrender\melodyStore.js" />
     <Compile Include="public\javascripts\jsrender\pitchdetect.js" />
+    <Compile Include="public\javascripts\jsrender\requestAnimFrame.js" />
     <Compile Include="public\javascripts\jsrender\visual.js" />
     <Compile Include="public\javascripts\jsrender\visual_global.js" />
     <Compile Include="public\javascripts\legacy.js" />

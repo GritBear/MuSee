@@ -181,7 +181,7 @@ function makeAnimationFac() {
 }
 
 function makeBackgroundObjFac() {
-    this.minTimeDiff = 12.0 * 1000;
+    this.minTimeDiff = 10.0 * 1000;
     this.heighOffset = 1.2;
     this.XRange = 50;
     
@@ -198,7 +198,9 @@ function makeBackgroundObjFac() {
         var curPitch = melodayStore.getMovingAvg();
         
         var curYEnd = ((curPitch - MIN_NOTE) / NOTE_SPAN) * HEIGHT * this.heighOffset;
-        
+        curYEnd = Math.min(curYEnd, HEIGHT);
+        curYEnd = Math.max(curYEnd, HEIGHT * 0.2);
+
         // Random integer centered at WIDTH * 0.75
         var curXEnd = WIDTH * 0.75 + (Math.random() * this.XRange);
 
@@ -224,7 +226,7 @@ function makeBackgroundObjFac() {
         this.prevMade = Date.now();
         this.prevXEnd = curXEnd;
         this.prevYEnd = curYEnd;
-        this.minTimeDiff = -(Math.random() * 4000) + 16000;
+        this.minTimeDiff = -(Math.random() * 2000) + 14000;
         return newTree;
     }
     

@@ -23,7 +23,7 @@ SOFTWARE.
 */
 
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
-var fftSize = 1024;
+var fftSize = 2048;
 var audioContext = null;
 var sourceNode = null;
 var analyser = null;
@@ -31,22 +31,39 @@ var theBuffer = null;
 var mediaStreamSource = null;
 
 var debug;
+var soundNames = ["/sounds/cj.mp3", "/sounds/titanic.mp3", "/sounds/hp.mp3"];
+var soundBufferArray = new Array();
+var curSoundName;
 
-window.onload = function() {
-	audioContext = new AudioContext();
-	MAX_SIZE = Math.max(4,Math.floor(audioContext.sampleRate/5000));	// corresponds to a 5kHz signal
-	var request = new XMLHttpRequest({mozSystem: true});
-	request.open("GET", "/sounds/cj.mp3", true);
-	request.responseType = "arraybuffer";
-	request.onload = function() {
-	  audioContext.decodeAudioData( request.response, function(buffer) { 
-	    	theBuffer = buffer;
-		} );
-	}
-	request.send();
-
+window.onload = function () {
+    audioContext = new AudioContext();
+    MAX_SIZE = Math.max(4, Math.floor(audioContext.sampleRate / 5000));	// corresponds to a 5kHz signal
+    
+    startNextSongLoading(0, soundNames.length);
 
     melodayStore = new melodayStoreEngine();
+}
+
+function startNextSongLoading(soundid, numSound) {
+    curSoundName = soundNames[soundid];
+    
+    var request = new XMLHttpRequest({ mozSystem: true });
+    
+    request.open("GET", curSoundName, true);
+    request.responseType = "arraybuffer";
+    request.onload = function () {
+        audioContext.decodeAudioData(request.response, function (buffer) {
+            theBuffer = buffer;
+            console.log("load:" + curSoundName);
+            soundBufferArray.push(buffer);
+            if (soundid < numSound - 1) {
+                startNextSongLoading(soundid + 1, numSound);
+            } else { 
+                $("#state").text("ready"); 
+            }
+        });
+    }
+    request.send();
 }
 
 function toggleOscillator() {
@@ -57,23 +74,29 @@ function toggleOscillator() {
         analyser = null;
         isPlaying = false;
         stopPainting();
-        return "play oscillator";
+        return "oscillator";
     }
     sourceNode = audioContext.createOscillator();
-
+    
     analyser = audioContext.createAnalyser();
     analyser.fftSize = fftSize;
-    sourceNode.connect( analyser );
-    analyser.connect( audioContext.destination );
+    sourceNode.connect(analyser);
+    
+    var gainNode = audioContext.createGain();
+    gainNode.gain.value = 0.1;
+
+    analyser.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
     sourceNode.start(0);
     isPlaying = true;
     isLiveInput = false;
     startPainting();
 
-    return "stop";
+    return "oscillator";
 }
 
-function togglePlayback() {
+function togglePlayback(soundid) {
     if (isPlaying) {
         //stop playing and return
         sourceNode.stop( 0 );
@@ -81,23 +104,24 @@ function togglePlayback() {
         analyser = null;
         isPlaying = false;
         stopPainting();
-        return "start";
+        return "demo" + soundid;
     }
-
+    
+    theBuffer = soundBufferArray[soundid];
     sourceNode = audioContext.createBufferSource();
     sourceNode.buffer = theBuffer;
     sourceNode.loop = true;
-
+    
     analyser = audioContext.createAnalyser();
     analyser.fftSize = fftSize;
-    sourceNode.connect( analyser );
-    analyser.connect( audioContext.destination );
-    sourceNode.start( 0 );
+    sourceNode.connect(analyser);
+    analyser.connect(audioContext.destination);
+    sourceNode.start(0);
     isPlaying = true;
     isLiveInput = false;
     startPainting();
 
-    return "stop";
+    return "demo" + soundid;
 }
 
 var paintTimer;

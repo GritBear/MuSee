@@ -1,16 +1,20 @@
 ﻿extends layout
 
 block content
-    h1= title
-    p Welcome to #{title}
+    div.headerelm
+        h1= title
     // <button onclick="updatePitch(0);">sample</button>
     div#visualizer
         canvas#buffer1.vcanvas(width='1400', height='700', style="border:4px solid #d3d3d3;")
         canvas#buffer2.vcanvas(width='1400', height='700', style="border:4px solid #d3d3d3;")
 
-    button(onclick='this.innerText = togglePlayback()') use demo audio
-    //button(onclick='toggleLiveInput()') use live input
-    button(onclick='toggleOscillator()') use oscillator
+    div.control_btn
+        button(onclick='this.innerText = togglePlayback(0)') demo0
+        button(onclick='this.innerText = togglePlayback(1)') demo1
+        button(onclick='this.innerText = togglePlayback(2)') demo2
+        //button(onclick='toggleLiveInput()') use live input
+        button(onclick='toggleOscillator()') oscillator
+        p#state loading...
 
     //loading textures
     .texture
