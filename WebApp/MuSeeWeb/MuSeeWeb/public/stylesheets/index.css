@@ -12,6 +12,11 @@ div.vague { color: lightgrey; }
 .flat #flat { display: inline; }
 .sharp #sharp { display: inline; }
 
+.headerelm {
+    width : 200px;
+    margin : 0 auto;
+}
+
 #visualizer {
     width : 100%;
     margin: 0 auto;
@@ -20,4 +25,9 @@ div.vague { color: lightgrey; }
 .vcanvas {
     margin: 0 auto;
     display: block;
+}
+
+.control_btn {
+    width : 200px;
+    margin : 0 auto;
 }
