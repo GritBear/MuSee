@@ -41,6 +41,12 @@ function artStoryEngine() {
     this.dispatcher = new dispatcher({maxSize : 20});
     this.aniFactory = new makeAnimationFac();
     this.backObjFac = new makeBackgroundObjFac();
+    this.birdFlock = new birdflock({
+        numBird : 5,
+        width: WIDTH,
+        height: HEIGHT
+    });
+    
     this.time = Date.now();
     
     this.syncTimeToNow = function () { 
@@ -72,14 +78,26 @@ function artStoryEngine() {
         
         this.aniFactory.move(xSpeed, 0);
         this.backObjFac.move(xSpeed, 0);
+        
+        var curPitch = melodayStore.getMovingAvg();
+        this.birdFlock.updateGoal({
+            x : WIDTH * 0.75,
+            y : HEIGHT - ((curPitch - MIN_NOTE) / NOTE_SPAN) * HEIGHT,
+        });
+
     }
 
     this.render = function () {
+        if (!isPlaying) {
+            return;        
+        }
         var ctx = CUR_BACK_BUFFER.getContext("2d");
         //paint elements
         this.dispatcher.apply(function (obj) {
             obj.render(ctx);
         });
+        
+        this.birdFlock.render(ctx);
         
         flipDoubleBuffer();
     }
@@ -90,7 +108,7 @@ function makeAnimationFac() {
     this.minDiaDistanceSquare = 100 * 100;
     this.maxDiaDistanceSquare = 120 * 120;
     this.maxDiaDistance = Math.sqrt(this.maxDiaDistanceSquare);
-    this.maxAngleChange = Math.PI / 4;
+    this.maxAngleChange = Math.PI / 3;
 
     this.prevMade = 0;
     this.prevXEnd = WIDTH * 0.75;
