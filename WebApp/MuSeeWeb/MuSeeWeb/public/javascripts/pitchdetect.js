@@ -31,7 +31,7 @@ var theBuffer = null;
 var mediaStreamSource = null;
 
 var debug;
-var soundNames = ["/sounds/cj.mp3", "/sounds/titanic.mp3", "/sounds/hp.mp3"];
+var soundNames = ["/sounds/lexion.mp3", "/sounds/cj.mp3", "/sounds/titanic.mp3", "/sounds/hp.mp3"];
 var soundBufferArray = new Array();
 var curSoundName;
 

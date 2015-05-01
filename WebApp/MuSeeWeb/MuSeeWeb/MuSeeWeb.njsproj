@@ -32,6 +32,7 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="public\javascripts\audio_global.js" />
+    <Compile Include="public\javascripts\birdflock.js" />
     <Compile Include="public\javascripts\jsrender\audio_global.js" />
     <Compile Include="public\javascripts\jsrender\melodyStore.js" />
     <Compile Include="public\javascripts\jsrender\pitchdetect.js" />
@@ -51,6 +52,7 @@
     <Content Include="public\sounds\hp.mp3" />
     <Content Include="public\sounds\titanic.mp3" />
     <Content Include="public\sounds\cj.mp3" />
+    <Content Include="public\sounds\lexion.mp3" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="public\stylesheets\index.css" />
     <Content Include="README.md" />
