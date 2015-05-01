@@ -32,7 +32,14 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="public\javascripts\audio_global.js" />
+    <Compile Include="public\javascripts\jsrender\audio_global.js" />
+    <Compile Include="public\javascripts\jsrender\melodyStore.js" />
+    <Compile Include="public\javascripts\jsrender\pitchdetect.js" />
+    <Compile Include="public\javascripts\jsrender\visual.js" />
+    <Compile Include="public\javascripts\jsrender\visual_global.js" />
     <Compile Include="public\javascripts\legacy.js" />
+    <Compile Include="public\javascripts\melodyStore.js" />
+    <Compile Include="public\javascripts\pitchdetect-dev.js" />
     <Compile Include="public\javascripts\pitchdetect.js" />
     <Compile Include="public\javascripts\visual.js" />
     <Compile Include="public\javascripts\visual_global.js" />
@@ -44,6 +51,8 @@
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="public\stylesheets\index.css" />
     <Content Include="README.md" />
+    <Content Include="views\dev.jade" />
+    <Content Include="views\jsrender.jade" />
     <Content Include="views\index.jade" />
     <Content Include="views\layout.jade" />
     <Content Include="views\error.jade" />
@@ -53,6 +62,7 @@
     <Folder Include="public\" />
     <Folder Include="public\images\" />
     <Folder Include="public\javascripts\" />
+    <Folder Include="public\javascripts\jsrender\" />
     <Folder Include="public\sounds\" />
     <Folder Include="public\stylesheets\" />
     <Folder Include="routes\" />

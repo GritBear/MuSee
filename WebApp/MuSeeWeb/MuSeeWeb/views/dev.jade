@@ -1,0 +1,49 @@
+﻿extends layout
+
+block content
+    h1= title
+    p Welcome to #{title}
+
+    button(onclick='this.innerText = togglePlayback()') use demo audio
+    //button(onclick='toggleLiveInput()') use live input
+    button(onclick='toggleOscillator()') use oscillator
+    button(onclick='toggleDebug()') debug
+
+    // <button onclick="updatePitch(0);">sample</button>
+    h2 Graphics
+    div#visualizer
+        canvas#buffer1(width='1200', height='600', style="border:4px solid #d3d3d3;")
+        canvas#buffer2(width='1200', height='600', style="border:4px solid #d3d3d3;")
+    
+    p end of graphics
+
+    p#debug Debug
+
+    #detector.vague
+        .pitch
+        span#pitch --
+        | Hz
+        .note
+        span#note --
+        |    
+        canvas#output(width='300', height='42')
+        #detune
+        span#detune_amt --
+        span#flat cents &flat;
+        span#sharp cents &sharp;
+
+    //loading textures
+    .texture
+        img#leaf1(src='/images/leaf1.png', alt='leaf1', height='256', width='256' hidden)
+        img#flower1(src='/images/flower1.png', alt='flower1', height='256', width='256' hidden)
+
+    //loading resources
+    link(rel='stylesheet', href='/stylesheets/index.css')
+    script(type='text/javascript' src='/javascripts/requestAnimFrame.js')
+    script(type='text/javascript' src='/javascripts/audio_global.js')
+    script(type='text/javascript' src='/javascripts/visual_global.js')
+    script(type='text/javascript' src='/javascripts/melodyStore.js')
+    script(type='text/javascript' src='/javascripts/pitchdetect-dev.js')
+    script(type='text/javascript' src='/javascripts/visual.js')
+    script(type='text/javascript' src='/javascripts/Starfield.js')
+    script(type='text/javascript' src='/javascripts/deterministicTree.js')

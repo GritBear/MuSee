@@ -1,4 +1,4 @@
-﻿body { font: 14pt 'Alike', sans-serif;}
+﻿body { font: 14pt 'Alike', sans-serif; width : 100%;}
 #note { font-size: 164px; }
 .droptarget { background-color: #348781}
 div.confident { color: black; }
@@ -11,3 +11,13 @@ div.vague { color: lightgrey; }
 #sharp { display: none; }
 .flat #flat { display: inline; }
 .sharp #sharp { display: inline; }
+
+#visualizer {
+    width : 100%;
+    margin: 0 auto;
+}
+
+.vcanvas {
+    margin: 0 auto;
+    display: block;
+}

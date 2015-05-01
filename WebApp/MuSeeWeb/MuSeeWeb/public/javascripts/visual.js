@@ -38,17 +38,29 @@ var renderTimer;
 //}
 
 function artStoryEngine() { 
-    this.dispatcher = new dispatcher({maxSize : 50});
+    this.dispatcher = new dispatcher({maxSize : 20});
     this.aniFactory = new makeAnimationFac();
+    this.backObjFac = new makeBackgroundObjFac();
     this.time = Date.now();
+    
+    this.syncTimeToNow = function () { 
+        this.time = Date.now();
+    }
 
     this.frameUpdate = function () {
         var newAni = this.aniFactory.make();
+        var newBackObj = this.backObjFac.make();
+
         var timeNow = Date.now();
         var timeDiff = (timeNow - this.time) / 1000;
         this.time = timeNow;
+
         if (newAni) {
             this.dispatcher.add(newAni);
+        }
+        
+        if (newBackObj) { 
+            this.dispatcher.add(newBackObj);
         }
         
         //move elements
@@ -59,13 +71,16 @@ function artStoryEngine() {
         });
         
         this.aniFactory.move(xSpeed, 0);
-        
+        this.backObjFac.move(xSpeed, 0);
+    }
+
+    this.render = function () {
         var ctx = CUR_BACK_BUFFER.getContext("2d");
         //paint elements
         this.dispatcher.apply(function (obj) {
             obj.render(ctx);
         });
-
+        
         flipDoubleBuffer();
     }
 }
@@ -73,13 +88,15 @@ function artStoryEngine() {
 function makeAnimationFac() {
     this.minTimeDiff = 1.0 * 1000; // 0.6 seconds
     this.minDiaDistanceSquare = 100 * 100;
+    this.maxDiaDistanceSquare = 120 * 120;
+    this.maxDiaDistance = Math.sqrt(this.maxDiaDistanceSquare);
     this.maxAngleChange = Math.PI / 4;
 
     this.prevMade = 0;
-    this.prevXEnd = WIDTH / 2;
+    this.prevXEnd = WIDTH * 0.75;
     this.prevYEnd = HEIGHT / 2;
     this.prevAngle = Math.PI / 4;
-    this.delayCnt = 2;
+    this.delayCnt = 1;
 
     this.make = function () {
         if (Date.now() - this.prevMade < this.minTimeDiff || !CURRENT_NOTE) { 
@@ -88,7 +105,7 @@ function makeAnimationFac() {
         
         var curPitch = melodayStore.getMovingAvg();
         
-        var curXEnd = WIDTH / 2;
+        var curXEnd = WIDTH * 0.75;
         var curYEnd = HEIGHT - ((curPitch - MIN_NOTE) / NOTE_SPAN) * HEIGHT;
         
         if (isNaN(curYEnd)) { 
@@ -121,8 +138,16 @@ function makeAnimationFac() {
         }
 
         var diagSquare = xDis * xDis + yDis * yDis;
-        if (diagSquare < this.minDiaDistanceSquare) { 
+        if (diagSquare < this.minDiaDistanceSquare) {
             return null;
+        } else if (diagSquare > this.maxDiaDistanceSquare) { 
+            //need to reduce the length
+            var factor = this.maxDiaDistance / Math.sqrt(diagSquare);
+            xDis = xDis * factor;
+            yDis = yDis * factor;
+            curXEnd = this.prevXEnd + xDis;
+            curYEnd = this.prevYEnd + yDis;
+            diagSquare = this.maxDiaDistanceSquare;
         }
 
         var width = Math.sqrt(diagSquare / 2);
@@ -130,15 +155,6 @@ function makeAnimationFac() {
 
         var x = xDis / 2 + this.prevXEnd;
         var y = yDis / 2 + this.prevYEnd;
-        
-        console.log("make image");
-        console.log(this.prevXEnd);
-        console.log(this.prevYEnd);
-        console.log(xDis);
-        console.log(yDis);
-        console.log(diagSquare);
-        console.log(width);
-        console.log(angle);
 
         var newSquare = new AnimatedObject( {
             name : "leaf", 
@@ -158,6 +174,60 @@ function makeAnimationFac() {
         return newSquare;
     }
 
+    this.move = function (dx, dy) {
+        this.prevXEnd += dx;
+        this.prevYEnd += dy;
+    }
+}
+
+function makeBackgroundObjFac() {
+    this.minTimeDiff = 12.0 * 1000;
+    this.heighOffset = 1.2;
+    this.XRange = 50;
+    
+    this.prevMade = 0;
+    this.prevXEnd = WIDTH / 2;
+    this.prevYEnd = HEIGHT / 2;
+    this.delayCnt = 1;
+
+    this.make = function () {
+        if (Date.now() - this.prevMade < this.minTimeDiff || !CURRENT_NOTE) {
+            return null;
+        }
+        
+        var curPitch = melodayStore.getMovingAvg();
+        
+        var curYEnd = ((curPitch - MIN_NOTE) / NOTE_SPAN) * HEIGHT * this.heighOffset;
+        
+        // Random integer centered at WIDTH * 0.75
+        var curXEnd = WIDTH * 0.75 + (Math.random() * this.XRange);
+
+        if (isNaN(curYEnd)) {
+            curYEnd = this.prevYEnd;
+        }
+        
+        if (this.delayCnt-- > 0) {
+            //enforce initial delay
+            this.prevMade = Date.now();
+            this.prevXEnd = curXEnd;
+            this.prevYEnd = curYEnd;
+            return null;
+        }
+        
+        var newTree = new deterministicTree({
+            w : WIDTH,
+            h : curYEnd,
+            x : curXEnd,
+            y : HEIGHT,
+        });
+        
+        this.prevMade = Date.now();
+        this.prevXEnd = curXEnd;
+        this.prevYEnd = curYEnd;
+        this.minTimeDiff = -(Math.random() * 4000) + 16000;
+        return newTree;
+    }
+    
     this.move = function (dx, dy) {
         this.prevXEnd += dx;
         this.prevYEnd += dy;
@@ -210,12 +280,11 @@ function AnimatedObject(params) {
         this.y += dy;
     }
 
-    this.render = function ( ctx ) {
-        //console.log("print image");
-        //console.log(this.x);
-        //console.log(this.y);
-        //console.log(this.width);
-        //console.log(this.height);
+    this.render = function (ctx) {
+        if (this.x < -120) {
+            return;
+        }
+
         ctx.save();
 
         ctx.translate(this.x, this.y);

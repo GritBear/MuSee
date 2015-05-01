@@ -29,14 +29,6 @@ var sourceNode = null;
 var analyser = null;
 var theBuffer = null;
 var mediaStreamSource = null;
-var detectorElem, 
-	canvasElem,
-	waveCanvas,
-	pitchElem,
-	noteElem,
-	detuneElem,
-    detuneAmount;
-
 
 var debug;
 
@@ -53,22 +45,9 @@ window.onload = function() {
 	}
 	request.send();
 
-	detectorElem = document.getElementById( "detector" );
-	canvasElem = document.getElementById( "output" );
-
-	pitchElem = document.getElementById( "pitch" );
-	noteElem = document.getElementById( "note" );
-	detuneElem = document.getElementById( "detune" );
-    detuneAmount = document.getElementById("detune_amt");
-    debug = document.getElementById("debug");
 
     melodayStore = new melodayStoreEngine();
 }
-
-function error() {
-    alert('Stream generation failed.');
-}
-
 
 function toggleOscillator() {
     if (isPlaying) {
@@ -123,14 +102,18 @@ function togglePlayback() {
 
 var paintTimer;
 function startPainting() {
+    artStoryEngine.syncTimeToNow();
+
     paintTimer = window.setInterval(function () {
         if (!isPlaying) {
+            artStoryEngine.syncTimeToNow();
             return;
         }
         updatePitch();
         artStoryEngine.frameUpdate();
-        console.log("pitch timer clicked");
     }, 1000 / updateRate);
+
+    executeFrame();
 }
 
 function stopPainting() {
@@ -138,6 +121,12 @@ function stopPainting() {
     if (!window.cancelAnimationFrame)
         window.cancelAnimationFrame = window.webkitCancelAnimationFrame;
     window.cancelAnimationFrame(rafID);
+}
+
+function executeFrame() {
+    if (isPlaying)
+        rafID = requestAnimFrame(executeFrame);
+    artStoryEngine.render();
 }
 
 var rafID = null;
@@ -167,28 +156,9 @@ function updatePitch(time) {
     //store values into global variables
     CURRENT_NOTE = noteFromPitch(Math.round(ac));
     melodayStore.addNote(CURRENT_NOTE);
-
-    debug.innerText = CURRENT_NOTE;
-
-    if (ac == -1) {
-        detectorElem.className = "vague";
-        pitchElem.innerText = "--";
-        noteElem.innerText = "-";
-        detuneElem.className = "";
-        detuneAmount.innerText = "--";
-    } else {
-        detectorElem.className = "confident";
-        pitch = ac;
-        pitchElem.innerText = Math.round(pitch);
-        var note = noteFromPitch(pitch);
-        //noteElem.innerHTML = noteStrings[note % 12];
-        noteElem.innerHTML = note;
-    }
 }
 
-var noteStrings = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-
-function noteFromPitch( frequency ) {
+function noteFromPitch(frequency) {
 	var noteNum = 12 * (Math.log( frequency / 440 )/Math.log(2) );
 	return Math.round( noteNum ) + 69;
 }
