@@ -31,7 +31,7 @@ var theBuffer = null;
 var mediaStreamSource = null;
 
 var debug;
-var soundNames = ["/sounds/cj.mp3", "/sounds/titanic.mp3"];
+var soundNames = ["/sounds/cj.mp3", "/sounds/titanic.mp3", "/sounds/hp.mp3"];
 var soundBufferArray = new Array();
 var curSoundName;
 
@@ -46,7 +46,7 @@ window.onload = function () {
 
 function startNextSongLoading(soundid, numSound) {
     curSoundName = soundNames[soundid];
-    console.log("load:" + curSoundName);
+    
     var request = new XMLHttpRequest({ mozSystem: true });
     
     request.open("GET", curSoundName, true);
@@ -54,6 +54,7 @@ function startNextSongLoading(soundid, numSound) {
     request.onload = function () {
         audioContext.decodeAudioData(request.response, function (buffer) {
             theBuffer = buffer;
+            console.log("load:" + curSoundName);
             soundBufferArray.push(buffer);
             if (soundid < numSound-1) { 
                 startNextSongLoading(soundid + 1, numSound);

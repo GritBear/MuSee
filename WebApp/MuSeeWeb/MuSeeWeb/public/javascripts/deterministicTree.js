@@ -22,7 +22,7 @@ function deterministicTree(params) {
     if (params.spread >= 0.3 && params.spread <= 1) {
         this.spread = params.spread;
     } else {
-        this.spread = 0.3;
+        this.spread = 0.5;
     }
     
     if (params.leaves === true || params.leaves === false) {

@@ -2,7 +2,7 @@
 var dispatcher;
 var renderTimer;
 var MIN_NOTE = 50;
-var MAX_NOTE = 120;
+var MAX_NOTE = 100;
 var NOTE_SPAN;
 var ENTRANCE_DURATION = 1;
 
@@ -198,8 +198,8 @@ function makeBackgroundObjFac() {
         var curPitch = melodayStore.getMovingAvg();
         
         var curYEnd = ((curPitch - MIN_NOTE) / NOTE_SPAN) * HEIGHT * this.heighOffset;
-        curYEnd = Math.min(curYEnd, HEIGHT*1.2);
-        curYEnd = Math.max(curYEnd, HEIGHT * 0.3);
+        curYEnd = Math.min(curYEnd, HEIGHT);
+        curYEnd = Math.max(curYEnd, HEIGHT * 0.2);
 
         // Random integer centered at WIDTH * 0.75
         var curXEnd = WIDTH * 0.75 + (Math.random() * this.XRange);
