@@ -97,21 +97,21 @@ window.onload = function () {
     }
 }
 
-function error() {
-    alert('Stream generation failed.');
-}
+//function error() {
+//    alert('Stream generation failed.');
+//}
 
-function getUserMedia(dictionary, callback) {
-    try {
-        navigator.getUserMedia = 
-        	navigator.getUserMedia ||
-        	navigator.webkitGetUserMedia ||
-        	navigator.mozGetUserMedia;
-        navigator.getUserMedia(dictionary, callback, error);
-    } catch (e) {
-        alert('getUserMedia threw exception :' + e);
-    }
-}
+//function getUserMedia(dictionary, callback) {
+//    try {
+//        navigator.getUserMedia = 
+//        	navigator.getUserMedia ||
+//        	navigator.webkitGetUserMedia ||
+//        	navigator.mozGetUserMedia;
+//        navigator.getUserMedia(dictionary, callback, error);
+//    } catch (e) {
+//        alert('getUserMedia threw exception :' + e);
+//    }
+//}
 
 
 

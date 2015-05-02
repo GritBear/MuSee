@@ -33,6 +33,7 @@
     <Compile Include="app.js" />
     <Compile Include="public\javascripts\audio_global.js" />
     <Compile Include="public\javascripts\birdflock.js" />
+    <Compile Include="public\javascripts\index.js" />
     <Compile Include="public\javascripts\jsrender\audio_global.js" />
     <Compile Include="public\javascripts\jsrender\melodyStore.js" />
     <Compile Include="public\javascripts\jsrender\pitchdetect.js" />
