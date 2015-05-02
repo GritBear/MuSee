@@ -293,9 +293,9 @@ function birdflock(params) {
     for (var i = 0; i < this.numBird; i++) {
         
         this.boid = this.boids[ i ] = new Boid();
-        this.boid.position.x = Math.random() * 400 - 200;
-        this.boid.position.y = Math.random() * 400 - 200;
-        this.boid.position.z = Math.random() * 400 - 200;
+        this.boid.position.x = Math.random() * 400;
+        this.boid.position.y = Math.random() * 400;
+        this.boid.position.z = Math.random() * 400;
         this.boid.velocity.x = Math.random() * 2 - 1;
         this.boid.velocity.y = Math.random() * 2 - 1;
         this.boid.velocity.z = Math.random() * 2 - 1;

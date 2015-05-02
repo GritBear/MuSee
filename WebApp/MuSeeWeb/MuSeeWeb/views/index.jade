@@ -9,13 +9,24 @@ block content
         canvas#buffer2.vcanvas(width='1400', height='700', style="border:4px solid #d3d3d3;")
 
     div.control_btn
-        button(onclick='this.innerText = togglePlayback(0)') demo0
-        button(onclick='this.innerText = togglePlayback(1)') demo1
-        button(onclick='this.innerText = togglePlayback(2)') demo2
-        button(onclick='this.innerText = togglePlayback(3)') demo3
-        //button(onclick='toggleLiveInput()') use live input
-        button(onclick='toggleOscillator()') oscillator
-        p#state loading...
+        p Demo audios 
+        span#state loading...
+        button(onclick='this.innerText = togglePlayback(0)') Demo 0
+        button(onclick='this.innerText = togglePlayback(1)') Demo 1
+        button(onclick='this.innerText = togglePlayback(2)') Demo 2
+        button(onclick='this.innerText = togglePlayback(3)') Demo 3
+        
+
+    div.control_btn
+        p Other audio sources
+        button(onclick='toggleLiveInput()') Microphone input
+        button(onclick='toggleOscillator()') Constant pitch
+
+    div.control_btn
+        p Use your music
+        //input#fileSelet(type="file" name="file[]" single)
+        div#drop_zone Drop file here
+        button#upload_play_btn(onclick='togglePlayback(4)' disabled) Play
 
     //loading textures
     .texture
@@ -36,3 +47,4 @@ block content
     script(type='text/javascript' src='/javascripts/pitchdetect.js')
     script(type='text/javascript' src='/javascripts/deterministicTree.js')
     script(type='text/javascript' src='/javascripts/visual.js')
+    script(type='text/javascript' src='/javascripts/index.js')

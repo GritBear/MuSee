@@ -32,50 +32,74 @@ var mediaStreamSource = null;
 
 var debug;
 var soundNames = ["/sounds/lexion.mp3", "/sounds/cj.mp3", "/sounds/titanic.mp3", "/sounds/hp.mp3"];
-var soundBufferArray = new Array();
+var soundBufferArray;
 var curSoundName;
 
 window.onload = function () {
     audioContext = new AudioContext();
     MAX_SIZE = Math.max(4, Math.floor(audioContext.sampleRate / 5000));	// corresponds to a 5kHz signal
     
+    soundBufferArray = new Array(soundNames.length + 1);
+
     startNextSongLoading(0, soundNames.length);
 
     melodayStore = new melodayStoreEngine();
 }
 
 function startNextSongLoading(soundid, numSound) {
-    curSoundName = soundNames[soundid];
-    
     var request = new XMLHttpRequest({ mozSystem: true });
     
-    request.open("GET", curSoundName, true);
+    request.open("GET", soundNames[soundid], true);
     request.responseType = "arraybuffer";
     request.onload = function () {
         audioContext.decodeAudioData(request.response, function (buffer) {
             theBuffer = buffer;
-            console.log("load:" + curSoundName);
-            soundBufferArray.push(buffer);
+            console.log("load:" + soundNames[soundid]);
+            curSoundName = soundNames[soundid];
+            soundBufferArray[soundid] = buffer;
             if (soundid < numSound - 1) {
                 startNextSongLoading(soundid + 1, numSound);
             } else { 
-                $("#state").text("ready"); 
+                $("#state").text("ready:"); 
             }
         });
     }
     request.send();
 }
 
+function acceptUploadedFile(file, callback) { 
+    var reader = new FileReader();
+    reader.onload = function (event) {
+        audioContext.decodeAudioData(event.target.result, function (buffer) {
+            theBuffer = buffer;
+            soundBufferArray[soundNames.length] = buffer;
+
+            //upload ready
+            callback();
+            $("#upload_play_btn").prop("disabled", false);
+
+        }, function () { alert("error loading!"); });
+    };
+    reader.onerror = function (event) {
+        alert("Error: " + reader.error);
+    };
+    reader.readAsArrayBuffer(file);
+
+}
+
 function toggleOscillator() {
-    if (isPlaying) {
+    if (isPlaying && curSoundName == "Oscillator") {
         //stop playing and return
-        sourceNode.stop( 0 );
-        sourceNode = null;
-        analyser = null;
-        isPlaying = false;
+        stopStream();
         stopPainting();
         return "oscillator";
+    } else if (isPlaying) { 
+        //stop playing and return
+        stopStream();
+        stopPainting();
     }
+
+    curSoundName = "Oscillator";
     sourceNode = audioContext.createOscillator();
     
     analyser = audioContext.createAnalyser();
@@ -93,20 +117,89 @@ function toggleOscillator() {
     isLiveInput = false;
     startPainting();
 
-    return "oscillator";
+    return "Constant Pitch";
+}
+
+function error() {
+    alert('Stream generation failed.');
+}
+
+function getUserMedia(dictionary, callback) {
+    try {
+        navigator.getUserMedia = 
+        	navigator.getUserMedia ||
+        	navigator.webkitGetUserMedia ||
+        	navigator.mozGetUserMedia;
+        navigator.getUserMedia(dictionary, callback, error);
+    } catch (e) {
+        alert('getUserMedia threw exception :' + e);
+    }
+}
+
+var liveStream;
+function toggleLiveInput() {
+    if (isPlaying && curSoundName == "liveInput") {
+        //stop playing and return
+        stopStream();
+        stopPainting();
+        return "Microphone input";
+    } else if (isPlaying) {
+        //stop playing and return
+        stopStream();
+        stopPainting();
+    }
+    
+    curSoundName = "liveInput";
+    getUserMedia(
+    	{
+            "audio": {
+                "mandatory": {
+                    "googEchoCancellation": "false",
+                    "googAutoGainControl": "true",
+                    "googNoiseSuppression": "true",
+                    "googHighpassFilter": "false"
+                },
+                "optional": []
+            },
+        }, function (stream) {
+            liveStream = stream;
+            // Create an AudioNode from the stream.
+            mediaStreamSource = audioContext.createMediaStreamSource(stream);
+            // Connect it to the destination.
+            analyser = audioContext.createAnalyser();
+            analyser.fftSize = fftSize;
+            mediaStreamSource.connect(analyser);
+            isPlaying = true;
+            startPainting();
+        });
+}
+
+function stopStream() {
+    if(sourceNode)
+        sourceNode.stop(0);
+    sourceNode = null;
+    analyser = null;
+    isPlaying = false;
+    stopPainting();
+
+    if(liveStream)
+        liveStream.stop();
+    liveStream = null;
 }
 
 function togglePlayback(soundid) {
-    if (isPlaying) {
+    if (isPlaying && curSoundName == soundNames[soundid]) {
         //stop playing and return
-        sourceNode.stop( 0 );
-        sourceNode = null;
-        analyser = null;
-        isPlaying = false;
+        stopStream();
         stopPainting();
-        return "demo" + soundid;
+        return "Demo " + soundid;
+    } else if (isPlaying) {
+        //stop playing and return
+        stopStream();
+        stopPainting();
     }
     
+    curSoundName = soundNames[soundid]
     theBuffer = soundBufferArray[soundid];
     sourceNode = audioContext.createBufferSource();
     sourceNode.buffer = theBuffer;
@@ -121,7 +214,7 @@ function togglePlayback(soundid) {
     isLiveInput = false;
     startPainting();
 
-    return "demo" + soundid;
+    return "Demo " + soundid;
 }
 
 var paintTimer;
@@ -136,7 +229,6 @@ function startPainting() {
         updatePitch();
         artStoryEngine.frameUpdate();
     }, 1000 / updateRate);
-
     executeFrame();
 }
 

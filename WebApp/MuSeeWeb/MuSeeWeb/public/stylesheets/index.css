@@ -1,6 +1,5 @@
 ﻿body { font: 14pt 'Alike', sans-serif; width : 100%;}
 #note { font-size: 164px; }
-.droptarget { background-color: #348781}
 div.confident { color: black; }
 div.vague { color: lightgrey; }
 #note { display: inline-block; height:180px; text-align: left;}
@@ -28,6 +27,21 @@ div.vague { color: lightgrey; }
 }
 
 .control_btn {
-    width : 300px;
+    width : 400px;
     margin : 0 auto;
+}
+
+#drop_zone {
+  border: 2px dashed #bbb;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  padding: 25px;
+  text-align: center;
+  font: 20pt bold 'Vollkorn';
+  color: #bbb;
+}
+
+.drop_on {
+  background-color : #9EDFFF;
 }
