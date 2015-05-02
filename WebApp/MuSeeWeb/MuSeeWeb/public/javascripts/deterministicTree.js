@@ -49,6 +49,7 @@ function deterministicTree(params) {
 
     // Set the leaves to a random color and tree width
     this.leavesColor = '#' + (0x1000000 + (Math.random()) * 0xffffff).toString(16).substr(1, 6);
+    this.lineWidth = Math.max(Math.min(5 + (Math.random() * this.MAX_BRANCH_WIDTH), this.branchHeight / 5), 2);
     this.stemColor = "#ED9E37";
     
     this.root = new treeStemElement({
