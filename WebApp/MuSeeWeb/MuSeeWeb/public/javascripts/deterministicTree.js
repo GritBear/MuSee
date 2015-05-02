@@ -40,16 +40,16 @@ function deterministicTree(params) {
         this.leaveType = this.MEDIUM_LEAVES;
     }
     
-    // Set the leaves to a random color and tree width
-    this.leavesColor = '#' + (0x1000000 + (Math.random()) * 0xffffff).toString(16).substr(1, 6);
-    this.lineWidth = 5 + (Math.random() * this.MAX_BRANCH_WIDTH);
-    this.stemColor = "#ED9E37";
-    
     //set location
     this.height = params.h;
     this.width = params.w;
     this.root_x = params.x;
     this.root_y = params.y;
+    this.branchHeight = this.height / 5;
+
+    // Set the leaves to a random color and tree width
+    this.leavesColor = '#' + (0x1000000 + (Math.random()) * 0xffffff).toString(16).substr(1, 6);
+    this.stemColor = "#ED9E37";
     
     this.root = new treeStemElement({
         canvasHeight: this.height,
@@ -59,6 +59,7 @@ function deterministicTree(params) {
         leaveType : this.leaveType,
         leavesColor : this.leavesColor,
         THIN_LEAVES : this.THIN_LEAVES,
+        branchHeight : this.branchHeight,
     }, 0, "root");
     
     this.root.createChildren();
@@ -93,7 +94,7 @@ function treeStemElement(params, depth, name) {
     this.isSpread = ((Math.random() * 1) < params.spread);
     this.drawLeaves = params.drawLeaves;
     this.depth = depth;
-    this.branchHeight = this.canvasHeight / 5;
+    this.branchHeight = params.branchHeight;
     
     this.entranceDuration = 0.15;
     this.startRenderingTime = 0;
