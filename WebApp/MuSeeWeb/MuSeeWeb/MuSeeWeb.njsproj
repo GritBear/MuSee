@@ -31,21 +31,24 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
-    <Compile Include="public\javascripts\audio_global.js" />
-    <Compile Include="public\javascripts\birdflock.js" />
-    <Compile Include="public\javascripts\index.js" />
+    <Compile Include="public\javascripts\musee\audio_global.js" />
+    <Compile Include="public\javascripts\musee\birdflock.js" />
+    <Compile Include="public\javascripts\musee\index.js" />
     <Compile Include="public\javascripts\jsrender\audio_global.js" />
     <Compile Include="public\javascripts\jsrender\melodyStore.js" />
     <Compile Include="public\javascripts\jsrender\pitchdetect.js" />
     <Compile Include="public\javascripts\jsrender\requestAnimFrame.js" />
     <Compile Include="public\javascripts\jsrender\visual.js" />
     <Compile Include="public\javascripts\jsrender\visual_global.js" />
-    <Compile Include="public\javascripts\legacy.js" />
-    <Compile Include="public\javascripts\melodyStore.js" />
-    <Compile Include="public\javascripts\pitchdetect-dev.js" />
-    <Compile Include="public\javascripts\pitchdetect.js" />
-    <Compile Include="public\javascripts\visual.js" />
-    <Compile Include="public\javascripts\visual_global.js" />
+    <Compile Include="public\javascripts\musee\legacy.js" />
+    <Compile Include="public\javascripts\musee\melodyStore.js" />
+    <Compile Include="public\javascripts\musee.js" />
+    <Compile Include="public\javascripts\musee\musee_global.js" />
+    <Compile Include="public\javascripts\musee\pitchdetect-dev.js" />
+    <Compile Include="public\javascripts\musee\pitchdetect.js" />
+    <Compile Include="public\javascripts\musee\pitch_config.js" />
+    <Compile Include="public\javascripts\musee\visual.js" />
+    <Compile Include="public\javascripts\musee\visual_global.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
@@ -69,6 +72,9 @@
     <Folder Include="public\images\" />
     <Folder Include="public\javascripts\" />
     <Folder Include="public\javascripts\jsrender\" />
+    <Folder Include="public\javascripts\lib\" />
+    <Folder Include="public\javascripts\musee\" />
+    <Folder Include="public\javascripts\musee\NewFolder1\" />
     <Folder Include="public\sounds\" />
     <Folder Include="public\stylesheets\" />
     <Folder Include="routes\" />

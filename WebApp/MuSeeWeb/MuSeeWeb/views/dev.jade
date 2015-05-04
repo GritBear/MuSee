@@ -1,36 +1,36 @@
 ﻿extends layout
 
 block content
-    h1= title
-    p Welcome to #{title}
-
-    button(onclick='this.innerText = togglePlayback()') use demo audio
-    //button(onclick='toggleLiveInput()') use live input
-    button(onclick='toggleOscillator()') use oscillator
-    button(onclick='toggleDebug()') debug
-
+    div.headerelm
+        h1= title
+        h5 An Open Source Web Music Visualizer
     // <button onclick="updatePitch(0);">sample</button>
-    h2 Graphics
     div#visualizer
-        canvas#buffer1(width='1200', height='600', style="border:4px solid #d3d3d3;")
-        canvas#buffer2(width='1200', height='600', style="border:4px solid #d3d3d3;")
-    
-    p end of graphics
+        canvas#buffer1.vcanvas(width='1400', height='700', style="border:4px solid #d3d3d3;")
+        canvas#buffer2.vcanvas(width='1400', height='700', style="border:4px solid #d3d3d3;")
 
-    p#debug Debug
+    div.control_btn
+        p Demo audios 
+        span#state loading...
+        button(onclick='this.innerText = togglePlayback(0)') Demo 0
+        button(onclick='this.innerText = togglePlayback(1)') Demo 1
+        button(onclick='this.innerText = togglePlayback(2)') Demo 2
+        button(onclick='this.innerText = togglePlayback(3)') Demo 3
+        
 
-    #detector.vague
-        .pitch
-        span#pitch --
-        | Hz
-        .note
-        span#note --
-        |    
-        canvas#output(width='300', height='42')
-        #detune
-        span#detune_amt --
-        span#flat cents &flat;
-        span#sharp cents &sharp;
+    div.control_btn
+        p Other audio sources
+        button(onclick='toggleLiveInput()') Microphone input
+        button(onclick='toggleOscillator()') Constant pitch
+
+    div.control_btn
+        p Use your music
+        //input#fileSelet(type="file" name="file[]" single)
+        div#drop_zone Drop file here
+        button#upload_play_btn(onclick='togglePlayback(4)' disabled) Play
+
+    div.control_btn
+        p Drop me any feedback at 6fenxls(at)gmail
 
     //loading textures
     .texture
@@ -39,11 +39,18 @@ block content
 
     //loading resources
     link(rel='stylesheet', href='/stylesheets/index.css')
-    script(type='text/javascript' src='/javascripts/requestAnimFrame.js')
-    script(type='text/javascript' src='/javascripts/audio_global.js')
-    script(type='text/javascript' src='/javascripts/visual_global.js')
-    script(type='text/javascript' src='/javascripts/melodyStore.js')
-    script(type='text/javascript' src='/javascripts/pitchdetect-dev.js')
-    script(type='text/javascript' src='/javascripts/visual.js')
-    script(type='text/javascript' src='/javascripts/Starfield.js')
-    script(type='text/javascript' src='/javascripts/deterministicTree.js')
+    
+    script(data-main="/javascripts/index.js" src="/javascripts/require.js")
+
+    script(type='text/javascript' src='/javascripts/lib/three.min.js')
+    script(type='text/javascript' src='/javascripts/lib/requestAnimFrame.js')
+    
+    script(type='text/javascript' src='/javascripts/musee/birdflock.js')
+    script(type='text/javascript' src='/javascripts/musee/audio_global.js')
+    script(type='text/javascript' src='/javascripts/musee/audio_global.js')
+    script(type='text/javascript' src='/javascripts/musee/visual_global.js')
+    script(type='text/javascript' src='/javascripts/musee/melodyStore.js')
+    script(type='text/javascript' src='/javascripts/musee/pitchdetect.js')
+    script(type='text/javascript' src='/javascripts/musee/deterministicTree.js')
+    script(type='text/javascript' src='/javascripts/musee/visual.js')
+    //script(type='text/javascript' src='/javascripts/index.js')
