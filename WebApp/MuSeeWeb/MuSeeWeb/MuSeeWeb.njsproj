@@ -31,6 +31,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="public\javascripts\app\controller\Base.js" />
+    <Compile Include="public\javascripts\app\controller\c1.js" />
+    <Compile Include="public\javascripts\app\model\AudioModel.js" />
+    <Compile Include="public\javascripts\app\model\Base.js" />
+    <Compile Include="public\javascripts\app\model\MuseeModel.js" />
+    <Compile Include="public\javascripts\app\model\MelodyStore.js" />
+    <Compile Include="public\javascripts\app\musee_main.jsx" />
+    <Compile Include="public\javascripts\app\model\VisualModel.js" />
+    <Compile Include="public\javascripts\common.js" />
+    <Compile Include="public\javascripts\lib\jquery.js" />
+    <Compile Include="public\javascripts\lib\jsx.js" />
+    <Compile Include="public\javascripts\lib\react-with-addons.min.js" />
     <Compile Include="public\javascripts\musee\audio_global.js" />
     <Compile Include="public\javascripts\musee\birdflock.js" />
     <Compile Include="public\javascripts\musee\index.js" />
@@ -41,14 +53,14 @@
     <Compile Include="public\javascripts\jsrender\visual.js" />
     <Compile Include="public\javascripts\jsrender\visual_global.js" />
     <Compile Include="public\javascripts\musee\legacy.js" />
+    <Compile Include="public\javascripts\app\lib.js" />
     <Compile Include="public\javascripts\musee\melodyStore.js" />
     <Compile Include="public\javascripts\musee.js" />
-    <Compile Include="public\javascripts\musee\musee_global.js" />
-    <Compile Include="public\javascripts\musee\pitchdetect-dev.js" />
     <Compile Include="public\javascripts\musee\pitchdetect.js" />
-    <Compile Include="public\javascripts\musee\pitch_config.js" />
     <Compile Include="public\javascripts\musee\visual.js" />
     <Compile Include="public\javascripts\musee\visual_global.js" />
+    <Compile Include="public\javascripts\tool\build.js" />
+    <Compile Include="public\javascripts\tool\r.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
@@ -74,7 +86,10 @@
     <Folder Include="public\javascripts\jsrender\" />
     <Folder Include="public\javascripts\lib\" />
     <Folder Include="public\javascripts\musee\" />
-    <Folder Include="public\javascripts\musee\NewFolder1\" />
+    <Folder Include="public\javascripts\app\controller\" />
+    <Folder Include="public\javascripts\app\model\" />
+    <Folder Include="public\javascripts\app\" />
+    <Folder Include="public\javascripts\tool\" />
     <Folder Include="public\sounds\" />
     <Folder Include="public\stylesheets\" />
     <Folder Include="routes\" />
